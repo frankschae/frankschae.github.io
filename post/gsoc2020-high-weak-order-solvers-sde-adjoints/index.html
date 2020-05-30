@@ -1,0 +1,1262 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Frank Schäfer">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="First and foremost, I would like to thank Chris Rackauckas, Moritz Schauer, and Yingbo Ma for their willingness to supervise me in this Google Summer of Code project. Although we are still at the very beginning of the project, we already had plenty of very inspiring discussion.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="FS">
+  <meta property="og:url" content="https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/">
+  <meta property="og:title" content="GSoC 2020: High weak order SDE solvers and their utility in neural SDEs | FS">
+  <meta property="og:description" content="First and foremost, I would like to thank Chris Rackauckas, Moritz Schauer, and Yingbo Ma for their willingness to supervise me in this Google Summer of Code project. Although we are still at the very beginning of the project, we already had plenty of very inspiring discussion."><meta property="og:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-05-30T15:10:33&#43;02:00">
+    
+    <meta property="article:modified_time" content="2020-05-30T15:10:33&#43;02:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/"
+  },
+  "headline": "GSoC 2020: High weak order SDE solvers and their utility in neural SDEs",
+  
+  "datePublished": "2020-05-30T15:10:33+02:00",
+  "dateModified": "2020-05-30T15:10:33+02:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Frank Schäfer"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "FS",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "First and foremost, I would like to thank Chris Rackauckas, Moritz Schauer, and Yingbo Ma for their willingness to supervise me in this Google Summer of Code project. Although we are still at the very beginning of the project, we already had plenty of very inspiring discussion."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>GSoC 2020: High weak order SDE solvers and their utility in neural SDEs | FS</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">FS</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">FS</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link js-theme-selector" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-palette" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>GSoC 2020: High weak order SDE solvers and their utility in neural SDEs</h1>
+
+  
+  <p class="page-subtitle">Community bonding period</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 30, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>First and foremost, I would like to thank Chris Rackauckas, Moritz Schauer, and Yingbo Ma for their willingness to supervise me in this Google Summer of Code project.
+Although we are still at the very beginning of the project, we already had plenty of very inspiring discussion. I will spend the following months implementing both  <strong>new high weak order solvers</strong> as well as <strong>adjoint sensitivity methods</strong> for stochastic differential equations (SDEs).
+Ultimately, these tools will allow researchers to simulate (or even control) the dynamics as generated by SDEs. Such set-ups are found in many fields ranging from the simulation of (bio-)chemical processes over financial modeling to quantum mechanics.</p>
+<h2 id="high-weak-order-solvers">High Weak Order Solvers</h2>
+<p>Currently, the 
+<a href="https://github.com/SciML/StochasticDiffEq.jl" target="_blank" rel="noopener">StochasticDiffEq</a> package contains state-of-the-art solvers for the strong approximation of SDEs, i.e., solvers that allow one to reconstruct correctly the numerical solution of a SDE in a pathwise sense.
+However, in many situations methods for the weak approximation, which only aim for computing an estimation for the expected value of the solution, are sufficient.  The less restrictive formulation of weak methods has the advantage that they are computationally cheaper than strong methods.</p>
+<h3 id="second-order-runge-kutta-methods-for-ito-sdes">Second order Runge-Kutta methods for Ito SDEs</h3>
+<p>In the beginning of the community bonding period I finished the implementations of the <code>DRI1()</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> and <code>RI1()</code><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> methods. Both are representing second order Runge-Kutta schemes and were introduced by Rößler. Interestingly, these methods are designed to scale well with the number of Wiener processes <code>m</code>. Specifically, only <code>2m-1</code> random variables have to be drawn and, additionally, the number of function evaluations for the drift and the diffusion terms is independent of <code>m</code>.</p>
+<p>As an example, we can check the second order convergence property on a multi-dimensional SDE with non-commuting noise<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
+<p>$$
+\scriptstyle d \begin{pmatrix} X^1 \\  X^2 \end{pmatrix} = \begin{pmatrix} \frac{-273}{512} &amp;  \phantom{X^2}0 \\  -\frac{1}{160} \phantom{X^2}  &amp; -\frac{785}{512}+\frac{\sqrt{2}}{8} \end{pmatrix}  \begin{pmatrix} X^1 \\  X^2 \end{pmatrix} dt + \begin{pmatrix} \frac{1}{4} X^1 &amp;  \frac{1}{16} X^1 \\  \frac{1-2\sqrt{2}}{4} X^2 &amp; \frac{1}{10}X^1  +\frac{1}{16} X^2 \end{pmatrix} d \begin{pmatrix} W^1 \\  W^2 \end{pmatrix} <br>
+$$</p>
+<p>with initial value $$ X(t=0)=  \begin{pmatrix} 1 \\ 1\end{pmatrix}.$$</p>
+<p>If we choose a function $f(x)=(x^1)^2$, we obtain</p>
+<p>$$ \rm{E}\left[ f(X(t)) \right] =  \exp(-t)$$</p>
+<p>for the expectation value of the solution.</p>
+<p>A solution of this problem for a fixed <code>dt</code> can now be obtained by the following lines of code:</p>
+<pre><code class="language-julia">using StochasticDiffEq
+numtraj = 1e7
+u₀ = [1.0,1.0]
+function f!(du,u,p,t)
+  du[1] = -273//512*u[1]
+  du[2] = -1//160*u[1]-(-785//512+sqrt(2)/8)*u[2]
+end
+function g!(du,u,p,t)
+  du[1,1] = 1//4*u[1]
+  du[1,2] = 1//16*u[1]
+  du[2,1] = (1-2*sqrt(2))/4*u[1]
+  du[2,2] = 1//10*u[1]+1//16*u[2]
+end
+dt = 1//8
+tspan = (0.0,10.0)
+prob = SDEProblem(f!,g!,u₀,tspan,noise_rate_prototype=zeros(2,2))
+
+h(z) = z^2
+
+ensemble_prob = EnsembleProblem(prob;
+        output_func = (sol,i) -&gt; (h(sol[end][1]),false)
+        )
+solve(ensemble_prob, DRI1();
+        dt=dt,
+        save_start=false,
+        save_everystep=false,
+        weak_timeseries_errors=false,
+        weak_dense_errors=false,
+        trajectories=numtraj)
+
+</code></pre>
+<p>Finally, the convergence plot displays nicely the second order convergence (slope $\approx 2.2$)</p>
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure >
+
+
+  <a data-fancybox="" href="/img/DRI1.pdf" >
+
+
+  <img src="/img/DRI1.pdf" alt=""  >
+</a>
+
+
+
+</figure>
+
+<p>In the next couple of weeks, my focus will be on</p>
+<ul>
+<li>adding other high weak order solvers,</li>
+<li>implementing adaptive time stepping.</li>
+</ul>
+<p>More of our near-term goals are collected in this 
+<a href="https://github.com/SciML/StochasticDiffEq.jl/issues/182" target="_blank" rel="noopener">issue</a>.</p>
+<h2 id="adjoint-sensitivity-methods-for-sdes">Adjoint sensitivity methods for SDEs</h2>
+<p>The adjoint sensitivity method is well known to compute gradients of solutions to ordinary differential equations (ODEs). Recently, this method was generalized to SDEs<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. Importantly, this new method has different complexities in terms of memory consumption or computation time as compared with forward- or reverse-mode automatic differentiation (AD) approaches. While forward mode AD is memory efficient, it scales poorly in time with increasing number of parameters. On the contrary, reverse-mode AD, i.e., a direct backpropagation through the solver, has a huge memory footprint.</p>
+<p>I started to implement the algorithm<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> (c.f., Fig. 2) in a slightly modified way: To compute the gradients, we reverse the SDE such that we run the time evolution from $t_1$ to $t_0$ (instead of a evolution from $-t_1$ to $-t_0$). Here, $t_0$  represents the start time and $t_1$  represents the end time of the time evolution. This modification allows us to reuse/generalize many functions that were implemented for ODE adjoints earlier.</p>
+<h3 id="reverse-sde-time-evolution">Reverse SDE time evolution</h3>
+<p>The reversion of a SDE is less trivial than the reversion of an ODE. However, for SDEs written in the Stratonovich sense, it turns out that reversion can be achieved by negative signs in front of the drift and diffusion terms.
+After some fixes for the available noise processes, we are now able to reverse a stochastic time evolution either by using a very general <code>NoiseWrapper</code> that interpolates in a distributionally-exact manner based on Brownian bridges, or by using <code>NoiseGrid</code> which linearly interpolates between values of the noise on a given grid.</p>
+<p>As an example, the code below computes the forward evolution of a SDE</p>
+<p>$$ dX  =  \alpha X dt + \beta X dW$$</p>
+<p>with $\alpha=1.01$, $\beta=0.87$, $x(0)=1/2$, in the time span (0,1), and, subsequently, also the reverse time evolution (1,0) with initial value $x(t=1)$.</p>
+<pre><code class="language-julia">  using StochasticDiffEq, DiffEqNoiseProcess
+
+  α=1.01
+  β=0.87
+
+  dt = 1e-3
+  tspan = (0.0,1.0)
+  u₀=1/2
+
+  tarray =  collect(tspan[1]:dt:tspan[2])
+
+  f!(du,u,p,t) = du .= α*u
+  g!(du,u,p,t) = du .= β*u
+
+
+  prob = SDEProblem(f!,g!,[u₀],tspan)
+  sol =solve(prob,EulerHeun(),dt=dt,save_noise=true, adaptive=false)
+
+  _sol = deepcopy(sol) # to make sure the plot is correct
+  W1 = NoiseGrid(reverse!(_sol.t),reverse!(_sol.W.W))
+  prob1 = SDEProblem(f!,g!,sol[end],reverse(tspan),noise=W1)
+  sol1 = solve(prob1,EulerHeun(),dt=dt)
+</code></pre>
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure >
+
+
+  <a data-fancybox="" href="/img/fb.pdf" >
+
+
+  <img src="/img/fb.pdf" alt=""  >
+</a>
+
+
+
+</figure>
+
+<h3 id="gradients-of-diagonal-sdes">Gradients of diagonal SDEs</h3>
+<p>I have already started to implement the stochastic adjoint sensitivity method for SDEs possessing diagonal noise. Currently, only non-mutating SDE functions are supported but I am optimistic that soon also the inplace formulation works.</p>
+<p>Let us consider again the linear SDE with multiplicative noise from above (with the same parameters). This SDE represents one of the few exact solvable cases. In the Stratonovich sense, the solution is given as</p>
+<p>$$ X(t) =  X(0) \exp(\alpha t + \beta W(t)).$$</p>
+<p>We might be interested in optimizing the parameters $\alpha$ and $\beta$ to minimize a certain loss function acting on the solution $X(t)$. For such an optimization task, a useful search direction is indicated by the gradient of the loss function with respect to the parameters. The latter however requires the differentiation through the SDE solver &ndash; if no analytical solution of the SDE is available.</p>
+<p>As a prototypical scenario, let us consider a mean squared error loss</p>
+<p>$$
+L(X(t)) = \sum_i |X(t_i)|^2,
+$$</p>
+<p>acting on the solution $X(t)$ for some fixed time points $t_i$. Then, the analytical forms for the gradients here read</p>
+<p>$$
+\begin{aligned}
+\frac{d L}{d \alpha} &amp;= 2 \sum_i t_i |X(t_i)|^2 \\<br>
+\frac{d L}{d \beta}  &amp;= 2 \sum_i W(t_i) |X(t_i)|^2
+\end{aligned}
+$$</p>
+<p>for $\alpha$ and $\beta$, respectively. We can confirm that this agrees with the gradients as obtained by the stochastic adjoint sensitivity method</p>
+<pre><code class="language-julia">using Test, LinearAlgebra
+using DiffEqSensitivity, StochasticDiffEq
+using Random
+
+seed = 100
+Random.seed!(seed)
+
+u₀ = [0.5]
+tstart = 0.0
+tend = 0.1
+dt = 0.005
+trange = (tstart, tend)
+t = tstart:dt:tend
+tarray = collect(t)
+
+function g(u,p,t)
+  sum(u.^2.0)
+end
+
+function dg!(out,u,p,t,i)
+  (out.=-2.0*u)
+end
+
+p2 = [1.01,0.87]
+
+f(u,p,t) = p[1]*u
+σ(u,p,t) = p[2]*u
+
+
+Random.seed!(seed)
+prob = SDEProblem(f,σ,u₀,trange,p2)
+sol = solve(prob,RKMil(interpretation=:Stratonovich),dt=tend/1e7,adaptive=false,save_noise=true)
+res_u0, res_p = adjoint_sensitivities(sol,EulerHeun(),dg!,t,dt=tend/1e7,sensealg=BacksolveAdjoint())
+
+
+noise = vec((@. sol.W(tarray)))
+Wextracted = [W[1][1] for W in noise]
+resp1 = 2*sum(@. tarray*u₀^2*exp(2*(p2[1])*tarray+2*p2[2]*Wextracted))
+resp2 = 2*sum(@. Wextracted*u₀^2*exp(2*(p2[1])*tarray+2*p2[2]*Wextracted))
+resp = [resp1, resp2]
+
+@test isapprox(res_p', resp, rtol = 1e-6)
+# True 
+</code></pre>
+<p>With respect to the adjoint sensitivity methods, we are looking forward</p>
+<ul>
+<li>to finish the current backsolve adjoint version,</li>
+<li>to allow for computing the gradients of non-commuting SDEs,</li>
+<li>to implement also an interpolation adjoint version</li>
+</ul>
+<p>in the upcoming weeks. For more information, the interested reader might take a look at the open 
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/issues" target="_blank" rel="noopener">issues</a> in the DiffEqSensitivity package.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Kristian Debrabant, Andreas Rößler, Applied Numerical Mathematics <strong>59</strong>, 582–594 (2009). <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Andreas Rößler, Journal on Numerical Analysis <strong>47</strong>, 1713–1738 (2009). <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Xuechen Li, Ting-Kam Leonard Wong, Ricky T. Q. Chen, David Duvenaud, arXiv preprint arXiv:2001.01328 (2020). <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/adjoint-sensitivity-methods/">Adjoint sensitivity methods</a>
+  
+  <a class="badge badge-light" href="/tag/gsoc-2020/">GSoC 2020</a>
+  
+  <a class="badge badge-light" href="/tag/high-weak-order-solver/">High weak order solver</a>
+  
+  <a class="badge badge-light" href="/tag/srk-methods/">SRK methods</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/&amp;text=GSoC%202020:%20High%20weak%20order%20SDE%20solvers%20and%20their%20utility%20in%20neural%20SDEs" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/&amp;t=GSoC%202020:%20High%20weak%20order%20SDE%20solvers%20and%20their%20utility%20in%20neural%20SDEs" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=GSoC%202020:%20High%20weak%20order%20SDE%20solvers%20and%20their%20utility%20in%20neural%20SDEs&amp;body=https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/&amp;title=GSoC%202020:%20High%20weak%20order%20SDE%20solvers%20and%20their%20utility%20in%20neural%20SDEs" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=GSoC%202020:%20High%20weak%20order%20SDE%20solvers%20and%20their%20utility%20in%20neural%20SDEs%20https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/&amp;title=GSoC%202020:%20High%20weak%20order%20SDE%20solvers%20and%20their%20utility%20in%20neural%20SDEs" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-circle" src="/author/frank-schafer/avatar_hu9202cabaed592d2d4bbe51596d4206a2_80238_270x270_fill_lanczos_center_2.png" alt="Frank Schäfer">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="https://frankschae.github.io/">Frank Schäfer</a></h5>
+        <h6 class="card-subtitle">PhD candidate in Physics</h6>
+        <p class="card-text">My research interests include many-body physics, machine learning, and differentiable programming.</p>
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=goAokcEAAAAJ&amp;hl=de&amp;oi=sra#" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/frankschae" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://orcid.org/0000-0003-2684-4984" target="_blank" rel="noopener">
+        <i class="ai ai-orcid"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js" integrity="sha256-lyWCDMnMeZiXRi7Zl54sZGKYmgQs4izcT7+tKc+KUBk=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/julia.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2020 Frank Schäfer &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
