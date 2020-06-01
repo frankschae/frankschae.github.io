@@ -712,7 +712,7 @@ solve(ensemble_prob, DRI1();
 </ul>
 <p>More of our near-term goals are collected in this 
 <a href="https://github.com/SciML/StochasticDiffEq.jl/issues/182" target="_blank" rel="noopener">issue</a>.</p>
-<h2 id="adjoint-sensitivity-methods-for-sdes">Adjoint sensitivity methods for SDEs</h2>
+<h2 id="adjoint-sensitivity-methods-for-sdes">Adjoint Sensitivity Methods for SDEs</h2>
 <p>The adjoint sensitivity method is well known to compute gradients of solutions to ordinary differential equations (ODEs). Recently, this method was generalized to SDEs<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. Importantly, this new method has different complexities in terms of memory consumption or computation time as compared with forward- or reverse-mode automatic differentiation (AD) approaches. While forward mode AD is memory efficient, it scales poorly in time with increasing number of parameters. On the contrary, reverse-mode AD, i.e., a direct backpropagation through the solver, has a huge memory footprint.</p>
 <p>I started to implement the algorithm<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> (c.f., Fig. 2) in a slightly modified way: To compute the gradients, we reverse the SDE such that we run the time evolution from $t_1$ to $t_0$ (instead of a evolution from $-t_1$ to $-t_0$). Here, $t_0$  represents the start time and $t_1$  represents the end time of the time evolution. This modification allows us to reuse/generalize many functions that were implemented for ODE adjoints earlier.</p>
 <h3 id="reverse-sde-time-evolution">Reverse SDE time evolution</h3>
@@ -833,7 +833,7 @@ resp2 = 2*sum(@. Wextracted*u₀^2*exp(2*(p2[1])*tarray+2*p2[2]*Wextracted))
 resp = [resp1, resp2]
 
 @test isapprox(res_p', resp, rtol = 1e-6)
-# True 
+# True
 </code></pre>
 <p>With respect to the adjoint sensitivity methods, we are looking forward</p>
 <ul>

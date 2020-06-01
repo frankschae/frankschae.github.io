@@ -104,7 +104,7 @@ solve(ensemble_prob, DRI1();
 &lt;/ul&gt;
 &lt;p&gt;More of our near-term goals are collected in this 
 &lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/issues/182&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;issue&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;adjoint-sensitivity-methods-for-sdes&#34;&gt;Adjoint sensitivity methods for SDEs&lt;/h2&gt;
+&lt;h2 id=&#34;adjoint-sensitivity-methods-for-sdes&#34;&gt;Adjoint Sensitivity Methods for SDEs&lt;/h2&gt;
 &lt;p&gt;The adjoint sensitivity method is well known to compute gradients of solutions to ordinary differential equations (ODEs). Recently, this method was generalized to SDEs&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;. Importantly, this new method has different complexities in terms of memory consumption or computation time as compared with forward- or reverse-mode automatic differentiation (AD) approaches. While forward mode AD is memory efficient, it scales poorly in time with increasing number of parameters. On the contrary, reverse-mode AD, i.e., a direct backpropagation through the solver, has a huge memory footprint.&lt;/p&gt;
 &lt;p&gt;I started to implement the algorithm&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; (c.f., Fig. 2) in a slightly modified way: To compute the gradients, we reverse the SDE such that we run the time evolution from $t_1$ to $t_0$ (instead of a evolution from $-t_1$ to $-t_0$). Here, $t_0$  represents the start time and $t_1$  represents the end time of the time evolution. This modification allows us to reuse/generalize many functions that were implemented for ODE adjoints earlier.&lt;/p&gt;
 &lt;h3 id=&#34;reverse-sde-time-evolution&#34;&gt;Reverse SDE time evolution&lt;/h3&gt;
@@ -225,7 +225,7 @@ resp2 = 2*sum(@. Wextracted*u₀^2*exp(2*(p2[1])*tarray+2*p2[2]*Wextracted))
 resp = [resp1, resp2]
 
 @test isapprox(res_p&#39;, resp, rtol = 1e-6)
-# True 
+# True
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;With respect to the adjoint sensitivity methods, we are looking forward&lt;/p&gt;
 &lt;ul&gt;
