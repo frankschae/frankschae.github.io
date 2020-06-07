@@ -215,6 +215,8 @@
   
 
   
+  <link rel="alternate" href="/post/gsoc2020-high-weak-order-solvers-sde-adjoints/index.xml" type="application/rss+xml" title="FS">
+  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
@@ -589,7 +591,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    8 min read
+    9 min read
   </span>
   
 
@@ -636,21 +638,23 @@ Ultimately, the planned contributions will allow researchers to simulate (or eve
 <a href="https://diffeqflux.sciml.ai/dev/examples/LV-stochastic/" target="_blank" rel="noopener">control</a>) stochastic dynamics. Also inverse problems, where 
 <a href="https://diffeqflux.sciml.ai/dev/examples/NN-SDE/" target="_blank" rel="noopener">SDE models are fit to data</a>, fall into the scope.
 Therefore, relevant applications are found in many fields ranging from the simulation of (bio-)chemical processes over financial modeling to quantum mechanics.</p>
+<p>This post is supposed to summarize what we have implemented in this first period and what we are going to do next. Future posts are going to dig into the individual subjects in more details.</p>
 <h2 id="high-weak-order-solvers">High Weak Order Solvers</h2>
 <p>Currently, the 
 <a href="https://github.com/SciML/StochasticDiffEq.jl" target="_blank" rel="noopener">StochasticDiffEq</a> package contains state-of-the-art solvers for the strong approximation of SDEs, i.e., solvers that allow one to reconstruct correctly the numerical solution of an SDE in a pathwise sense.
-However, in many situations methods for the weak approximation, which only aim for computing an estimation for the expected value of the solution, are sufficient.
-When Monte Carlo methods are used for SDE models, it is indeed often sufficient to be able to accurately sample random trajectories of the SDE, and it is not important to accurately approximate a particular trajectory. The former is exactly what a solver with high weak order provides.
-The less restrictive formulation of weak methods has the advantage that they are computationally cheaper than strong methods.
-High weak order solvers are particularly appealing, as they allow for using much larger time steps while attaining the same error in the mean, as compared with SDE solvers having a smaller weak order convergence.</p>
+In general, an accurate estimation of multiple stochastic integrals is then required to produce a strong method of order greater than 1/2.</p>
+<p>However in many situations, we are only aiming for computing an estimation for the <strong>expected value of the solution</strong>.
+In such situations, methods for the <strong>weak approximation</strong> are sufficient. The less restrictive formulation of the objective for weak methods has the advantage that they are computationally cheaper than strong methods.
+<strong>High weak order solvers</strong> are particularly appealing, as they allow for using much larger time steps while attaining the same error in the mean, as compared with SDE solvers having a smaller weak order convergence.
+As an example, when Monte Carlo methods are used for SDE models, it is indeed often sufficient to be able to accurately sample random trajectories of the SDE, and it is not important to accurately approximate a particular trajectory. The former is exactly what a solver with high weak order provides.</p>
 <h3 id="second-order-runge-kutta-methods-for-ito-sdes">Second order Runge-Kutta methods for Ito SDEs</h3>
-<p>In the beginning of the community bonding period I finished the implementations of the <code>DRI1()</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> and <code>RI1()</code><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> methods. Both are representing second order Runge-Kutta schemes and were introduced by Rößler. Interestingly, these methods are designed to scale well with the number of Wiener processes <code>m</code>. Specifically, only <code>2m-1</code> random variables have to be drawn and, additionally, the number of function evaluations for the drift and the diffusion terms is independent of <code>m</code>.</p>
+<p>In the beginning of the community bonding period I finished the implementations of the <code>DRI1()</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> and <code>RI1()</code><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> methods. Both are representing second order Runge-Kutta schemes and were introduced by Rößler. Interestingly, these methods are designed to scale well with the number of Wiener processes <code>m</code>. Specifically, only <code>2m-1</code> random variables have to be drawn (in contrast to <code>m(m+1)/2</code> from previous methods). Additionally, the number of function evaluations for the drift and the diffusion terms is independent of <code>m</code>.</p>
 <p>As an example, we can check the second order convergence property on a multi-dimensional SDE with non-commuting noise<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
 <p>$$
-\scriptstyle d \begin{pmatrix} X^1 \\  X^2 \end{pmatrix} = \begin{pmatrix} \frac{-273}{512} &amp;  \phantom{X^2}0 \\  -\frac{1}{160} \phantom{X^2}  &amp; -\frac{785}{512}+\frac{\sqrt{2}}{8} \end{pmatrix}  \begin{pmatrix} X^1 \\  X^2 \end{pmatrix} dt + \begin{pmatrix} \frac{1}{4} X^1 &amp;  \frac{1}{16} X^1 \\  \frac{1-2\sqrt{2}}{4} X^2 &amp; \frac{1}{10}X^1  +\frac{1}{16} X^2 \end{pmatrix} d \begin{pmatrix} W^1 \\  W^2 \end{pmatrix} <br>
+\scriptstyle d \begin{pmatrix} X^1 \\  X^2 \end{pmatrix} = \begin{pmatrix} -\frac{273}{512} &amp;  \phantom{X^2}0 \\  -\frac{1}{160} \phantom{X^2}  &amp; -\frac{785}{512}+\frac{\sqrt{2}}{8} \end{pmatrix}  \begin{pmatrix} X^1 \\  X^2 \end{pmatrix} dt + \begin{pmatrix} \frac{1}{4} X^1 &amp;  \frac{1}{16} X^1 \\  \frac{1-2\sqrt{2}}{4} X^2 &amp; \frac{1}{10}X^1  +\frac{1}{16} X^2 \end{pmatrix} d \begin{pmatrix} W^1 \\  W^2 \end{pmatrix} <br>
 $$</p>
 <p>with initial value $$ X(t=0)=  \begin{pmatrix} 1 \\ 1\end{pmatrix}.$$</p>
-<p>If we choose a function $f(x)=(x^1)^2$, we can analytically compute the expected value of the solution</p>
+<p>For the function $f(x)=(x^1)^2$, we can analytically compute the expected value of the solution</p>
 <p>$$ \rm{E}\left[ f(X(t)) \right] =  \exp(-t),$$</p>
 <p>which we use to test the weak convergence order of the algorithms in the following.</p>
 <p>To compute the expected value numerically, we sample an ensemble of <code>numtraj = 1e7</code> trajectories for different step sizes <code>dt</code>. The code for a single  <code>dt</code> reads:</p>
@@ -728,15 +732,26 @@ sol = solve(ensemble_prob, DRI1();
 <a href="https://github.com/SciML/StochasticDiffEq.jl/issues/182" target="_blank" rel="noopener">issue</a>.</p>
 <h2 id="adjoint-sensitivity-methods-for-sdes">Adjoint Sensitivity Methods for SDEs</h2>
 <p>In 
-<a href="https://mitmath.github.io/18337/lecture10/estimation_identification" target="_blank" rel="noopener">parameter estimation/inverse problems</a>, one is interested to know the optimal choice of parameters <code>p</code> such that a model <code>f(p)</code>, e.g., a differential equation, optimally fits some data. The shooting method approaches this task by introducing some sort of loss function which must be minimized.</p>
-<p>The adjoint sensitivity method is well known to compute gradients of solutions to ordinary differential equations (ODEs) with respect to the parameters and initial states entering the ODE. Those gradients can be used to minimize the loss function and ultimately solve the inverse problem. The adjoint sensitivity method was recently generalized to SDEs<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. Importantly, this new method has different complexities in terms of memory consumption or computation time as compared with forward- or reverse-mode automatic differentiation (AD) approaches. While forward mode AD is memory efficient, it scales poorly in time with increasing number of parameters. On the contrary, reverse-mode AD, i.e., a direct backpropagation through the solver, has a huge memory footprint (NP vs N+P where N is the number of state variables and P is the number of parameters).</p>
-<p>I started to implement the algorithm<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> (c.f., Fig. 2) in a slightly modified way: To compute the gradients, we reverse the SDE such that we run the time evolution from $t_1$ to $t_0$ (instead of a evolution from $-t_1$ to $-t_0$). Here, $t_0$  represents the start time and $t_1$  represents the end time of the time evolution. This modification allows us to reuse/generalize many functions that were implemented for ODE adjoints earlier.</p>
+<a href="https://mitmath.github.io/18337/lecture10/estimation_identification" target="_blank" rel="noopener">parameter estimation/inverse problems</a>, one is interested to know the optimal choice of parameters <code>p</code> such that a model <code>f(p)</code>, e.g., a differential equation, optimally fits some data, y. The shooting method approaches this task by introducing some sort of loss function $L$. A common choice is the mean squared error</p>
+<p>$$
+L = |f(p)-y|^2.
+$$</p>
+<p>An optimizer is then used to update the parameters $p$ such that $L$ is minimized. For this fit, local optimizers use the gradient $\frac{dL}{dp}$ to minimize the loss function and ultimately solve the inverse problem.
+One possibility to obtain the gradient information for (stochastic) differential equations is to use automatic differentiation (AD).
+While forward mode AD is memory efficient, it scales poorly in time with increasing number of parameters. On the contrary, reverse-mode AD, i.e., a direct backpropagation through the solver, has a huge memory footprint.</p>
+<p>Alternatively to the &ldquo;direct&rdquo; AD approaches, the <strong>adjoint sensitivity method</strong> can be used<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. The adjoint sensitivity method is well known to compute gradients of solutions to ordinary differential equations (ODEs) with respect to the parameters and initial states entering the ODE. The method was recently generalized to SDEs<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>.
+Importantly, this new approach has different complexities in terms of memory consumption or computation time as compared with forward- or reverse-mode AD (NP vs N+P where N is the number of state variables and P is the number of parameters).</p>
+<p>It turns out that the aforementioned gradients in the stochastic adjoint sensitivity method are given by solving an SDE with an <strong>augmented state backwards in time</strong> launched at the end state of the forward evolution.  In other words, we first compute the forward time evolution of the model from the start time $t_0$ to the end time $t_1$. Subsequently, we reverse the SDE and run a second time evolution from $t_1$ to $t_0$. Please note that the authors in Ref. <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> are implementing a slightly modfified version where the time evolution of the augmented state runs from $-t_1$ to $-t_0$. We however are indeed using the former variant as it allows us to reuse/generalize many functions that were implemented in the 
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/" target="_blank" rel="noopener">DiffEqSensitivity</a> package for ODE adjoints earlier.</p>
 <h3 id="reverse-sde-time-evolution">Reverse SDE time evolution</h3>
 <p>The reversion of an SDE is more difficult than the reversion of an ODE. However, for SDEs written in the Stratonovich sense, it turns out that reversion can be achieved by negative signs in front of the drift and diffusion terms.
-After some fixes for the available noise processes, we are now able to reverse a stochastic time evolution either by using a very general <code>NoiseWrapper</code> that interpolates in a distributionally-exact manner based on Brownian bridges, or by using <code>NoiseGrid</code> which linearly interpolates between values of the noise on a given grid.</p>
+As one needs to follow the same trajectory backward, the noise sampled in the forward pass must be reconstructed.
+In general, we would like to use adaptive time-stepping solvers which require some form of interpolation for the noise values.
+After some fixes for the 
+<a href="https://docs.sciml.ai/latest/features/noise_process/#Adaptive-NoiseWrapper-Example-1" target="_blank" rel="noopener">available noise processes</a>, we are now able to reverse a stochastic time evolution either by using <code>NoiseGrid</code> which linearly interpolates between values of the noise on a given grid or by using a very general <code>NoiseWrapper</code> which interpolates in a distributionally-exact manner based on Brownian bridges.</p>
 <p>As an example, the code below computes first the forward evolution of an SDE</p>
 <p>$$ dX  =  \alpha X dt + \beta X dW$$</p>
-<p>with $\alpha=1.01$, $\beta=0.87$, $x(0)=1/2$, in the time span ($t_{0}=0$, $t_{1}=1)$. This forward evolution is shown in blue. Subsequently, also the reverse time evolution (red) launched at time $t_{1}=1$ with initial value $x(t=1)$, propagated in negative time direction until $t_{0}=0$, is computed. We see in the animation that both trajectories match very well.</p>
+<p>with $\alpha=1.01$, $\beta=0.87$, $x(0)=1/2$, in the time span ($t_{0}=0$, $t_{1}=1)$. This forward evolution is shown in blue in the animation below. Subsequently, also the reverse time evolution (red) launched at time $t_{1}=1$ with initial value $x(t=1)$, propagated in negative time direction until $t_{0}=0$, is computed. We see that both trajectories match very well.</p>
 <pre><code class="language-julia">  using StochasticDiffEq, DiffEqNoiseProcess
 
   α=1.01
@@ -791,11 +806,11 @@ After some fixes for the available noise processes, we are now able to reverse a
 </figure>
 
 <h3 id="gradients-of-diagonal-sdes">Gradients of diagonal SDEs</h3>
-<p>I have already started to implement the stochastic adjoint sensitivity method for SDEs possessing diagonal noise. Currently, only non-mutating SDE functions are supported but I am optimistic that soon also the inplace formulation works.</p>
+<p>I have already started to implement the stochastic adjoint sensitivity method for SDEs possessing diagonal noise. Currently, only out-of-place SDE functions are supported but I am optimistic that soon also the inplace formulation works.</p>
 <p>Let us consider again the linear SDE with multiplicative noise from above (with the same parameters). This SDE represents one of the few exact solvable cases. In the Stratonovich sense, the solution is given as</p>
 <p>$$ X(t) =  X(0) \exp(\alpha t + \beta W(t)).$$</p>
 <p>We might be interested in optimizing the parameters $\alpha$ and $\beta$ to minimize a certain loss function acting on the solution $X(t)$. For such an optimization task, a useful search direction is indicated by the gradient of the loss function with respect to the parameters. The latter however requires the differentiation through the SDE solver &ndash; if no analytical solution of the SDE is available.</p>
-<p>As a prototypical scenario, let us consider a mean squared error loss</p>
+<p>As an example, let us consider a mean squared error loss</p>
 <p>$$
 L(X(t)) = \sum_i |X(t_i)|^2,
 $$</p>
@@ -855,10 +870,12 @@ resp = [resp1, resp2]
 <ul>
 <li>to finish the current backsolve adjoint version,</li>
 <li>to allow for computing the gradients of non-commuting SDEs,</li>
-<li>to implement also an interpolation adjoint version</li>
+<li>to implement also an interpolation adjoint version,</li>
+<li>to benchmark it with respect to AD approaches</li>
 </ul>
 <p>in the upcoming weeks. For more information, the interested reader might take a look at the open 
 <a href="https://github.com/SciML/DiffEqSensitivity.jl/issues" target="_blank" rel="noopener">issues</a> in the DiffEqSensitivity package.</p>
+<p>If you have any questions or comments, please don’t hesitate to contact me!</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -869,7 +886,10 @@ resp = [resp1, resp2]
 <p>Andreas Rößler, Journal on Numerical Analysis <strong>47</strong>, 1713–1738 (2009). <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3" role="doc-endnote">
-<p>Xuechen Li, Ting-Kam Leonard Wong, Ricky T. Q. Chen, David Duvenaud, arXiv preprint arXiv:2001.01328 (2020). <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Steven G. Johnson, &ldquo;Notes on Adjoint Methods for 18.335.&rdquo; Introduction to Numerical Methods (2012). <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>Xuechen Li, Ting-Kam Leonard Wong, Ricky T. Q. Chen, David Duvenaud, arXiv preprint arXiv:2001.01328 (2020). <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -889,6 +909,8 @@ resp = [resp1, resp2]
   <a class="badge badge-light" href="/tag/gsoc-2020/">GSoC 2020</a>
   
   <a class="badge badge-light" href="/tag/high-weak-order-solver/">High weak order solver</a>
+  
+  <a class="badge badge-light" href="/tag/julia/">julia</a>
   
   <a class="badge badge-light" href="/tag/srk-methods/">SRK methods</a>
   
