@@ -256,12 +256,12 @@ resp = [resp1, resp2]
 @test isapprox(res_p&#39;, resp, rtol = 1e-6)
 # True
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With respect to the adjoint sensitivity methods, we are looking forward to&lt;/p&gt;
+&lt;p&gt;With respect to the adjoint sensitivity methods, we are planning to&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;finishing the current backsolve adjoint version,&lt;/li&gt;
-&lt;li&gt;allowing for computing the gradients of non-commuting SDEs,&lt;/li&gt;
-&lt;li&gt;implementing also an interpolation adjoint version,&lt;/li&gt;
-&lt;li&gt;benchmarking it with respect to AD approaches&lt;/li&gt;
+&lt;li&gt;finish the current backsolve adjoint version,&lt;/li&gt;
+&lt;li&gt;allow for computing the gradients of non-commuting SDEs,&lt;/li&gt;
+&lt;li&gt;implement also an interpolation adjoint version,&lt;/li&gt;
+&lt;li&gt;benchmark it with respect to AD approaches&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;in the upcoming weeks. For more information, the interested reader might take a look at the open 
 &lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/issues&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;issues&lt;/a&gt; in the DiffEqSensitivity package.&lt;/p&gt;
