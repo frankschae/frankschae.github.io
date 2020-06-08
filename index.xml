@@ -41,10 +41,10 @@ As an example, when Monte Carlo methods are used for SDE models, it is indeed of
 &lt;p&gt;In the beginning of the community bonding period I finished the implementations of the &lt;code&gt;DRI1()&lt;/code&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; and &lt;code&gt;RI1()&lt;/code&gt;&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; methods. Both are representing second order Runge-Kutta schemes and were introduced by Rößler. Interestingly, these methods are designed to scale well with the number of Wiener processes &lt;code&gt;m&lt;/code&gt;. Specifically, only &lt;code&gt;2m-1&lt;/code&gt; random variables have to be drawn (in contrast to &lt;code&gt;m(m+1)/2&lt;/code&gt; from previous methods). Additionally, the number of function evaluations for the drift and the diffusion terms is independent of &lt;code&gt;m&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;As an example, we can check the second order convergence property on a multi-dimensional SDE with non-commuting noise&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
 &lt;p&gt;$$
-\scriptstyle d \begin{pmatrix} X^1 \\  X^2 \end{pmatrix} = \begin{pmatrix} -\frac{273}{512} &amp;amp;  \phantom{X^2}0 \\  -\frac{1}{160} \phantom{X^2}  &amp;amp; -\frac{785}{512}+\frac{\sqrt{2}}{8} \end{pmatrix}  \begin{pmatrix} X^1 \\  X^2 \end{pmatrix} dt + \begin{pmatrix} \frac{1}{4} X^1 &amp;amp;  \frac{1}{16} X^1 \\  \frac{1-2\sqrt{2}}{4} X^2 &amp;amp; \frac{1}{10}X^1  +\frac{1}{16} X^2 \end{pmatrix} d \begin{pmatrix} W^1 \\  W^2 \end{pmatrix} &lt;br&gt;
+\scriptstyle d \begin{pmatrix} X_1 \\  X_2 \end{pmatrix} = \begin{pmatrix} -\frac{273}{512} &amp;amp;  \phantom{X_2}0 \\  -\frac{1}{160} \phantom{X_2}  &amp;amp; -\frac{785}{512}+\frac{\sqrt{2}}{8} \end{pmatrix}  \begin{pmatrix} X_1 \\  X_2 \end{pmatrix} dt + \begin{pmatrix} \frac{1}{4} X_1 &amp;amp;  \frac{1}{16} X_1 \\  \frac{1-2\sqrt{2}}{4} X_2 &amp;amp; \frac{1}{10}X_1  +\frac{1}{16} X_2 \end{pmatrix} d \begin{pmatrix} W_1 \\  W_2 \end{pmatrix} &lt;br&gt;
 $$&lt;/p&gt;
 &lt;p&gt;with initial value $$ X(t=0)=  \begin{pmatrix} 1 \\ 1\end{pmatrix}.$$&lt;/p&gt;
-&lt;p&gt;For the function $f(x)=(x^1)^2$, we can analytically compute the expected value of the solution&lt;/p&gt;
+&lt;p&gt;For the function $f(x)=(x_1)^2$, we can analytically compute the expected value of the solution&lt;/p&gt;
 &lt;p&gt;$$ \rm{E}\left[ f(X(t)) \right] =  \exp(-t),$$&lt;/p&gt;
 &lt;p&gt;which we use to test the weak convergence order of the algorithms in the following.&lt;/p&gt;
 &lt;p&gt;To compute the expected value numerically, we sample an ensemble of &lt;code&gt;numtraj = 1e7&lt;/code&gt; trajectories for different step sizes &lt;code&gt;dt&lt;/code&gt;. The code for a single  &lt;code&gt;dt&lt;/code&gt; reads:&lt;/p&gt;
@@ -103,10 +103,10 @@ sol = solve(ensemble_prob, DRI1();
 &lt;figure &gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/DRI1.pdf&#34; &gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/DRI1.png&#34; &gt;
 
 
-  &lt;img src=&#34;https://frankschae.github.io/img/DRI1.pdf&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;https://frankschae.github.io/img/DRI1.png&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
@@ -256,12 +256,12 @@ resp = [resp1, resp2]
 @test isapprox(res_p&#39;, resp, rtol = 1e-6)
 # True
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With respect to the adjoint sensitivity methods, we are looking forward&lt;/p&gt;
+&lt;p&gt;With respect to the adjoint sensitivity methods, we are looking forward to&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;to finish the current backsolve adjoint version,&lt;/li&gt;
-&lt;li&gt;to allow for computing the gradients of non-commuting SDEs,&lt;/li&gt;
-&lt;li&gt;to implement also an interpolation adjoint version,&lt;/li&gt;
-&lt;li&gt;to benchmark it with respect to AD approaches&lt;/li&gt;
+&lt;li&gt;finishing the current backsolve adjoint version,&lt;/li&gt;
+&lt;li&gt;allowing for computing the gradients of non-commuting SDEs,&lt;/li&gt;
+&lt;li&gt;implementing also an interpolation adjoint version,&lt;/li&gt;
+&lt;li&gt;benchmarking it with respect to AD approaches&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;in the upcoming weeks. For more information, the interested reader might take a look at the open 
 &lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/issues&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;issues&lt;/a&gt; in the DiffEqSensitivity package.&lt;/p&gt;

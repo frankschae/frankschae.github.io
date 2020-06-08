@@ -651,10 +651,10 @@ As an example, when Monte Carlo methods are used for SDE models, it is indeed of
 <p>In the beginning of the community bonding period I finished the implementations of the <code>DRI1()</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> and <code>RI1()</code><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> methods. Both are representing second order Runge-Kutta schemes and were introduced by Rößler. Interestingly, these methods are designed to scale well with the number of Wiener processes <code>m</code>. Specifically, only <code>2m-1</code> random variables have to be drawn (in contrast to <code>m(m+1)/2</code> from previous methods). Additionally, the number of function evaluations for the drift and the diffusion terms is independent of <code>m</code>.</p>
 <p>As an example, we can check the second order convergence property on a multi-dimensional SDE with non-commuting noise<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
 <p>$$
-\scriptstyle d \begin{pmatrix} X^1 \\  X^2 \end{pmatrix} = \begin{pmatrix} -\frac{273}{512} &amp;  \phantom{X^2}0 \\  -\frac{1}{160} \phantom{X^2}  &amp; -\frac{785}{512}+\frac{\sqrt{2}}{8} \end{pmatrix}  \begin{pmatrix} X^1 \\  X^2 \end{pmatrix} dt + \begin{pmatrix} \frac{1}{4} X^1 &amp;  \frac{1}{16} X^1 \\  \frac{1-2\sqrt{2}}{4} X^2 &amp; \frac{1}{10}X^1  +\frac{1}{16} X^2 \end{pmatrix} d \begin{pmatrix} W^1 \\  W^2 \end{pmatrix} <br>
+\scriptstyle d \begin{pmatrix} X_1 \\  X_2 \end{pmatrix} = \begin{pmatrix} -\frac{273}{512} &amp;  \phantom{X_2}0 \\  -\frac{1}{160} \phantom{X_2}  &amp; -\frac{785}{512}+\frac{\sqrt{2}}{8} \end{pmatrix}  \begin{pmatrix} X_1 \\  X_2 \end{pmatrix} dt + \begin{pmatrix} \frac{1}{4} X_1 &amp;  \frac{1}{16} X_1 \\  \frac{1-2\sqrt{2}}{4} X_2 &amp; \frac{1}{10}X_1  +\frac{1}{16} X_2 \end{pmatrix} d \begin{pmatrix} W_1 \\  W_2 \end{pmatrix} <br>
 $$</p>
 <p>with initial value $$ X(t=0)=  \begin{pmatrix} 1 \\ 1\end{pmatrix}.$$</p>
-<p>For the function $f(x)=(x^1)^2$, we can analytically compute the expected value of the solution</p>
+<p>For the function $f(x)=(x_1)^2$, we can analytically compute the expected value of the solution</p>
 <p>$$ \rm{E}\left[ f(X(t)) \right] =  \exp(-t),$$</p>
 <p>which we use to test the weak convergence order of the algorithms in the following.</p>
 <p>To compute the expected value numerically, we sample an ensemble of <code>numtraj = 1e7</code> trajectories for different step sizes <code>dt</code>. The code for a single  <code>dt</code> reads:</p>
@@ -713,10 +713,10 @@ sol = solve(ensemble_prob, DRI1();
 <figure >
 
 
-  <a data-fancybox="" href="/img/DRI1.pdf" >
+  <a data-fancybox="" href="/img/DRI1.png" >
 
 
-  <img src="/img/DRI1.pdf" alt=""  >
+  <img src="/img/DRI1.png" alt=""  >
 </a>
 
 
@@ -866,12 +866,12 @@ resp = [resp1, resp2]
 @test isapprox(res_p', resp, rtol = 1e-6)
 # True
 </code></pre>
-<p>With respect to the adjoint sensitivity methods, we are looking forward</p>
+<p>With respect to the adjoint sensitivity methods, we are looking forward to</p>
 <ul>
-<li>to finish the current backsolve adjoint version,</li>
-<li>to allow for computing the gradients of non-commuting SDEs,</li>
-<li>to implement also an interpolation adjoint version,</li>
-<li>to benchmark it with respect to AD approaches</li>
+<li>finishing the current backsolve adjoint version,</li>
+<li>allowing for computing the gradients of non-commuting SDEs,</li>
+<li>implementing also an interpolation adjoint version,</li>
+<li>benchmarking it with respect to AD approaches</li>
 </ul>
 <p>in the upcoming weeks. For more information, the interested reader might take a look at the open 
 <a href="https://github.com/SciML/DiffEqSensitivity.jl/issues" target="_blank" rel="noopener">issues</a> in the DiffEqSensitivity package.</p>
