@@ -766,7 +766,7 @@ sim = test_convergence(dts,ensemble_prob,DRI1(),
   )
 </code></pre>
 <p>The last line computes the weak convergence with respect to the final time point for the <code>DRI1()</code> scheme.
-Repeating the call to the <code>test_convergence()</code> function for the other solvers, we obtain the convergence plot:</p>
+Repeating this call to the <code>test_convergence()</code> function for the other aforementioned solvers, we obtain the convergence plot:</p>
 
 
 
@@ -916,7 +916,7 @@ pl = plot(summ,fillalpha=0.5,xlabel = &quot;time t&quot;, yaxis=&quot;X(t)&quot;
 </code></pre>
 <p>simulates the stochastic version of the Brusselator equations with intitial condition</p>
 <p>$$ X(t=0)=  \begin{pmatrix} 0.1 \\ 0\end{pmatrix},$$</p>
-<p>on a time span $\mathbb{I}=[0, 100]$.</p>
+<p>on a time span $\mathbb{I}=[0, 100]$ for adaptive (<code>sol</code>) and fixed step sizes (<code>sol_na</code>).</p>
 
 
 
@@ -949,7 +949,10 @@ pl = plot(summ,fillalpha=0.5,xlabel = &quot;time t&quot;, yaxis=&quot;X(t)&quot;
 
 <p>We can confirm Rößler&rsquo;s observation in his paper<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> that the adaptive scheme describes the time evolution of the SDE more accurately,
 as oscillations are damped out stronger for the fixed step size method, thus approaching the origin too rapidly.</p>
-<pre><code class="language-julia">dts = []
+<pre><code class="language-julia">using DifferentialEquations.EnsembleAnalysis
+meansol = timeseries_steps_mean(sol)
+meansol_na = timeseries_point_mean(sol_na,meansol.t)
+dts = []
 tmp1 = tspan[1]
 for tmp2 in meansol.t
   global tmp1
