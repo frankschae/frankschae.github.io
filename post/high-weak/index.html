@@ -28,7 +28,7 @@
     
   
   <meta name="description" content="This post summarizes our new high weak order methods for the SciML ecosystem, as implemented within the Google Summer of Code 2020 project.
-Starting from an introductory part highlighting the differences between the strong and the weak approximation for stochastic differential equations, we look into the convergence and performance properties of a few representative new methods in case of a non-commutative noise process.">
+After an introductory part highlighting the differences between the strong and the weak approximation for stochastic differential equations, we look into the convergence and performance properties of a few representative new methods in case of a non-commutative noise process.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://frankschae.github.io/post/high-weak/">
@@ -242,7 +242,7 @@ Starting from an introductory part highlighting the differences between the stro
   <meta property="og:url" content="https://frankschae.github.io/post/high-weak/">
   <meta property="og:title" content="High weak order SDE solvers | FS">
   <meta property="og:description" content="This post summarizes our new high weak order methods for the SciML ecosystem, as implemented within the Google Summer of Code 2020 project.
-Starting from an introductory part highlighting the differences between the strong and the weak approximation for stochastic differential equations, we look into the convergence and performance properties of a few representative new methods in case of a non-commutative noise process."><meta property="og:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+After an introductory part highlighting the differences between the strong and the weak approximation for stochastic differential equations, we look into the convergence and performance properties of a few representative new methods in case of a non-commutative noise process."><meta property="og:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -292,7 +292,7 @@ Starting from an introductory part highlighting the differences between the stro
       "url": "https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "This post summarizes our new high weak order methods for the SciML ecosystem, as implemented within the Google Summer of Code 2020 project.\nStarting from an introductory part highlighting the differences between the strong and the weak approximation for stochastic differential equations, we look into the convergence and performance properties of a few representative new methods in case of a non-commutative noise process."
+  "description": "This post summarizes our new high weak order methods for the SciML ecosystem, as implemented within the Google Summer of Code 2020 project.\nAfter an introductory part highlighting the differences between the strong and the weak approximation for stochastic differential equations, we look into the convergence and performance properties of a few representative new methods in case of a non-commutative noise process."
 }
 </script>
 
@@ -630,15 +630,11 @@ Starting from an introductory part highlighting the differences between the stro
       <p>This post summarizes our new 
 <a href="https://diffeq.sciml.ai/dev/solvers/sde_solve/#High-Weak-Order-Methods-1" target="_blank" rel="noopener">high weak order methods</a>
 for the 
-<a href="https://sciml.ai" target="_blank" rel="noopener">SciML</a> ecosystem, as implemented within the
-
+<a href="https://sciml.ai" target="_blank" rel="noopener">SciML</a> ecosystem, as implemented within the 
 <a href="https://summerofcode.withgoogle.com/organizations/6363760870031360/?sp-page=2#5505348691034112" target="_blank" rel="noopener">Google Summer of Code 2020</a> project.</p>
-<p>Starting from an introductory part highlighting the differences between the strong and
-the weak approximation for stochastic differential equations, we look into the convergence and
-performance properties of a few representative new methods in case of a non-commutative noise process.
-Based on the stochastic version of the Brusselator equations, we showcase how adaptive step-size
-control for the weak solvers can result in a better approximation of the system dynamics. Finally,
-we discuss how to run simulations on GPU hardware.</p>
+<p>After an introductory part highlighting the differences between the strong and the weak approximation for stochastic differential equations, we look into the convergence and performance properties of a few representative new methods in case of a non-commutative noise process.
+Based on the stochastic version of the Brusselator equations, we demonstrate how adaptive step-size control for the weak solvers can result in a better approximation of the system dynamics.
+Finally, we discuss how to run simulations on GPU hardware.</p>
 <p>Throughout this post, we shall use the vector notation $X(t)$ to denote the solution of the <em>d</em>-dimensional Ito SDE
 system</p>
 <p>$$
@@ -646,22 +642,22 @@ dX(t) = a(t,X(t)) dt + b(t,X(t)) dW
 $$</p>
 <p>with an <em>m</em>-dimensional driving Wiener process <em>W(t)</em> in the time span $\mathbb{I}=[t_0, T]$, where $a: \mathbb{I}\times\mathbb{R}^d \rightarrow \mathbb{R}^d$
 and $b: \mathbb{I}\times \mathbb{R}^{d} \rightarrow \mathbb{R}^{d \times m}$ are continuous functions which fulfill a global Lipschitz condition.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
-For simplicity, we write $X(t)$ for both time discrete approximations and continuous time random variables in the following.</p>
+For simplicity, we write $X(t)$ for both time-discrete approximations and continuous-time random variables in the following.</p>
 <h2 id="strong-convergence">Strong convergence</h2>
-<p>Suppose that we encounter the following problem: Given <strong>noisy</strong> (e.g., originating from measurement noise)
-observations $Z(t)$, what is the best estimate $\hat{X}(t)$ of a stochastic system $X(t)$
+<p>Suppose that we encounter the following problem: Given <strong>noisy</strong> observations $Z(t)$ (e.g., originating from measurement noise),
+what is the best estimate $\hat{X}(t)$ of a stochastic system $X(t)$
 satisfying the form above. Intuitively, we aim at filtering away the noise from the observations in an optimal way.
-Thus, such tasks are well known as filtering problems.</p>
+Such tasks are well known as filtering problems.</p>
 <p>To solve a filtering problem, we need a solver whose sample paths $Y(t)$ are close to the ones of the
 stochastic process $X(t)$, i.e., the solver should allow us to reconstruct correctly the numerical solution of each single trajectory of
 an SDE.</p>
 <p>Introducing the absolute error at the final time $T$ as
 $$
-\epsilon(\delta) =  \rm{E}(|X(T) -Y(T)|) \leq \sqrt{\rm{E}(|X(T)-Y(T)|^2)},
+\rm{E}(|X(T) -Y(T)|) \leq \sqrt{\rm{E}(|X(T)-Y(T)|^2)},
 $$
 we define convergence in the <strong>strong sense</strong> with order $p$ of a time discrete approximation $Y(T)$ with step size $h$
-to the solution $X(T)$ of a SDE at time $T$ if there exists a finite constant $C$ (independent of $h$)
-and a positive constant $\delta &gt; 0$ such that
+to the solution $X(T)$ of a SDE at time $T$ if there exists a constant $C$ (independent of $h$)
+and a constant $\delta &gt; 0$ such that
 $$
 \rm{E}(|X(T) -Y(T)|) \leq C \cdot h^p,
 $$
@@ -677,26 +673,23 @@ of scalar, diagonal, and commutative noise processes, an approximation based on 
 in the case of non-commutative noise processes.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> Currently, we are also 
 <a href="https:://github.com/SciML/StochasticDiffEq.jl/pull/347" target="_blank" rel="noopener">implementing those iterated integrals in the StochasticDiffEq library</a>.</p>
 <h2 id="weak-convergence">Weak convergence</h2>
-<p>Instead of an accurate pathwise approximation of a stochastic process, we only require an estimation for
-the <strong>expected value of the solution</strong> in many situations. Then, methods for the <strong>weak approximation</strong> are sufficient and &ndash; due to the less restrictive formulation of the objective &ndash; those solvers are computationally cheaper than their strong counterparts.
-For example, weak solvers are very efficient for simulations in quantum optics,
-if only mean values of many trajectories are required, e.g., when the expectation values of variables such as position and
-momentum operators are computed in the phase space framework (Wigner functions, positive P-functions, etc.) of quantum mechanics. Thus, our new contributions are particularly appealing for many-body simulations, which are the computationally
-most demanding problems in quantum mechanics.</p>
-<p>We define convergence in the <strong>weak sense</strong> with order $p$ of a time discrete approximation $Y(T)$ with step size $h$
-to the solution $X(T)$ of a SDE at time $T$ if there exists a finite constant $C$ (independent of $h$)
-and a positive constant $\delta &gt; 0$ such that
+<p>Instead of an accurate pathwise approximation of a stochastic process, we only require an estimation for the <strong>expected value of the solution</strong> in many situations. In these cases, methods for the <strong>weak approximation</strong> are sufficient and &ndash; due to the less restrictive formulation of the objective &ndash; those solvers are computationally cheaper than their strong counterparts.
+For example, weak solvers are very efficient for simulations in quantum optics, if only mean values of many trajectories are required, e.g., when the expectation values of variables such as position and momentum operators are computed in the phase space framework (Wigner functions, positive P-functions, etc.) of quantum mechanics.
+Our new contributions are particularly appealing for many-body simulations, which are the computationally most demanding problems in quantum mechanics.</p>
+<p>We define convergence in the <strong>weak sense</strong> with order $p$ of a time-discrete approximation $Y(T)$ with step size $h$
+to the solution $X(T)$ of a SDE at time $T$ if there exists a constant $C$ (independent of $h$)
+and a constant $\delta &gt; 0$ such that
 $$
 |\rm{E}(g(X(T))) -\rm{E}(g(Y(T)))| \leq C \cdot h^p,
 $$
 $~$</p>
 <p>for any polynomial $g$ for each $h \in [0, \delta]$.</p>
-<p>We demonstrate below that <strong>high weak order solvers</strong> are specifically appealing, as they allow for using much larger time steps while attaining the same error in the mean, as compared with SDE solvers possessing a smaller weak order convergence.</p>
+<p>We demonstrate below that <strong>high weak order solvers</strong> are specifically appealing, as they allow for using much larger time steps while attaining the same error in the mean, as compared with SDE solvers possessing a smaller weak-order convergence.</p>
 <h2 id="new-high-weak-order-methods">New high weak order methods</h2>
 <p>A list of all new weak solvers is available in the 
 <a href="https://diffeq.sciml.ai/dev/solvers/sde_solve/#High-Weak-Order-Methods-1" target="_blank" rel="noopener">SciML documentation</a>.
 Note that we also implemented methods designed for the Stratonovich sense.
-For the subsequent examples regarding Ito SDEs, we use only a subset of the plethora of second order weak solvers.
+For the subsequent examples regarding Ito SDEs, we use only a subset of the plethora of second-order weak solvers.
 We employ the <code>DRI1()</code><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, <code>RD1WM()</code><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>, and <code>RD2WM()</code><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> methods due to Debrabant &amp; Rößler and Platen&rsquo;s <code>PL1WM()</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> method.
 We compare those methods to the strong Euler-Maruyama <code>EM()</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> and the simplified Euler-Maruyama <code>SimplifiedEM()</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> schemes.
 The latter is the simplest weak solver, where the Gaussian increments of the strong Euler-Maruyama scheme are replaced by
@@ -710,7 +703,7 @@ two-point distributed random variables with similar moment properties.</p>
 \scriptstyle d \begin{pmatrix} X_1 \\  X_2 \end{pmatrix} = \begin{pmatrix} -\frac{273}{512} &amp;  \phantom{X_2}0 \\  -\frac{1}{160} \phantom{X_2}  &amp; -\frac{785}{512}+\frac{\sqrt{2}}{8} \end{pmatrix}  \begin{pmatrix} X_1 \\  X_2 \end{pmatrix} dt + \begin{pmatrix} \frac{1}{4} X_1 &amp;  \frac{1}{16} X_1 \\  \frac{1-2\sqrt{2}}{4} X_2 &amp; \frac{1}{10}X_1  +\frac{1}{16} X_2 \end{pmatrix} d \begin{pmatrix} W_1 \\  W_2 \end{pmatrix} <br>
 $$</p>
 <p>with initial value
-$~$</p>
+$$ ~$$</p>
 <p>$$ X(t=0)=  \begin{pmatrix} 1 \\ 1\end{pmatrix},$$</p>
 <p>where the expected value of the solution can be computed analytically</p>
 <p>$$ \rm{E}\left[ f(X(t)) \right] =  \exp(-t),$$</p>
@@ -743,7 +736,7 @@ function g1!(du,u,p,t)
   end
   return nothing
 end
-dts = 1 .//2 .^(3👎0)
+dts = 1 .//2 .^(3: -1:0)
 tspan = (0.0,3.0)
 
 h2(z) = z^2 # but apply it only to u[1]
@@ -765,7 +758,7 @@ sim = test_convergence(dts,ensemble_prob,DRI1(),
   expected_value=exp(-3.0)
   )
 </code></pre>
-<p>The last line computes the weak convergence with respect to the final time point for the <code>DRI1()</code> scheme.
+<p>The object <code>sim</code> defined in the last line contains all relevant quantities to test the weak convergence with respect to the final time point for the <code>DRI1()</code> scheme.
 Repeating this call to the <code>test_convergence()</code> function for the other aforementioned solvers, we obtain the convergence plot:</p>
 
 
@@ -797,12 +790,14 @@ Repeating this call to the <code>test_convergence()</code> function for the othe
 
 </figure>
 
-<p>Note that the <code>SimplifiedEM</code> and the <code>EM</code> scheme are actually lying on top of each other.
+<p>Note that the <code>SimplifiedEM</code> and the <code>EM</code> scheme fall on top of each other.
 <code>DRI1()</code> achieves the smallest errors for a fixed <code>dt</code> in this study.</p>
 <h3 id="work-precision-diagrams">Work-Precision Diagrams</h3>
-<p>Ultimately, we are not only interested in the general convergence slope of an algorithm but rather we&rsquo;d like to choose
-an algorithm based on a work-precision diagram, i.e., we select the fastest method depending on the permitted tolerance.
-Thanks to some new routines, a user can generate a work-precision diagram by the following code</p>
+<p>Ultimately, we are not only interested in the general convergence slope of an algorithm but also in its speed.
+We&rsquo;d like to select the fastest method depending on the permitted tolerance.
+This is commonly studied using work-precision diagram.
+Thanks to 
+<a href="https://github.com/SciML/DiffEqDevTools.jl/pull/75" target="_blank" rel="noopener">new routines</a>, a user can generate a work-precision diagram by the following code</p>
 <pre><code class="language-julia">reltols = 1.0 ./ 4.0 .^ (1:4)
 abstols = reltols#[0.0 for i in eachindex(reltols)]
 setups = [
@@ -854,15 +849,17 @@ plt = plot(wp;legend=:bottomleft)
 
 </figure>
 
-<p>Therefore, <code>DRI1</code> performs the best in this non-commutative noise case if the error should stay below 1e-3.
+<p>Therefore, <code>DRI1</code> has the best performance in this non-commutative noise case if the error is supposed to stay below 1e-3.
 For larger permitted errors, the <code>SimplifiedEM</code> scheme might be a good choice. However, the first order methods
-are outclassed soon when high precision is more of a concern.
-We plan to perform more in-depth benchmarks in the near future. Stay tuned on the 
-<a href="https://sciml.ai/news/2020/08/10/StochasticBonanza/#tons_of_methods_for_high_weak_order_solving_of_sdes" target="_blank" rel="noopener">SciML news</a>.</p>
+are outclassed when high precision is more of a concern.
+We plan to perform more in-depth benchmarks in the near future what will be reported on the 
+<a href="https://sciml.ai/news/2020/08/10/StochasticBonanza/#tons_of_methods_for_high_weak_order_solving_of_sdes" target="_blank" rel="noopener">SciML news</a>. Stay tuned!</p>
 <h3 id="adaptive-step-size-control">Adaptive step-size control</h3>
 <p>Already in 2004, Rößler proposed an adaptive discretization algorithm for the weak approximation of SDEs.<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> The idea is to employ an embedded SRK scheme: Using the same function evaluations but distinct Butcher tableaus, one constructs two stochastic Runge-Kutta methods with different convergence order, such that the local error can be estimated with only small additional computational overhead. Based on the error estimate, new step sizes are proposed.</p>
 <p>To use adaptive step-size control, it is sufficient to set <code>adaptive=true</code> (default setting). Optionally, one may also pass absolute and relative tolerances.</p>
-<p>The following julia code</p>
+<p>The following julia code simulates the stochastic version of the Brusselator equations with intitial condition</p>
+<p>$$ X(t=0)=  \begin{pmatrix} 0.1 \\ 0\end{pmatrix},$$</p>
+<p>on a time span $\mathbb{I}=[0, 100]$ for adaptive (<code>sol</code>) and fixed step sizes (<code>sol_na</code>):</p>
 <pre><code class="language-julia">using StochasticDiffEq, DiffEqNoiseProcess, Random
 using Plots
 using DiffEqGPU
@@ -914,9 +911,7 @@ summ = EnsembleSummary(sol,0.0f0:0.5f0:100f0)
 pl = plot(summ,fillalpha=0.5,xlabel = &quot;time t&quot;, yaxis=&quot;X(t)&quot;, label= [&quot;x₁(t)&quot; &quot;x₂(t)&quot;], legend=true)
 
 </code></pre>
-<p>simulates the stochastic version of the Brusselator equations with intitial condition</p>
-<p>$$ X(t=0)=  \begin{pmatrix} 0.1 \\ 0\end{pmatrix},$$</p>
-<p>on a time span $\mathbb{I}=[0, 100]$ for adaptive (<code>sol</code>) and fixed step sizes (<code>sol_na</code>).</p>
+<p>The time evolution of both dependent variables ($x_1(t)$ and $x_2(t)$) displays damped oscillations.</p>
 
 
 
@@ -947,7 +942,7 @@ pl = plot(summ,fillalpha=0.5,xlabel = &quot;time t&quot;, yaxis=&quot;X(t)&quot;
 
 </figure>
 
-<p>We can confirm Rößler&rsquo;s observation in his paper<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> that the adaptive scheme describes the time evolution of the SDE more accurately,
+<p>We can confirm Rößler&rsquo;s observation<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> that the adaptive scheme describes the time evolution of the SDE more accurately,
 as oscillations are damped out stronger for the fixed step size method, thus approaching the origin too rapidly.</p>
 <pre><code class="language-julia">using DifferentialEquations.EnsembleAnalysis
 meansol = timeseries_steps_mean(sol)
@@ -1050,8 +1045,7 @@ Note that for some high weak order solvers GPU usage is not recommended as scala
 <p>Kristian Debrabant, Andreas Rößler, Applied Numerical Mathematics <strong>59</strong>, 582–594 (2009). <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:4" role="doc-endnote">
-<p>Kristian Debrabant, Andreas Rößler, Mathematics and Computers in Simulation <strong>77</strong>, 408-420 (2008)
-%%%<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>: Angel Tocino and Jesus Vigo-Aguiar, SIAM Journal on Scientific Computing <strong>24</strong>, 507-523 (2002). <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Kristian Debrabant, Andreas Rößler, Mathematics and Computers in Simulation <strong>77</strong>, 408-420 (2008) <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
