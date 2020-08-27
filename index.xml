@@ -5,12 +5,188 @@
     <link>https://frankschae.github.io/</link>
       <atom:link href="https://frankschae.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>FS</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Mon, 17 Aug 2020 14:46:35 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Wed, 26 Aug 2020 22:59:49 +0200</lastBuildDate>
     <image>
       <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>FS</title>
       <link>https://frankschae.github.io/</link>
     </image>
+    
+    <item>
+      <title>High weak order solvers and adjoint sensitivity analysis for stochastic differential equations</title>
+      <link>https://frankschae.github.io/post/gsoc-2020/</link>
+      <pubDate>Wed, 26 Aug 2020 22:59:49 +0200</pubDate>
+      <guid>https://frankschae.github.io/post/gsoc-2020/</guid>
+      <description>&lt;h2 id=&#34;project-summary&#34;&gt;Project summary&lt;/h2&gt;
+&lt;p&gt;In this project, we have implemented new promising tools within the 
+&lt;a href=&#34;https://sciml.ai&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SciML&lt;/a&gt; organization which are relevant for tasks such as optimal control or parameter estimation for stochastic differential equations.
+The high weak order solvers will allow for massive performance advantages for fitting expectations of equations.
+Instead of automatic differentiation (AD) through the operations of an SDE solver, which scales poorly in memory, one can now use efficient stochastic adjoint sensitivity methods.&lt;/p&gt;
+&lt;h2 id=&#34;blog-posts&#34;&gt;Blog posts&lt;/h2&gt;
+&lt;p&gt;The following posts describe the work during the entire period in more detail:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GSoC 2020: High weak order SDE solvers and their utility in neural SDEs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://frankschae.github.io/post/high-weak/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;High weak order SDE solvers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Adjoint sensitivity methods  &amp;ndash; To be uploaded soon.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;docs&#34;&gt;Docs&lt;/h2&gt;
+&lt;p&gt;The documentation of the solvers is available 
+&lt;a href=&#34;https://diffeq.sciml.ai/latest/solvers/sde_solve/#High-Weak-Order-Methods&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.
+Docs with respect to the adjoint sensitivity tools will be available 
+&lt;a href=&#34;https://diffeq.sciml.ai/latest/analysis/sensitivity/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;achievements&#34;&gt;Achievements&lt;/h2&gt;
+&lt;p&gt;Please find below a list of the PRs carried out during GSoC in the different repositories in chronological order within the SciML ecosystem.&lt;/p&gt;
+&lt;h4 id=&#34;stochasticdiffeqjl&#34;&gt;StochasticDiffEq.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/285&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Inplace version of DRI1 scheme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/289&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RI1 method&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/305&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;tstop fixes for reverse time propagation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/317&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fixes for EulerHeun scheme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/327&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Speed up the tests for the DRI1 and RI1 schemes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/328&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RI3, RI5, RI6, RDI2WM, RDI3WM, and RDI4WM schemes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/329&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RDI1WM scheme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/332&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Adaptive version of the stochastic Runge-Kutta schemes by embedding&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/333&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RS1 and RS2 schemes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/334&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PL1WM scheme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/337&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;NON scheme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/338&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Citations for weak methods&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/342&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Stochastic improved and modified Euler methods&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/343&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;COM scheme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/348&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Computationally more efficient NON variant (NON2)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Open:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/288&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Static array tests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/347&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Levy area for non-commutative noise processes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;diffeqsensitivityjl&#34;&gt;DiffEqSensitivity.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/235&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Adjoint sensitivities for steady states&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/237&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Concrete_solve dispatch for steady state problem&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/242&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;BacksolveAdjoint for SDEs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/256&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GPU savety for SDE BacksolveAdjoint&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/258&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Tests for concrete solve with respect to SDEs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/260&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Alternative differentiation choices (vjps) for noise Jacobian&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/265&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fixes and tests for inplace formulation of BacksolveAdjoint&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/268&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Efficient SDE BacksolveAdjoint for scalar noise&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/275&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Generalization of the SDE Adjoint for non-diagonal noise processes and diagonal noise processes with mixing terms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/295&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;InterpolatingAdjoint for SDEs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/298&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Citations for backsolve, steadystate and interpolation adjoint&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/299&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Allow for more general noise processes: replace NoiseGrid by NoiseWrapper&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/303&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Checkpointing fix for BacksolveAdjoint in case of ODEs and SDEs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/305&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Cheaper non-diagonal noise tests&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Open:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/317&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Support adjoints for SDEs written in the Ito sense&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;diffeqnoiseprocessjl&#34;&gt;DiffEqNoiseProcess.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/48&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Multi dimensional Brownian motion tests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/49&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Bug fix for inplace form of NoiseGrid&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/51&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Reversible NoiseWrapper&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/53&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Relax the size constraints of the available noise processes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/54&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Generalization of the real-valued white noise process function&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/55&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fix of an extraction issue with NoiseGrid&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/56&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Allow NoiseWrapper to start at user-specified time points for interpolating parts of a trajectory&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/56&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Extraction and endpoint fixes on NoiseWrapper&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/62&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Reversal of SDEs written in the Ito sense&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;diffeqgpujl&#34;&gt;DiffEqGPU.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqGPU.jl/pull/59&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Memory efficient reduction function for ensemble problems&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;modelingtoolkitjl&#34;&gt;ModelingToolkit.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/317&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;modelingtoolkitize for SDESystem with conversion function between Ito and Stratonovich sense&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;diffeqdevtoolsjl&#34;&gt;DiffEqDevTools.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqDevTools.jl/pull/62&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;NoiseWrapper alternative for analyticless convergence tests of SDE solvers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqDevTools.jl/pull/74&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;test_convergence() dispatch for ensemble simulations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqDevTools.jl/pull/75&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Work precision set for ensemble problems&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;diffeqbasejl&#34;&gt;DiffEqBase.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqBase.jl/pull/503&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fix concrete_solve tests&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;future-work&#34;&gt;Future work&lt;/h2&gt;
+&lt;p&gt;There is still a lot that we&amp;rsquo;d like to do, among others:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Writing up more docs and examples&lt;/li&gt;
+&lt;li&gt;Implementing drift-implicit weak stochastic Runge-Kutta solver&lt;/li&gt;
+&lt;li&gt;Finishing the SDE adjoints for the Ito sense&lt;/li&gt;
+&lt;li&gt;Implementing a virtual Brownian tree to store the noise processes in O(1) memory&lt;/li&gt;
+&lt;li&gt;Setting up an OptimalControl library that allows for easy usage of the new tools within a symbolic interface&lt;/li&gt;
+&lt;li&gt;Benchmarking of the new solvers and adjoints&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Contributors, suggestions &amp;amp; comments are always welcome! You might like to join our slac channels #diffeq-bridged and #neuralsde to get in touch.&lt;/p&gt;
+&lt;h2 id=&#34;acknowledgement&#34;&gt;Acknowledgement&lt;/h2&gt;
+&lt;p&gt;I would like to thank my mentors 
+&lt;a href=&#34;https://github.com/ChrisRackauckas&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chris Rackauckas&lt;/a&gt;, 
+&lt;a href=&#34;https://github.com/mschauer&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Moritz Schauer&lt;/a&gt;, and  
+&lt;a href=&#34;https://github.com/YingboMa&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Yingbo Ma&lt;/a&gt; for their amazing support during this project. It was a great opportunity to work in such an inspiring collaboration and I highly appreciate their detailed feedback.
+I would also like to thank 
+&lt;a href=&#34;https://www.quantumtheory-bruder.physik.unibas.ch/people.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Christoph Bruder&lt;/a&gt;, Niels Lörch, Martin Koppenhöfer, and Michal Kloc for helpful comments on my blog posts.
+Many thanks to the very supportive julia community and to Google&amp;rsquo;s open source program for funding this experience!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>High weak order SDE solvers</title>
