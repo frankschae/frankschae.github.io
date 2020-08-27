@@ -120,7 +120,7 @@ Docs with respect to the adjoint sensitivity tools will be available
 &lt;p&gt;Merged:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/48&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Multi dimensional Brownian motion tests&lt;/a&gt;&lt;/li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/48&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Multi-dimensional Brownian motion tests&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/49&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Bug fix for inplace form of NoiseGrid&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;
@@ -167,16 +167,16 @@ Docs with respect to the adjoint sensitivity tools will be available
 &lt;a href=&#34;https://github.com/SciML/DiffEqBase.jl/pull/503&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fix concrete_solve tests&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;future-work&#34;&gt;Future work&lt;/h2&gt;
-&lt;p&gt;There is still a lot that we&amp;rsquo;d like to do, among others:&lt;/p&gt;
+&lt;p&gt;There is still a lot that we&amp;rsquo;d like to do, e.g.,&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Writing up more docs and examples&lt;/li&gt;
-&lt;li&gt;Implementing drift-implicit weak stochastic Runge-Kutta solver&lt;/li&gt;
+&lt;li&gt;Implementing drift-implicit weak stochastic Runge-Kutta solvers&lt;/li&gt;
 &lt;li&gt;Finishing the SDE adjoints for the Ito sense&lt;/li&gt;
 &lt;li&gt;Implementing a virtual Brownian tree to store the noise processes in O(1) memory&lt;/li&gt;
 &lt;li&gt;Setting up an OptimalControl library that allows for easy usage of the new tools within a symbolic interface&lt;/li&gt;
 &lt;li&gt;Benchmarking of the new solvers and adjoints&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Contributors, suggestions &amp;amp; comments are always welcome! You might like to join our slac channels #diffeq-bridged and #neuralsde to get in touch.&lt;/p&gt;
+&lt;p&gt;Contributions, suggestions &amp;amp; comments are always welcome! You might like to join our slac channels #diffeq-bridged and #neuralsde to get in touch.&lt;/p&gt;
 &lt;h2 id=&#34;acknowledgement&#34;&gt;Acknowledgement&lt;/h2&gt;
 &lt;p&gt;I would like to thank my mentors 
 &lt;a href=&#34;https://github.com/ChrisRackauckas&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chris Rackauckas&lt;/a&gt;, 
