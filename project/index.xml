@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects | FS</title>
+    <link>https://frankschae.github.io/project/</link>
+      <atom:link href="https://frankschae.github.io/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Wed, 10 Mar 2021 00:20:29 +0100</lastBuildDate>
+    <image>
+      <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Projects</title>
+      <link>https://frankschae.github.io/project/</link>
+    </image>
+    
+    <item>
+      <title>Control of (Stochastic) Quantum Dynamics with Differentiable Programming</title>
+      <link>https://frankschae.github.io/project/dp_for_control/</link>
+      <pubDate>Wed, 10 Mar 2021 00:20:29 +0100</pubDate>
+      <guid>https://frankschae.github.io/project/dp_for_control/</guid>
+      <description>&lt;p&gt;Conceptually, it is straightforward to determine the time evolution of a quantum system for a fixed initial state given its (time-dependent) Hamiltonian or Lindbladian. Depending on the physical context, the dynamics is described by an ordinary or stochastic differential equation. In quantum state control, which is of paramount importance for quantum computation, we aim at solving the inverse problem. That is, starting from a distribution of initial states, we seek protocols that allow us to reach a desired target state by optimization of free parameters of the differential equation (control drives) in a certain time interval. To solve this control problem, we implement the system dynamics as part of a fully differentiable program and use a loss function that quantifies the distance from the target state. Specifically, we employ a neural network that maps an observation of the state of the qubit to a control drive defined via the differential equation for each time interval. To implement efficient training, we backpropagate the gradient information from the loss function through the SDE solver using adjoint sensitivity methods. Such a procedure should ultimately combine powerful tools from machine learning and scientific computation.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning for Phase Transitions</title>
+      <link>https://frankschae.github.io/project/ml_for_pt/</link>
+      <pubDate>Tue, 09 Mar 2021 23:56:43 +0100</pubDate>
+      <guid>https://frankschae.github.io/project/ml_for_pt/</guid>
+      <description>&lt;p&gt;Fully automated classification methods that yield direct physical insights into phase diagrams are of current interest. We demonstrate the identification of phase boundaries using an unsupervised machine learning method based on the vector-field divergence of the output of a predictive model, as well as using a data-driven scheme which relies on the difference between mean input features. As examples, we consider the anisotropic Ising model, the Kuramoto-Hopf model, Ising gauge theory, the toric code, and the spinless Falicov-Kimball model.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Spectral Structure and Many-Body Dynamics of Ultracold Bosons in a Double Well </title>
+      <link>https://frankschae.github.io/project/mbdynamics/</link>
+      <pubDate>Tue, 09 Mar 2021 10:39:11 +0100</pubDate>
+      <guid>https://frankschae.github.io/project/mbdynamics/</guid>
+      <description>&lt;p&gt;We examine the spectral structure and many-body dynamics of two and three repulsively interacting bosons trapped in a one-dimensional double-well, for variable barrier height, inter-particle interaction strength, and initial conditions. By exact diagonalization of the many-particle Hamiltonian, we specifically explore the dynamical behavior of the particles launched either at the single-particle ground state or saddle-point energy, in a time-independent potential. We complement these results by a characterization of the cross-over from diabatic to quasi-adiabatic evolution under finite-time switching of the potential barrier, via the associated time evolution of a single particle’s von Neumann entropy. This is achieved with the help of the multiconfigurational time-dependent Hartree method for indistinguishable particles (MCTDH-X)—which also allows us to extrapolate our results for increasing particle numbers.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Cooperative Scattering of Scalar Waves by Optimized Configurations of Point Scatterers</title>
+      <link>https://frankschae.github.io/project/scattering/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://frankschae.github.io/project/scattering/</guid>
+      <description>&lt;p&gt;We investigate multiple scattering of scalar waves by an ensemble of N resonant point scatterers in three dimensions. For up to N = 21 scatterers, we numerically optimize the positions of the individual scatterers, to maximize the total scattering cross section for an incoming plane wave, on the one hand, and to minimize the decay rate associated to a long-lived scattering resonance, on the other. In both cases, the optimum is achieved by configurations where all scatterers are placed on a line parallel to the direction of the incoming plane wave. The associated maximal scattering cross section increases quadratically with the number of scatterers for large N, whereas the minimal decay rate—which is realized by configurations that are not the same as those that maximize the scattering cross section—decreases exponentially as a function of N. Finally, we also analyze the stability of our optimized configurations with respect to small random displacements of the scatterers. These results demonstrate that optimized configurations of scatterers bear a considerable potential for applications such as quantum memories or mirrors consisting of only a few atoms.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

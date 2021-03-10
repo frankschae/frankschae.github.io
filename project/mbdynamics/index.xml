@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spectral Structure and Many-Body Dynamics of Ultracold Bosons in a Double Well  | FS</title>
+    <link>https://frankschae.github.io/project/mbdynamics/</link>
+      <atom:link href="https://frankschae.github.io/project/mbdynamics/index.xml" rel="self" type="application/rss+xml" />
+    <description>Spectral Structure and Many-Body Dynamics of Ultracold Bosons in a Double Well </description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Tue, 09 Mar 2021 10:39:11 +0100</lastBuildDate>
+    <image>
+      <url>https://frankschae.github.io/project/mbdynamics/featured.png</url>
+      <title>Spectral Structure and Many-Body Dynamics of Ultracold Bosons in a Double Well </title>
+      <link>https://frankschae.github.io/project/mbdynamics/</link>
+    </image>
+    
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Agnes Valenti | FS</title>
+    <link>https://frankschae.github.io/author/agnes-valenti/</link>
+      <atom:link href="https://frankschae.github.io/author/agnes-valenti/index.xml" rel="self" type="application/rss+xml" />
+    <description>Agnes Valenti</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Tue, 09 Mar 2021 23:56:43 +0100</lastBuildDate>
+    <image>
+      <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Agnes Valenti</title>
+      <link>https://frankschae.github.io/author/agnes-valenti/</link>
+    </image>
+    
+    <item>
+      <title>Machine Learning for Phase Transitions</title>
+      <link>https://frankschae.github.io/project/ml_for_pt/</link>
+      <pubDate>Tue, 09 Mar 2021 23:56:43 +0100</pubDate>
+      <guid>https://frankschae.github.io/project/ml_for_pt/</guid>
+      <description>&lt;p&gt;Fully automated classification methods that yield direct physical insights into phase diagrams are of current interest. We demonstrate the identification of phase boundaries using an unsupervised machine learning method based on the vector-field divergence of the output of a predictive model, as well as using a data-driven scheme which relies on the difference between mean input features. As examples, we consider the anisotropic Ising model, the Kuramoto-Hopf model, Ising gauge theory, the toric code, and the spinless Falicov-Kimball model.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

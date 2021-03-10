@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NODE | FS</title>
+    <link>https://frankschae.github.io/tag/node/</link>
+      <atom:link href="https://frankschae.github.io/tag/node/index.xml" rel="self" type="application/rss+xml" />
+    <description>NODE</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Wed, 10 Mar 2021 00:20:29 +0100</lastBuildDate>
+    <image>
+      <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>NODE</title>
+      <link>https://frankschae.github.io/tag/node/</link>
+    </image>
+    
+    <item>
+      <title>Control of (Stochastic) Quantum Dynamics with Differentiable Programming</title>
+      <link>https://frankschae.github.io/project/dp_for_control/</link>
+      <pubDate>Wed, 10 Mar 2021 00:20:29 +0100</pubDate>
+      <guid>https://frankschae.github.io/project/dp_for_control/</guid>
+      <description>&lt;p&gt;Conceptually, it is straightforward to determine the time evolution of a quantum system for a fixed initial state given its (time-dependent) Hamiltonian or Lindbladian. Depending on the physical context, the dynamics is described by an ordinary or stochastic differential equation. In quantum state control, which is of paramount importance for quantum computation, we aim at solving the inverse problem. That is, starting from a distribution of initial states, we seek protocols that allow us to reach a desired target state by optimization of free parameters of the differential equation (control drives) in a certain time interval. To solve this control problem, we implement the system dynamics as part of a fully differentiable program and use a loss function that quantifies the distance from the target state. Specifically, we employ a neural network that maps an observation of the state of the qubit to a control drive defined via the differential equation for each time interval. To implement efficient training, we backpropagate the gradient information from the loss function through the SDE solver using adjoint sensitivity methods. Such a procedure should ultimately combine powerful tools from machine learning and scientific computation.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>multiple scattering theory | FS</title>
+    <link>https://frankschae.github.io/tag/multiple-scattering-theory/</link>
+      <atom:link href="https://frankschae.github.io/tag/multiple-scattering-theory/index.xml" rel="self" type="application/rss+xml" />
+    <description>multiple scattering theory</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright>
+    <image>
+      <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>multiple scattering theory</title>
+      <link>https://frankschae.github.io/tag/multiple-scattering-theory/</link>
+    </image>
+    
+    <item>
+      <title>Cooperative Scattering of Scalar Waves by Optimized Configurations of Point Scatterers</title>
+      <link>https://frankschae.github.io/project/scattering/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://frankschae.github.io/project/scattering/</guid>
+      <description>&lt;p&gt;We investigate multiple scattering of scalar waves by an ensemble of N resonant point scatterers in three dimensions. For up to N = 21 scatterers, we numerically optimize the positions of the individual scatterers, to maximize the total scattering cross section for an incoming plane wave, on the one hand, and to minimize the decay rate associated to a long-lived scattering resonance, on the other. In both cases, the optimum is achieved by configurations where all scatterers are placed on a line parallel to the direction of the incoming plane wave. The associated maximal scattering cross section increases quadratically with the number of scatterers for large N, whereas the minimal decay rate—which is realized by configurations that are not the same as those that maximize the scattering cross section—decreases exponentially as a function of N. Finally, we also analyze the stability of our optimized configurations with respect to small random displacements of the scatterers. These results demonstrate that optimized configurations of scatterers bear a considerable potential for applications such as quantum memories or mirrors consisting of only a few atoms.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

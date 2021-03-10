@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cooperative Scattering of Scalar Waves by Optimized Configurations of Point Scatterers | FS</title>
+    <link>https://frankschae.github.io/project/scattering/</link>
+      <atom:link href="https://frankschae.github.io/project/scattering/index.xml" rel="self" type="application/rss+xml" />
+    <description>Cooperative Scattering of Scalar Waves by Optimized Configurations of Point Scatterers</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright>
+    <image>
+      <url>https://frankschae.github.io/project/scattering/featured.png</url>
+      <title>Cooperative Scattering of Scalar Waves by Optimized Configurations of Point Scatterers</title>
+      <link>https://frankschae.github.io/project/scattering/</link>
+    </image>
+    
+  </channel>
+</rss>

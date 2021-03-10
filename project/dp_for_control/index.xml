@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Control of (Stochastic) Quantum Dynamics with Differentiable Programming | FS</title>
+    <link>https://frankschae.github.io/project/dp_for_control/</link>
+      <atom:link href="https://frankschae.github.io/project/dp_for_control/index.xml" rel="self" type="application/rss+xml" />
+    <description>Control of (Stochastic) Quantum Dynamics with Differentiable Programming</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Wed, 10 Mar 2021 00:20:29 +0100</lastBuildDate>
+    <image>
+      <url>https://frankschae.github.io/project/dp_for_control/featured.jpeg</url>
+      <title>Control of (Stochastic) Quantum Dynamics with Differentiable Programming</title>
+      <link>https://frankschae.github.io/project/dp_for_control/</link>
+    </image>
+    
+  </channel>
+</rss>

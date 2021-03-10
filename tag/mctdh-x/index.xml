@@ -5,12 +5,21 @@
     <link>https://frankschae.github.io/tag/mctdh-x/</link>
       <atom:link href="https://frankschae.github.io/tag/mctdh-x/index.xml" rel="self" type="application/rss+xml" />
     <description>MCTDH-X</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Sun, 10 May 2020 13:22:17 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Tue, 09 Mar 2021 10:39:11 +0100</lastBuildDate>
     <image>
       <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>MCTDH-X</title>
       <link>https://frankschae.github.io/tag/mctdh-x/</link>
     </image>
+    
+    <item>
+      <title>Spectral Structure and Many-Body Dynamics of Ultracold Bosons in a Double Well </title>
+      <link>https://frankschae.github.io/project/mbdynamics/</link>
+      <pubDate>Tue, 09 Mar 2021 10:39:11 +0100</pubDate>
+      <guid>https://frankschae.github.io/project/mbdynamics/</guid>
+      <description>&lt;p&gt;We examine the spectral structure and many-body dynamics of two and three repulsively interacting bosons trapped in a one-dimensional double-well, for variable barrier height, inter-particle interaction strength, and initial conditions. By exact diagonalization of the many-particle Hamiltonian, we specifically explore the dynamical behavior of the particles launched either at the single-particle ground state or saddle-point energy, in a time-independent potential. We complement these results by a characterization of the cross-over from diabatic to quasi-adiabatic evolution under finite-time switching of the potential barrier, via the associated time evolution of a single particle’s von Neumann entropy. This is achieved with the help of the multiconfigurational time-dependent Hartree method for indistinguishable particles (MCTDH-X)—which also allows us to extrapolate our results for increasing particle numbers.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>F. Schäfer, M. A. Bastarrachea-Magnani, A. U. J. Lode, L. de Forges de Parny, and A. Buchleitner, Entropy 22, 382 (2020)</title>

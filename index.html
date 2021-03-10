@@ -245,7 +245,7 @@
   <meta property="og:description" content="PhD candidate in Physics"><meta property="og:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2020-08-26T22:59:49&#43;02:00">
+    <meta property="og:updated_time" content="2021-03-10T00:21:37&#43;01:00">
   
 
   
@@ -433,7 +433,34 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/#projects" data-target="#projects"><span>Projects</span></a>
+          <a class="nav-link " href="/#projects" data-target="#projects"><span>Research projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#software" data-target="#software"><span>Open Source Software</span></a>
         </li>
 
         
@@ -679,8 +706,13 @@
     
     <h1>Biography</h1>
 
-    <p>I am a PhD candidate in physics within the &ldquo;Quantum Computing and Quantum Technology&rdquo; PhD school at the University of Basel.
-Currently, I am participating in the Google Summer of Code 2020 program.  My project focuses on the implementation of  &ldquo;High weak order stochastic differential equation solvers and their utility in neural stochastic differential equations&rdquo; in Julia. The project is carried in collaboration with my mentors Chris Rackauckas, Moritz Schauer, and Yingbo Ma.</p>
+    <p>I am a third-year PhD candidate in physics in the 
+<a href="https://quantumtheory-bruder.physik.unibas.ch/en/" target="_blank" rel="noopener">Bruder group</a> within the &ldquo;Quantum Computing and Quantum Technology&rdquo; PhD school at the University of Basel. I have participated in the Google Summer of Code 2020 program with 
+<a href="https://summerofcode.withgoogle.com/archive/2020/projects/5076877036748800/" target="_blank" rel="noopener">the project</a> &ldquo;High weak order stochastic differential equation solvers and their utility in neural stochastic differential equations&rdquo; within the Julia Language organization. The project was supervised by 
+<a href="https://github.com/ChrisRackauckas" target="_blank" rel="noopener">Chris Rackauckas</a>, 
+<a href="https://github.com/mschauer" target="_blank" rel="noopener">Moritz Schauer</a>, and  
+<a href="https://github.com/YingboMa" target="_blank" rel="noopener">Yingbo Ma</a>. Since 2020, I am a member of the 
+<a href="https://sciml.ai/" target="_blank" rel="noopener">SciML</a> open source software organization for scientific machine learning.</p>
 
 
     <div class="row">
@@ -692,9 +724,21 @@ Currently, I am participating in the Google Summer of Code 2020 program.  My pro
           
           <li>Scientific machine learning</li>
           
+          <li>Differentiable programming</li>
+          
+          <li>Automatic differentiation</li>
+          
+          <li>Neural ODEs/SDEs</li>
+          
+          <li>Quantum optimal control</li>
+          
+          <li>Parameter inference</li>
+          
+          <li>ML for phase transitions</li>
+          
           <li>Quantum optics</li>
           
-          <li>Many-body physics of ultracold atoms</li>
+          <li>Many-body physics</li>
           
           <li>Multiple scattering theory</li>
           
@@ -1140,7 +1184,7 @@ After an introductory part highlighting the differences between the strong and t
 <div class="row">
   <div class="col-12 col-lg-4 section-heading">
 
-    <h1>Projects</h1>
+    <h1>Research projects</h1>
     
 
   </div>
@@ -1152,7 +1196,871 @@ After an introductory part highlighting the differences between the strong and t
 
     
 
-    <div class="isotope projects-container js-layout-masonry ">
+    <div class=" row js-layout-row ">
+      
+
+        
+        
+        
+
+        
+          
+
+
+<div class="col-12 isotope-item js-id-SciML js-id-differentiable-programming js-id-NODE js-id-NSDE js-id-adjoint-sensitivity-methods js-id-automatic-differentiation js-id-quantum-control">
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/project/dp_for_control/" >Control of (Stochastic) Quantum Dynamics with Differentiable Programming</a>
+    </h3>
+
+    
+    <div class="article-style">
+      Quantum control based on parametrized controllers trained with gradient information computed by (adjoint) sensitivity methods.
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+
+      
+      <div>
+        
+
+  
+  <span>FS in collaboration with Pavel Sekatski</span>, <span>Martin Koppenhöfer</span>, <span>Niels Lörch</span>, <span>Christoph Bruder</span>, <span>and Michal Kloc</span>
+      </div>
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+    
+  
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://github.com/frankschae/Control-of-Stochastic-Quantum-Dynamics-with-Differentiable-Programming" target="_blank" rel="noopener">
+  Code
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://arxiv.org/abs/2101.01190" target="_blank" rel="noopener">
+    
+    SDE control paper
+  </a>
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://iopscience.iop.org/article/10.1088/2632-2153/ab9802" target="_blank" rel="noopener">
+    
+    ODE control paper
+  </a>
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://www.youtube.com/watch?v=v8mJVGVdkNQ&amp;list=PLWIVj90xdDE-2eeyFuiooxWcF8kw323Iv&amp;index=3&amp;t=0s" target="_blank" rel="noopener">
+    
+    CMD2020GEFES talk
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/project/dp_for_control/" >
+      <img src="/project/dp_for_control/featured_hudf85e1c26ad74a07a00aa9287e088b01_236898_150x0_resize_q90_lanczos.jpeg" alt="">
+    </a>
+    
+  </div>
+</div>
+
+</div>
+
+        
+
+      
+
+        
+        
+        
+
+        
+          
+
+
+<div class="col-12 isotope-item js-id-Machine-learning js-id-neural-networks js-id-unsupervised-learning">
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/project/ml_for_pt/" >Machine Learning for Phase Transitions</a>
+    </h3>
+
+    
+    <div class="article-style">
+      Data-driven methods based on sample instances of the state of a physical system as a function of the system&rsquo;s parameters.
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+
+      
+      <div>
+        
+
+  
+  <span>FS in collaboration with Julian Arnold</span>, <span>Eliska Greplova</span>, <span>Agnes Valenti</span>, <span>Martin Zonda</span>, <span>Axel Lode</span>, <span>Gregor Boschung</span>, <span>Sebastian Huber</span>, <span>and Niels Lörch</span>
+      </div>
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+    
+  
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://github.com/arnoldjulian/Interpretable-and-unsupervised-phase-classification" target="_blank" rel="noopener">
+  Code
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.99.062107" target="_blank" rel="noopener">
+    
+    PRE
+  </a>
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://iopscience.iop.org/article/10.1088/1367-2630/ab7771/meta" target="_blank" rel="noopener">
+    
+    NJP
+  </a>
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://arxiv.org/abs/2010.04730" target="_blank" rel="noopener">
+    
+    Arxiv preprint
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/project/ml_for_pt/" >
+      <img src="/project/ml_for_pt/featured_hu3194460ba82e7df78553a9c87bbc0c72_237834_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+</div>
+
+        
+
+      
+
+        
+        
+        
+
+        
+          
+
+
+<div class="col-12 isotope-item js-id-Many-body-physics js-id-exact-diagonalization js-id-Bose-Hubbard-model js-id-MCTDH-X">
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/project/mbdynamics/" >Spectral Structure and Many-Body Dynamics of Ultracold Bosons in a Double Well </a>
+    </h3>
+
+    
+    <div class="article-style">
+      Study of the spectral structure and the resulting dynamics of a few bosons under consideration of different initial conditions.
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+
+      
+      <div>
+        
+
+  
+  <span>FS in collaboration with Laurent de Forges de Parny</span>, <span>Miguel Bastarrachea</span>, <span>Axel Lode</span>, <span>and Andreas Buchleitner</span>
+      </div>
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+    
+  
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://www.mdpi.com/1099-4300/22/4/382" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://publikationen.uni-tuebingen.de/xmlui/handle/10900/87664" target="_blank" rel="noopener">
+    
+    bwHPC proceeding
+  </a>
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://freidok.uni-freiburg.de/data/154730" target="_blank" rel="noopener">
+    
+    Master thesis
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/project/mbdynamics/" >
+      <img src="/project/mbdynamics/featured_hu7f7947d2046583f5302b04408a1eb220_58439_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+</div>
+
+        
+
+      
+
+        
+        
+        
+
+        
+          
+
+
+<div class="col-12 isotope-item js-id-multiple-scattering-theory">
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/project/scattering/" >Cooperative Scattering of Scalar Waves by Optimized Configurations of Point Scatterers</a>
+    </h3>
+
+    
+    <div class="article-style">
+      Numerical optimization of the positions of point scatterers to maximize the total scattering cross section for an incoming plane wave.
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+
+      
+      <div>
+        
+
+  
+  <span>FS in collaboration with Felix Eckert and Thomas Wellens</span>
+      </div>
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+    
+  
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://iopscience.iop.org/article/10.1088/1361-6455/aa92d8/meta" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://freidok.uni-freiburg.de/data/12809" target="_blank" rel="noopener">
+    
+    Bachelor thesis
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/project/scattering/" >
+      <img src="/project/scattering/featured_huf3ed79a93892e0cfaab1947971615755_22233_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+</div>
+
+        
+
+      
+    </div>
+
+  </div>
+</div>
+
+    </div>
+  </section>
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+
+  <section id="software" class="home-section wg-portfolio   "  >
+    <div class="container">
+      
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-12 col-lg-4 section-heading">
+
+    <h1>Open source software</h1>
+    
+
+  </div>
+  <div class="col-12 col-lg-8">
+
+
+
+    
+
+    
+
+    <div class=" row js-layout-row ">
+      
+
+        
+        
+        
+          
+          
+        
+
+        
+          
+
+
+<div class="col-12 isotope-item ">
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="https://sciml.ai/" target="_blank" rel="noopener">SciML Scientific Machine Learning Software</a>
+    </h3>
+
+    
+    <div class="article-style">
+      Contributions to the SciML ecosystem in Julia, especially the DiffEqSensitivity.jl package for sensitivity analysis utilities, the StochasticDiffEq.jl package for stochastic differential equations solvers, and the DiffEqNoiseProcess package for tools to develop noise processes for differential equations.
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+
+      
+        
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Mar 10, 2021
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+      
+    </div>
+
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+</div>
+
+        
+
+      
+
+        
+        
+        
+          
+          
+        
+
+        
+          
+
+
+<div class="col-12 isotope-item ">
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="https://github.com/mschauer/MitosisStochasticDiffEq.jl" target="_blank" rel="noopener">MitosisStochasticDiffEq</a>
+    </h3>
+
+    
+    <div class="article-style">
+      Implementation of the backward filter and the forward change of measure of the Automatic Backward Filtering Forward Guiding paradigm. Joint work with <a href="https://github.com/mschauer">Moritz Schauer</a>.
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+
+      
+        
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Mar 10, 2021
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+      
+    </div>
+
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+  </div>
+</div>
+
+</div>
+
+        
+
       
     </div>
 
