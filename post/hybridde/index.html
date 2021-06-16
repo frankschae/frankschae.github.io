@@ -977,8 +977,8 @@ end
 <pre><code class="language-julia">function f4!(du,u,p,t)
   Ω = nn3(u[1:2], p)
 
-  du[1] = u[2]
-  du[2] = Ω[1]
+  du[1] = Ω[1]
+  du[2] = Ω[2]
   du[3:4] .= Ω[3:4]
   return nothing
 end
