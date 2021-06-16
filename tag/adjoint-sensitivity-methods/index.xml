@@ -5,12 +5,385 @@
     <link>https://frankschae.github.io/tag/adjoint-sensitivity-methods/</link>
       <atom:link href="https://frankschae.github.io/tag/adjoint-sensitivity-methods/index.xml" rel="self" type="application/rss+xml" />
     <description>Adjoint sensitivity methods</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Wed, 10 Mar 2021 00:20:29 +0100</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Wed, 16 Jun 2021 14:50:17 +0200</lastBuildDate>
     <image>
       <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Adjoint sensitivity methods</title>
       <link>https://frankschae.github.io/tag/adjoint-sensitivity-methods/</link>
     </image>
+    
+    <item>
+      <title>Neural Hybrid Differential Equations</title>
+      <link>https://frankschae.github.io/post/hybridde/</link>
+      <pubDate>Wed, 16 Jun 2021 14:50:17 +0200</pubDate>
+      <guid>https://frankschae.github.io/post/hybridde/</guid>
+      <description>&lt;p&gt;I am delighted that I have been awarded my second GSoC stipend this year.  I look forward to carrying out the ambitious project scope with my mentors 
+&lt;a href=&#34;https://github.com/ChrisRackauckas&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chris Rackauckas&lt;/a&gt;, 
+&lt;a href=&#34;https://github.com/mschauer&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Moritz Schauer&lt;/a&gt;,  
+&lt;a href=&#34;https://github.com/YingboMa&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Yingbo Ma&lt;/a&gt;, and 
+&lt;a href=&#34;https://github.com/mohamed82008&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Mohamed Tarek&lt;/a&gt;. This year&amp;rsquo;s project is embedded within the 
+&lt;a href=&#34;https://summerofcode.withgoogle.com/organizations/5765643267211264/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;NumFocus&lt;/a&gt;/
+&lt;a href=&#34;https://sciml.ai&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SciML&lt;/a&gt; organization and comprises adjoint sensitivity methods for events, shadowing methods for chaotic dynamics, symbolically generated adjoint methods, and further AD tooling within the Julia Language.&lt;/p&gt;
+&lt;p&gt;This first post aims to illustrate our new (adjoint) sensitivity analysis tools with respect to event handling in (ordinary) differential equations (DEs).&lt;/p&gt;
+&lt;h2 id=&#34;hybrid-differential-equations&#34;&gt;Hybrid Differential Equations&lt;/h2&gt;
+&lt;p&gt;DEs with additional explicit or implicit discontinuities are called hybrid DEs. Within the SciML software suite, such discontinuities may be incorporated into DE models by 
+&lt;a href=&#34;https://diffeq.sciml.ai/stable/features/callback_functions/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;callbacks&lt;/a&gt;. Evidently, the incorporation of discontinuities allows a user to specify changes (&lt;em&gt;events&lt;/em&gt;) in the system, i.e., changes of the state or the parameters of the DE, which cannot be modeled by a plain ordinary DE. While explicit events can be described by 
+&lt;a href=&#34;https://diffeq.sciml.ai/stable/features/callback_functions/#DiscreteCallback-Examples&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;DiscreteCallbacks&lt;/a&gt;, implicit events have to be specified by 
+&lt;a href=&#34;https://diffeq.sciml.ai/stable/features/callback_functions/#ContinuousCallback-Examples&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ContinuousCallbacks&lt;/a&gt;. That is, explicit events possess explicit event times, while implicit events are triggered when a continuous function evaluates to &lt;code&gt;0&lt;/code&gt;. Thus, implicit events require some sort of rootfinding procedure.&lt;/p&gt;
+&lt;p&gt;Some relevant examples for hybrid DEs with discrete or continuous callbacks are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;quantum optics experiments, where photon-counting measurements lead to jumps in the quantum state that occur with a variable rate (&lt;code&gt;ContinuousCallback&lt;/code&gt;), see for instance Appendix A in Ref.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
+&lt;li&gt;a bouncing ball&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; (&lt;code&gt;ContinuousCallback&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;classical point process models, such as a Poisson process&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
+&lt;li&gt;digital controllers&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;, where a continuous system dynamics is controlled by a discrete-time controller (&lt;code&gt;DiscreteCallback&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;pharmacokinetic models&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;, where explicit dosing times change the drug concentration in the blood (&lt;code&gt;DiscreteCallback&lt;/code&gt;). The simplest possible example being the one-compartment PK model.&lt;/li&gt;
+&lt;li&gt;kicked oscillator dynamics, e.g., a harmonic oscillator that gets a kick at some time points (&lt;code&gt;DiscreteCallback&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The associated sensitivity methods that allow us to differentiate through the respective hybrid DE systems have been recently introduced in Refs. &lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; and &lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;kicked-harmonic-oscillator&#34;&gt;Kicked harmonic oscillator&lt;/h2&gt;
+&lt;p&gt;Let us consider the simple physical model of a damped harmonic oscillator, described by an ODE of the form&lt;/p&gt;
+&lt;p&gt;$$
+\ddot{x}(t) + a\cdot\dot{x}(t) + b \cdot x(t) = 0 ,
+$$&lt;/p&gt;
+&lt;p&gt;where $a=0.1$ and $b=1$ with initial conditions&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+x(t=0) &amp;amp;= 1  \\&lt;br&gt;
+v(t=0) &amp;amp;= \dot{x}(t=0) = 0.
+\end{aligned}&lt;br&gt;
+$$&lt;/p&gt;
+&lt;p&gt;This second order DE can be 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Ordinary_differential_equation#Reduction_of_order&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;reduced&lt;/a&gt; to two first order DEs, such that we can straightforwardly simulate the resulting ODE with the &lt;code&gt;DifferentialEquations.jl&lt;/code&gt; package. (Instead of doing this reduction manually, we could also use 
+&lt;a href=&#34;https://mtk.sciml.ai/stable/tutorials/higher_order/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;ModelingToolkit.jl&lt;/code&gt;&lt;/a&gt; to transform automatically the DE. Alternatively, for second order ODEs, there is also
+a &lt;code&gt;SecondOrderODEProblem&lt;/code&gt; implemented.) The Julia code reads:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;using DiffEqFlux, DifferentialEquations, Flux, Optim, Plots, DiffEqSensitivity
+using Zygote
+using Random
+u0 = Float32[1.; 0.]
+
+tspan = (0.0f0,50.0f0)
+
+dtsave = 0.5f0
+t = tspan[1]:dtsave:tspan[2]
+
+function oscillator!(du,u,p,t)
+  du[1] = u[2]
+  du[2] = - u[1] - 1//10*u[2]
+  return nothing
+end
+
+# ODE without kicks
+pl = plot(solve(prob_data,Tsit5(),saveat=t), label=[&amp;quot;x(t)&amp;quot; &amp;quot;v(t)&amp;quot;])
+&lt;/code&gt;&lt;/pre&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/forward_damped_oscillator_no_kicks.png&#34; &gt;
+
+
+  &lt;img src=&#34;https://frankschae.github.io/img/forward_damped_oscillator_no_kicks.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;We now include a kick to the velocity of the oscillator at regular time steps. Here, we choose both the time difference between the kicks and the increase in velocity as &lt;code&gt;1&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;kicktimes = tspan[1]:1:tspan[2]
+function kick!(integrator)
+  integrator.u[end] += one(eltype(integrator.u))
+end
+cb_ = PresetTimeCallback(kicktimes,kick!,save_positions=(false,false))
+
+prob_data = ODEProblem(oscillator!,u0,tspan)
+sol_data = solve(prob_data,Tsit5(),callback=cb_,saveat=t)
+t_data = sol_data.t
+ode_data = Array(sol_data)
+
+# visualize data
+pl1 = plot(t_data,ode_data[1,:],label=&amp;quot;data x(t)&amp;quot;)
+plot!(pl1,t_data,ode_data[2,:],label=&amp;quot;data v(t)&amp;quot;)
+
+pl2 = plot(t_data[1:20],ode_data[1,1:20],label=&amp;quot;data x(t)&amp;quot;)
+plot!(pl2,t_data[1:20],ode_data[2,1:20],label=&amp;quot;data v(t)&amp;quot;)
+pl = plot(pl2, pl1, layout=(1,2), xlabel=&amp;quot;t&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/forward_damped_oscillator.png&#34; &gt;
+
+
+  &lt;img src=&#34;https://frankschae.github.io/img/forward_damped_oscillator.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+The left-hand side shows a zoom for short times to resolve the kicks better. Note that by setting &lt;code&gt;save_positions=(true,true)&lt;/code&gt;, the kicks would be saved before &lt;strong&gt;and&lt;/strong&gt; after the event such that the kicks would appear completely vertically in the plot. The data on the right-hand will be used as training data below. In the spirit of universal differential equations&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;, we now aim at learning (potentially) missing parts of the model from these data traces.&lt;/p&gt;
+&lt;h3 id=&#34;high-domain-knowledge&#34;&gt;High domain knowledge&lt;/h3&gt;
+&lt;p&gt;For simplicity, we assume that we have almost perfect knowledge about our system. That is, we assume to know the basic structure of the ODE, including its parameters $a$ and $b$, and that the &lt;code&gt;affect!&lt;/code&gt; function of the event only acts on the velocity. We then encode the affect as an additional component to the ODE. The task is thus to learn the dynamics of the third component of &lt;code&gt;integrator.u&lt;/code&gt;. If we further set the inital value of that component to &lt;code&gt;1&lt;/code&gt;, then the neural network only has to learn that &lt;code&gt;du[3]&lt;/code&gt; is &lt;code&gt;0&lt;/code&gt;. In other words, the output of the neural network must be &lt;code&gt;0&lt;/code&gt; for all states &lt;code&gt;u&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;Random.seed!(123)
+nn1 = FastChain(FastDense(2, 64, tanh),FastDense(64, 1))
+p_nn1 = initial_params(nn1)
+
+function f1!(du,u,p,t)
+  du[1] = u[2]
+  du[2] = - u[1] - 1//10*u[2]
+  du[3] = nn1(u[1:2], p)[1]
+  return nothing
+end
+
+affect!(integrator) = integrator.u[2] += integrator.u[3]
+cb = PresetTimeCallback(kicktimes,affect!,save_positions=(false,false))
+z0 = Float32[u0;one(u0[1])]
+prob1 = ODEProblem(f1!,z0,tspan,p_nn1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can easily compare the time evolution of the neural hybrid DE with respect to the data:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;# to visualize the predictions of the trained neural network below
+function visualize(prob,p)
+  _prob = remake(prob,p=p)
+  ode_pred = Array(solve(_prob,Tsit5(),callback=cb,
+                 saveat=dtsave))[1:2,:]
+  pl1 = plot(t_data,ode_pred[1,:],label=&amp;quot;x(t)&amp;quot;)
+  scatter!(pl1,t_data[1:5:end],ode_data[1,1:5:end],label=&amp;quot;data x(t)&amp;quot;)
+  pl2 = plot(t_data,ode_pred[2,:],label=&amp;quot;v(t)&amp;quot;)
+  scatter!(pl2,t_data[1:5:end],ode_data[2,1:5:end],label=&amp;quot;data v(t)&amp;quot;)
+
+  pl = plot(pl1, pl2, layout=(1,2), xlabel=&amp;quot;t&amp;quot;)
+  return pl, sum(abs2,ode_data .- ode_pred)
+end
+
+pl = plot(solve(prob1,Tsit5(),saveat=t,
+  callback=cb
+  ),label=[&amp;quot;x(t)&amp;quot; &amp;quot;v(t)&amp;quot; &amp;quot;u3(t)&amp;quot;])
+&lt;/code&gt;&lt;/pre&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/untrained_nn.png&#34; &gt;
+
+
+  &lt;img src=&#34;https://frankschae.github.io/img/untrained_nn.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;which (of course) doesn&amp;rsquo;t match the data due to the random initialization of the neural network parameters before training. The neural network can be trained, i.e., its parameters can be optimized, by minimizing a mean-squared error loss function:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;### loss function
+function loss(p; prob=prob1, sensealg = ReverseDiffAdjoint())
+  _prob = remake(prob,p=p)
+  pred = Array(solve(_prob,Tsit5(),callback=cb,
+               saveat=dtsave,sensealg=sensealg))[1:2,:]
+  sum(abs2,ode_data .- pred)
+end
+
+loss(p_nn1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The recently implemented tools are deeply hidden within the 
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;DiffEqSensitivity.jl&lt;/a&gt; package. However, while the user could only choose discrete sensitivies such as &lt;code&gt;ReverseDiffAdjoint()&lt;/code&gt; or  &lt;code&gt;ForwardDiffAdjoint()&lt;/code&gt; that rely on direct differentiation through the solver operations to get accurate gradients, one can now also select continuous adjoint sensitivy methods such as &lt;code&gt;BacksolveAdjoint()&lt;/code&gt;,  &lt;code&gt;InterpolatingAdjoint()&lt;/code&gt;, and &lt;code&gt;QuadratureAdjoint()&lt;/code&gt; as the &lt;code&gt;sensealg&lt;/code&gt; for hybrid DEs. Each choice has its own characteristics in terms of stability, scaling with parameters, and memory consumption, see, e.g., 
+&lt;a href=&#34;https://www.youtube.com/watch?v=XRJ-rtP2fVE&amp;amp;list=PLP8iPy9hna6TxktMt-IzdU2vQpGp3bwDn&amp;amp;index=1&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chris&#39; talk&lt;/a&gt; at the SciML symposiam at SIAM CSE.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;###################################
+# training loop
+# optimize the parameters for a few epochs with ADAM
+function train(prob, p_nn; sensealg=BacksolveAdjoint())
+  opt = ADAM(0.0003f0)
+  list_plots = []
+  losses = []
+  for epoch in 1:200
+    println(&amp;quot;epoch: $epoch / 200&amp;quot;)
+    _dy, back = Zygote.pullback(p -&amp;gt; loss(p,
+      prob=prob,
+      sensealg=sensealg), p_nn)
+    gs = @time back(one(_dy))[1]
+    push!(losses, _dy)
+    if epoch % 10 == 0
+      # plot every xth epoch
+      pl, test_loss = visualize(prob, p_nn)
+      println(&amp;quot;Loss (epoch: $epoch): $test_loss&amp;quot;)
+      display(pl)
+      push!(list_plots, pl)
+    end
+    Flux.Optimise.update!(opt, p_nn, gs)
+    println(&amp;quot;&amp;quot;)
+  end
+  return losses, list_plots
+end
+
+# plot training loss
+losses, list_plots = train(prob1, p_nn1)
+pl1 = plot(losses, lw = 1.5, xlabel = &amp;quot;epoch&amp;quot;, ylabel=&amp;quot;loss&amp;quot;, legend=false)
+pl2 = list_plots[end]
+pl3 = plot(solve(prob1,p=p_nn1,Tsit5(),saveat=t,
+   callback=cb
+  ), label=[&amp;quot;x(t)&amp;quot; &amp;quot;v(t)&amp;quot; &amp;quot;u3(t)&amp;quot;])
+
+pl = plot(pl2,pl3)
+&lt;/code&gt;&lt;/pre&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/trained1.png&#34; &gt;
+
+
+  &lt;img src=&#34;https://frankschae.github.io/img/trained1.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;reducing-the-domain-knowledge&#34;&gt;Reducing the domain knowledge&lt;/h2&gt;
+&lt;p&gt;The less physical information is included in the model design, the more difficult the training becomes, e.g., due to 
+&lt;a href=&#34;https://diffeqflux.sciml.ai/dev/examples/local_minima/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;local minima&lt;/a&gt;. Possible modification for the kicked oscillator could be&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;changing the initial condition of the third component of &lt;code&gt;u&lt;/code&gt;,&lt;/li&gt;
+&lt;li&gt;using another affect function &lt;code&gt;affect!(integrator) = integrator.u[2] = integrator.u[3]&lt;/code&gt;,&lt;/li&gt;
+&lt;li&gt;dropping the knowledge that only &lt;code&gt;u[2]&lt;/code&gt; gets a kick by using a neural network with &lt;code&gt;2&lt;/code&gt; outputs (+ a fourth component in the ODE):&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;affect2!(integrator) = integrator.u[1:2] = integrator.u[3:4]
+function f2!(du,u,p,t)
+  du[1] = u[2]
+  du[2] = - u[1] - 1//10*u[2]
+  du[3:4] .= nn2(u[1:2], nn_weights)
+  return nothing
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;fit the parameters additionally:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;function f3!(du,u,p,t)
+  a = p[end-1]
+  b = p[end]
+  nn_weights = p[1:end-2]
+
+  du[1] = u[2]
+  du[2] = -b*u[1] - a*u[2]
+  du[3:4] .= nn2(u[1:2], nn_weights)
+  return nothing
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;infer the underlying dynamics using a neural network with &lt;code&gt;4&lt;/code&gt; outputs:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;function f4!(du,u,p,t)
+  Ω = nn3(u[1:2], p)
+
+  du[1] = u[2]
+  du[2] = Ω[1]
+  du[3:4] .= Ω[3:4]
+  return nothing
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;outlook&#34;&gt;Outlook&lt;/h2&gt;
+&lt;p&gt;With respect to the adjoint sensitivity methods for hybrid DEs, we are planning to&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;refine the adjoints in case of implicit discontinuities (&lt;code&gt;ContinuousCallbacks&lt;/code&gt;) and&lt;/li&gt;
+&lt;li&gt;support direct usage through the 
+&lt;a href=&#34;https://diffeq.sciml.ai/stable/types/jump_types/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;jump problem&lt;/a&gt; interface&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;in the upcoming weeks. For further information, the interested reader might take a look at the open 
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/issues&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;issues&lt;/a&gt; in the DiffEqSensitivity.jl package.&lt;/p&gt;
+&lt;p&gt;If you have any questions or comments, please don’t hesitate to contact me!&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Frank Schäfer, Pavel Sekatski, et al., Mach. Learn.: Sci. Technol. &lt;strong&gt;2&lt;/strong&gt;, 035004 (2021) &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Ricky T. Q. Chen, Brandon Amos, Maximilian Nickel, arXiv preprint arXiv:2011.03902 (2020). &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Junteng Jia, Austin R. Benson, arXiv preprint arXiv:1905.10403 (2019). &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Michael Poli, Stefano Massaroli, et al., arXiv preprint arXiv:2106.04165 (2021). &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Chris Rackauckas, Yingbo Ma, et al., &amp;ldquo;Accelerated predictive healthcare analytics with pumas, a high performance pharmaceutical modeling and simulation platform.&amp;rdquo; (2020). &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Chris Rackauckas, Yingbo Ma, et al., arXiv preprint arXiv:2001.04385 (2020). &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
     
     <item>
       <title>Control of (Stochastic) Quantum Dynamics with Differentiable Programming</title>
