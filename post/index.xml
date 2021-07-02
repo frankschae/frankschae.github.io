@@ -5,12 +5,430 @@
     <link>https://frankschae.github.io/post/</link>
       <atom:link href="https://frankschae.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Wed, 16 Jun 2021 14:50:17 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Fri, 02 Jul 2021 11:08:22 +0200</lastBuildDate>
     <image>
       <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
       <link>https://frankschae.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>Shadowing Methods for Forward and Adjoint Sensitivity Analysis of Chaotic Systems</title>
+      <link>https://frankschae.github.io/post/shadowing/</link>
+      <pubDate>Fri, 02 Jul 2021 11:08:22 +0200</pubDate>
+      <guid>https://frankschae.github.io/post/shadowing/</guid>
+      <description>&lt;p&gt;In this post, we dig into sensitivity analysis of chaotic systems. Chaotic systems are dynamical, deterministic systems that are extremely sensitive to small changes in the initial state or the system parameters. Specifically, the dependence of a chaotic system on its initial conditions is well known as the &amp;ldquo;butterfly effect&amp;rdquo;. Chaotic models are used in various fields ranging from simple examples such as the double pendulum to highly complicated fluid or climate models.&lt;/p&gt;
+&lt;p&gt;Sensitivity analysis methods have proven to be very powerful for solving inverse problems such as parameter estimation or optimal control&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; &lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; &lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;. However, conventional sensitivity analysis methods may fail in chaotic systems due to the ill-conditioning of the initial value problem. Sophisticated methods, such as least squares shadowing&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; (LSS) or non-intrusive least squares shadowing&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; (NILSS),  that essentially transform the initial value problem to a well conditioned optimization problem &amp;ndash; the least squares shadowing problem &amp;ndash; have been developed in the last decade. In this second part of my GSoC project, I implemented these methods within the 
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;DiffEqSensitivity.jl&lt;/a&gt; package.&lt;/p&gt;
+&lt;p&gt;The objective for LSS and NILSS is a long-time average quantity. More precisely, we define the instantaneous objective by $g(u,p)$, where $u$ is the state and $p$ is the parameter of the differential equation. Then, the objective is obtained by averaging $g$ over an infinitely long trajectory:&lt;/p&gt;
+&lt;p&gt;$$
+\langle g \rangle_∞ = \lim_{T \rightarrow ∞} \langle g \rangle_T,
+$$
+where
+$$
+\langle g \rangle_T = \frac{1}{T} \int_0^T g(u,s) \text{d}t.
+$$
+Under the assumption of ergodicity, $\langle g \rangle_∞$ only depends on $p$.&lt;/p&gt;
+&lt;h2 id=&#34;the-lorenz-system&#34;&gt;The Lorenz system&lt;/h2&gt;
+&lt;p&gt;One of the most important chaotic models is the Lorenz system which is a simplified model for atmospheric convection. The Lorenz system has three states $x$, $y$, and $z$, as well as three parameters $\rho$, $\sigma$, and $\beta$. Its time evolution is then described by the ODE:&lt;/p&gt;
+&lt;p&gt;$$
+\begin{pmatrix}
+\text{d}x \\&lt;br&gt;
+\text{d}y \\&lt;br&gt;
+\text{d}z \\&lt;br&gt;
+\end{pmatrix} = \begin{pmatrix}
+\sigma (y-x)\\&lt;br&gt;
+x(\rho-z) - y\\&lt;br&gt;
+x y - \beta z \\&lt;br&gt;
+\end{pmatrix}\text{d}t
+$$&lt;/p&gt;
+&lt;p&gt;For simplicity, let us fix $\sigma=10$ and $\beta=8/3$ and focus only on the sensitivity with respect to $\rho$. The classic Lorenz attractor is obtained when using $\rho=28$:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;using Random; Random.seed!(1234)
+using OrdinaryDiffEq
+using Statistics
+using QuadGK, ForwardDiff, Calculus
+using DiffEqSensitivity
+using SparseArrays, LinearAlgebra
+
+# simulate 1 trajectory of the Lorenz system forward
+function lorenz!(du,u,p,t)
+  du[1] = 10*(u[2]-u[1])
+  du[2] = u[1]*(p[1]-u[3]) - u[2]
+  du[3] = u[1]*u[2] - (8//3)*u[3]
+end
+
+p = [28.0]
+tspan_init = (0.0,30.0)
+tspan_attractor = (30.0,50.0)
+u0 = rand(3)
+prob_init = ODEProblem(lorenz!,u0,tspan_init,p)
+sol_init = solve(prob_init,Tsit5())
+prob_attractor = ODEProblem(lorenz!,sol_init[end],tspan_attractor,p)
+sol_attractor = solve(prob_attractor,Vern9(),abstol=1e-14,reltol=1e-14)
+
+using Plots, LaTeXStrings
+pl1 = plot(sol_init,vars=(1,2,3), legend=true,
+  label = &amp;quot;initial&amp;quot;,
+  labelfontsize=20,
+  lw = 2,
+  xlabel = L&amp;quot;x&amp;quot;, ylabel = L&amp;quot;y&amp;quot;, zlabel = L&amp;quot;z&amp;quot;,
+  xlims=(-25,30),ylims=(-30,30),zlims=(5,49)
+ )
+plot!(pl1, sol_attractor,vars=(1,2,3), label=&amp;quot;attractor&amp;quot;,xlims=(-25,30),ylims=(-30,30),zlims=(5,49)
+ )
+savefig(pl1, &amp;quot;Lorenz_forward.png&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/Lorenz_forward.png&#34; &gt;
+
+
+  &lt;img src=&#34;https://frankschae.github.io/img/Lorenz_forward.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;Here, we plot the initial evolution in blue and the evolution on the attractor in orange.&lt;/p&gt;
+&lt;p&gt;Following Refs.&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; and &lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;, we choose&lt;/p&gt;
+&lt;p&gt;$$
+\langle z \rangle_∞ = \lim_{T \rightarrow ∞} \frac{1}{T} \int_0^T z \text{d}t
+$$&lt;/p&gt;
+&lt;p&gt;as the objective, where we only use the trajectory that lies completely on the attractor (i.e., the blue trajectory in the plot on top). Let us first study the objective as a function of $\rho$.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;function compute_objective(sol)
+  quadgk(t-&amp;gt; sol(t)[end]/(tspan_attractor[2]-tspan_attractor[1]) ,tspan_attractor[1],tspan_attractor[2], atol=1e-14, rtol=1e-10)[1]
+end
+
+pl2 = plot(sol_attractor.t, getindex.(sol_attractor.u,3), ylabel=L&amp;quot;z(t)&amp;quot;, xlabel=L&amp;quot;t&amp;quot;, label=false, labelfontsize=20,lw = 2)
+mean_z = [mean(getindex.(sol_attractor.u,3))]
+int_z = compute_objective(sol_attractor)
+hline!(pl2, [int_z], label=L&amp;quot;\langle z\rangle&amp;quot;, lw = 2)
+savefig(pl2, &amp;quot;zsingle.png&amp;quot;)
+
+# for each value of the parameter, solve 20 times the initial value problem
+# wrap the procedure inside a function depending on p
+function Lorenz_solve(p)
+  u0 = rand(3)
+  prob_init = ODEProblem(lorenz!,u0,tspan_init,p)
+  sol_init = solve(prob_init,Tsit5())
+  prob_attractor = ODEProblem(lorenz!,sol_init[end],tspan_attractor,p)
+  sol_attractor = solve(prob_attractor,Vern9(),abstol=1e-14,reltol=1e-14)
+  sol_attractor, prob_attractor
+end
+
+Niter = 10
+ps = collect(20.0:1.0:40.0)
+probs = []
+sols = []
+zmean = []
+zstd = []
+for ρ in ps
+  @show ρ
+  ztmp = []
+  for i=1:Niter
+    sol, prob = Lorenz_solve([ρ])
+    zbar = compute_objective(sol)
+    push!(sols, sol)
+    push!(probs, prob)
+    push!(ztmp, zbar)
+  end
+  push!(zmean,mean(ztmp))
+  push!(zstd,std(ztmp))
+end
+
+pl3 = plot(ps,zmean, ribbon = zstd, ylabel=L&amp;quot;\langle z\rangle&amp;quot;, xlabel=L&amp;quot;\rho&amp;quot;, legend=false, labelfontsize=20, lw = 2)
+savefig(pl3, &amp;quot;zvsrho.png&amp;quot;)
+
+pl4 = plot(pl2,pl3, margin=3Plots.mm, layout = (1, 2), size=(600,300))
+savefig(pl4, &amp;quot;z.png&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We obtain:&lt;/p&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/z.png&#34; &gt;
+
+
+  &lt;img src=&#34;https://frankschae.github.io/img/z.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;That is, we find a slope of approximately one (almost everywhere except at the kink $\rho\approx 23$), and, therefore, we expect a sensitivity of&lt;/p&gt;
+&lt;p&gt;$$
+\frac{\text{d}\langle z \rangle_∞}{\text{d} \rho} \approx 1.
+$$&lt;/p&gt;
+&lt;h2 id=&#34;conventional-forward-mode-sensitivity-analysis-and-finite-differencing&#34;&gt;Conventional forward-mode sensitivity analysis and finite-differencing&lt;/h2&gt;
+&lt;p&gt;For non-chaotic systems, we would just use the 
+&lt;a href=&#34;https://diffeq.sciml.ai/stable/analysis/sensitivity/#Sensitivity-Algorithms&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;standard discrete or continuous forward sensitivity methods&lt;/a&gt; or even finite-differencing.  If we try to compute the sensitivity for the Lorenz system:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;function G(p, prob=prob_attractor)
+  tmp_prob = remake(prob,p=p)
+  tmp_sol = solve(tmp_prob,Vern9(),abstol=1e-14,reltol=1e-14)
+  res = compute_objective(tmp_sol)
+  @info res
+  res
+end
+sense_forward = ForwardDiff.gradient(G,p)
+sense_calculus = Calculus.gradient(G,p)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;we find diverging values:&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+&amp;amp; \frac{\text{d}\langle z \rangle_\infty}{\text{d} \rho} \Bigg\rvert_{\rho=28} \approx -49899 {\text{ (ForwardDiff)}}  \\&lt;br&gt;
+&amp;amp;\frac{\text{d}\langle z \rangle_\infty}{\text{d} \rho} \Bigg\rvert_{\rho=28} \approx 472 {\text{ (Calculus)}}
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;As pointed out in the NILSS paper, this is because the process of $T\rightarrow ∞$ for a fixed initial state does &lt;em&gt;not&lt;/em&gt; commute with the differentiation:&lt;/p&gt;
+&lt;p&gt;$$
+\frac{\text{d}}{\text{d} \rho} \langle z \rangle_∞ \neq \lim_{T \rightarrow ∞} \frac{\partial}{\partial \rho} \langle z \rangle_T
+$$&lt;/p&gt;
+&lt;p&gt;Similarly, using 
+&lt;a href=&#34;https://diffeq.sciml.ai/stable/analysis/uncertainty_quantification/#Example-3:-Adaptive-ProbInts-on-the-Lorenz-Attractor&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;uncertainty quantification&lt;/a&gt; one realizes that due to finite numerical precision and the associated unavoidable errors that are amplified exponentially, one cannot follow the true solution of a chaotic system for long times. We can visualize this by twice solving the Lorenz system with exactly the same parameters and initial condition but with different floating point number precision:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;prob_attractor1 = ODEProblem(lorenz!,sol_init[end],(0.0, 50.0),p)
+prob_attractor2 = ODEProblem(lorenz!,convert.(Float32, sol_init[end]),(0f0, 50f0),convert.(Float32,p))
+sol1 = solve(prob_attractor1,Tsit5(),abstol=1e-6,reltol=1e-6, saveat=0.01)
+sol2 = solve(prob_attractor2,Tsit5(),abstol=1f-6,reltol=1f-6, saveat=0.01f0)
+
+list_plots = []
+t1 = 0.0
+for i in 1:500
+  t2 = i*0.1
+  plt1 = plot(sol1, vars=(1,2,3), tspan=(t1,t2), denseplot=true, legend=true,
+     label = &amp;quot;Float64&amp;quot;, labelfontsize=20, lw = 2,
+     xlabel = L&amp;quot;x&amp;quot;, ylabel = L&amp;quot;y&amp;quot;, zlabel = L&amp;quot;z&amp;quot;,
+     xlims=(-20,25),ylims=(-28,25),zlims=(5,48))
+  plot!(plt1, sol2,vars=(1,2,3), tspan=(t1,t2), denseplot=true, label=&amp;quot;Float32&amp;quot;,
+        xlims=(-20,25),ylims=(-28,25),zlims=(5,48))
+  push!(list_plots, plt1)
+end
+
+anim = animate(list_plots,every=1)
+
+pl1 = plot(sol1,vars=(1,2,3), legend=true,
+  label = &amp;quot;Float64&amp;quot;, labelfontsize=20, lw = 2,
+  xlabel = L&amp;quot;x&amp;quot;, ylabel = L&amp;quot;y&amp;quot;, zlabel = L&amp;quot;z&amp;quot;,
+  xlims=(-20,25),ylims=(-28,25),zlims=(5,48)
+ )
+plot!(pl1, sol2,vars=(1,2,3), label=&amp;quot;Float32&amp;quot;, xlims=(-20,25),ylims=(-28,25),zlims=(5,48)
+ )
+
+savefig(pl1, &amp;quot;Lorenz_Floats.png&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/Lorenz.gif&#34; &gt;
+
+
+  &lt;img src=&#34;https://frankschae.github.io/img/Lorenz.gif&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/Lorenz_Floats.png&#34; &gt;
+
+
+  &lt;img src=&#34;https://frankschae.github.io/img/Lorenz_Floats.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;Luckily, the 
+&lt;a href=&#34;https://mathworld.wolfram.com/ShadowingTheorem.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;shadowing lemma&lt;/a&gt; states:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Although a numerically computed chaotic trajectory diverges exponentially from the true trajectory with the same initial coordinates, there exists an errorless trajectory with a slightly different initial condition that stays near (&amp;ldquo;shadows&amp;rdquo;) the numerically computed one.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;shadowing-methods&#34;&gt;Shadowing methods&lt;/h2&gt;
+&lt;p&gt;The central idea of the shadowing methods is to distill the long-time effect (which actually shifts the attractor) due to a variation of the system parameters from the transient effect, i.e., the butterfly effect, that looks like exponentially diverging trajectories due to variations of the initial conditions. That implies that we aim at finding two trajectories, one with $p$ and one with $p+\delta p$, which do &lt;em&gt;not&lt;/em&gt; diverge exponentially from each other (which exist thanks to the shadowing lemma). In this case, their difference will only contain the long-time effect. More details can be found in Refs. &lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; and &lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;lss-and-nilss-for-the-lorenz-system&#34;&gt;LSS and NILSS for the Lorenz system&lt;/h2&gt;
+&lt;p&gt;Switching to LSS or NILSS within the 
+&lt;a href=&#34;https://sciml.ai/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SciML&lt;/a&gt; ecosystem is straightforward by either defining the associated LSS (&lt;code&gt;ForwardLSSProblem&lt;/code&gt; or &lt;code&gt;AdjointLSSProblem&lt;/code&gt;) or NILSS problem (&lt;code&gt;NILSSProblem&lt;/code&gt;) type manually:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;# objective
+g(u,p,t) = u[end]
+
+####
+# LSS
+####
+lss_problem = ForwardLSSProblem(sol_attractor, ForwardLSS(alpha=DiffEqSensitivity.CosWindowing()), g)
+@show shadow_forward(lss_problem) # 1.0095888187322035
+
+lss_problem = ForwardLSSProblem(sol_attractor, ForwardLSS(alpha=DiffEqSensitivity.Cos2Windowing()), g)
+@show shadow_forward(lss_problem) # 1.0343951385924328
+
+lss_problem = ForwardLSSProblem(sol_attractor, ForwardLSS(alpha=10.0), g)
+@show shadow_forward(lss_problem) # 1.0284286902740765
+
+adjointlss_problem = AdjointLSSProblem(sol_attractor, AdjointLSS(alpha=10.0), g)
+@show shadow_adjoint(adjointlss_problem) # 1.028428690274077
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or by setting the &lt;code&gt;sensealg=&lt;/code&gt; kwarg in &lt;code&gt;solve()&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;# select via sensealg in solve
+using Zygote
+
+function GLSS(p; sensealg=ForwardLSS(), dt=0.01, g=nothing)
+  _prob = remake(prob_attractor,p=p)
+  _sol = solve(_prob,Vern9(),abstol=1e-14,reltol=1e-14,saveat=dt,sensealg=sensealg, g=g)
+  sum(getindex.(_sol.u,3))
+end
+
+dp1 = Zygote.gradient((p)-&amp;gt;GLSS(p),p) # 0.9694728321500617
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that we have implemented three different options for forward shadowing with &lt;code&gt;LSS()&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;CosWindowing()&lt;/code&gt; (default)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Cos2Windowing()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;time dilation with a factor of $\alpha$.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Additionally, an adjoint implementation &lt;code&gt;AdjointLSS()&lt;/code&gt; is available that is particularly recommended for a large number of system parameters.  Based on the values computed above, we can easily check that &lt;code&gt;AdjointLSS(alpha=10.0)&lt;/code&gt; agrees perfectly with &lt;code&gt;ForwardLSS(alpha=10.0)&lt;/code&gt;. In all cases considered, we find the expected sensitivity value of $\approx 1$.&lt;/p&gt;
+&lt;p&gt;However, the use of &lt;code&gt;LSS()&lt;/code&gt; is (typically) much more expensive than the use of &lt;code&gt;NILSS()&lt;/code&gt;, because &lt;code&gt;LSS()&lt;/code&gt; needs to solve a large linear system. This linear system scales with the number of independent variables in the differential equation times the number of time steps and, thus, it can become very large.  The computational and memory costs of &lt;code&gt;NILSS()&lt;/code&gt; scale with the number of positive (unstable) Lyapunov exponents, since it constrains the optimization problem in the LSS method to its unstable subspace. In many cases, this number is much smaller than the number of independent variables, hence making &lt;code&gt;NILSS()&lt;/code&gt; more efficient.&lt;/p&gt;
+&lt;p&gt;In the &lt;code&gt;NILSS()&lt;/code&gt; algorithm, the user can control the number of steps per segment as well as the number of segments.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;####
+# NILSS
+####
+
+# make sure trajectory is fully on the attractor
+Random.seed!(1234)
+tspan_init = (0.0,100.0)
+tspan_attractor = (100.0,120.0)
+u0 = rand(3)
+prob_init = ODEProblem(lorenz!,u0,tspan_init,p)
+sol_init = solve(prob_init,Tsit5())
+prob_attractor = ODEProblem(lorenz!,sol_init[end],tspan_attractor,p)
+
+nseg = 100 # number of segments on time interval
+nstep = 2001 # number of steps on each segment
+
+nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
+@show DiffEqSensitivity.shadow_forward(nilss_prob,Tsit5()) # 0.9966924374966089
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the number of segments is chosen too small, a warning is thrown:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;nseg = 20 # number of segments on time interval
+nstep = 2001 # number of steps on each segment
+
+nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
+@show DiffEqSensitivity.shadow_forward(nilss_prob,Tsit5()) # 1.0416028730638789
+
+# Warning: Detected a large value of ξ at the beginning of a segment.
+# └ @ DiffEqSensitivity ~/.julia/dev/DiffEqSensitivity/src/nilss.jl:474
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the future, we might add an option for the automate control of these variables following the proposal in the NILSS paper&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;outlook&#34;&gt;Outlook&lt;/h2&gt;
+&lt;p&gt;With respect to the shadowing methods for chaotic systems, we are planning to implement further methods, such as&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NILSAS&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;li&gt;FD-NILSS&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;in the upcoming weeks. For further information and a collection of other methods, the interested reader is invited to track the corresponding 
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/issues/102&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;issue&lt;/a&gt; in the DiffEqSensitivity.jl package.&lt;/p&gt;
+&lt;p&gt;If you have any questions or comments, please don’t hesitate to contact me!&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Frank Schäfer, Michal Kloc, et al., Mach. Learn.: Sci. Technol. &lt;strong&gt;1&lt;/strong&gt;, 035009 (2020). &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Frank Schäfer, Pavel Sekatski, et al., Mach. Learn.: Sci. Technol. &lt;strong&gt;2&lt;/strong&gt;, 035004 (2021). &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Chris Rackauckas, Yingbo Ma, et al., arXiv preprint arXiv:2001.04385 (2020). &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Qiqi Wang, Rui Hu, et al. J. Comput. Phys &lt;strong&gt;26&lt;/strong&gt;, 210-224 (2014) &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Angxiu Ni and Qiqi Wang. J. Comput. Phys &lt;strong&gt;347&lt;/strong&gt;,  56-77 (2017). &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Angxiu Ni and Chaitanya Talnikar, J. Comput. Phys &lt;strong&gt;395&lt;/strong&gt;, 690-709, (2019) &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:7&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Angxiu Ni, Qiqi Wang et al., J. Comput. Phys &lt;strong&gt;394&lt;/strong&gt;, 615-631 (2019) &lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
     
     <item>
       <title>Neural Hybrid Differential Equations</title>
