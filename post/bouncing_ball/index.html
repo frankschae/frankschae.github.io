@@ -1,0 +1,1426 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Frank Schäfer">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="In this post, we discuss sensitivity analysis of hybrid differential equations1 and highlight differences between explicit2 and implicit discontinuities3 4. As a paradigmatic example, we consider a bouncing ball described by the ODE">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://frankschae.github.io/post/bouncing_ball/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+  
+
+  
+  <link rel="alternate" href="/post/bouncing_ball/index.xml" type="application/rss+xml" title="FS">
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://frankschae.github.io/post/bouncing_ball/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="FS">
+  <meta property="og:url" content="https://frankschae.github.io/post/bouncing_ball/">
+  <meta property="og:title" content="[WIP] Sensitivity Analysis of Hybrid Differential Equations | FS">
+  <meta property="og:description" content="In this post, we discuss sensitivity analysis of hybrid differential equations1 and highlight differences between explicit2 and implicit discontinuities3 4. As a paradigmatic example, we consider a bouncing ball described by the ODE"><meta property="og:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2021-07-16T13:24:04&#43;02:00">
+    
+    <meta property="article:modified_time" content="2021-07-16T13:24:04&#43;02:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://frankschae.github.io/post/bouncing_ball/"
+  },
+  "headline": "[WIP] Sensitivity Analysis of Hybrid Differential Equations",
+  
+  "datePublished": "2021-07-16T13:24:04+02:00",
+  "dateModified": "2021-07-16T13:24:04+02:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Frank Schäfer"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "FS",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "In this post, we discuss sensitivity analysis of hybrid differential equations1 and highlight differences between explicit2 and implicit discontinuities3 4. As a paradigmatic example, we consider a bouncing ball described by the ODE"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>[WIP] Sensitivity Analysis of Hybrid Differential Equations | FS</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">FS</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">FS</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Research projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#software"><span>Open Source Software</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link js-theme-selector" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-palette" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>[WIP] Sensitivity Analysis of Hybrid Differential Equations</h1>
+
+  
+  <p class="page-subtitle">GSoC 2021 &ndash; third blog post</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jul 16, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>In this post, we discuss sensitivity analysis of hybrid differential equations<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> and highlight differences between explicit<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> and implicit discontinuities<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>. As a paradigmatic example, we consider a bouncing ball described by the ODE</p>
+<p>$$
+\begin{aligned}
+\text{d}z(t) &amp;= v(t) \text{d}t, \\<br>
+\text{d}v(t) &amp;= -g  \text{d}t
+\end{aligned}<br>
+$$</p>
+<p>with initial condition</p>
+<p>$$
+\begin{aligned}
+z(t=0) &amp;= z_0 = 5, \\<br>
+v(t=0) &amp;= v_0 = -0.1.
+\end{aligned}<br>
+$$</p>
+<p>The initial condition contains the initial height <code>z0</code> and initial velocity <code>v0</code> of the ball. We have two important parameters in this system. First, there is the gravitational constant <code>g=10</code> modeling the acceleration of the ball due to an approximately constant gravitational field. Second, we include a dissipation factor <code>γ=0.8</code> (
+<a href="https://en.wikipedia.org/wiki/Coefficient_of_restitution" target="_blank" rel="noopener">coefficient of restitution</a>) that accounts for a non-perfect elastic bounce on the ground.</p>
+<p>We can straightforwardly integrate the ODE analytically</p>
+<p>$$
+\begin{aligned}
+z(t) &amp;= z_0 + v_0 t - \frac{g}{2} t^2, \\<br>
+v(t) &amp;= v_0 - g  t
+\end{aligned}<br>
+$$</p>
+<p>or numerically</p>
+<pre><code class="language-julia">using ForwardDiff, Zygote, OrdinaryDiffEq, DiffEqSensitivity
+using Plots, LaTeXStrings
+
+##
+### simulate forward
+function f(du,u,p,t)
+  du[1] = u[2]
+  du[2] = -p[1]
+end
+
+z0 = 5.0
+v0 = -0.1
+t0 = 0.0
+tend = 1.9
+g = 10
+γ = 0.8
+
+u0 = [z0,v0]
+tspan = (t0,tend)
+p = [g, γ]
+prob = ODEProblem(f,u0,tspan,p)
+
+# plot forward trajectory
+sol = solve(prob,Tsit5(),saveat=0.1)
+pl = plot(sol, label = [&quot;z(t)&quot; &quot;v(t)&quot;], labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &quot;t&quot;, legend=:bottomleft)
+hline!(pl, [0.0], label=false, color=&quot;black&quot;)
+savefig(pl,&quot;BB_forward_no_bounce.png&quot;)
+</code></pre>
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure >
+
+
+  <a data-fancybox="" href="/img/BB_forward_no_bounce.png" >
+
+
+  <img src="/img/BB_forward_no_bounce.png" alt=""  >
+</a>
+
+
+
+</figure>
+
+<h2 id="forward-simulation-with-events">Forward simulation with events</h2>
+<p>At around $t^\star \approx 1$, the ball hits the ground $z^\star(t^\star) = 0$, and is inelastically reflected while dissipating a fraction of its energy. This discontinuity can be modeled by re-initializing the ODE with new initial conditions</p>
+<p>$$
+\begin{aligned}<br>
+z_+&amp;= \lim_{t \rightarrow {t^\star}^+} z(t) =  \lim_{t \rightarrow {t^\star}^-}  z(t) = z_- ,\\<br>
+v_+&amp;= \lim_{t \rightarrow {t^\star}^+} v(t) =  -\gamma \lim_{t \rightarrow {t^\star}^-}  v(t) =  -\gamma v_-
+\end{aligned}<br>
+$$</p>
+<p>on the right-hand side of the event. Given our analytical solution for the state as a function of time, we can easily compute the event time $t^\star$ as</p>
+<p>$$
+t^\star = \frac{v_0 + \sqrt{v_0^2 + 2 g z_0}}{g}.
+$$</p>
+<h3 id="explicit-events">Explicit events</h3>
+<p>We can define the bounce of the ball as an explicit event by inserting the values of the initial condition and the parameters into $t^\star$. We obtain</p>
+<p>$$
+t^\star = 0.99005.
+$$</p>
+<p>The full trajectory $z_{\rm exp}(t)$ is determined by</p>
+<p>$$
+z_{\rm exp}(t) = \begin{cases}
+z^{1}_{\rm exp}(t) &amp;=z_0 + v_0 t - \frac{g}{2} t^2 &amp;, \forall t \leq t^\star, \\<br>
+z^{2}_{\rm exp}(t) &amp;=-0.4901 g - 0.5 g (-0.99005 + t)^2 +\\<br>
+&amp;+0.99005 v_0 + z_0 - (-0.99005 + t) (-0.99005 g + v_0)\gamma  &amp;, \forall t &gt; t^\star
+\end{cases}
+$$</p>
+<p>where we used:</p>
+<p>$$
+\begin{aligned}<br>
+z_{-, \rm exp}&amp;= z_0 + 0.99005 v_0 -0.4901 g,\\<br>
+v_{-, \rm exp}&amp;= (v_0 - 0.99005 g) .
+\end{aligned}<br>
+$$</p>
+<p>and</p>
+<p>$$
+\begin{aligned}<br>
+z_{+, \rm exp}&amp;= z_0 + 0.99005 v_0 -0.4901 g, \\<br>
+v_{+, \rm exp}&amp;= -(v_0 - 0.99005 g) \gamma .
+\end{aligned}<br>
+$$</p>
+<p>Numerically, we use a <code>DiscreteCallback</code> in this case to simulate the system</p>
+<pre><code class="language-julia"># DiscreteCallback (explicit event)
+tstar = (v0 + sqrt(v0^2+2*z0*g))/g
+condition1(u,t,integrator) = (t == tstar)
+affect!(integrator) = integrator.u[2] = -integrator.p[2]*integrator.u[2]
+cb1 = DiscreteCallback(condition1,affect!,save_positions=(true,true))
+
+sol1 = solve(prob,Tsit5(),callback=cb1, saveat=0.1, tstops=[tstar])
+</code></pre>
+<p>Evidently, by choosing an explicit definition of the event, the impact time is fixed. Thus, if we perturb the initial conditions or the parameters, the event location remains at $t^\star = 0.99005$ while it should actually change (for a fixed ground).</p>
+<h3 id="implicit-events">Implicit events</h3>
+<p>The physically more meaningful description of a bouncing ball is therefore given by an implicit description of the event in form of a condition (event function)</p>
+<p>$$
+g(z,v,p,t) = z(t)
+$$</p>
+<p>where an event occurs if $g(z^\star,v^\star,p,t^\star) = 0$. Note that we have already used this condition to define our impact time $t^\star$ of the explicit event.</p>
+<p>As in the previous case, we can analytically compute the full trajectory of the ball. At the event time, we have</p>
+<p>\begin{aligned}<br>
+z_{-, \rm imp}&amp;= 0, \\<br>
+v_{-, \rm imp}&amp;= - \sqrt{v_0^2 + 2 g z_0}
+\end{aligned}</p>
+<p>for the left and</p>
+<p>\begin{aligned}<br>
+z_{+, \rm imp}&amp;= 0 \\<br>
+v_{+, \rm imp}&amp;= \gamma \sqrt{v_0^2 + 2 g z_0}.
+\end{aligned}</p>
+<p>for the right limit. Thus, the full trajectory $z_{\rm imp}(t)$ is given by</p>
+<p>$$
+z_{\rm imp}(t) = \begin{cases}
+z^{1}_{\rm imp}(t) &amp;=z_0 + v_0 t - \frac{g}{2} t^2 &amp;, \forall t \leq t^\star ,\\<br>
+z^{2}_{\rm imp}(t) &amp;= -\frac{(-g t + v_0 + \sqrt{v_0^2 + 2 g z_0})}{2 g} \times, \\<br>
+&amp;\times (-g t + v_0 + \sqrt{v_0^2 + 2 g z_0} (1 + 2 \gamma)) &amp;, \forall t &gt; t^\star.
+\end{cases}
+$$</p>
+<p>Numerically, we use a <code>ContinuousCallback</code> in this case</p>
+<pre><code class="language-julia"># ContinuousCallback (implicit event)
+condition2(u,t,integrator) = u[1] # Event when condition(u,t,integrator) == 0
+cb2 = ContinuousCallback(condition2,affect!,save_positions=(true,true))
+sol2 = solve(prob,Tsit5(),callback=cb2,saveat=0.1)
+</code></pre>
+<p>We can verify that both callbacks lead to the same forward time evolution (for fixed initial conditions and parameters)</p>
+<pre><code class="language-julia"># plot forward trajectory
+pl1 = plot(sol1, label = [&quot;z(t)&quot; &quot;v(t)&quot;], title=&quot;explicit event&quot;, labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &quot;t&quot;, legend=:bottomright)
+pl2 = plot(sol2, label = [&quot;z(t)&quot; &quot;v(t)&quot;], title=&quot;implicit event&quot;, labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &quot;t&quot;, legend=:bottomright)
+hline!(pl1, [0.0], label=false, color=&quot;black&quot;)
+hline!(pl2, [0.0], label=false, color=&quot;black&quot;)
+pl = plot(pl1,pl2)
+savefig(pl,&quot;BB_forward.png&quot;)
+</code></pre>
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure >
+
+
+  <a data-fancybox="" href="/img/BB_forward.png" >
+
+
+  <img src="/img/BB_forward.png" alt=""  >
+</a>
+
+
+
+</figure>
+
+<p>In addition, the implicitly defined impact time via the <code>ContinuousCallback</code> also shifts the impact time when changing the initial conditions or the parameters</p>
+<pre><code class="language-julia"># animate forward trajectory
+sol3 = solve(remake(prob,u0=[u0[1]+0.5,u0[2]]),Tsit5(),callback=cb2,saveat=0.01)
+
+plt2 = plot(sol2, label = false, labelfontsize=20, legendfontsize=20, lw = 1, xlabel = &quot;t&quot;, legend=:bottomright, color=&quot;black&quot;, xlims=(t0,tend))
+hline!(plt2, [0.0], label=false, color=&quot;black&quot;)
+plot!(plt2, sol3, tspan=(t0,tend), color=[1 2], label = [&quot;z(t)&quot; &quot;v(t)&quot;], labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &quot;t&quot;, legend=:bottomright, denseplot=true, xlims=(t0,tend), ylims=(-11,9))
+# scatter!(plt2, [t2,t2], sol3(t2), color=[1, 2], label=false)
+
+list_plots = []
+for t in sol3.t
+  tstart = 0.0
+
+  plt1 = plot(sol2, label = false, labelfontsize=20, legendfontsize=20, lw = 1, xlabel = &quot;t&quot;, legend=:bottomright, color=&quot;black&quot;)
+  hline!(plt1, [0.0], label=false, color=&quot;black&quot;)
+  plot!(plt1, sol3, tspan=(t0,t), color=[1 2], label = [&quot;z(t)&quot; &quot;v(t)&quot;], labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &quot;t&quot;, legend=:bottomright, denseplot=true, xlims=(t0,tend), ylims=(-11,9))
+  scatter!(plt1,[t,t], sol3(t), color=[1, 2], label=false)
+  plt = plot(plt1,plt2)
+  push!(list_plots, plt)
+end
+
+plot(list_plots[100])
+
+anim = animate(list_plots,every=1)
+</code></pre>
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure >
+
+
+  <a data-fancybox="" href="/img/BB.gif" >
+
+
+  <img src="/img/BB.gif" alt=""  >
+</a>
+
+
+
+</figure>
+
+<p>The original curve is shown in black in the figure above. In other words, the event time $t^\star=t^\star(p,z_0,v_0,t_0)$ is a function of the parameters and initial conditions that is implicitly defined by the event condition. Therefore, the sensitivity of the event time with respect to parameters $\frac{\text{d}t^\star}{\text{d}p}$ or initial conditions $\frac{\text{d}t^\star}{\text{d}z_0}$, $\frac{\text{d}t^\star}{\text{d}v_0}$ must be taken into account.</p>
+<h2 id="sensitivity-analysis-with-events">Sensitivity analysis with events</h2>
+<p>We are often interested in computing the change of a loss function with respect to changes of the parameters or initial condition. For this purpose, let us consider the mean square error loss function</p>
+<p>$$
+L(z,y) = \sum_i(z(t_i) - y_i)^2
+$$</p>
+<p>with respect to target values $y_i$ at time points $t_i$ incident before, after, or at the event time. Let $\alpha$ denote any of the inputs $(z_0,v_0,g,\gamma)$. The sensitivity with respect to $\alpha$ is then given by the chain rule:</p>
+<p>$$
+\frac{\text{d}L}{\text{d} \alpha} =  2\sum_i (z(t_i) - y_i) \frac{\text{d}z(t_i)}{\text{d} \alpha}.
+$$</p>
+<p>For the bouncing ball, we can easily compute those sensitivities by inserting the appropriate limit of $z_{\rm imp}(t_i)$ and $z_{\rm exp}(t_i)$. One can verify that the sensitivities are different in the two cases, as expected.</p>
+<p>However, in most systems, we won&rsquo;t be able to solve analytically a differential equation</p>
+<p>$$
+\text{d}x(t) = f(x,p,t) \text{d}t
+$$</p>
+<p>with initial condition $x_0=x(t_0)$. Instead, we have to numerically solve for the state <code>x(t)</code>. Regarding the computation of the sensitivities, we may then choose one of the 
+<a href="https://diffeq.sciml.ai/stable/analysis/sensitivity/" target="_blank" rel="noopener">available algorithms</a> for our differential equation. Currently, <code>BacksolveAdjoint()</code>, <code>InterpolatingAdjoint()</code>, <code>QuadratureAdjoint()</code>, <code>ReverseDiffAdjoint()</code>, <code>TrackerAdjoint()</code>, and <code>ForwardDiffAdjoint()</code> are compatible with events. Let us focus in the following on the <code>BacksolveAdjoint()</code> algorithm which computes the sensitivities</p>
+<p>$$
+\begin{aligned}
+\frac{\text{d}L}{\text{d}x(t_{0})} &amp;= \lambda(t_{0}),\\<br>
+\frac{\text{d}L}{\text{d}p} &amp;= \lambda_{p}(t_{0}),
+\end{aligned}
+$$</p>
+<p>by solving an ODE for $\lambda(t)$ in reverse time from $t_N$ to $t_0$</p>
+<p>$$
+\begin{aligned}
+\frac{\text{d}\lambda(t)}{\text{d}t} &amp;= -\lambda(t)^\dagger \frac{\text{d} f(\rightarrow x(t), p, t)}{\text{d} x(t)} - \frac{\text{d} L(\rightarrow x(t), y)}{\text{d} x(t)}^\dagger \delta(t-t_i), \\<br>
+\frac{\text{d}\lambda_{p}(t)}{\text{d}t} &amp;= -\lambda(t)^\dagger \frac{\text{d} f(x(t), \rightarrow p, t)}{\text{d} p},
+\end{aligned}
+$$</p>
+<p>with initial conditions:</p>
+<p>$$
+\begin{aligned}
+\lambda(t_{N})&amp;= 0, \\<br>
+\lambda_{p}(t_{N}) &amp;= 0.
+\end{aligned}
+$$</p>
+<p>The arrows indicate the variable with respect to which we differentiate. Note that computing the vector-Jacobian products (vjp) in the adjoint ODE requires the value of $x(t)$ along its trajectory. In <code>BacksolveAdjoint()</code> we recompute $x(t)$&ndash;together with the adjoint variables&ndash;backwards in time starting with its final value $x(t_N)$.</p>
+<h3 id="explicit-events-1">Explicit events</h3>
+<p>To make <code>BacksolveAdjoint()</code> compatible with explicit events<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, we have to store the event times $t^\star_j$ as well as the state $x({t_j^\star}^-)$ and parameters $p=p({t_j^\star}^-)$ (if they are changed) at the left limit of $t^\star_j$. We then solve the adjoint ODE backwards in time between the events. As soon as we reach an event from the right limit ${t_j^\star}^+$, we update the augmented state according to</p>
+<p>$$
+\begin{aligned}
+\lambda({t_j^\star}^-) &amp;= \lambda({t_j^\star}^+) \frac{\text{d} a(\rightarrow x({t_j^\star}^-), p({t_j^\star}^-), {t_j^\star}^-)}{\text{d} x({t_j^\star}^-)} \\<br>
+\lambda_p({t_j^\star}^-) &amp;= \lambda_p({t_j^\star}^+) -  \lambda({t_j^\star}^+) \frac{\text{d} a(x({t_j^\star}^-), \rightarrow p({t_j^\star}^-), {t_j^\star}^-)}{\text{d} p({t_j^\star}^-)}
+\end{aligned}
+$$</p>
+<p>where $a$ is the affect function applied at the discontinuity. That is, to lift the adjoint from the right to the left limit, we compute a vjp with the adjoint $\lambda({t_j^\star}^+)$ at the right limit and the Jacobian of the affect function evaluated on the left limit.</p>
+<p>In particular, we apply a loss function callback before and after this update if the state was saved in the forward evolution and entered directly into the loss function.</p>
+<h3 id="implicit-events-1">Implicit events</h3>
+<p>Define $u(t) = (t, x(t))$. Let us first consider the event times. We are interested in</p>
+<p>$$
+\frac{\text{d}L(u(t^\star_j(\rightarrow p), \rightarrow p))}{\text{d}p} = \frac{\text{d}L(t^\star_j(p), \text{solve}(t^\star_j(p), x0, \rightarrow p))}{\text{d}p}
+$$</p>
+<p>In a first step, we need to compute $t^\star_j(p)$ based on the event condition $F(t, p) = g(u(t, p)) = 0$.  We can apply the 
+<a href="https://www.uni-siegen.de/fb6/analysis/overhagen/vorlesungsbeschreibungen/skripte/analysis3_1.pdf" target="_blank" rel="noopener">implicit function theorem</a> which yields:</p>
+<p>$$
+\begin{aligned}
+\frac{\text{d}t^\star_j(p)}{\text{d}p} &amp;= - \left(\frac{\text{d}g(\rightarrow t^\star_j, \text{solve}(\rightarrow t^\star_j,x_0, p))}{\text{d}t^\star_j}\right)^{-1} \frac{\text{d}g(t^\star_j, \text{solve}(t^\star_j, x_0, \rightarrow p))}{\text{d}p} \\<br>
+\end{aligned}
+$$</p>
+<p>The total derivative inside the bracket is defined as:
+$$
+\begin{aligned}
+\frac{\text{d}g(\rightarrow t^\star_j, \text{solve}(\rightarrow t^\star_j, x_0, p))}{\text{d}t^\star_j} &amp;= \frac{\text{d}g(\rightarrow t^\star_j, \text{solve}(t^\star_j, x_0, p))}{\text{d}t^\star_j} + \frac{\text{d}g(t^\star_j, \text{solve}(\rightarrow t^\star_j, x_0, p))}{\text{d}t^\star_j}\\<br>
+\end{aligned}
+$$</p>
+<p>Since</p>
+<p>$$
+\frac{\text{d}(\text{solve}(\rightarrow t^\star_j, x_0, p))}{\text{d}t^\star_j} = f(t^\star_j,p)
+$$</p>
+<p>by definition of the ODE, we can further write</p>
+<p>$$
+\begin{aligned}
+\frac{\text{d}g(t^\star_j, \text{solve}(\rightarrow t^\star_j, x_0, p))}{\text{d}t^\star_j} = \dots \\<br>
+\end{aligned}
+$$</p>
+<h2 id="outlook">Outlook</h2>
+<p>We are still refining the adjoints in case of implicit discontinuities (<code>ContinuousCallbacks</code>). For further information, the interested reader is encouraged to track the associated issues 
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/issues/383" target="_blank" rel="noopener">#383</a> and 
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/issues/374" target="_blank" rel="noopener">#374</a>, and 
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/445" target="_blank" rel="noopener">PR #445</a> in the DiffEqSensitivity.jl package.</p>
+<p>If you have any questions or comments, please don’t hesitate to contact me!</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Michael Poli, Stefano Massaroli, et al., arXiv preprint arXiv:2106.04165 (2021). <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Junteng Jia, Austin R. Benson, arXiv preprint arXiv:1905.10403 (2019). <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Timo C. Wunderlich and Christian Pehle, Sci. Rep. <em>11</em>, 12829 (2021). <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>Ricky T. Q. Chen, Brandon Amos, Maximilian Nickel, arXiv preprint arXiv:2011.03902 (2020). <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/gsoc-2021/">GSoC 2021</a>
+  
+  <a class="badge badge-light" href="/tag/hybrid-differential-equations/">Hybrid differential equations</a>
+  
+  <a class="badge badge-light" href="/tag/adjoint-sensitivity-methods/">Adjoint sensitivity methods</a>
+  
+  <a class="badge badge-light" href="/tag/event-handling/">Event handling</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://frankschae.github.io/post/bouncing_ball/&amp;text=[WIP]%20Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://frankschae.github.io/post/bouncing_ball/&amp;t=[WIP]%20Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=[WIP]%20Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations&amp;body=https://frankschae.github.io/post/bouncing_ball/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://frankschae.github.io/post/bouncing_ball/&amp;title=[WIP]%20Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=[WIP]%20Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations%20https://frankschae.github.io/post/bouncing_ball/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://frankschae.github.io/post/bouncing_ball/&amp;title=[WIP]%20Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-circle" src="/author/frank-schafer/avatar_hu9202cabaed592d2d4bbe51596d4206a2_80238_270x270_fill_lanczos_center_2.png" alt="Frank Schäfer">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="https://frankschae.github.io/">Frank Schäfer</a></h5>
+        <h6 class="card-subtitle">PhD candidate in Physics</h6>
+        <p class="card-text">My research interests include many-body physics, machine learning, and differentiable programming.</p>
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=goAokcEAAAAJ&amp;hl=de&amp;oi=sra#" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/frankschae" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://orcid.org/0000-0003-2684-4984" target="_blank" rel="noopener">
+        <i class="ai ai-orcid"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/hybridde/">Neural Hybrid Differential Equations</a></li>
+      
+      <li><a href="/post/shadowing/">Shadowing Methods for Forward and Adjoint Sensitivity Analysis of Chaotic Systems</a></li>
+      
+      <li><a href="/post/gsoc2020-high-weak-order-solvers-sde-adjoints/">GSoC 2020: High weak order SDE solvers and their utility in neural SDEs</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js" integrity="sha256-lyWCDMnMeZiXRi7Zl54sZGKYmgQs4izcT7+tKc+KUBk=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/julia.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2020 Frank Schäfer &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

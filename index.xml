@@ -5,12 +5,374 @@
     <link>https://frankschae.github.io/</link>
       <atom:link href="https://frankschae.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>FS</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Fri, 02 Jul 2021 11:08:22 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Fri, 16 Jul 2021 13:24:04 +0200</lastBuildDate>
     <image>
       <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>FS</title>
       <link>https://frankschae.github.io/</link>
     </image>
+    
+    <item>
+      <title>[WIP] Sensitivity Analysis of Hybrid Differential Equations</title>
+      <link>https://frankschae.github.io/post/bouncing_ball/</link>
+      <pubDate>Fri, 16 Jul 2021 13:24:04 +0200</pubDate>
+      <guid>https://frankschae.github.io/post/bouncing_ball/</guid>
+      <description>&lt;p&gt;In this post, we discuss sensitivity analysis of hybrid differential equations&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; and highlight differences between explicit&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; and implicit discontinuities&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; &lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;. As a paradigmatic example, we consider a bouncing ball described by the ODE&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+\text{d}z(t) &amp;amp;= v(t) \text{d}t, \\&lt;br&gt;
+\text{d}v(t) &amp;amp;= -g  \text{d}t
+\end{aligned}&lt;br&gt;
+$$&lt;/p&gt;
+&lt;p&gt;with initial condition&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+z(t=0) &amp;amp;= z_0 = 5, \\&lt;br&gt;
+v(t=0) &amp;amp;= v_0 = -0.1.
+\end{aligned}&lt;br&gt;
+$$&lt;/p&gt;
+&lt;p&gt;The initial condition contains the initial height &lt;code&gt;z0&lt;/code&gt; and initial velocity &lt;code&gt;v0&lt;/code&gt; of the ball. We have two important parameters in this system. First, there is the gravitational constant &lt;code&gt;g=10&lt;/code&gt; modeling the acceleration of the ball due to an approximately constant gravitational field. Second, we include a dissipation factor &lt;code&gt;γ=0.8&lt;/code&gt; (
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Coefficient_of_restitution&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;coefficient of restitution&lt;/a&gt;) that accounts for a non-perfect elastic bounce on the ground.&lt;/p&gt;
+&lt;p&gt;We can straightforwardly integrate the ODE analytically&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+z(t) &amp;amp;= z_0 + v_0 t - \frac{g}{2} t^2, \\&lt;br&gt;
+v(t) &amp;amp;= v_0 - g  t
+\end{aligned}&lt;br&gt;
+$$&lt;/p&gt;
+&lt;p&gt;or numerically&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;using ForwardDiff, Zygote, OrdinaryDiffEq, DiffEqSensitivity
+using Plots, LaTeXStrings
+
+##
+### simulate forward
+function f(du,u,p,t)
+  du[1] = u[2]
+  du[2] = -p[1]
+end
+
+z0 = 5.0
+v0 = -0.1
+t0 = 0.0
+tend = 1.9
+g = 10
+γ = 0.8
+
+u0 = [z0,v0]
+tspan = (t0,tend)
+p = [g, γ]
+prob = ODEProblem(f,u0,tspan,p)
+
+# plot forward trajectory
+sol = solve(prob,Tsit5(),saveat=0.1)
+pl = plot(sol, label = [&amp;quot;z(t)&amp;quot; &amp;quot;v(t)&amp;quot;], labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &amp;quot;t&amp;quot;, legend=:bottomleft)
+hline!(pl, [0.0], label=false, color=&amp;quot;black&amp;quot;)
+savefig(pl,&amp;quot;BB_forward_no_bounce.png&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/BB_forward_no_bounce.png&#34; &gt;
+
+
+  &lt;img src=&#34;https://frankschae.github.io/img/BB_forward_no_bounce.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;forward-simulation-with-events&#34;&gt;Forward simulation with events&lt;/h2&gt;
+&lt;p&gt;At around $t^\star \approx 1$, the ball hits the ground $z^\star(t^\star) = 0$, and is inelastically reflected while dissipating a fraction of its energy. This discontinuity can be modeled by re-initializing the ODE with new initial conditions&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}&lt;br&gt;
+z_+&amp;amp;= \lim_{t \rightarrow {t^\star}^+} z(t) =  \lim_{t \rightarrow {t^\star}^-}  z(t) = z_- ,\\&lt;br&gt;
+v_+&amp;amp;= \lim_{t \rightarrow {t^\star}^+} v(t) =  -\gamma \lim_{t \rightarrow {t^\star}^-}  v(t) =  -\gamma v_-
+\end{aligned}&lt;br&gt;
+$$&lt;/p&gt;
+&lt;p&gt;on the right-hand side of the event. Given our analytical solution for the state as a function of time, we can easily compute the event time $t^\star$ as&lt;/p&gt;
+&lt;p&gt;$$
+t^\star = \frac{v_0 + \sqrt{v_0^2 + 2 g z_0}}{g}.
+$$&lt;/p&gt;
+&lt;h3 id=&#34;explicit-events&#34;&gt;Explicit events&lt;/h3&gt;
+&lt;p&gt;We can define the bounce of the ball as an explicit event by inserting the values of the initial condition and the parameters into $t^\star$. We obtain&lt;/p&gt;
+&lt;p&gt;$$
+t^\star = 0.99005.
+$$&lt;/p&gt;
+&lt;p&gt;The full trajectory $z_{\rm exp}(t)$ is determined by&lt;/p&gt;
+&lt;p&gt;$$
+z_{\rm exp}(t) = \begin{cases}
+z^{1}_{\rm exp}(t) &amp;amp;=z_0 + v_0 t - \frac{g}{2} t^2 &amp;amp;, \forall t \leq t^\star, \\&lt;br&gt;
+z^{2}_{\rm exp}(t) &amp;amp;=-0.4901 g - 0.5 g (-0.99005 + t)^2 +\\&lt;br&gt;
+&amp;amp;+0.99005 v_0 + z_0 - (-0.99005 + t) (-0.99005 g + v_0)\gamma  &amp;amp;, \forall t &amp;gt; t^\star
+\end{cases}
+$$&lt;/p&gt;
+&lt;p&gt;where we used:&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}&lt;br&gt;
+z_{-, \rm exp}&amp;amp;= z_0 + 0.99005 v_0 -0.4901 g,\\&lt;br&gt;
+v_{-, \rm exp}&amp;amp;= (v_0 - 0.99005 g) .
+\end{aligned}&lt;br&gt;
+$$&lt;/p&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}&lt;br&gt;
+z_{+, \rm exp}&amp;amp;= z_0 + 0.99005 v_0 -0.4901 g, \\&lt;br&gt;
+v_{+, \rm exp}&amp;amp;= -(v_0 - 0.99005 g) \gamma .
+\end{aligned}&lt;br&gt;
+$$&lt;/p&gt;
+&lt;p&gt;Numerically, we use a &lt;code&gt;DiscreteCallback&lt;/code&gt; in this case to simulate the system&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;# DiscreteCallback (explicit event)
+tstar = (v0 + sqrt(v0^2+2*z0*g))/g
+condition1(u,t,integrator) = (t == tstar)
+affect!(integrator) = integrator.u[2] = -integrator.p[2]*integrator.u[2]
+cb1 = DiscreteCallback(condition1,affect!,save_positions=(true,true))
+
+sol1 = solve(prob,Tsit5(),callback=cb1, saveat=0.1, tstops=[tstar])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Evidently, by choosing an explicit definition of the event, the impact time is fixed. Thus, if we perturb the initial conditions or the parameters, the event location remains at $t^\star = 0.99005$ while it should actually change (for a fixed ground).&lt;/p&gt;
+&lt;h3 id=&#34;implicit-events&#34;&gt;Implicit events&lt;/h3&gt;
+&lt;p&gt;The physically more meaningful description of a bouncing ball is therefore given by an implicit description of the event in form of a condition (event function)&lt;/p&gt;
+&lt;p&gt;$$
+g(z,v,p,t) = z(t)
+$$&lt;/p&gt;
+&lt;p&gt;where an event occurs if $g(z^\star,v^\star,p,t^\star) = 0$. Note that we have already used this condition to define our impact time $t^\star$ of the explicit event.&lt;/p&gt;
+&lt;p&gt;As in the previous case, we can analytically compute the full trajectory of the ball. At the event time, we have&lt;/p&gt;
+&lt;p&gt;\begin{aligned}&lt;br&gt;
+z_{-, \rm imp}&amp;amp;= 0, \\&lt;br&gt;
+v_{-, \rm imp}&amp;amp;= - \sqrt{v_0^2 + 2 g z_0}
+\end{aligned}&lt;/p&gt;
+&lt;p&gt;for the left and&lt;/p&gt;
+&lt;p&gt;\begin{aligned}&lt;br&gt;
+z_{+, \rm imp}&amp;amp;= 0 \\&lt;br&gt;
+v_{+, \rm imp}&amp;amp;= \gamma \sqrt{v_0^2 + 2 g z_0}.
+\end{aligned}&lt;/p&gt;
+&lt;p&gt;for the right limit. Thus, the full trajectory $z_{\rm imp}(t)$ is given by&lt;/p&gt;
+&lt;p&gt;$$
+z_{\rm imp}(t) = \begin{cases}
+z^{1}_{\rm imp}(t) &amp;amp;=z_0 + v_0 t - \frac{g}{2} t^2 &amp;amp;, \forall t \leq t^\star ,\\&lt;br&gt;
+z^{2}_{\rm imp}(t) &amp;amp;= -\frac{(-g t + v_0 + \sqrt{v_0^2 + 2 g z_0})}{2 g} \times, \\&lt;br&gt;
+&amp;amp;\times (-g t + v_0 + \sqrt{v_0^2 + 2 g z_0} (1 + 2 \gamma)) &amp;amp;, \forall t &amp;gt; t^\star.
+\end{cases}
+$$&lt;/p&gt;
+&lt;p&gt;Numerically, we use a &lt;code&gt;ContinuousCallback&lt;/code&gt; in this case&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;# ContinuousCallback (implicit event)
+condition2(u,t,integrator) = u[1] # Event when condition(u,t,integrator) == 0
+cb2 = ContinuousCallback(condition2,affect!,save_positions=(true,true))
+sol2 = solve(prob,Tsit5(),callback=cb2,saveat=0.1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can verify that both callbacks lead to the same forward time evolution (for fixed initial conditions and parameters)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;# plot forward trajectory
+pl1 = plot(sol1, label = [&amp;quot;z(t)&amp;quot; &amp;quot;v(t)&amp;quot;], title=&amp;quot;explicit event&amp;quot;, labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &amp;quot;t&amp;quot;, legend=:bottomright)
+pl2 = plot(sol2, label = [&amp;quot;z(t)&amp;quot; &amp;quot;v(t)&amp;quot;], title=&amp;quot;implicit event&amp;quot;, labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &amp;quot;t&amp;quot;, legend=:bottomright)
+hline!(pl1, [0.0], label=false, color=&amp;quot;black&amp;quot;)
+hline!(pl2, [0.0], label=false, color=&amp;quot;black&amp;quot;)
+pl = plot(pl1,pl2)
+savefig(pl,&amp;quot;BB_forward.png&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/BB_forward.png&#34; &gt;
+
+
+  &lt;img src=&#34;https://frankschae.github.io/img/BB_forward.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;In addition, the implicitly defined impact time via the &lt;code&gt;ContinuousCallback&lt;/code&gt; also shifts the impact time when changing the initial conditions or the parameters&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;# animate forward trajectory
+sol3 = solve(remake(prob,u0=[u0[1]+0.5,u0[2]]),Tsit5(),callback=cb2,saveat=0.01)
+
+plt2 = plot(sol2, label = false, labelfontsize=20, legendfontsize=20, lw = 1, xlabel = &amp;quot;t&amp;quot;, legend=:bottomright, color=&amp;quot;black&amp;quot;, xlims=(t0,tend))
+hline!(plt2, [0.0], label=false, color=&amp;quot;black&amp;quot;)
+plot!(plt2, sol3, tspan=(t0,tend), color=[1 2], label = [&amp;quot;z(t)&amp;quot; &amp;quot;v(t)&amp;quot;], labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &amp;quot;t&amp;quot;, legend=:bottomright, denseplot=true, xlims=(t0,tend), ylims=(-11,9))
+# scatter!(plt2, [t2,t2], sol3(t2), color=[1, 2], label=false)
+
+list_plots = []
+for t in sol3.t
+  tstart = 0.0
+
+  plt1 = plot(sol2, label = false, labelfontsize=20, legendfontsize=20, lw = 1, xlabel = &amp;quot;t&amp;quot;, legend=:bottomright, color=&amp;quot;black&amp;quot;)
+  hline!(plt1, [0.0], label=false, color=&amp;quot;black&amp;quot;)
+  plot!(plt1, sol3, tspan=(t0,t), color=[1 2], label = [&amp;quot;z(t)&amp;quot; &amp;quot;v(t)&amp;quot;], labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &amp;quot;t&amp;quot;, legend=:bottomright, denseplot=true, xlims=(t0,tend), ylims=(-11,9))
+  scatter!(plt1,[t,t], sol3(t), color=[1, 2], label=false)
+  plt = plot(plt1,plt2)
+  push!(list_plots, plt)
+end
+
+plot(list_plots[100])
+
+anim = animate(list_plots,every=1)
+&lt;/code&gt;&lt;/pre&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/BB.gif&#34; &gt;
+
+
+  &lt;img src=&#34;https://frankschae.github.io/img/BB.gif&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;The original curve is shown in black in the figure above. In other words, the event time $t^\star=t^\star(p,z_0,v_0,t_0)$ is a function of the parameters and initial conditions that is implicitly defined by the event condition. Therefore, the sensitivity of the event time with respect to parameters $\frac{\text{d}t^\star}{\text{d}p}$ or initial conditions $\frac{\text{d}t^\star}{\text{d}z_0}$, $\frac{\text{d}t^\star}{\text{d}v_0}$ must be taken into account.&lt;/p&gt;
+&lt;h2 id=&#34;sensitivity-analysis-with-events&#34;&gt;Sensitivity analysis with events&lt;/h2&gt;
+&lt;p&gt;We are often interested in computing the change of a loss function with respect to changes of the parameters or initial condition. For this purpose, let us consider the mean square error loss function&lt;/p&gt;
+&lt;p&gt;$$
+L(z,y) = \sum_i(z(t_i) - y_i)^2
+$$&lt;/p&gt;
+&lt;p&gt;with respect to target values $y_i$ at time points $t_i$ incident before, after, or at the event time. Let $\alpha$ denote any of the inputs $(z_0,v_0,g,\gamma)$. The sensitivity with respect to $\alpha$ is then given by the chain rule:&lt;/p&gt;
+&lt;p&gt;$$
+\frac{\text{d}L}{\text{d} \alpha} =  2\sum_i (z(t_i) - y_i) \frac{\text{d}z(t_i)}{\text{d} \alpha}.
+$$&lt;/p&gt;
+&lt;p&gt;For the bouncing ball, we can easily compute those sensitivities by inserting the appropriate limit of $z_{\rm imp}(t_i)$ and $z_{\rm exp}(t_i)$. One can verify that the sensitivities are different in the two cases, as expected.&lt;/p&gt;
+&lt;p&gt;However, in most systems, we won&amp;rsquo;t be able to solve analytically a differential equation&lt;/p&gt;
+&lt;p&gt;$$
+\text{d}x(t) = f(x,p,t) \text{d}t
+$$&lt;/p&gt;
+&lt;p&gt;with initial condition $x_0=x(t_0)$. Instead, we have to numerically solve for the state &lt;code&gt;x(t)&lt;/code&gt;. Regarding the computation of the sensitivities, we may then choose one of the 
+&lt;a href=&#34;https://diffeq.sciml.ai/stable/analysis/sensitivity/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;available algorithms&lt;/a&gt; for our differential equation. Currently, &lt;code&gt;BacksolveAdjoint()&lt;/code&gt;, &lt;code&gt;InterpolatingAdjoint()&lt;/code&gt;, &lt;code&gt;QuadratureAdjoint()&lt;/code&gt;, &lt;code&gt;ReverseDiffAdjoint()&lt;/code&gt;, &lt;code&gt;TrackerAdjoint()&lt;/code&gt;, and &lt;code&gt;ForwardDiffAdjoint()&lt;/code&gt; are compatible with events. Let us focus in the following on the &lt;code&gt;BacksolveAdjoint()&lt;/code&gt; algorithm which computes the sensitivities&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+\frac{\text{d}L}{\text{d}x(t_{0})} &amp;amp;= \lambda(t_{0}),\\&lt;br&gt;
+\frac{\text{d}L}{\text{d}p} &amp;amp;= \lambda_{p}(t_{0}),
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;by solving an ODE for $\lambda(t)$ in reverse time from $t_N$ to $t_0$&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+\frac{\text{d}\lambda(t)}{\text{d}t} &amp;amp;= -\lambda(t)^\dagger \frac{\text{d} f(\rightarrow x(t), p, t)}{\text{d} x(t)} - \frac{\text{d} L(\rightarrow x(t), y)}{\text{d} x(t)}^\dagger \delta(t-t_i), \\&lt;br&gt;
+\frac{\text{d}\lambda_{p}(t)}{\text{d}t} &amp;amp;= -\lambda(t)^\dagger \frac{\text{d} f(x(t), \rightarrow p, t)}{\text{d} p},
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;with initial conditions:&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+\lambda(t_{N})&amp;amp;= 0, \\&lt;br&gt;
+\lambda_{p}(t_{N}) &amp;amp;= 0.
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;The arrows indicate the variable with respect to which we differentiate. Note that computing the vector-Jacobian products (vjp) in the adjoint ODE requires the value of $x(t)$ along its trajectory. In &lt;code&gt;BacksolveAdjoint()&lt;/code&gt; we recompute $x(t)$&amp;ndash;together with the adjoint variables&amp;ndash;backwards in time starting with its final value $x(t_N)$.&lt;/p&gt;
+&lt;h3 id=&#34;explicit-events-1&#34;&gt;Explicit events&lt;/h3&gt;
+&lt;p&gt;To make &lt;code&gt;BacksolveAdjoint()&lt;/code&gt; compatible with explicit events&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, we have to store the event times $t^\star_j$ as well as the state $x({t_j^\star}^-)$ and parameters $p=p({t_j^\star}^-)$ (if they are changed) at the left limit of $t^\star_j$. We then solve the adjoint ODE backwards in time between the events. As soon as we reach an event from the right limit ${t_j^\star}^+$, we update the augmented state according to&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+\lambda({t_j^\star}^-) &amp;amp;= \lambda({t_j^\star}^+) \frac{\text{d} a(\rightarrow x({t_j^\star}^-), p({t_j^\star}^-), {t_j^\star}^-)}{\text{d} x({t_j^\star}^-)} \\&lt;br&gt;
+\lambda_p({t_j^\star}^-) &amp;amp;= \lambda_p({t_j^\star}^+) -  \lambda({t_j^\star}^+) \frac{\text{d} a(x({t_j^\star}^-), \rightarrow p({t_j^\star}^-), {t_j^\star}^-)}{\text{d} p({t_j^\star}^-)}
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;where $a$ is the affect function applied at the discontinuity. That is, to lift the adjoint from the right to the left limit, we compute a vjp with the adjoint $\lambda({t_j^\star}^+)$ at the right limit and the Jacobian of the affect function evaluated on the left limit.&lt;/p&gt;
+&lt;p&gt;In particular, we apply a loss function callback before and after this update if the state was saved in the forward evolution and entered directly into the loss function.&lt;/p&gt;
+&lt;h3 id=&#34;implicit-events-1&#34;&gt;Implicit events&lt;/h3&gt;
+&lt;p&gt;Define $u(t) = (t, x(t))$. Let us first consider the event times. We are interested in&lt;/p&gt;
+&lt;p&gt;$$
+\frac{\text{d}L(u(t^\star_j(\rightarrow p), \rightarrow p))}{\text{d}p} = \frac{\text{d}L(t^\star_j(p), \text{solve}(t^\star_j(p), x0, \rightarrow p))}{\text{d}p}
+$$&lt;/p&gt;
+&lt;p&gt;In a first step, we need to compute $t^\star_j(p)$ based on the event condition $F(t, p) = g(u(t, p)) = 0$.  We can apply the 
+&lt;a href=&#34;https://www.uni-siegen.de/fb6/analysis/overhagen/vorlesungsbeschreibungen/skripte/analysis3_1.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;implicit function theorem&lt;/a&gt; which yields:&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+\frac{\text{d}t^\star_j(p)}{\text{d}p} &amp;amp;= - \left(\frac{\text{d}g(\rightarrow t^\star_j, \text{solve}(\rightarrow t^\star_j,x_0, p))}{\text{d}t^\star_j}\right)^{-1} \frac{\text{d}g(t^\star_j, \text{solve}(t^\star_j, x_0, \rightarrow p))}{\text{d}p} \\&lt;br&gt;
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;The total derivative inside the bracket is defined as:
+$$
+\begin{aligned}
+\frac{\text{d}g(\rightarrow t^\star_j, \text{solve}(\rightarrow t^\star_j, x_0, p))}{\text{d}t^\star_j} &amp;amp;= \frac{\text{d}g(\rightarrow t^\star_j, \text{solve}(t^\star_j, x_0, p))}{\text{d}t^\star_j} + \frac{\text{d}g(t^\star_j, \text{solve}(\rightarrow t^\star_j, x_0, p))}{\text{d}t^\star_j}\\&lt;br&gt;
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;Since&lt;/p&gt;
+&lt;p&gt;$$
+\frac{\text{d}(\text{solve}(\rightarrow t^\star_j, x_0, p))}{\text{d}t^\star_j} = f(t^\star_j,p)
+$$&lt;/p&gt;
+&lt;p&gt;by definition of the ODE, we can further write&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+\frac{\text{d}g(t^\star_j, \text{solve}(\rightarrow t^\star_j, x_0, p))}{\text{d}t^\star_j} = \dots \\&lt;br&gt;
+\end{aligned}
+$$&lt;/p&gt;
+&lt;h2 id=&#34;outlook&#34;&gt;Outlook&lt;/h2&gt;
+&lt;p&gt;We are still refining the adjoints in case of implicit discontinuities (&lt;code&gt;ContinuousCallbacks&lt;/code&gt;). For further information, the interested reader is encouraged to track the associated issues 
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/issues/383&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;#383&lt;/a&gt; and 
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/issues/374&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;#374&lt;/a&gt;, and 
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/445&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PR #445&lt;/a&gt; in the DiffEqSensitivity.jl package.&lt;/p&gt;
+&lt;p&gt;If you have any questions or comments, please don’t hesitate to contact me!&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Michael Poli, Stefano Massaroli, et al., arXiv preprint arXiv:2106.04165 (2021). &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Junteng Jia, Austin R. Benson, arXiv preprint arXiv:1905.10403 (2019). &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Timo C. Wunderlich and Christian Pehle, Sci. Rep. &lt;em&gt;11&lt;/em&gt;, 12829 (2021). &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Ricky T. Q. Chen, Brandon Amos, Maximilian Nickel, arXiv preprint arXiv:2011.03902 (2020). &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
     
     <item>
       <title>Shadowing Methods for Forward and Adjoint Sensitivity Analysis of Chaotic Systems</title>
