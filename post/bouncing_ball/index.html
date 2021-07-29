@@ -279,7 +279,7 @@
   
   "author": {
     "@type": "Person",
-    "name": "Frank Schäfer"
+    "name": "Frank Schäfer and Moritz Schauer"
   },
   
   "publisher": {
@@ -602,6 +602,16 @@
 
   
   
+  
+  
+  <div>
+    
+
+  
+  <span>Frank Schäfer and Moritz Schauer</span>
+  </div>
+  
+  
 
   
   <span class="article-date">
@@ -618,7 +628,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    9 min read
+    10 min read
   </span>
   
 
@@ -677,7 +687,8 @@ z(t) &amp;= z_0 + v_0 t - \frac{g}{2} t^2, \\<br>
 v(t) &amp;= v_0 - g  t
 \end{aligned}<br>
 $$</p>
-<p>or numerically</p>
+<p>or numerically using the OrdinaryDiffEq package from the 
+<a href="https://sciml.ai/" target="_blank" rel="noopener">SciML</a> ecosystem.</p>
 <pre><code class="language-julia">using ForwardDiff, Zygote, OrdinaryDiffEq, DiffEqSensitivity
 using Plots, LaTeXStrings
 
@@ -809,13 +820,13 @@ z^{2}_{\rm imp}(t) &amp;= -\frac{(-g t + v_0 + \sqrt{v_0^2 + 2 g z_0})}{2 g} \ti
 &amp;\times (-g t + v_0 + \sqrt{v_0^2 + 2 g z_0} (1 + 2 \gamma)) &amp;, \forall t &gt; t^\star.
 \end{cases}
 $$</p>
-<p>Numerically, we use a <code>ContinuousCallback</code> in this case</p>
+<p>Numerically, we use a <code>ContinuousCallback</code> in this case.</p>
 <pre><code class="language-julia"># ContinuousCallback (implicit event)
 condition2(u,t,integrator) = u[1] # Event when condition(u,t,integrator) == 0
 cb2 = ContinuousCallback(condition2,affect!,save_positions=(true,true))
 sol2 = solve(prob,Tsit5(),callback=cb2,saveat=0.1)
 </code></pre>
-<p>We can verify that both callbacks lead to the same forward time evolution (for fixed initial conditions and parameters)</p>
+<p>We can verify that both callbacks lead to the same forward time evolution (for fixed initial conditions and parameters).</p>
 <pre><code class="language-julia"># plot forward trajectory
 pl1 = plot(sol1, label = [&quot;z(t)&quot; &quot;v(t)&quot;], title=&quot;explicit event&quot;, labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &quot;t&quot;, legend=:bottomright)
 pl2 = plot(sol2, label = [&quot;z(t)&quot; &quot;v(t)&quot;], title=&quot;implicit event&quot;, labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &quot;t&quot;, legend=:bottomright)
@@ -909,9 +920,9 @@ anim = animate(list_plots,every=1)
 
 </figure>
 
-<p>The original curve is shown in black in the figure above. In other words, the event time $t^\star=t^\star(p,z_0,v_0,t_0)$ is a function of the parameters and initial conditions that is implicitly defined by the event condition. Therefore, the sensitivity of the event time with respect to parameters $\frac{\text{d}t^\star}{\text{d}p}$ or initial conditions $\frac{\text{d}t^\star}{\text{d}z_0}$, $\frac{\text{d}t^\star}{\text{d}v_0}$ must be taken into account.</p>
+<p>The original curve is shown in black in the figure above. In other words, the event time $t^\star=t^\star(p,z_0,v_0,t_0)$ is a function of the parameters and initial conditions, and is implicitly defined by the event condition. Therefore, the sensitivity of the event time with respect to parameters $\frac{\text{d}t^\star}{\text{d}p}$ or initial conditions $\frac{\text{d}t^\star}{\text{d}z_0}$, $\frac{\text{d}t^\star}{\text{d}v_0}$ must be taken into account.</p>
 <h2 id="sensitivity-analysis-with-events">Sensitivity analysis with events</h2>
-<p>We are often interested in computing the change of a loss function with respect to changes of the parameters or initial condition. For this purpose, let us consider the mean square error loss function</p>
+<p>We are often interested in computing the change of a loss function with respect to changes of the parameters or initial condition. For this purpose, let us first consider the mean square error loss function</p>
 <p>$$
 L(z,y) = \sum_i(z(t_i) - y_i)^2
 $$</p>
@@ -919,23 +930,29 @@ $$</p>
 <p>$$
 \frac{\text{d}L}{\text{d} \alpha} =  2\sum_i (z(t_i) - y_i) \frac{\text{d}z(t_i)}{\text{d} \alpha}.
 $$</p>
-<p>For the bouncing ball, we can easily compute those sensitivities by inserting the appropriate limit of $z_{\rm imp}(t_i)$ and $z_{\rm exp}(t_i)$. One can verify that the sensitivities are different in the two cases, as expected.</p>
+<p>For the bouncing ball, we can easily compute those sensitivities by inserting our results for $z_{\rm imp}(t_i)$ and $z_{\rm exp}(t_i)$. One can verify that the sensitivities are different in the two cases, as expected.</p>
 <p>However, in most systems, we won&rsquo;t be able to solve analytically a differential equation</p>
 <p>$$
 \text{d}x(t) = f(x,p,t) \text{d}t
 $$</p>
 <p>with initial condition $x_0=x(t_0)$. Instead, we have to numerically solve for the state <code>x(t)</code>. Regarding the computation of the sensitivities, we may then choose one of the 
-<a href="https://diffeq.sciml.ai/stable/analysis/sensitivity/" target="_blank" rel="noopener">available algorithms</a> for our differential equation. Currently, <code>BacksolveAdjoint()</code>, <code>InterpolatingAdjoint()</code>, <code>QuadratureAdjoint()</code>, <code>ReverseDiffAdjoint()</code>, <code>TrackerAdjoint()</code>, and <code>ForwardDiffAdjoint()</code> are compatible with events. Let us focus in the following on the <code>BacksolveAdjoint()</code> algorithm which computes the sensitivities</p>
+<a href="https://diffeq.sciml.ai/stable/analysis/sensitivity/" target="_blank" rel="noopener">available algorithms</a> for the given differential equation. Currently, <code>BacksolveAdjoint()</code>, <code>InterpolatingAdjoint()</code>, <code>QuadratureAdjoint()</code>, <code>ReverseDiffAdjoint()</code>, <code>TrackerAdjoint()</code>, and <code>ForwardDiffAdjoint()</code> are compatible events in ordinary differential equations. We write the loss function in the following as a function of time, state, and parameters</p>
+<p>$$
+\begin{aligned}
+L = L(t,x,p).
+\end{aligned}
+$$</p>
+<p>In the following, let us focus on the <code>BacksolveAdjoint()</code> algorithm, which computes the sensitivities</p>
 <p>$$
 \begin{aligned}
 \frac{\text{d}L}{\text{d}x(t_{0})} &amp;= \lambda(t_{0}),\\<br>
 \frac{\text{d}L}{\text{d}p} &amp;= \lambda_{p}(t_{0}),
 \end{aligned}
 $$</p>
-<p>by solving an ODE for $\lambda(t)$ in reverse time from $t_N$ to $t_0$</p>
+<p>with respect to the initial state and the parameters, by solving an ODE for $\lambda(t)$ in reverse time from $t_N$ to $t_0$</p>
 <p>$$
 \begin{aligned}
-\frac{\text{d}\lambda(t)}{\text{d}t} &amp;= -\lambda(t)^\dagger \frac{\text{d} f(\rightarrow x(t), p, t)}{\text{d} x(t)} - \frac{\text{d} L(\rightarrow x(t), y)}{\text{d} x(t)}^\dagger \delta(t-t_i), \\<br>
+\frac{\text{d}\lambda(t)}{\text{d}t} &amp;= -\lambda(t)^\dagger \frac{\text{d} f(\rightarrow x(t), p, t)}{\text{d} x(t)} - \frac{\text{d} L(t, \rightarrow x(t), p)}{\text{d} x(t)}^\dagger \delta(t-t_i), \\<br>
 \frac{\text{d}\lambda_{p}(t)}{\text{d}t} &amp;= -\lambda(t)^\dagger \frac{\text{d} f(x(t), \rightarrow p, t)}{\text{d} p},
 \end{aligned}
 $$</p>
@@ -946,7 +963,8 @@ $$</p>
 \lambda_{p}(t_{N}) &amp;= 0.
 \end{aligned}
 $$</p>
-<p>The arrows indicate the variable with respect to which we differentiate. Note that computing the vector-Jacobian products (vjp) in the adjoint ODE requires the value of $x(t)$ along its trajectory. In <code>BacksolveAdjoint()</code> we recompute $x(t)$&ndash;together with the adjoint variables&ndash;backwards in time starting with its final value $x(t_N)$.</p>
+<p>The arrows indicate the variable with respect to which we differentiate. Note that computing the vector-Jacobian products (vjp) in the adjoint ODE requires the value of $x(t)$ along its trajectory. In <code>BacksolveAdjoint()</code>, we recompute $x(t)$&ndash;together with the adjoint variables&ndash;backwards in time starting with its final value $x(t_N)$. A derivation of the ODE adjoint is given in 
+<a href="https://mitmath.github.io/18337/lecture11/adjoints" target="_blank" rel="noopener">Chris' MIT 18.337 lecture notes</a>.</p>
 <h3 id="explicit-events-1">Explicit events</h3>
 <p>To make <code>BacksolveAdjoint()</code> compatible with explicit events<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, we have to store the event times $t^\star_j$ as well as the state $x({t_j^\star}^-)$ and parameters $p=p({t_j^\star}^-)$ (if they are changed) at the left limit of $t^\star_j$. We then solve the adjoint ODE backwards in time between the events. As soon as we reach an event from the right limit ${t_j^\star}^+$, we update the augmented state according to</p>
 <p>$$
@@ -958,32 +976,51 @@ $$</p>
 <p>where $a$ is the affect function applied at the discontinuity. That is, to lift the adjoint from the right to the left limit, we compute a vjp with the adjoint $\lambda({t_j^\star}^+)$ at the right limit and the Jacobian of the affect function evaluated on the left limit.</p>
 <p>In particular, we apply a loss function callback before and after this update if the state was saved in the forward evolution and entered directly into the loss function.</p>
 <h3 id="implicit-events-1">Implicit events</h3>
-<p>Define $u(t) = (t, x(t))$. Let us first consider the event times. We are interested in</p>
+<h4 id="special-case-event-as-termination-condition">special case: event as termination condition</h4>
+<p>Define $u(t) = (t, x(t))$. Let us first re-derive the case, where the implicit event terminates the ODE and where we have a loss function acting on $t^\star_1$, $x(t^\star_1)$, and $p$, as considered by Ricky T. Q. Chen, Brandon Amos, and Maximilian Nickel in their ICLR 2021 paper<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>. We are interested in</p>
 <p>$$
-\frac{\text{d}L(u(t^\star_j(\rightarrow p), \rightarrow p))}{\text{d}p} = \frac{\text{d}L(t^\star_j(p), \text{solve}(t^\star_j(p), x0, \rightarrow p))}{\text{d}p}
+\frac{\text{d}L(u(t^\star_1(\rightarrow p), \rightarrow p), \rightarrow p)}{\text{d}p} = \frac{\text{d}L(t^\star_1({\color{black}\rightarrow} p), \text{solve}(t_0, x_0, t^\star_1({\color{black}\rightarrow}p), \rightarrow p),\rightarrow p)}{\text{d}p},
 $$</p>
-<p>In a first step, we need to compute $t^\star_j(p)$ based on the event condition $F(t, p) = g(u(t, p)) = 0$.  We can apply the 
+<p>which indicates that changing $p$ changes both $t^\star_1$ as well as $x^\star_1$ in $t^\star_1$.</p>
+<p>In a first step, we need to compute $t^\star_1(p)$ based on the event condition $F(t, p) = g(u(t, p)) = 0$.  We can apply the 
 <a href="https://www.uni-siegen.de/fb6/analysis/overhagen/vorlesungsbeschreibungen/skripte/analysis3_1.pdf" target="_blank" rel="noopener">implicit function theorem</a> which yields:</p>
 <p>$$
 \begin{aligned}
-\frac{\text{d}t^\star_j(p)}{\text{d}p} &amp;= - \left(\frac{\text{d}g(\rightarrow t^\star_j, \text{solve}(\rightarrow t^\star_j,x_0, p))}{\text{d}t^\star_j}\right)^{-1} \frac{\text{d}g(t^\star_j, \text{solve}(t^\star_j, x_0, \rightarrow p))}{\text{d}p} \\<br>
+\frac{\text{d}t^\star_1(p)}{\text{d}p} &amp;= - \left(\frac{\text{d}g(\rightarrow t^\star_1, \text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d}t^\star_1}\right)^{-1} \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, t^\star_1, \rightarrow p))}{\text{d}p} \\<br>
 \end{aligned}
 $$</p>
 <p>The total derivative inside the bracket is defined as:
 $$
 \begin{aligned}
-\frac{\text{d}g(\rightarrow t^\star_j, \text{solve}(\rightarrow t^\star_j, x_0, p))}{\text{d}t^\star_j} &amp;= \frac{\text{d}g(\rightarrow t^\star_j, \text{solve}(t^\star_j, x_0, p))}{\text{d}t^\star_j} + \frac{\text{d}g(t^\star_j, \text{solve}(\rightarrow t^\star_j, x_0, p))}{\text{d}t^\star_j}\\<br>
+\frac{\text{d}g(\rightarrow t^\star_1, \text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d}t^\star_1} &amp;= \frac{\text{d}g(\rightarrow t^\star_1, \text{solve}(t_0, x_0, t^\star_1, p))}{\text{d}t^\star_1} + \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d}t^\star_1}\\<br>
 \end{aligned}
 $$</p>
 <p>Since</p>
 <p>$$
-\frac{\text{d}(\text{solve}(\rightarrow t^\star_j, x_0, p))}{\text{d}t^\star_j} = f(t^\star_j,p)
+\frac{\text{d}(\text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d}t^\star_1} = f(x^\star, p, t^\star_1)
 $$</p>
 <p>by definition of the ODE, we can further write</p>
 <p>$$
 \begin{aligned}
-\frac{\text{d}g(t^\star_j, \text{solve}(\rightarrow t^\star_j, x_0, p))}{\text{d}t^\star_j} = \dots \\<br>
+\frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d}t^\star_1} = \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d} u^\star(t^\star_1)}  f(x^\star, p, t^\star_1).
 \end{aligned}
+$$</p>
+<p>Thus, we find that</p>
+<p>$$
+{\color{red} \text{write here how BacksolveAdjoint needs to be modified}}
+$$</p>
+<p>and if we allow the loss function to depend on other times or states:</p>
+<p>$$
+\color{red} \dots
+$$</p>
+<h4 id="generalization-several-events">generalization: several events</h4>
+<p>As pointed out by Chen et al. as well as by Timo C. Wunderlich and Christian Pehle<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, one can chain together the events and differentiate through the entire time evolution. That is, we are generally allowed to segment the time evolution over an interval $[t_0, t]$ into one from $[t_0, s]$ and a subsequent one from $[s, t]$:</p>
+<p>$$
+\text{solve}(t_0, x_0, t, p)  = \text{solve}(s, \text{solve}(t_0, x_0, s, p), t-s, p),
+$$</p>
+<p>such that also loss function contributions are chained:</p>
+<p>$$
+\color{red} \text{write general BacksolveAdjoint equations&hellip;}
 $$</p>
 <h2 id="outlook">Outlook</h2>
 <p>We are still refining the adjoints in case of implicit discontinuities (<code>ContinuousCallbacks</code>). For further information, the interested reader is encouraged to track the associated issues 
@@ -1127,103 +1164,17 @@ $$</p>
 
 
   
-  
+    
+    
 
 
 
 
 
   
-    
-    
-    
-      
-    
-    
-    
-    <div class="media author-card content-widget-hr">
-      
-        
-        <img class="avatar mr-3 avatar-circle" src="/author/frank-schafer/avatar_hu9202cabaed592d2d4bbe51596d4206a2_80238_270x270_fill_lanczos_center_2.png" alt="Frank Schäfer">
-      
-
-      <div class="media-body">
-        <h5 class="card-title"><a href="https://frankschae.github.io/">Frank Schäfer</a></h5>
-        <h6 class="card-subtitle">PhD candidate in Physics</h6>
-        <p class="card-text">My research interests include many-body physics, machine learning, and differentiable programming.</p>
-        <ul class="network-icon" aria-hidden="true">
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="/#contact" >
-        <i class="fas fa-envelope"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://scholar.google.com/citations?user=goAokcEAAAAJ&amp;hl=de&amp;oi=sra#" target="_blank" rel="noopener">
-        <i class="ai ai-google-scholar"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://github.com/frankschae" target="_blank" rel="noopener">
-        <i class="fab fa-github"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://orcid.org/0000-0003-2684-4984" target="_blank" rel="noopener">
-        <i class="ai ai-orcid"></i>
-      </a>
-    </li>
-  
-</ul>
-
-      </div>
-    </div>
-  
 
 
+  
 
 
 
