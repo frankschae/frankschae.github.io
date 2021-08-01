@@ -5,12 +5,324 @@
     <link>https://frankschae.github.io/</link>
       <atom:link href="https://frankschae.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>FS</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Fri, 16 Jul 2021 13:24:04 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Sun, 01 Aug 2021 12:03:17 +0200</lastBuildDate>
     <image>
       <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>FS</title>
       <link>https://frankschae.github.io/</link>
     </image>
+    
+    <item>
+      <title>[WIP] AbstractDifferentiation.jl for AD-backend agnostic code </title>
+      <link>https://frankschae.github.io/post/abstract_differentiation/</link>
+      <pubDate>Sun, 01 Aug 2021 12:03:17 +0200</pubDate>
+      <guid>https://frankschae.github.io/post/abstract_differentiation/</guid>
+      <description>&lt;p&gt;One of the most exciting features in 
+&lt;a href=&#34;https://julialang.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Julia&lt;/a&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; is its capability to support 
+&lt;a href=&#34;https://sinews.siam.org/Details-Page/scientific-machine-learning-how-julia-employs-differentiable-programming-to-do-it-best&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;differentiable programming (∂P)&lt;/a&gt;. ∂P, i.e., the ability to differentiate general computer program structures, enables efficient combination of existing packages for scientific computation and machine learning&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;. There is already a plethora of examples where ∂P has provided massive performance &lt;em&gt;and&lt;/em&gt; accuracy advantages over black-box approaches to machine learning. This is because black-box machine learning approaches are flexible but require a large amount of data. Incorporating given structures from the scientific knowledge that underlies the problem reduces the amount of data and allows the learning task to be simplified&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;. For example, by focusing on learning only the parts of the model that are actually missing&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; &lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;. In the context of quantum control, we have demonstrated the power of this framework for closed&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; and 
+&lt;a href=&#34;https://www.youtube.com/watch?v=uDUwdAqKzYM&amp;amp;list=PLP8iPy9hna6TxktMt-IzdU2vQpGp3bwDn&amp;amp;index=3&amp;amp;t=12s&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;open quantum systems&lt;/a&gt;&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;∂P is (commonly) realized by automatic differentiation (AD), which is a family of techniques to efficiently and accurately differentiate numeric functions expressed as computer programs. Generally, besides the two main branches of AD, forward- and reverse-mode AD, 
+&lt;a href=&#34;https://juliadiff.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;a large variety of software implementations&lt;/a&gt; with different 
+&lt;a href=&#34;https://discourse.julialang.org/t/state-of-automatic-differentiation-in-julia/43083&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;pros and cons&lt;/a&gt; exists. The goal is to make the best choice in every part of the program without requiring users to significantly customize their code. Having a common ground by 
+&lt;a href=&#34;https://github.com/JuliaDiff/ChainRules.jl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ChainRules.jl&lt;/a&gt; empowers this idea of a 
+&lt;a href=&#34;http://www.stochasticlifestyle.com/glue-ad-for-full-language-differentiable-programming/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Glue AD&lt;/a&gt; where backend developers just define ChainRules overloads. However, switching from one backend to another on the user side can still be tedious because the user has to look up the syntax of the new AD package.&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://github.com/mohamed82008&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Mohamed Tarek&lt;/a&gt; has started to 
+&lt;a href=&#34;https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/1&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;implement a high level API for differentiation&lt;/a&gt; that unifies the APIs of all the AD packages in the Julia ecosystem.  Ultimately, the API of our new package, 
+&lt;a href=&#34;https://github.com/JuliaDiff/AbstractDifferentiation.jl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;AbstractDifferentiation.jl&lt;/a&gt;, aims at enabling AD users to write AD backend-agnostic code. This will highly ease the switching between different AD packages. Once the interface is completed and all tests are added, it is also planned that 
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;DiffEqSensitivity.jl&lt;/a&gt; within the 
+&lt;a href=&#34;https://sciml.ai/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SciML&lt;/a&gt; software suite adopts AbstractDifferentiation.jl as a better way of handling AD choices. In this part of my GSoC, I&amp;rsquo;ve started to fix remaining errors of the 
+&lt;a href=&#34;https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/1&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;initial PR&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We refer the reader to this 
+&lt;a href=&#34;https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/1&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;first PR&lt;/a&gt; for a complete list of functions provided by AbstractDifferentiation.jl (and some great discussions about the package). In the rest of this blog post, we will focus on a concrete example to illustrate the main idea.&lt;/p&gt;
+&lt;h2 id=&#34;optimization-of-the-rosenbrock-function&#34;&gt;Optimization of the Rosenbrock function&lt;/h2&gt;
+&lt;p&gt;The 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Rosenbrock_function&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Rosenbrock function&lt;/a&gt; is defined by&lt;/p&gt;
+&lt;p&gt;$$
+g(x_1,x_2) = (a-x_1)^2 + b(x_2-x_1^2)^2.
+$$&lt;/p&gt;
+&lt;p&gt;The function $g$ has a global minimum at $(x_1^\star, x_2^\star)= (a, a^2)$ with $g(x_1^\star, x_2^\star)=0$. In the following, we fix $a = 1$ and $b = 100$. The global minimum is inside a long, narrow, banana-shaped flat valley, which makes the function a common problem for performance testing of optimization algorithms.&lt;/p&gt;
+&lt;p&gt;Let us now implement the 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Gauss%E2%80%93Newton_algorithm&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Gauss–Newton algorithm&lt;/a&gt; to find the global minimum. The Gauss–Newton algorithm iteratively finds the value of the $N$ variables $(x_1,\dots, x_N)$ that minimize the sum of squares of $M$ residuals $(f_1,\dots, f_M)$&lt;/p&gt;
+&lt;p&gt;$$
+S({\bf x}) =  \sum_{i=1}^M f_i({\bf x})^2.
+$$&lt;/p&gt;
+&lt;p&gt;Starting from an initial guess ${\bf x_0}$  for the minimum, the method runs through the iterations&lt;/p&gt;
+&lt;p&gt;$$
+x^{k+1} = x^k - \alpha_k \left(J^T J \right)^{-1} J^T f(x^k),
+$$
+where $J$ is the Jacobian matrix at $x^k$ and $\alpha_k$ is the step length determined via a 
+&lt;a href=&#34;https://de.wikipedia.org/wiki/Gau%C3%9F-Newton-Verfahren#Beispiel&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;line search subroutine&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The following plot shows the Rosenbrock function in 3D as well as a 2D heatmap including the global minimum ${\bf x^\star}=(1,1)$ and our initial guess ${\bf x_0}=(0,-0.1)$.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;using Pkg
+path = @__DIR__
+cd(path); Pkg.activate(&amp;quot;.&amp;quot;); Pkg.instantiate()
+
+## AbstractDifferentiation is not released yet.
+
+using AbstractDifferentiation
+using Test, LinearAlgebra
+using FiniteDifferences, ForwardDiff, Zygote
+
+## Rosenbrock function
+# R: R^2 -&amp;gt; R: x -&amp;gt; (a-x₁)² + b(x₂-x₁²)²
+g(x,p) = (p[1]-x[1])^2 + p[2]*(x[2]-x[1]^2)^2
+
+# visualization
+p = [1.0,100.0]
+x₀ = [0.0,-0.1]
+xopt = [1.0,1.0]
+
+do_plot = true
+if do_plot
+    using Plots, LaTeXStrings
+    x₁, x₂ = -2.0:0.01:2.0, -0.6:0.01:3.5
+    z = Surface((x₁,x₂)-&amp;gt;g([x₁,x₂],p), x₁, x₂)
+    pl1 = surface(x₁,x₂,z, linealpha = 0.3, c=cgrad(:thermal, scale = :exp), colorbar=true,
+                labelfontsize=20,camera = (3,50),
+                xlabel = L&amp;quot;x_1&amp;quot;, ylabel = L&amp;quot;x_2&amp;quot;)
+
+    pl2 = heatmap(x₁,x₂,z, c=cgrad(:thermal, scale = :exp),
+                labelfontsize=20,
+                xlabel = L&amp;quot;x_1&amp;quot;, ylabel = L&amp;quot;x_2&amp;quot;)
+    scatter!(pl2, [(x₀[1],x₀[2])], label=L&amp;quot;x_0&amp;quot;, legendfontsize=15, markershape = :circle, markersize = 10, markercolor = :green)
+    scatter!(pl2, [(xopt[1],xopt[2])],label=L&amp;quot;x^\star&amp;quot;, legendfontsize=15, markershape = :star, markersize = 10, markercolor = :red)
+
+    pl = plot(pl1,pl2, layout=(2,1))
+    savefig(pl, &amp;quot;Rosenbrock.png&amp;quot;)
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://frankschae.github.io/img/Rosenbrock.png&#34; &gt;
+
+
+  &lt;img src=&#34;https://frankschae.github.io/img/Rosenbrock.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;To apply the Gauss-Newton algorithm, we cast the Rosenbrock function into an appropriate form, i.e., we use:&lt;/p&gt;
+&lt;p&gt;$$
+f:\mathbb{R}^2\rightarrow\mathbb{R}^2:  {\bf x} \mapsto \begin{pmatrix}
+f_1({\bf x}) \\&lt;br&gt;
+f_2({\bf x}) \\&lt;br&gt;
+\end{pmatrix} = \begin{pmatrix}
+\sqrt{2}(a-x_1) \\&lt;br&gt;
+\sqrt{2b}(x_2-x_1^2)\\&lt;br&gt;
+\end{pmatrix}.
+$$&lt;/p&gt;
+&lt;p&gt;We can easily compute the Jacobian of $f$ manually&lt;/p&gt;
+&lt;p&gt;$$
+J =  \begin{pmatrix}
+-\sqrt{2} &amp;amp; 0 \\&lt;br&gt;
+-2x_1\sqrt{2b} &amp;amp; \sqrt{2b} \\&lt;br&gt;
+\end{pmatrix}.
+$$&lt;/p&gt;
+&lt;p&gt;We can then implement a (simple, non-optimized) version of the Gauss-Newton algorithm as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;# bring Rosenbrock function into the form &amp;quot;sum of squares of functions&amp;quot;
+f1(x,p) = convert(eltype(x),sqrt(2))*(p[1]-x[1])
+f2(x,p) = convert(eltype(x),sqrt(2*p[2]))*(x[2]-x[1]^2)
+f(x,p) = [f1(x,p),f2(x,p)]
+
+
+## manually pre-defined Jacobian
+function Jacobian(x,p)
+  [-convert(eltype(x),sqrt(2))   0
+  -2*x[1]*convert(eltype(x),sqrt(2*p[2]))  convert(eltype(x),sqrt(2*p[2]))]
+end
+
+## Gauss-Newton scheme
+function GaussNewton!(xs, x, p; maxiter=8, backend=nothing)
+    for i=1:maxiter
+        x = step(x, p, backend)
+        @info i
+        @show x
+        push!(xs, x)
+    end
+    return xs, x
+end
+done(x,x2,p) = g(x2,p) &amp;lt; g(x,p)
+function step(x, p, backend::Nothing, α=1//1)
+  x2 = deepcopy(x)
+  while !done(x,x2,p)
+    J = Jacobian(x,p)
+    d = -inv(J&#39;*J)*J&#39;*f(x,p)
+    copyto!(x2,x + α*d)
+    α = α//2
+  end
+  return x2
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When we run the algorithm, we find the global minimum after about the 7th iteration.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;xs = [x₀]
+GaussNewton!(xs, x₀, p)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;# output:
+[ Info: 1 ]
+x = [0.125, -0.08750000000000001]
+[ Info: 2 ]
+x = [0.234375, -0.047265625000000006]
+[ Info: 3 ]
+x = [0.4257812499999995, 0.06800537109374968]
+[ Info: 4 ]
+x = [0.5693359374999986, 0.21857223510742047]
+[ Info: 5 ]
+x = [0.784667968749996, 0.5165503501892037]
+[ Info: 6 ]
+x = [0.9999999999999961, 0.9536321163177449]
+[ Info: 7 ]
+x = [0.9999999999999989, 0.9999999999999999]
+[ Info: 8 ]
+x = [1.0, 1.0]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If computing the Jacobian by hand is too cumbersome (or not possible for other reasons), we can compute it using finite differences. Within the AbstractDifferentiation API, we can directly define, for instance, the Jacobian of 
+&lt;a href=&#34;https://github.com/JuliaDiff/FiniteDifferences.jl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FiniteDifferences&lt;/a&gt; as a new primitive operation.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;## FiniteDifferences
+struct FDMBackend{A} &amp;lt;: AD.AbstractFiniteDifference
+    alg::A
+end
+FDMBackend() = FDMBackend(central_fdm(5, 1))
+const fdm_backend = FDMBackend()
+# Minimal interface
+AD.@primitive function jacobian(ab::FDMBackend, f, xs...)
+    return FiniteDifferences.jacobian(ab.alg, f, xs...)
+end
+
+# AD Jacobian returns tuple
+@test AD.jacobian(fdm_backend, x-&amp;gt;f(x,p), x₀)[1] ≈ Jacobian(x₀, p)
+
+function step(x, p, backend, α=1//1)
+  x2 = deepcopy(x)
+  while !done(x,x2,p)
+    J = AD.jacobian(backend, x-&amp;gt;f(x,p), x)[1]
+    d = -inv(J&#39;*J)*J&#39;*f(x,p)
+    copyto!(x2,x + α*d)
+    α = α//2
+  end
+  return x2
+end
+
+
+xs = [x₀]
+GaussNewton!(xs, x₀, p, backend=fdm_backend)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we wanted to use reverse-mode AD instead, for example via 
+&lt;a href=&#34;https://github.com/FluxML/Zygote.jl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Zygote.jl&lt;/a&gt;, we are probably more familiar with how to implement a pullback function as a primitive. AbstractDifferentiation then generates the associated code to compute the Jacobian for us.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;## Zygote
+struct ZygoteBackend &amp;lt;: AD.AbstractReverseMode end
+const zygote_backend = ZygoteBackend()
+AD.@primitive function pullback_function(ab::ZygoteBackend, f, xs...)
+    return function (vs)
+        # Supports only single output
+        _, back = Zygote.pullback(f, xs...)
+        if vs isa AbstractVector
+            back(vs)
+        else
+            @assert length(vs) == 1
+            back(vs[1])
+        end
+    end
+end
+##
+
+# AD Jacobian returns tuple
+@test AD.jacobian(zygote_backend, x-&amp;gt;f(x,p), x₀)[1] ≈ Jacobian(x₀, p)
+
+xs = [x₀]
+GaussNewton!(xs, x₀, p, backend=zygote_backend)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Typically, reverse-mode AD is only beneficial for functions $f:\mathbb{R}^N\rightarrow\mathbb{R}^M$ where $M \ll N$, thus it is also a good idea to compare the performance with respect to forward-mode AD (
+&lt;a href=&#34;https://github.com/JuliaDiff/ForwardDiff.jl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ForwardDiff.jl&lt;/a&gt;)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;## ForwardDiff
+struct ForwardDiffBackend &amp;lt;: AD.AbstractForwardMode end
+const forwarddiff_backend = ForwardDiffBackend()
+AD.@primitive function pushforward_function(ab::ForwardDiffBackend, f, xs...)
+    # jvp = f&#39;(x)*v, i.e., differentiate f(x + h*v) wrt h at 0
+    return function (vs)
+        if xs isa Tuple
+            @assert length(xs) &amp;lt;= 2
+            if length(xs) == 1
+                (ForwardDiff.derivative(h-&amp;gt;f(xs[1]+h*vs[1]),0),)
+            else
+                ForwardDiff.derivative(h-&amp;gt;f(xs[1]+h*vs[1], xs[2]+h*vs[2]),0)
+            end
+        else
+            ForwardDiff.derivative(h-&amp;gt;f(xs+h*vs),0)
+        end
+    end
+end
+##
+
+xs = [x₀]
+GaussNewton!(xs, x₀, p, backend=forwarddiff_backend)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;where we used that the Jacobian-vector product $f&#39;(x)v$, i.e., the primitives of forward-mode AD, can be computed by 
+&lt;a href=&#34;https://discourse.julialang.org/t/help-with-jacobian-vector-product-to-get-natural-gradient/51115/12&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;differentiating $f(x + hv)$ with respect to $h$ at 0&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;$$
+\color{red} \text{add Enzyme or Diffractor?}
+$$&lt;/p&gt;
+&lt;h2 id=&#34;outlook&#34;&gt;Outlook&lt;/h2&gt;
+&lt;p&gt;There are many other use cases, including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://diffeq.sciml.ai/stable/analysis/sensitivity/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sensitivity analysis of differential equations&lt;/a&gt; requires vector-Jacobian products for adjoint methods and Jacobian-vector products for tangent methods.&lt;/li&gt;
+&lt;li&gt;The 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Newton%27s_method&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Newton–Raphson method&lt;/a&gt; for rootfinding requires the gradient in the case of scalar function $f:\mathbb{R}\rightarrow\mathbb{R}$ and the Jacobian in case of $N$ (nonlinear) equations, i.e., finding the zeros of $f:\mathbb{R}^N\rightarrow\mathbb{R}^N$.&lt;/li&gt;
+&lt;li&gt;The 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Newton%27s_method_in_optimization&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Newton method&lt;/a&gt; in optimization requires the computation of the Hessian.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;AbstractDifferentiation.jl is by no means complete yet. We are still in the very early stages, but we hope to make significant progress in the coming weeks. Some of the next steps are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;fixing remaining bugs, e.g., with respect to the computation of the Hessian and&lt;/li&gt;
+&lt;li&gt;adding AD/Finite Differentiation packages.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you have any questions or comments, please don’t hesitate to contact me!&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Jeff Bezanson, Stefan Karpinski, et al., arXiv preprint arXiv:1209.5145 (2012). &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Mike Innes, Alan Edelman, et al., arXiv preprint arXiv:1907.07587 (2019). &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Chris Rackauckas, Yingbo Ma, et al., arXiv preprint arXiv:2001.04385 (2020). &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Raj Dandekar, Chris Rackauckas, et al., Patterns &lt;strong&gt;1&lt;/strong&gt;, 100145 (2020). &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Frank Schäfer, Michal Kloc, et al., Mach. Learn.: Sci. Technol. &lt;strong&gt;1&lt;/strong&gt;, 035009 (2020). &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Frank Schäfer, Pavel Sekatski, et al., Mach. Learn.: Sci. Technol. &lt;strong&gt;2&lt;/strong&gt;, 035004 (2021). &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
     
     <item>
       <title>[WIP] Sensitivity Analysis of Hybrid Differential Equations</title>
@@ -398,7 +710,7 @@ $$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
 &lt;p&gt;For a function $f$ of more than one variable $y = f(t, x_1(t),x_2(t),\dots,x_N(t))$, the 
-&lt;a href=&#34;https://en.wikipedia.org/wiki/Differential_of_a_function#Differentials_in_several_variables&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;total derivative&lt;/a&gt; with respect to the independent variable $t$ is given by the sum of all partial differentials
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Differential_of_a_function#Differentials_in_several_variables&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;total derivative&lt;/a&gt; with respect to the independent variable $t$ is given by the sum of all partial derivatives
 $$
 \begin{aligned}
 \frac{\text{d}y}{\text{d}t} &amp;amp;= \frac{\text{d}f(\rightarrow t, x_1(\rightarrow t),x_2(\rightarrow t),\dots,x_N(\rightarrow t))}{\text{d}t} \\&lt;br&gt;

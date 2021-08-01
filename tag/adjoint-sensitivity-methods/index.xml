@@ -398,7 +398,7 @@ $$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
 &lt;p&gt;For a function $f$ of more than one variable $y = f(t, x_1(t),x_2(t),\dots,x_N(t))$, the 
-&lt;a href=&#34;https://en.wikipedia.org/wiki/Differential_of_a_function#Differentials_in_several_variables&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;total derivative&lt;/a&gt; with respect to the independent variable $t$ is given by the sum of all partial differentials
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Differential_of_a_function#Differentials_in_several_variables&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;total derivative&lt;/a&gt; with respect to the independent variable $t$ is given by the sum of all partial derivatives
 $$
 \begin{aligned}
 \frac{\text{d}y}{\text{d}t} &amp;amp;= \frac{\text{d}f(\rightarrow t, x_1(\rightarrow t),x_2(\rightarrow t),\dots,x_N(\rightarrow t))}{\text{d}t} \\&lt;br&gt;
