@@ -838,7 +838,7 @@ x = [0.9999999999999989, 0.9999999999999999]
 x = [1.0, 1.0]
 </code></pre>
 <p>If computing the Jacobian by hand is too cumbersome (or not possible for other reasons), we can compute it using finite differences. Within the AbstractDifferentiation API, we can directly define, for instance, the Jacobian of 
-<a href="https://github.com/JuliaDiff/FiniteDifferences.jl" target="_blank" rel="noopener">FiniteDifferences</a> as a new primitive operation.</p>
+<a href="https://github.com/JuliaDiff/FiniteDifferences.jl" target="_blank" rel="noopener">FiniteDifferences.jl</a> as a new primitive operation.</p>
 <pre><code class="language-julia">## FiniteDifferences
 struct FDMBackend{A} &lt;: AD.AbstractFiniteDifference
     alg::A
@@ -873,7 +873,7 @@ end
 xs = [x₀]
 GaussNewton!(xs, x₀, p, backend=fdm_backend)
 </code></pre>
-<p>If we wanted to use reverse-mode AD instead, for example via 
+<p>If we want to use reverse-mode AD instead, for example via 
 <a href="https://github.com/FluxML/Zygote.jl" target="_blank" rel="noopener">Zygote.jl</a>, a natural choice for the primitive is to define the pullback function. AbstractDifferentiation then generates the associated code to compute the Jacobian for us.</p>
 <pre><code class="language-julia">## Zygote
 struct ZygoteBackend &lt;: AD.AbstractReverseMode end
@@ -922,7 +922,7 @@ end
 xs = [x₀]
 GaussNewton!(xs, x₀, p, backend=forwarddiff_backend)
 </code></pre>
-<p>where we used that the Jacobian-vector product $f'(x)v$, i.e., the primitives of forward-mode AD, can be computed by 
+<p>where we have used that the Jacobian-vector product $f'(x)v$, i.e., the primitives of forward-mode AD, can be computed by 
 <a href="https://discourse.julialang.org/t/help-with-jacobian-vector-product-to-get-natural-gradient/51115/12" target="_blank" rel="noopener">differentiating $f(x + hv)$ with respect to $h$ at 0</a>.</p>
 <p>Many AD packages, such as Zygote, have troubles with mutating functions. 
 <a href="https://github.com/wsmoses/Enzyme.jl" target="_blank" rel="noopener">Enzyme.jl</a> is one of the exceptions. Additionally, it is very fast and has further improved the performance of the 
@@ -979,7 +979,7 @@ GaussNewton!(xs, x₀, p, backend=enzyme_backend)
 </code></pre>
 <p>Note that we have declared the Enzyme backend as <code>inplace</code> (which is important for internal control flow) and specified a <code>primalvalue</code> function returning the primal value of the forward pass.</p>
 <h2 id="some-current-glitches">Some current glitches</h2>
-<p>First, the push forward of a tuple of vectors, e.g., $(v_1, v_2)$, for a function with several input arguments is currently ambiguous. While <code>AD.jacobian</code> primitives and <code>AD.pullback_function</code> primitives interpret the push forward of our <code>f</code> function as</p>
+<p>First, the push forward of a tuple of vectors, e.g., $(v_1, v_2)$, for a function with several input arguments is currently ambiguous. While <code>AD.jacobian</code> primitives and <code>AD.pullback_function</code> primitives interpret the push forward of our $f$ function as</p>
 <p>$$
 \left(\frac{\partial f(x_0,p)}{\partial x} v_1 , \frac{\partial f(x_0,p)}{\partial p} v_2 \right),
 $$</p>
@@ -1079,6 +1079,8 @@ H3 = AD.hessian(backends, x-&gt;g(x,p), x₀)
 <div class="article-tags">
   
   <a class="badge badge-light" href="/tag/gsoc-2021/">GSoC 2021</a>
+  
+  <a class="badge badge-light" href="/tag/julia/">julia</a>
   
   <a class="badge badge-light" href="/tag/automatic-differentiation/">Automatic Differentiation</a>
   
@@ -1297,11 +1299,15 @@ H3 = AD.hessian(backends, x-&gt;g(x,p), x₀)
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/post/bouncing_ball/">[WIP] Sensitivity Analysis of Hybrid Differential Equations</a></li>
-      
       <li><a href="/post/shadowing/">Shadowing Methods for Forward and Adjoint Sensitivity Analysis of Chaotic Systems</a></li>
       
       <li><a href="/post/hybridde/">Neural Hybrid Differential Equations</a></li>
+      
+      <li><a href="/post/bouncing_ball/">[WIP] Sensitivity Analysis of Hybrid Differential Equations</a></li>
+      
+      <li><a href="/post/high-weak/">High weak order SDE solvers</a></li>
+      
+      <li><a href="/post/gsoc2020-high-weak-order-solvers-sde-adjoints/">GSoC 2020: High weak order SDE solvers and their utility in neural SDEs</a></li>
       
     </ul>
   </div>

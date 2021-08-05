@@ -203,7 +203,7 @@ x = [0.9999999999999989, 0.9999999999999999]
 x = [1.0, 1.0]
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If computing the Jacobian by hand is too cumbersome (or not possible for other reasons), we can compute it using finite differences. Within the AbstractDifferentiation API, we can directly define, for instance, the Jacobian of 
-&lt;a href=&#34;https://github.com/JuliaDiff/FiniteDifferences.jl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FiniteDifferences&lt;/a&gt; as a new primitive operation.&lt;/p&gt;
+&lt;a href=&#34;https://github.com/JuliaDiff/FiniteDifferences.jl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FiniteDifferences.jl&lt;/a&gt; as a new primitive operation.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;## FiniteDifferences
 struct FDMBackend{A} &amp;lt;: AD.AbstractFiniteDifference
     alg::A
@@ -238,7 +238,7 @@ end
 xs = [x₀]
 GaussNewton!(xs, x₀, p, backend=fdm_backend)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If we wanted to use reverse-mode AD instead, for example via 
+&lt;p&gt;If we want to use reverse-mode AD instead, for example via 
 &lt;a href=&#34;https://github.com/FluxML/Zygote.jl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Zygote.jl&lt;/a&gt;, a natural choice for the primitive is to define the pullback function. AbstractDifferentiation then generates the associated code to compute the Jacobian for us.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;## Zygote
 struct ZygoteBackend &amp;lt;: AD.AbstractReverseMode end
@@ -287,7 +287,7 @@ end
 xs = [x₀]
 GaussNewton!(xs, x₀, p, backend=forwarddiff_backend)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;where we used that the Jacobian-vector product $f&#39;(x)v$, i.e., the primitives of forward-mode AD, can be computed by 
+&lt;p&gt;where we have used that the Jacobian-vector product $f&#39;(x)v$, i.e., the primitives of forward-mode AD, can be computed by 
 &lt;a href=&#34;https://discourse.julialang.org/t/help-with-jacobian-vector-product-to-get-natural-gradient/51115/12&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;differentiating $f(x + hv)$ with respect to $h$ at 0&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Many AD packages, such as Zygote, have troubles with mutating functions. 
 &lt;a href=&#34;https://github.com/wsmoses/Enzyme.jl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Enzyme.jl&lt;/a&gt; is one of the exceptions. Additionally, it is very fast and has further improved the performance of the 
@@ -344,7 +344,7 @@ GaussNewton!(xs, x₀, p, backend=enzyme_backend)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Note that we have declared the Enzyme backend as &lt;code&gt;inplace&lt;/code&gt; (which is important for internal control flow) and specified a &lt;code&gt;primalvalue&lt;/code&gt; function returning the primal value of the forward pass.&lt;/p&gt;
 &lt;h2 id=&#34;some-current-glitches&#34;&gt;Some current glitches&lt;/h2&gt;
-&lt;p&gt;First, the push forward of a tuple of vectors, e.g., $(v_1, v_2)$, for a function with several input arguments is currently ambiguous. While &lt;code&gt;AD.jacobian&lt;/code&gt; primitives and &lt;code&gt;AD.pullback_function&lt;/code&gt; primitives interpret the push forward of our &lt;code&gt;f&lt;/code&gt; function as&lt;/p&gt;
+&lt;p&gt;First, the push forward of a tuple of vectors, e.g., $(v_1, v_2)$, for a function with several input arguments is currently ambiguous. While &lt;code&gt;AD.jacobian&lt;/code&gt; primitives and &lt;code&gt;AD.pullback_function&lt;/code&gt; primitives interpret the push forward of our $f$ function as&lt;/p&gt;
 &lt;p&gt;$$
 \left(\frac{\partial f(x_0,p)}{\partial x} v_1 , \frac{\partial f(x_0,p)}{\partial p} v_2 \right),
 $$&lt;/p&gt;
