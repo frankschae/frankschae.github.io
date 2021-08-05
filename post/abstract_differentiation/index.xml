@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>[WIP] AbstractDifferentiation.jl for AD-backend agnostic code  | FS</title>
+    <title>AbstractDifferentiation.jl for AD-backend agnostic code  | FS</title>
     <link>https://frankschae.github.io/post/abstract_differentiation/</link>
       <atom:link href="https://frankschae.github.io/post/abstract_differentiation/index.xml" rel="self" type="application/rss+xml" />
-    <description>[WIP] AbstractDifferentiation.jl for AD-backend agnostic code </description>
+    <description>AbstractDifferentiation.jl for AD-backend agnostic code </description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Sun, 01 Aug 2021 12:03:17 +0200</lastBuildDate>
     <image>
       <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
-      <title>[WIP] AbstractDifferentiation.jl for AD-backend agnostic code </title>
+      <title>AbstractDifferentiation.jl for AD-backend agnostic code </title>
       <link>https://frankschae.github.io/post/abstract_differentiation/</link>
     </image>
     
