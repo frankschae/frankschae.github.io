@@ -436,7 +436,7 @@ H3 = AD.hessian(backends, x-&amp;gt;g(x,p), x₀)
     </item>
     
     <item>
-      <title>[WIP] Sensitivity Analysis of Hybrid Differential Equations</title>
+      <title>Sensitivity Analysis of Hybrid Differential Equations</title>
       <link>https://frankschae.github.io/post/bouncing_ball/</link>
       <pubDate>Fri, 16 Jul 2021 13:24:04 +0200</pubDate>
       <guid>https://frankschae.github.io/post/bouncing_ball/</guid>
@@ -773,12 +773,12 @@ $$
 $$&lt;/p&gt;
 &lt;p&gt;Since&lt;/p&gt;
 &lt;p&gt;$$
-\frac{\text{d}(\text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d}t^\star_1} = f(x^\star, p, t^\star_1)
+\frac{\text{d}(\text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d}t^\star_1} = f(x^\star, p^\star, t^\star_1)
 $$&lt;/p&gt;
 &lt;p&gt;by definition of the ODE, we can write&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d}t^\star_1} = \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d} u^\star(t^\star_1)}  f(x^\star, p, t^\star_1).
+\frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d}t^\star_1} = \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d} u^\star(t^\star_1)}  f(x^\star, p^\star, t^\star_1).
 \end{aligned}
 $$&lt;/p&gt;
 &lt;p&gt;Furthermore, we have
@@ -787,7 +787,10 @@ $$
 \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, t^\star_1, \rightarrow p))}{\text{d}p} = \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, t^\star_1,\rightarrow p))}{\text{d} u^\star(t^\star_1)}^\dagger  \frac{\text{d}\text{ solve}(t_0, x_0, t^\star_1,\rightarrow p))}{\text{d}p}
 \end{aligned}
 $$
-for the second term of $\frac{\text{d}t^\star_1(p)}{\text{d}p}$.&lt;/p&gt;
+for the second term of $\frac{\text{d}t^\star_1(p)}{\text{d}p}$. We define&lt;/p&gt;
+&lt;p&gt;$$
+\frac{\text{d}g}{\text{d}u^\star_1} \stackrel{\text{def}}{=} \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, t^\star_1,\rightarrow p))}{\text{d} u^\star(t^\star_1)}
+$$&lt;/p&gt;
 &lt;p&gt;We can now write the gradient as:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
@@ -806,66 +809,50 @@ $$&lt;/p&gt;
 &lt;p&gt;with&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-v &amp;amp;= \xi \left(-\frac{\text{d}g}{\text{d}t^\star_1}\right)^{-1} \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, t^\star_1,\rightarrow p))}{\text{d} u^\star(t^\star_1)} + \frac{\text{d}L(t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d} u^\star(t^\star_1)},
+v &amp;amp;= \xi \left(-\frac{\text{d}g}{\text{d}t^\star_1}\right)^{-1} \frac{\text{d}g}{\text{d}u^\star_1} + \frac{\text{d}L(t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d} u^\star(t^\star_1)},
 \end{aligned}
 $$&lt;/p&gt;
 &lt;p&gt;where we introduced the scalar pre-factor&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\xi = \left( \frac{\text{d}L(\rightarrow t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d}t^\star_1} +  \frac{\text{d}L(t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d} u^\star(t^\star_1)}^\dagger f(x^\star, p, t^\star_1)\right).
+\xi = \left( \frac{\text{d}L(\rightarrow t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d}t^\star_1} +  \frac{\text{d}L(t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d} u^\star(t^\star_1)}^\dagger f(x^\star, p^\star, t^\star_1)\right).
 \end{aligned}
 $$&lt;/p&gt;
-&lt;p&gt;This means that if we terminate the ODE integration by an implicit event, we compute the sensitivities as follows:&lt;/p&gt;
+&lt;p&gt;This means that if we terminate the ODE integration by an implicit event, we compute the sensitivities as follows (for simplicity we drop terms due to an explicit dependence of the loss function on the parameters or time):&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;use an ODE solver to solve forward until the event is triggered
 $$
 u_i = \text{solve}(t_0, x_0, t^\star_1(p),  p).
 $$
 $u_i(t_i)=(t_i,x_i)$ are the stored values which enter the loss function.&lt;/li&gt;
-&lt;li&gt;compute the loss function gradient with respect to the state at $t^\star_1$
+&lt;li&gt;compute the loss function gradient with respect to the state at $t^\star_1$.
 $$
-\lambda_0 = \frac{\text{d}L(t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d} u^\star(t^\star_1)}.
+\lambda_-^\text{0} = \frac{\text{d}L(t^\star_1(p), \rightarrow \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d} u^\star(t^\star_1)}.
 $$&lt;/li&gt;
-&lt;li&gt;(instead of using the &lt;code&gt;BacksolveAdjoint()&lt;/code&gt; algorithm with $\lambda_0$ directly,) compute the terms:
-$$
-\frac{\text{d}g}{\text{d}t^\star_1} = ,
-$$&lt;/li&gt;
+&lt;li&gt;(instead of using the &lt;code&gt;BacksolveAdjoint()&lt;/code&gt; algorithm with $\lambda_-^\text{0}$ directly,) use the corrected version containing the dependence on the event time. For this, compute  $\frac{\text{d}g}{\text{d}t^\star_1}, \frac{\text{d}g}{\text{d}u^\star_1}$, and $f(x^\star, p, t^\star_1)$.
+Then, the corrected version of the adjoint is given by&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;$$
-\frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, t^\star_1,\rightarrow p))}{\text{d} u^\star(t^\star_1)} = ,
-$$
-and
-$$\xi_{\text{left}} = $$.&lt;/p&gt;
-&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;
-&lt;p&gt;compute the correction factor:
-$$
-\begin{aligned}
-\lambda_{\text{left}} =
-\end{aligned}
+\lambda_- = - \left( {\lambda_-^\text{0}}^\dagger f(x^\star, p^\star, t^\star_1) \right)\left(\frac{\text{d}g}{\text{d}t^\star_1}\right)^{-1} \frac{\text{d}g}{\text{d}u^\star_1} + \lambda_-^\text{0}.
 $$&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;use&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;$$
-\lambda_{\text{imp}} =
-$$&lt;/p&gt;
-&lt;p&gt;as initial condition to $\text{backsolve_adjoint}(\lambda_{\text{imp}}, t^\star_1, x(t^\star_1), t_0)$ which backpropagates the adjoint $\lambda_{\text{imp}}$ from $t^\star_1$ to $t_0$.&lt;/p&gt;
-&lt;p&gt;If there is an additional affect function associated with the event, we must additionally compute&lt;/p&gt;
+&lt;p&gt;$\lambda_-$ can then be used as initial condition to $\text{backsolve_adjoint}(\lambda_-, t^\star_1, x(t^\star_1), t_0)$ which backpropagates the adjoint $\lambda_-$ from $t^\star_1$ to $t_0$.&lt;/p&gt;
+&lt;p&gt;If there is an additional affect function $a$ associated with the event, i.e. a right limit, we must additionally compute&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\lambda_{\text{right}} = ,\\&lt;br&gt;
+\lambda_+^\text{0} =  \frac{\text{d}L(t^\star_1(p), \rightarrow a\left(\text{solve}(t_0, x_0, t^\star_1(p),  p)\right), p)}{\text{d} u^\star(t^\star_1))}.
 \end{aligned}
 $$&lt;/p&gt;
-&lt;p&gt;such that&lt;/p&gt;
+&lt;p&gt;Compute the vjp as in the case of a &amp;lsquo;DiscreteCallback&amp;rsquo;&lt;/p&gt;
 &lt;p&gt;$$
-\lambda_{\text{imp}} =
+\lambda_-^\text{0} = {\lambda_+^\text{0}}^\dagger \frac{\text{d} a(\rightarrow x({t_j^\star}^-), p({t_j^\star}^-), {t_j^\star}^-)}{\text{d} x({t_j^\star}^-)}
 $$&lt;/p&gt;
+&lt;p&gt;and correct it as above&lt;/p&gt;
 &lt;p&gt;$$
-\color{red} \text{continue here&amp;hellip;}
+\begin{aligned}
+\lambda_- = - \left( {\lambda_-^\text{0}}^\dagger f(x({t_1^\star}^-), p({t_1^\star}^-), t^\star_1) \right)\left(\frac{\text{d}g}{\text{d}{t_1^\star}^-}\right)^{-1} \frac{\text{d}g}{\text{d}{u^\star_1}^-} + \lambda_-^\text{0}.
+\end{aligned}
 $$&lt;/p&gt;
+&lt;p&gt;If both limits contribute to the loss function, the contributions are added.&lt;/p&gt;
 &lt;h4 id=&#34;generalization-several-events&#34;&gt;generalization: several events&lt;/h4&gt;
 &lt;p&gt;As pointed out by Chen et al. as well as by Timo C. Wunderlich and Christian Pehle&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, one can chain together the events and differentiate through the entire time evolution on a time interval $(t_0, t_{\text{end}})$. That is, we are generally allowed to segment the time evolution over an interval $[t_0, t]$ into one from $[t_0, s]$ and a subsequent one from $[s, t]$:&lt;/p&gt;
 &lt;p&gt;$$
@@ -874,18 +861,16 @@ $$&lt;/p&gt;
 &lt;p&gt;such that also loss function contributions are chained. Therefore, we have the following modification:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;segment the trajectory at the event times. Use $\text{backsolve_adjoint}(\lambda_{0}, t_\text{end}, x(t_\text{end}), t^\star_N)$ to backprogagate the loss function gradient from the final state until the *right* limit of the last event location.&lt;/p&gt;
+&lt;p&gt;Segment the trajectory at the event times. Use $\text{backsolve_adjoint}(\lambda_{0}, t_\text{end}, x(t_\text{end}), t^\star_N)$ to backprogagate the loss function gradient from the final state until the right limit of the last event location.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;compute the vjp with respect to the affect function to obtain the adjoint at the left limit.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;correct $\lambda$.&lt;/p&gt;
+&lt;p&gt;In addition to the steps above, subtract a correction:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;$$
-\color{red} \text{write general BacksolveAdjoint equations&amp;hellip;}
+\lambda_\text{c} = - \left( {\lambda_+}^\dagger f(x({t_N^\star}^+), p({t_N^\star}^+), t^\star_N) \right)\left(\frac{\text{d}g}{\text{d}{t_N^\star}^-}\right)^{-1} \frac{\text{d}g}{\text{d}{u^\star_N}^-},
 $$&lt;/p&gt;
+&lt;p&gt;where $\lambda_+$ is the right-hand limit of the adjoint state before the loss gradient ($\lambda_+^\text{0}$ above) was added. Iterate over the remaining events.&lt;/p&gt;
 &lt;h2 id=&#34;outlook&#34;&gt;Outlook&lt;/h2&gt;
 &lt;p&gt;We are still refining the adjoints in case of implicit discontinuities (&lt;code&gt;ContinuousCallbacks&lt;/code&gt;). For further information, the interested reader is encouraged to track the associated issues 
 &lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/issues/383&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;#383&lt;/a&gt; and 

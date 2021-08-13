@@ -239,7 +239,7 @@
   
   <meta property="og:site_name" content="FS">
   <meta property="og:url" content="https://frankschae.github.io/post/bouncing_ball/">
-  <meta property="og:title" content="[WIP] Sensitivity Analysis of Hybrid Differential Equations | FS">
+  <meta property="og:title" content="Sensitivity Analysis of Hybrid Differential Equations | FS">
   <meta property="og:description" content="In this post, we discuss sensitivity analysis of hybrid differential equations1 and highlight differences between explicit2 and implicit discontinuities3 4. As a paradigmatic example, we consider a bouncing ball described by the ODE"><meta property="og:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
@@ -272,7 +272,7 @@
     "@type": "WebPage",
     "@id": "https://frankschae.github.io/post/bouncing_ball/"
   },
-  "headline": "[WIP] Sensitivity Analysis of Hybrid Differential Equations",
+  "headline": "Sensitivity Analysis of Hybrid Differential Equations",
   
   "datePublished": "2021-07-16T13:24:04+02:00",
   "dateModified": "2021-07-16T13:24:04+02:00",
@@ -308,7 +308,7 @@
 
 
 
-  <title>[WIP] Sensitivity Analysis of Hybrid Differential Equations | FS</title>
+  <title>Sensitivity Analysis of Hybrid Differential Equations | FS</title>
 
 </head>
 
@@ -588,7 +588,7 @@
   
   
 <div class="article-container pt-3">
-  <h1>[WIP] Sensitivity Analysis of Hybrid Differential Equations</h1>
+  <h1>Sensitivity Analysis of Hybrid Differential Equations</h1>
 
   
   <p class="page-subtitle">GSoC 2021 &ndash; third blog post</p>
@@ -628,7 +628,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    12 min read
+    13 min read
   </span>
   
 
@@ -997,12 +997,12 @@ $$
 $$</p>
 <p>Since</p>
 <p>$$
-\frac{\text{d}(\text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d}t^\star_1} = f(x^\star, p, t^\star_1)
+\frac{\text{d}(\text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d}t^\star_1} = f(x^\star, p^\star, t^\star_1)
 $$</p>
 <p>by definition of the ODE, we can write</p>
 <p>$$
 \begin{aligned}
-\frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d}t^\star_1} = \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d} u^\star(t^\star_1)}  f(x^\star, p, t^\star_1).
+\frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d}t^\star_1} = \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, \rightarrow t^\star_1, p))}{\text{d} u^\star(t^\star_1)}  f(x^\star, p^\star, t^\star_1).
 \end{aligned}
 $$</p>
 <p>Furthermore, we have
@@ -1011,7 +1011,10 @@ $$
 \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, t^\star_1, \rightarrow p))}{\text{d}p} = \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, t^\star_1,\rightarrow p))}{\text{d} u^\star(t^\star_1)}^\dagger  \frac{\text{d}\text{ solve}(t_0, x_0, t^\star_1,\rightarrow p))}{\text{d}p}
 \end{aligned}
 $$
-for the second term of $\frac{\text{d}t^\star_1(p)}{\text{d}p}$.</p>
+for the second term of $\frac{\text{d}t^\star_1(p)}{\text{d}p}$. We define</p>
+<p>$$
+\frac{\text{d}g}{\text{d}u^\star_1} \stackrel{\text{def}}{=} \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, t^\star_1,\rightarrow p))}{\text{d} u^\star(t^\star_1)}
+$$</p>
 <p>We can now write the gradient as:</p>
 <p>$$
 \begin{aligned}
@@ -1030,66 +1033,50 @@ $$</p>
 <p>with</p>
 <p>$$
 \begin{aligned}
-v &amp;= \xi \left(-\frac{\text{d}g}{\text{d}t^\star_1}\right)^{-1} \frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, t^\star_1,\rightarrow p))}{\text{d} u^\star(t^\star_1)} + \frac{\text{d}L(t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d} u^\star(t^\star_1)},
+v &amp;= \xi \left(-\frac{\text{d}g}{\text{d}t^\star_1}\right)^{-1} \frac{\text{d}g}{\text{d}u^\star_1} + \frac{\text{d}L(t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d} u^\star(t^\star_1)},
 \end{aligned}
 $$</p>
 <p>where we introduced the scalar pre-factor</p>
 <p>$$
 \begin{aligned}
-\xi = \left( \frac{\text{d}L(\rightarrow t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d}t^\star_1} +  \frac{\text{d}L(t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d} u^\star(t^\star_1)}^\dagger f(x^\star, p, t^\star_1)\right).
+\xi = \left( \frac{\text{d}L(\rightarrow t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d}t^\star_1} +  \frac{\text{d}L(t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d} u^\star(t^\star_1)}^\dagger f(x^\star, p^\star, t^\star_1)\right).
 \end{aligned}
 $$</p>
-<p>This means that if we terminate the ODE integration by an implicit event, we compute the sensitivities as follows:</p>
+<p>This means that if we terminate the ODE integration by an implicit event, we compute the sensitivities as follows (for simplicity we drop terms due to an explicit dependence of the loss function on the parameters or time):</p>
 <ol>
 <li>use an ODE solver to solve forward until the event is triggered
 $$
 u_i = \text{solve}(t_0, x_0, t^\star_1(p),  p).
 $$
 $u_i(t_i)=(t_i,x_i)$ are the stored values which enter the loss function.</li>
-<li>compute the loss function gradient with respect to the state at $t^\star_1$
+<li>compute the loss function gradient with respect to the state at $t^\star_1$.
 $$
-\lambda_0 = \frac{\text{d}L(t^\star_1(p), \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d} u^\star(t^\star_1)}.
+\lambda_-^\text{0} = \frac{\text{d}L(t^\star_1(p), \rightarrow \text{solve}(t_0, x_0, t^\star_1(p),  p), p)}{\text{d} u^\star(t^\star_1)}.
 $$</li>
-<li>(instead of using the <code>BacksolveAdjoint()</code> algorithm with $\lambda_0$ directly,) compute the terms:
-$$
-\frac{\text{d}g}{\text{d}t^\star_1} = ,
-$$</li>
+<li>(instead of using the <code>BacksolveAdjoint()</code> algorithm with $\lambda_-^\text{0}$ directly,) use the corrected version containing the dependence on the event time. For this, compute  $\frac{\text{d}g}{\text{d}t^\star_1}, \frac{\text{d}g}{\text{d}u^\star_1}$, and $f(x^\star, p, t^\star_1)$.
+Then, the corrected version of the adjoint is given by</li>
 </ol>
 <p>$$
-\frac{\text{d}g(t^\star_1, \text{solve}(t_0, x_0, t^\star_1,\rightarrow p))}{\text{d} u^\star(t^\star_1)} = ,
-$$
-and
-$$\xi_{\text{left}} = $$.</p>
-<ol start="4">
-<li>
-<p>compute the correction factor:
-$$
-\begin{aligned}
-\lambda_{\text{left}} =
-\end{aligned}
+\lambda_- = - \left( {\lambda_-^\text{0}}^\dagger f(x^\star, p^\star, t^\star_1) \right)\left(\frac{\text{d}g}{\text{d}t^\star_1}\right)^{-1} \frac{\text{d}g}{\text{d}u^\star_1} + \lambda_-^\text{0}.
 $$</p>
-</li>
-<li>
-<p>use</p>
-</li>
-</ol>
-<p>$$
-\lambda_{\text{imp}} =
-$$</p>
-<p>as initial condition to $\text{backsolve_adjoint}(\lambda_{\text{imp}}, t^\star_1, x(t^\star_1), t_0)$ which backpropagates the adjoint $\lambda_{\text{imp}}$ from $t^\star_1$ to $t_0$.</p>
-<p>If there is an additional affect function associated with the event, we must additionally compute</p>
+<p>$\lambda_-$ can then be used as initial condition to $\text{backsolve_adjoint}(\lambda_-, t^\star_1, x(t^\star_1), t_0)$ which backpropagates the adjoint $\lambda_-$ from $t^\star_1$ to $t_0$.</p>
+<p>If there is an additional affect function $a$ associated with the event, i.e. a right limit, we must additionally compute</p>
 <p>$$
 \begin{aligned}
-\lambda_{\text{right}} = ,\\<br>
+\lambda_+^\text{0} =  \frac{\text{d}L(t^\star_1(p), \rightarrow a\left(\text{solve}(t_0, x_0, t^\star_1(p),  p)\right), p)}{\text{d} u^\star(t^\star_1))}.
 \end{aligned}
 $$</p>
-<p>such that</p>
+<p>Compute the vjp as in the case of a &lsquo;DiscreteCallback&rsquo;</p>
 <p>$$
-\lambda_{\text{imp}} =
+\lambda_-^\text{0} = {\lambda_+^\text{0}}^\dagger \frac{\text{d} a(\rightarrow x({t_j^\star}^-), p({t_j^\star}^-), {t_j^\star}^-)}{\text{d} x({t_j^\star}^-)}
 $$</p>
+<p>and correct it as above</p>
 <p>$$
-\color{red} \text{continue here&hellip;}
+\begin{aligned}
+\lambda_- = - \left( {\lambda_-^\text{0}}^\dagger f(x({t_1^\star}^-), p({t_1^\star}^-), t^\star_1) \right)\left(\frac{\text{d}g}{\text{d}{t_1^\star}^-}\right)^{-1} \frac{\text{d}g}{\text{d}{u^\star_1}^-} + \lambda_-^\text{0}.
+\end{aligned}
 $$</p>
+<p>If both limits contribute to the loss function, the contributions are added.</p>
 <h4 id="generalization-several-events">generalization: several events</h4>
 <p>As pointed out by Chen et al. as well as by Timo C. Wunderlich and Christian Pehle<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, one can chain together the events and differentiate through the entire time evolution on a time interval $(t_0, t_{\text{end}})$. That is, we are generally allowed to segment the time evolution over an interval $[t_0, t]$ into one from $[t_0, s]$ and a subsequent one from $[s, t]$:</p>
 <p>$$
@@ -1098,18 +1085,16 @@ $$</p>
 <p>such that also loss function contributions are chained. Therefore, we have the following modification:</p>
 <ol>
 <li>
-<p>segment the trajectory at the event times. Use $\text{backsolve_adjoint}(\lambda_{0}, t_\text{end}, x(t_\text{end}), t^\star_N)$ to backprogagate the loss function gradient from the final state until the *right* limit of the last event location.</p>
+<p>Segment the trajectory at the event times. Use $\text{backsolve_adjoint}(\lambda_{0}, t_\text{end}, x(t_\text{end}), t^\star_N)$ to backprogagate the loss function gradient from the final state until the right limit of the last event location.</p>
 </li>
 <li>
-<p>compute the vjp with respect to the affect function to obtain the adjoint at the left limit.</p>
-</li>
-<li>
-<p>correct $\lambda$.</p>
+<p>In addition to the steps above, subtract a correction:</p>
 </li>
 </ol>
 <p>$$
-\color{red} \text{write general BacksolveAdjoint equations&hellip;}
+\lambda_\text{c} = - \left( {\lambda_+}^\dagger f(x({t_N^\star}^+), p({t_N^\star}^+), t^\star_N) \right)\left(\frac{\text{d}g}{\text{d}{t_N^\star}^-}\right)^{-1} \frac{\text{d}g}{\text{d}{u^\star_N}^-},
 $$</p>
+<p>where $\lambda_+$ is the right-hand limit of the adjoint state before the loss gradient ($\lambda_+^\text{0}$ above) was added. Iterate over the remaining events.</p>
 <h2 id="outlook">Outlook</h2>
 <p>We are still refining the adjoints in case of implicit discontinuities (<code>ContinuousCallbacks</code>). For further information, the interested reader is encouraged to track the associated issues 
 <a href="https://github.com/SciML/DiffEqSensitivity.jl/issues/383" target="_blank" rel="noopener">#383</a> and 
@@ -1178,7 +1163,7 @@ $$ <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://frankschae.github.io/post/bouncing_ball/&amp;text=[WIP]%20Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://frankschae.github.io/post/bouncing_ball/&amp;text=Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -1191,7 +1176,7 @@ $$ <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://frankschae.github.io/post/bouncing_ball/&amp;t=[WIP]%20Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://frankschae.github.io/post/bouncing_ball/&amp;t=Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -1204,7 +1189,7 @@ $$ <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
       
       
       <li>
-        <a href="mailto:?subject=[WIP]%20Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations&amp;body=https://frankschae.github.io/post/bouncing_ball/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations&amp;body=https://frankschae.github.io/post/bouncing_ball/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -1217,7 +1202,7 @@ $$ <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://frankschae.github.io/post/bouncing_ball/&amp;title=[WIP]%20Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://frankschae.github.io/post/bouncing_ball/&amp;title=Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -1230,7 +1215,7 @@ $$ <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=[WIP]%20Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations%20https://frankschae.github.io/post/bouncing_ball/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations%20https://frankschae.github.io/post/bouncing_ball/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1243,7 +1228,7 @@ $$ <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://frankschae.github.io/post/bouncing_ball/&amp;title=[WIP]%20Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://frankschae.github.io/post/bouncing_ball/&amp;title=Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>

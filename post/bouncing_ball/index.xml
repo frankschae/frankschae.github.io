@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>[WIP] Sensitivity Analysis of Hybrid Differential Equations | FS</title>
+    <title>Sensitivity Analysis of Hybrid Differential Equations | FS</title>
     <link>https://frankschae.github.io/post/bouncing_ball/</link>
       <atom:link href="https://frankschae.github.io/post/bouncing_ball/index.xml" rel="self" type="application/rss+xml" />
-    <description>[WIP] Sensitivity Analysis of Hybrid Differential Equations</description>
+    <description>Sensitivity Analysis of Hybrid Differential Equations</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Fri, 16 Jul 2021 13:24:04 +0200</lastBuildDate>
     <image>
       <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
-      <title>[WIP] Sensitivity Analysis of Hybrid Differential Equations</title>
+      <title>Sensitivity Analysis of Hybrid Differential Equations</title>
       <link>https://frankschae.github.io/post/bouncing_ball/</link>
     </image>
     
