@@ -27,10 +27,10 @@
   
     
   
-  <meta name="description" content="Project summary In this project, we have implemented new promising tools within the SciML organization which are relevant for tasks such as optimal control or parameter estimation for stochastic differential equations.">
+  <meta name="description" content="Project summary In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as an high level API for automatic differentiation.">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://frankschae.github.io/post/gsoc-2020/">
+  <link rel="alternate" hreflang="en-us" href="https://frankschae.github.io/post/gsoc-2021/">
 
   
 
@@ -215,14 +215,14 @@
   
 
   
-  <link rel="alternate" href="/post/gsoc-2020/index.xml" type="application/rss+xml" title="FS">
+  <link rel="alternate" href="/post/gsoc-2021/index.xml" type="application/rss+xml" title="FS">
   
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="https://frankschae.github.io/post/gsoc-2020/">
+  <link rel="canonical" href="https://frankschae.github.io/post/gsoc-2021/">
 
   
   
@@ -238,15 +238,15 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="FS">
-  <meta property="og:url" content="https://frankschae.github.io/post/gsoc-2020/">
-  <meta property="og:title" content="High weak order solvers and adjoint sensitivity analysis for stochastic differential equations | FS">
-  <meta property="og:description" content="Project summary In this project, we have implemented new promising tools within the SciML organization which are relevant for tasks such as optimal control or parameter estimation for stochastic differential equations."><meta property="og:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="og:url" content="https://frankschae.github.io/post/gsoc-2021/">
+  <meta property="og:title" content="Neural Hybrid Differential Equations and Adjoint Sensitivity Analysis | FS">
+  <meta property="og:description" content="Project summary In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as an high level API for automatic differentiation."><meta property="og:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2020-08-26T22:59:49&#43;02:00">
+      <meta property="article:published_time" content="2021-08-13T21:41:45&#43;02:00">
     
-    <meta property="article:modified_time" content="2020-08-26T22:59:49&#43;02:00">
+    <meta property="article:modified_time" content="2021-08-13T21:41:45&#43;02:00">
   
 
   
@@ -270,12 +270,12 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://frankschae.github.io/post/gsoc-2020/"
+    "@id": "https://frankschae.github.io/post/gsoc-2021/"
   },
-  "headline": "High weak order solvers and adjoint sensitivity analysis for stochastic differential equations",
+  "headline": "Neural Hybrid Differential Equations and Adjoint Sensitivity Analysis",
   
-  "datePublished": "2020-08-26T22:59:49+02:00",
-  "dateModified": "2020-08-26T22:59:49+02:00",
+  "datePublished": "2021-08-13T21:41:45+02:00",
+  "dateModified": "2021-08-13T21:41:45+02:00",
   
   "author": {
     "@type": "Person",
@@ -290,7 +290,7 @@
       "url": "https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Project summary In this project, we have implemented new promising tools within the SciML organization which are relevant for tasks such as optimal control or parameter estimation for stochastic differential equations."
+  "description": "Project summary In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as an high level API for automatic differentiation."
 }
 </script>
 
@@ -308,7 +308,7 @@
 
 
 
-  <title>High weak order solvers and adjoint sensitivity analysis for stochastic differential equations | FS</title>
+  <title>Neural Hybrid Differential Equations and Adjoint Sensitivity Analysis | FS</title>
 
 </head>
 
@@ -588,10 +588,10 @@
   
   
 <div class="article-container pt-3">
-  <h1>High weak order solvers and adjoint sensitivity analysis for stochastic differential equations</h1>
+  <h1>Neural Hybrid Differential Equations and Adjoint Sensitivity Analysis</h1>
 
   
-  <p class="page-subtitle">GSoC 2020: The Julia Language &ndash; Final report.</p>
+  <p class="page-subtitle">GSoC 2021: The NumFOCUS organization &ndash; Final report.</p>
   
 
   
@@ -609,7 +609,7 @@
     
       
     
-    Aug 26, 2020
+    Aug 13, 2021
   </span>
   
 
@@ -655,172 +655,119 @@
 
     <div class="article-style">
       <h2 id="project-summary">Project summary</h2>
-<p>In this project, we have implemented new promising tools within the 
-<a href="https://sciml.ai" target="_blank" rel="noopener">SciML</a> organization which are relevant for tasks such as optimal control or parameter estimation for stochastic differential equations.
-The high weak order solvers will allow for massive performance advantages for fitting expectations of equations.
-Instead of automatic differentiation (AD) through the operations of an SDE solver, which scales poorly in memory, one can now use efficient stochastic adjoint sensitivity methods.</p>
+<p>In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as an high level API for automatic differentiation.</p>
+<p>Possible fields of application for these tools range from model discovery with explicit dosing times in pharmacology, over accurate gradient estimates for chaotic fluid dynamics, to the control of open quantum systems. A more detailed summary is available 
+<a href="https://summerofcode.withgoogle.com/projects/#5357798591823872" target="_blank" rel="noopener">on the GSoC page</a>.</p>
 <h2 id="blog-posts">Blog posts</h2>
-<p>The following posts describe the work during the entire period in more detail:</p>
+<p>The following blog posts describe the work in more detail throughout the GSoC period:</p>
 <ol>
 <li>
-<a href="https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/" target="_blank" rel="noopener">GSoC 2020: High weak order SDE solvers and their utility in neural SDEs</a></li>
+<a href="https://frankschae.github.io/post/hybridde/" target="_blank" rel="noopener">Neural Hybrid Differential Equations</a></li>
 <li>
-<a href="https://frankschae.github.io/post/high-weak/" target="_blank" rel="noopener">High weak order SDE solvers</a></li>
+<a href="https://frankschae.github.io/post/shadowing/" target="_blank" rel="noopener">Shadowing Methods for Forward and Adjoint Sensitivity Analysis of Chaotic Systems</a></li>
+<li>
+<a href="https://frankschae.github.io/post/bouncing_ball/" target="_blank" rel="noopener">Sensitivity Analysis of Hybrid Differential Equations</a></li>
+<li>
+<a href="https://frankschae.github.io/post/abstract_differentiation/" target="_blank" rel="noopener">AbstractDifferentiation.jl for AD-backend agnostic code</a></li>
 </ol>
 <h2 id="docs">Docs</h2>
-<p>The documentation of the solvers is available 
-<a href="https://diffeq.sciml.ai/latest/solvers/sde_solve/#High-Weak-Order-Methods" target="_blank" rel="noopener">here</a>.
-Docs with respect to the adjoint sensitivity tools will be available 
-<a href="https://diffeq.sciml.ai/latest/analysis/sensitivity/" target="_blank" rel="noopener">here</a>.</p>
+<p>Documentation with respect to the adjoint sensitivity tools will be available 
+<a href="https://diffeq.sciml.ai/latest/analysis/sensitivity/" target="_blank" rel="noopener">on the local sensitivity analysis</a> and 
+<a href="http://scimlbase.sciml.ai/dev/fundamentals/Differentiation/" target="_blank" rel="noopener">on the control of automatic differentiation choices</a> pages.</p>
 <h2 id="achievements">Achievements</h2>
-<p>Please find below a list of the PRs carried out during GSoC in the different repositories in chronological order within the SciML ecosystem.</p>
-<h4 id="stochasticdiffeqjl">StochasticDiffEq.jl</h4>
-<p>Merged:</p>
-<ul>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/285" target="_blank" rel="noopener">Inplace version of DRI1 scheme</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/289" target="_blank" rel="noopener">RI1 method</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/305" target="_blank" rel="noopener">tstop fixes for reverse time propagation</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/317" target="_blank" rel="noopener">Fixes for EulerHeun scheme</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/327" target="_blank" rel="noopener">Speed up the tests for the DRI1 and RI1 schemes</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/328" target="_blank" rel="noopener">RI3, RI5, RI6, RDI2WM, RDI3WM, and RDI4WM schemes</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/329" target="_blank" rel="noopener">RDI1WM scheme</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/332" target="_blank" rel="noopener">Adaptive version of the stochastic Runge-Kutta schemes by embedding</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/333" target="_blank" rel="noopener">RS1 and RS2 schemes</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/334" target="_blank" rel="noopener">PL1WM scheme</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/337" target="_blank" rel="noopener">NON scheme</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/338" target="_blank" rel="noopener">Citations for weak methods</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/342" target="_blank" rel="noopener">Stochastic improved and modified Euler methods</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/343" target="_blank" rel="noopener">COM scheme</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/348" target="_blank" rel="noopener">Computationally more efficient NON variant (NON2)</a></li>
-</ul>
-<p>Open:</p>
-<ul>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/288" target="_blank" rel="noopener">Static array tests</a></li>
-<li>
-<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/347" target="_blank" rel="noopener">Levy area for non-commutative noise processes</a></li>
-</ul>
+<p>Below is a list of PRs in the various repositories in chronological order.</p>
 <h4 id="diffeqsensitivityjl">DiffEqSensitivity.jl</h4>
 <p>Merged:</p>
 <ul>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/235" target="_blank" rel="noopener">Adjoint sensitivities for steady states</a></li>
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/415" target="_blank" rel="noopener">Add additive noise downstream test for DiffEqFlux</a></li>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/237" target="_blank" rel="noopener">Concrete_solve dispatch for steady state problem</a></li>
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/416" target="_blank" rel="noopener">DiscreteCallback fixes</a></li>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/242" target="_blank" rel="noopener">BacksolveAdjoint for SDEs</a></li>
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/417" target="_blank" rel="noopener">Allow for changes of p in callbacks</a></li>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/256" target="_blank" rel="noopener">GPU savety for SDE BacksolveAdjoint</a></li>
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/418" target="_blank" rel="noopener">Fix for using the correct uleft/pleft in continuous callback</a></li>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/258" target="_blank" rel="noopener">Tests for concrete solve with respect to SDEs</a></li>
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/419" target="_blank" rel="noopener">Fix broadcasting error on steady state adjoint</a></li>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/260" target="_blank" rel="noopener">Alternative differentiation choices (vjps) for noise Jacobian</a></li>
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/420" target="_blank" rel="noopener">Forward Least Squares Shadowing (LSS)</a></li>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/265" target="_blank" rel="noopener">Fixes and tests for inplace formulation of BacksolveAdjoint</a></li>
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/422" target="_blank" rel="noopener">Adjoint-mode for the LSS method</a></li>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/268" target="_blank" rel="noopener">Efficient SDE BacksolveAdjoint for scalar noise</a></li>
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/423" target="_blank" rel="noopener">concrete_solve dispatch for LSS methods</a></li>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/275" target="_blank" rel="noopener">Generalization of the SDE Adjoint for non-diagonal noise processes and diagonal noise processes with mixing terms</a></li>
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/437" target="_blank" rel="noopener">Non-Intrusive Least Square Shadowing (NILSS)</a></li>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/295" target="_blank" rel="noopener">InterpolatingAdjoint for SDEs</a></li>
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/442" target="_blank" rel="noopener">concrete_solve for NILSS</a></li>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/298" target="_blank" rel="noopener">Citations for backsolve, steadystate and interpolation adjoint</a></li>
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/443" target="_blank" rel="noopener">Remove allocation in NILSS</a></li>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/299" target="_blank" rel="noopener">Allow for more general noise processes: replace NoiseGrid by NoiseWrapper</a></li>
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/444" target="_blank" rel="noopener">Handle additional callback case</a></li>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/303" target="_blank" rel="noopener">Checkpointing fix for BacksolveAdjoint in case of ODEs and SDEs</a></li>
-<li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/305" target="_blank" rel="noopener">Cheaper non-diagonal noise tests</a></li>
+<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/445" target="_blank" rel="noopener">State-dependent Continuous Callbacks for BacksolveAdjoint</a></li>
 </ul>
 <p>Open:</p>
-<ul>
-<li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/317" target="_blank" rel="noopener">Support adjoints for SDEs written in the Ito sense</a></li>
-</ul>
+<h4 id="abstractdifferentiationjl">AbstractDifferentiation.jl</h4>
+<p>Merged:</p>
+<p>*
+<a href="https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/2" target="_blank" rel="noopener">Fixes gradient, Jacobian, Hessian, and vjp tests</a></p>
+<p>Open:</p>
+<p>*
+<a href="https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/3" target="_blank" rel="noopener">Add ForwardDiff and Zygote</a></p>
+<h4 id="ordinarydiffeqjl">OrdinaryDiffEq.jl</h4>
+<p>Merged:</p>
+<p>*
+<a href="https://github.com/SciML/OrdinaryDiffEq.jl/pull/1424" target="_blank" rel="noopener">Fix discrete reverse mode for some standard controllers</a></p>
+<h4 id="steadystatediffeqjl">SteadyStateDiffEq.jl</h4>
+<p>Merged:</p>
+<p>*
+<a href="https://github.com/SciML/SteadyStateDiffEq.jl/pull/31" target="_blank" rel="noopener">convert alg.tspan to type of prob.u0</a></p>
 <h4 id="diffeqnoiseprocessjl">DiffEqNoiseProcess.jl</h4>
 <p>Merged:</p>
-<ul>
-<li>
-<a href="https://github.com/SciML/DiffEqNoiseProcess.jl/pull/48" target="_blank" rel="noopener">Multi-dimensional Brownian motion tests</a></li>
-<li>
-<a href="https://github.com/SciML/DiffEqNoiseProcess.jl/pull/49" target="_blank" rel="noopener">Bug fix for inplace form of NoiseGrid</a></li>
-<li>
-<a href="https://github.com/SciML/DiffEqNoiseProcess.jl/pull/51" target="_blank" rel="noopener">Reversible NoiseWrapper</a></li>
-<li>
-<a href="https://github.com/SciML/DiffEqNoiseProcess.jl/pull/53" target="_blank" rel="noopener">Relax the size constraints of the available noise processes</a></li>
-<li>
-<a href="https://github.com/SciML/DiffEqNoiseProcess.jl/pull/54" target="_blank" rel="noopener">Generalization of the real-valued white noise process function</a></li>
-<li>
-<a href="https://github.com/SciML/DiffEqNoiseProcess.jl/pull/55" target="_blank" rel="noopener">Fix of an extraction issue with NoiseGrid</a></li>
-<li>
-<a href="https://github.com/SciML/DiffEqNoiseProcess.jl/pull/56" target="_blank" rel="noopener">Allow NoiseWrapper to start at user-specified time points for interpolating parts of a trajectory</a></li>
-<li>
-<a href="https://github.com/SciML/DiffEqNoiseProcess.jl/pull/56" target="_blank" rel="noopener">Extraction and endpoint fixes on NoiseWrapper</a></li>
-<li>
-<a href="https://github.com/SciML/DiffEqNoiseProcess.jl/pull/62" target="_blank" rel="noopener">Reversal of SDEs written in the Ito sense</a></li>
-</ul>
-<h4 id="diffeqgpujl">DiffEqGPU.jl</h4>
+<p>*
+<a href="https://github.com/SciML/DiffEqNoiseProcess.jl/pull/94" target="_blank" rel="noopener">Allow solvers to use Noise Grid with SVectors</a></p>
+<h4 id="stochasticdiffeqjl">StochasticDiffEq.jl</h4>
 <p>Merged:</p>
 <ul>
 <li>
-<a href="https://github.com/SciML/DiffEqGPU.jl/pull/59" target="_blank" rel="noopener">Memory efficient reduction function for ensemble problems</a></li>
+<a href="https://github.com/SciML/StochasticDiffEq.jl/pull/428" target="_blank" rel="noopener">Remove Ihat2 matrix from weak solvers</a></li>
 </ul>
-<h4 id="modelingtoolkitjl">ModelingToolkit.jl</h4>
+<h4 id="diffeqdocsjl">DiffEqDocs.jl</h4>
 <p>Merged:</p>
 <ul>
 <li>
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/317" target="_blank" rel="noopener">modelingtoolkitize for SDESystem with conversion function between Ito and Stratonovich sense</a></li>
-</ul>
-<h4 id="diffeqdevtoolsjl">DiffEqDevTools.jl</h4>
-<p>Merged:</p>
-<ul>
-<li>
-<a href="https://github.com/SciML/DiffEqDevTools.jl/pull/62" target="_blank" rel="noopener">NoiseWrapper alternative for analyticless convergence tests of SDE solvers</a></li>
-<li>
-<a href="https://github.com/SciML/DiffEqDevTools.jl/pull/74" target="_blank" rel="noopener">test_convergence() dispatch for ensemble simulations</a></li>
-<li>
-<a href="https://github.com/SciML/DiffEqDevTools.jl/pull/75" target="_blank" rel="noopener">Work precision set for ensemble problems</a></li>
-</ul>
-<h4 id="diffeqbasejl">DiffEqBase.jl</h4>
-<p>Merged:</p>
-<ul>
-<li>
-<a href="https://github.com/SciML/DiffEqBase.jl/pull/503" target="_blank" rel="noopener">Fix concrete_solve tests</a></li>
+<a href="https://github.com/SciML/DiffEqDocs.jl/pull/490" target="_blank" rel="noopener">Small typo on plot page</a></li>
 </ul>
 <h2 id="future-work">Future work</h2>
-<p>There is still a lot that we&rsquo;d like to do, e.g.,</p>
+<p>Besides the implementation of more shadowing methods, such as</p>
 <ul>
-<li>Writing up more docs and examples</li>
-<li>Implementing drift-implicit weak stochastic Runge-Kutta solvers</li>
-<li>Finishing the SDE adjoints for the Ito sense</li>
-<li>Implementing a virtual Brownian tree to store the noise processes in O(1) memory</li>
-<li>Setting up an OptimalControl library that allows for easy usage of the new tools within a symbolic interface</li>
-<li>Benchmarking of the new solvers and adjoints</li>
+<li>
+<a href="https://arxiv.org/abs/1801.08674" target="_blank" rel="noopener">NILSAS</a>,</li>
+<li>
+<a href="https://arxiv.org/abs/1711.06633" target="_blank" rel="noopener">FD-NILSS</a>, or</li>
+<li>
+<a href="https://arxiv.org/abs/2009.00595" target="_blank" rel="noopener">Fast linear response</a>,</li>
 </ul>
-<p>Contributions, suggestions &amp; comments are always welcome! You might like to join our slac channels #diffeq-bridged and #neuralsde to get in touch.</p>
+<p>we are planning to</p>
+<ul>
+<li>benchmark the new adjoints,</li>
+<li>refine the AbstractDifferentiation.jl package and use it within DiffEqSensitivity.jl,</li>
+<li>add more docs, and examples.</li>
+</ul>
+<p>If you have any further suggestions or comments, check out our slac/zulip channels #sciml-bridged and #diffeq-bridged or the 
+<a href="https://discourse.julialang.org/" target="_blank" rel="noopener">Julia language discourse</a>.</p>
 <h2 id="acknowledgement">Acknowledgement</h2>
-<p>I would like to thank my mentors 
+<p>Many thanks to my mentors 
 <a href="https://github.com/ChrisRackauckas" target="_blank" rel="noopener">Chris Rackauckas</a>, 
-<a href="https://github.com/mschauer" target="_blank" rel="noopener">Moritz Schauer</a>, and  
-<a href="https://github.com/YingboMa" target="_blank" rel="noopener">Yingbo Ma</a> for their amazing support during this project. It was a great opportunity to work in such an inspiring collaboration and I highly appreciate their detailed feedback.
+<a href="https://github.com/mschauer" target="_blank" rel="noopener">Moritz Schauer</a>, 
+<a href="https://github.com/YingboMa" target="_blank" rel="noopener">Yingbo Ma</a>, and 
+<a href="https://github.com/mohamed82008" target="_blank" rel="noopener">Mohamed Tarek</a> for their great, ongoing support before, during, and after this project. It was a great opportunity to be part of such an inspiring collaboration. I highly appreciate our quick and flexible meeting times.
 I would also like to thank 
-<a href="https://www.quantumtheory-bruder.physik.unibas.ch/people.html" target="_blank" rel="noopener">Christoph Bruder</a>, Niels Lörch, Martin Koppenhöfer, and Michal Kloc for helpful comments on my blog posts.
-Many thanks to the very supportive julia community and to Google&rsquo;s open source program for funding this experience!</p>
+<a href="https://www.quantumtheory-bruder.physik.unibas.ch/people.html" target="_blank" rel="noopener">Christoph Bruder</a>, 
+<a href="https://github.com/arnoldjulian" target="_blank" rel="noopener">Julian Arnold</a>, and 
+<a href="https://github.com/mako-git" target="_blank" rel="noopener">Martin Koppenhöfer</a> for helpful comments on my blog posts. Special thanks to 
+<a href="https://github.com/Zymrael" target="_blank" rel="noopener">Michael Poli</a> and 
+<a href="https://github.com/massastrello" target="_blank" rel="noopener">Stefano Massaroli</a> for their suggestions with respect to adjoints for hybrid differential equations. Finally, thanks to the very supportive julia community and to Google&rsquo;s open source program for funding this experience!</p>
 
     </div>
 
@@ -832,7 +779,7 @@ Many thanks to the very supportive julia community and to Google&rsquo;s open so
 
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tag/gsoc-2020/">GSoC 2020</a>
+  <a class="badge badge-light" href="/tag/gsoc-2021/">GSoC 2021</a>
   
 </div>
 
@@ -849,7 +796,7 @@ Many thanks to the very supportive julia community and to Google&rsquo;s open so
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://frankschae.github.io/post/gsoc-2020/&amp;text=High%20weak%20order%20solvers%20and%20adjoint%20sensitivity%20analysis%20for%20stochastic%20differential%20equations" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://frankschae.github.io/post/gsoc-2021/&amp;text=Neural%20Hybrid%20Differential%20Equations%20and%20Adjoint%20Sensitivity%20Analysis" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -862,7 +809,7 @@ Many thanks to the very supportive julia community and to Google&rsquo;s open so
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://frankschae.github.io/post/gsoc-2020/&amp;t=High%20weak%20order%20solvers%20and%20adjoint%20sensitivity%20analysis%20for%20stochastic%20differential%20equations" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://frankschae.github.io/post/gsoc-2021/&amp;t=Neural%20Hybrid%20Differential%20Equations%20and%20Adjoint%20Sensitivity%20Analysis" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -875,7 +822,7 @@ Many thanks to the very supportive julia community and to Google&rsquo;s open so
       
       
       <li>
-        <a href="mailto:?subject=High%20weak%20order%20solvers%20and%20adjoint%20sensitivity%20analysis%20for%20stochastic%20differential%20equations&amp;body=https://frankschae.github.io/post/gsoc-2020/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Neural%20Hybrid%20Differential%20Equations%20and%20Adjoint%20Sensitivity%20Analysis&amp;body=https://frankschae.github.io/post/gsoc-2021/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -888,7 +835,7 @@ Many thanks to the very supportive julia community and to Google&rsquo;s open so
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://frankschae.github.io/post/gsoc-2020/&amp;title=High%20weak%20order%20solvers%20and%20adjoint%20sensitivity%20analysis%20for%20stochastic%20differential%20equations" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://frankschae.github.io/post/gsoc-2021/&amp;title=Neural%20Hybrid%20Differential%20Equations%20and%20Adjoint%20Sensitivity%20Analysis" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -901,7 +848,7 @@ Many thanks to the very supportive julia community and to Google&rsquo;s open so
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=High%20weak%20order%20solvers%20and%20adjoint%20sensitivity%20analysis%20for%20stochastic%20differential%20equations%20https://frankschae.github.io/post/gsoc-2020/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Neural%20Hybrid%20Differential%20Equations%20and%20Adjoint%20Sensitivity%20Analysis%20https://frankschae.github.io/post/gsoc-2021/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -914,7 +861,7 @@ Many thanks to the very supportive julia community and to Google&rsquo;s open so
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://frankschae.github.io/post/gsoc-2020/&amp;title=High%20weak%20order%20solvers%20and%20adjoint%20sensitivity%20analysis%20for%20stochastic%20differential%20equations" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://frankschae.github.io/post/gsoc-2021/&amp;title=Neural%20Hybrid%20Differential%20Equations%20and%20Adjoint%20Sensitivity%20Analysis" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1047,9 +994,13 @@ Many thanks to the very supportive julia community and to Google&rsquo;s open so
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/post/high-weak/">High weak order SDE solvers</a></li>
+      <li><a href="/post/abstract_differentiation/">AbstractDifferentiation.jl for AD-backend agnostic code </a></li>
       
-      <li><a href="/post/gsoc2020-high-weak-order-solvers-sde-adjoints/">GSoC 2020: High weak order SDE solvers and their utility in neural SDEs</a></li>
+      <li><a href="/post/bouncing_ball/">Sensitivity Analysis of Hybrid Differential Equations</a></li>
+      
+      <li><a href="/post/shadowing/">Shadowing Methods for Forward and Adjoint Sensitivity Analysis of Chaotic Systems</a></li>
+      
+      <li><a href="/post/hybridde/">Neural Hybrid Differential Equations</a></li>
       
     </ul>
   </div>

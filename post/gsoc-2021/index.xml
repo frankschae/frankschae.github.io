@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags | FS</title>
-    <link>https://frankschae.github.io/tags/</link>
-      <atom:link href="https://frankschae.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    <description>Tags</description>
+    <title>Neural Hybrid Differential Equations and Adjoint Sensitivity Analysis | FS</title>
+    <link>https://frankschae.github.io/post/gsoc-2021/</link>
+      <atom:link href="https://frankschae.github.io/post/gsoc-2021/index.xml" rel="self" type="application/rss+xml" />
+    <description>Neural Hybrid Differential Equations and Adjoint Sensitivity Analysis</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Fri, 13 Aug 2021 21:41:45 +0200</lastBuildDate>
     <image>
       <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
-      <title>Tags</title>
-      <link>https://frankschae.github.io/tags/</link>
+      <title>Neural Hybrid Differential Equations and Adjoint Sensitivity Analysis</title>
+      <link>https://frankschae.github.io/post/gsoc-2021/</link>
     </image>
     
   </channel>

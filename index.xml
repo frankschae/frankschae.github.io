@@ -5,12 +5,134 @@
     <link>https://frankschae.github.io/</link>
       <atom:link href="https://frankschae.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>FS</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Sun, 01 Aug 2021 12:03:17 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Fri, 13 Aug 2021 21:41:45 +0200</lastBuildDate>
     <image>
       <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>FS</title>
       <link>https://frankschae.github.io/</link>
     </image>
+    
+    <item>
+      <title>Neural Hybrid Differential Equations and Adjoint Sensitivity Analysis</title>
+      <link>https://frankschae.github.io/post/gsoc-2021/</link>
+      <pubDate>Fri, 13 Aug 2021 21:41:45 +0200</pubDate>
+      <guid>https://frankschae.github.io/post/gsoc-2021/</guid>
+      <description>&lt;h2 id=&#34;project-summary&#34;&gt;Project summary&lt;/h2&gt;
+&lt;p&gt;In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as an high level API for automatic differentiation.&lt;/p&gt;
+&lt;p&gt;Possible fields of application for these tools range from model discovery with explicit dosing times in pharmacology, over accurate gradient estimates for chaotic fluid dynamics, to the control of open quantum systems. A more detailed summary is available 
+&lt;a href=&#34;https://summerofcode.withgoogle.com/projects/#5357798591823872&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;on the GSoC page&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;blog-posts&#34;&gt;Blog posts&lt;/h2&gt;
+&lt;p&gt;The following blog posts describe the work in more detail throughout the GSoC period:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://frankschae.github.io/post/hybridde/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Neural Hybrid Differential Equations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://frankschae.github.io/post/shadowing/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Shadowing Methods for Forward and Adjoint Sensitivity Analysis of Chaotic Systems&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://frankschae.github.io/post/bouncing_ball/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sensitivity Analysis of Hybrid Differential Equations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://frankschae.github.io/post/abstract_differentiation/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;AbstractDifferentiation.jl for AD-backend agnostic code&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;docs&#34;&gt;Docs&lt;/h2&gt;
+&lt;p&gt;Documentation with respect to the adjoint sensitivity tools will be available 
+&lt;a href=&#34;https://diffeq.sciml.ai/latest/analysis/sensitivity/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;on the local sensitivity analysis&lt;/a&gt; and 
+&lt;a href=&#34;http://scimlbase.sciml.ai/dev/fundamentals/Differentiation/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;on the control of automatic differentiation choices&lt;/a&gt; pages.&lt;/p&gt;
+&lt;h2 id=&#34;achievements&#34;&gt;Achievements&lt;/h2&gt;
+&lt;p&gt;Below is a list of PRs in the various repositories in chronological order.&lt;/p&gt;
+&lt;h4 id=&#34;diffeqsensitivityjl&#34;&gt;DiffEqSensitivity.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/415&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Add additive noise downstream test for DiffEqFlux&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/416&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;DiscreteCallback fixes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/417&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Allow for changes of p in callbacks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/418&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fix for using the correct uleft/pleft in continuous callback&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/419&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fix broadcasting error on steady state adjoint&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/420&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Forward Least Squares Shadowing (LSS)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/422&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Adjoint-mode for the LSS method&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/423&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;concrete_solve dispatch for LSS methods&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/437&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Non-Intrusive Least Square Shadowing (NILSS)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/442&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;concrete_solve for NILSS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/443&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Remove allocation in NILSS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/444&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Handle additional callback case&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/445&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;State-dependent Continuous Callbacks for BacksolveAdjoint&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Open:&lt;/p&gt;
+&lt;h4 id=&#34;abstractdifferentiationjl&#34;&gt;AbstractDifferentiation.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;p&gt;*
+&lt;a href=&#34;https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/2&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fixes gradient, Jacobian, Hessian, and vjp tests&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Open:&lt;/p&gt;
+&lt;p&gt;*
+&lt;a href=&#34;https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/3&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Add ForwardDiff and Zygote&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;ordinarydiffeqjl&#34;&gt;OrdinaryDiffEq.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;p&gt;*
+&lt;a href=&#34;https://github.com/SciML/OrdinaryDiffEq.jl/pull/1424&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fix discrete reverse mode for some standard controllers&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;steadystatediffeqjl&#34;&gt;SteadyStateDiffEq.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;p&gt;*
+&lt;a href=&#34;https://github.com/SciML/SteadyStateDiffEq.jl/pull/31&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;convert alg.tspan to type of prob.u0&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;diffeqnoiseprocessjl&#34;&gt;DiffEqNoiseProcess.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;p&gt;*
+&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/94&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Allow solvers to use Noise Grid with SVectors&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;stochasticdiffeqjl&#34;&gt;StochasticDiffEq.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/StochasticDiffEq.jl/pull/428&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Remove Ihat2 matrix from weak solvers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;diffeqdocsjl&#34;&gt;DiffEqDocs.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqDocs.jl/pull/490&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Small typo on plot page&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;future-work&#34;&gt;Future work&lt;/h2&gt;
+&lt;p&gt;Besides the implementation of more shadowing methods, such as&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://arxiv.org/abs/1801.08674&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;NILSAS&lt;/a&gt;,&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://arxiv.org/abs/1711.06633&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FD-NILSS&lt;/a&gt;, or&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://arxiv.org/abs/2009.00595&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fast linear response&lt;/a&gt;,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;we are planning to&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;benchmark the new adjoints,&lt;/li&gt;
+&lt;li&gt;refine the AbstractDifferentiation.jl package and use it within DiffEqSensitivity.jl,&lt;/li&gt;
+&lt;li&gt;add more docs, and examples.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you have any further suggestions or comments, check out our slac/zulip channels #sciml-bridged and #diffeq-bridged or the 
+&lt;a href=&#34;https://discourse.julialang.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Julia language discourse&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;acknowledgement&#34;&gt;Acknowledgement&lt;/h2&gt;
+&lt;p&gt;Many thanks to my mentors 
+&lt;a href=&#34;https://github.com/ChrisRackauckas&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chris Rackauckas&lt;/a&gt;, 
+&lt;a href=&#34;https://github.com/mschauer&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Moritz Schauer&lt;/a&gt;, 
+&lt;a href=&#34;https://github.com/YingboMa&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Yingbo Ma&lt;/a&gt;, and 
+&lt;a href=&#34;https://github.com/mohamed82008&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Mohamed Tarek&lt;/a&gt; for their great, ongoing support before, during, and after this project. It was a great opportunity to be part of such an inspiring collaboration. I highly appreciate our quick and flexible meeting times.
+I would also like to thank 
+&lt;a href=&#34;https://www.quantumtheory-bruder.physik.unibas.ch/people.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Christoph Bruder&lt;/a&gt;, 
+&lt;a href=&#34;https://github.com/arnoldjulian&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Julian Arnold&lt;/a&gt;, and 
+&lt;a href=&#34;https://github.com/mako-git&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Martin Koppenhöfer&lt;/a&gt; for helpful comments on my blog posts. Special thanks to 
+&lt;a href=&#34;https://github.com/Zymrael&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Michael Poli&lt;/a&gt; and 
+&lt;a href=&#34;https://github.com/massastrello&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Stefano Massaroli&lt;/a&gt; for their suggestions with respect to adjoints for hybrid differential equations. Finally, thanks to the very supportive julia community and to Google&amp;rsquo;s open source program for funding this experience!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>AbstractDifferentiation.jl for AD-backend agnostic code </title>
@@ -1761,7 +1883,6 @@ Instead of automatic differentiation (AD) through the operations of an SDE solve
 &lt;a href=&#34;https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GSoC 2020: High weak order SDE solvers and their utility in neural SDEs&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;a href=&#34;https://frankschae.github.io/post/high-weak/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;High weak order SDE solvers&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Adjoint sensitivity methods  &amp;ndash; To be uploaded soon.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;docs&#34;&gt;Docs&lt;/h2&gt;
 &lt;p&gt;The documentation of the solvers is available 

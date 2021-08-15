@@ -29,7 +29,6 @@ Instead of automatic differentiation (AD) through the operations of an SDE solve
 &lt;a href=&#34;https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GSoC 2020: High weak order SDE solvers and their utility in neural SDEs&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;a href=&#34;https://frankschae.github.io/post/high-weak/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;High weak order SDE solvers&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Adjoint sensitivity methods  &amp;ndash; To be uploaded soon.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;docs&#34;&gt;Docs&lt;/h2&gt;
 &lt;p&gt;The documentation of the solvers is available 
