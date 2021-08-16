@@ -120,8 +120,8 @@ $$&lt;/p&gt;
 &lt;p&gt;The full trajectory $z_{\rm exp}(t)$ is determined by&lt;/p&gt;
 &lt;p&gt;$$
 z_{\rm exp}(t) = \begin{cases}
-z^{1}_{\rm exp}(t) &amp;amp;=z_0 + v_0 t - \frac{g}{2} t^2 &amp;amp;, \forall t \leq t^\star, \\&lt;br&gt;
-z^{2}_{\rm exp}(t) &amp;amp;=-0.4901 g - 0.5 g (-0.99005 + t)^2 +\\&lt;br&gt;
+z^{(1)}_{\rm exp}(t) &amp;amp;=z_0 + v_0 t - \frac{g}{2} t^2 &amp;amp;, \forall t \leq t^\star, \\&lt;br&gt;
+z^{(2)}_{\rm exp}(t) &amp;amp;=-0.4901 g - 0.5 g (-0.99005 + t)^2 +\\&lt;br&gt;
 &amp;amp;+0.99005 v_0 + z_0 - (-0.99005 + t) (-0.99005 g + v_0)\gamma  &amp;amp;, \forall t &amp;gt; t^\star,
 \end{cases}
 $$&lt;/p&gt;
@@ -168,8 +168,8 @@ v_{+, \rm imp}&amp;amp;= \gamma \sqrt{v_0^2 + 2 g z_0}.
 &lt;p&gt;for the right limit. Thus, the full trajectory $z_{\rm imp}(t)$ is given by&lt;/p&gt;
 &lt;p&gt;$$
 z_{\rm imp}(t) = \begin{cases}
-z^{1}_{\rm imp}(t) &amp;amp;=z_0 + v_0 t - \frac{g}{2} t^2 &amp;amp;, \forall t \leq t^\star ,\\&lt;br&gt;
-z^{2}_{\rm imp}(t) &amp;amp;= -\frac{(-g t + v_0 + \sqrt{v_0^2 + 2 g z_0})}{2 g} \times, \\&lt;br&gt;
+z^{(1)}_{\rm imp}(t) &amp;amp;=z_0 + v_0 t - \frac{g}{2} t^2 &amp;amp;, \forall t \leq t^\star ,\\&lt;br&gt;
+z^{(2)}_{\rm imp}(t) &amp;amp;= -\frac{(-g t + v_0 + \sqrt{v_0^2 + 2 g z_0})}{2 g} \times, \\&lt;br&gt;
 &amp;amp;\times (-g t + v_0 + \sqrt{v_0^2 + 2 g z_0} (1 + 2 \gamma)) &amp;amp;, \forall t &amp;gt; t^\star.
 \end{cases}
 $$&lt;/p&gt;
@@ -218,7 +218,12 @@ savefig(pl,&amp;quot;BB_forward.png&amp;quot;)
 
 &lt;/figure&gt;
 
-&lt;p&gt;In addition, the implicitly defined impact time via the &lt;code&gt;ContinuousCallback&lt;/code&gt; also shifts the impact time when changing the initial conditions or the parameters&lt;/p&gt;
+&lt;p&gt;In addition, the implicitly defined impact time via the &lt;code&gt;ContinuousCallback&lt;/code&gt; also shifts the impact time when changing the initial conditions or the parameters. In other words, the event time $t^\star=t^\star(p,z_0,v_0,t_0)$ is a function of the parameters and initial conditions, and is implicitly defined by the event condition.&lt;/p&gt;
+&lt;p&gt;Suppose we let the ball drop from a somewhat higher position now. Does an increase in height at $t=0$ give an increase or decrease in height at the end time $t_\text{end}=1.9$? This is something we can answer with sensitivity analysis. For example if we increase the height by (a fraction of) one unit then&lt;/p&gt;
+&lt;p&gt;$$
+\frac{\text{d} z_{\rm imp}(t_\text{end})}{\text{d} z_0} = \frac{\text{d} z_{\rm imp}^{(2)}(t_\text{end})}{\text{d} z_0} = 0.84
+$$&lt;/p&gt;
+&lt;p&gt;We can verify this visually:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;# animate forward trajectory
 sol3 = solve(remake(prob,u0=[u0[1]+0.5,u0[2]]),Tsit5(),callback=cb2,saveat=0.01)
 
@@ -273,9 +278,9 @@ anim = animate(list_plots,every=1)
 
 &lt;/figure&gt;
 
-&lt;p&gt;The original curve is shown in black in the figure above. In other words, the event time $t^\star=t^\star(p,z_0,v_0,t_0)$ is a function of the parameters and initial conditions, and is implicitly defined by the event condition.&lt;/p&gt;
+&lt;p&gt;The original curve is shown in black in the figure above.&lt;/p&gt;
 &lt;h2 id=&#34;sensitivity-analysis-with-events&#34;&gt;Sensitivity analysis with events&lt;/h2&gt;
-&lt;p&gt;We are often interested in computing the change of a loss function with respect to changes of the parameters or initial condition. For this purpose, let us first consider the mean square error loss function&lt;/p&gt;
+&lt;p&gt;More generally, we are often interested in computing the change of a loss function with respect to changes of the parameters or initial condition. Suppose that you have a mean square error loss function&lt;/p&gt;
 &lt;p&gt;$$
 L(z,y) = \sum_i(z(t_i) - y_i)^2
 $$&lt;/p&gt;
