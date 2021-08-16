@@ -221,8 +221,9 @@ savefig(pl,&amp;quot;BB_forward.png&amp;quot;)
 &lt;p&gt;In addition, the implicitly defined impact time via the &lt;code&gt;ContinuousCallback&lt;/code&gt; also shifts the impact time when changing the initial conditions or the parameters. In other words, the event time $t^\star=t^\star(p,z_0,v_0,t_0)$ is a function of the parameters and initial conditions, and is implicitly defined by the event condition.&lt;/p&gt;
 &lt;p&gt;Suppose we let the ball drop from a somewhat higher position now. Does an increase in height at $t=0$ give an increase or decrease in height at the end time $t_\text{end}=1.9$? This is something we can answer with sensitivity analysis. For example if we increase the height by (a fraction of) one unit then&lt;/p&gt;
 &lt;p&gt;$$
-\frac{\text{d} z_{\rm imp}(t_\text{end})}{\text{d} z_0} = \frac{\text{d} z_{\rm imp}^{(2)}(t_\text{end})}{\text{d} z_0} = 0.84
+\frac{\text{d} z_{\rm imp}(t_\text{end})}{\text{d} z_0} = \frac{\text{d} z_{\rm imp}^{(2)}(t_\text{end})}{\text{d} z_0} = 0.84,
 $$&lt;/p&gt;
+&lt;p&gt;meaning the height at $t_\text{end}$ is also by a corresponding fraction of 0.84 units higher.&lt;/p&gt;
 &lt;p&gt;We can verify this visually:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;# animate forward trajectory
 sol3 = solve(remake(prob,u0=[u0[1]+0.5,u0[2]]),Tsit5(),callback=cb2,saveat=0.01)
