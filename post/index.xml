@@ -18,11 +18,11 @@
       <pubDate>Fri, 13 Aug 2021 21:41:45 +0200</pubDate>
       <guid>https://frankschae.github.io/post/gsoc-2021/</guid>
       <description>&lt;h2 id=&#34;project-summary&#34;&gt;Project summary&lt;/h2&gt;
-&lt;p&gt;In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as an high level API for automatic differentiation.&lt;/p&gt;
+&lt;p&gt;In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as a high level API for automatic differentiation.&lt;/p&gt;
 &lt;p&gt;Possible fields of application for these tools range from model discovery with explicit dosing times in pharmacology, over accurate gradient estimates for chaotic fluid dynamics, to the control of open quantum systems. A more detailed summary is available 
 &lt;a href=&#34;https://summerofcode.withgoogle.com/projects/#5357798591823872&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;on the GSoC page&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;blog-posts&#34;&gt;Blog posts&lt;/h2&gt;
-&lt;p&gt;The following blog posts describe the work in more detail throughout the GSoC period:&lt;/p&gt;
+&lt;p&gt;The following blog posts describe the work throughout the GSoC period in more detail:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;a href=&#34;https://frankschae.github.io/post/hybridde/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Neural Hybrid Differential Equations&lt;/a&gt;&lt;/li&gt;
@@ -76,23 +76,33 @@
 &lt;/ul&gt;
 &lt;h4 id=&#34;abstractdifferentiationjl&#34;&gt;AbstractDifferentiation.jl&lt;/h4&gt;
 &lt;p&gt;Merged:&lt;/p&gt;
-&lt;p&gt;*
-&lt;a href=&#34;https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/2&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fixes gradient, Jacobian, Hessian, and vjp tests&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/2&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fixes gradient, Jacobian, Hessian, and vjp tests&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Open:&lt;/p&gt;
-&lt;p&gt;*
-&lt;a href=&#34;https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/3&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Add ForwardDiff and Zygote&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/3&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Add ForwardDiff and Zygote&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h4 id=&#34;ordinarydiffeqjl&#34;&gt;OrdinaryDiffEq.jl&lt;/h4&gt;
 &lt;p&gt;Merged:&lt;/p&gt;
-&lt;p&gt;*
-&lt;a href=&#34;https://github.com/SciML/OrdinaryDiffEq.jl/pull/1424&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fix discrete reverse mode for some standard controllers&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/OrdinaryDiffEq.jl/pull/1424&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fix discrete reverse mode for some standard controllers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h4 id=&#34;steadystatediffeqjl&#34;&gt;SteadyStateDiffEq.jl&lt;/h4&gt;
 &lt;p&gt;Merged:&lt;/p&gt;
-&lt;p&gt;*
-&lt;a href=&#34;https://github.com/SciML/SteadyStateDiffEq.jl/pull/31&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;convert alg.tspan to type of prob.u0&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/SteadyStateDiffEq.jl/pull/31&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;convert alg.tspan to type of prob.u0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h4 id=&#34;diffeqnoiseprocessjl&#34;&gt;DiffEqNoiseProcess.jl&lt;/h4&gt;
 &lt;p&gt;Merged:&lt;/p&gt;
-&lt;p&gt;*
-&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/94&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Allow solvers to use Noise Grid with SVectors&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqNoiseProcess.jl/pull/94&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Allow solvers to use Noise Grid with SVectors&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h4 id=&#34;stochasticdiffeqjl&#34;&gt;StochasticDiffEq.jl&lt;/h4&gt;
 &lt;p&gt;Merged:&lt;/p&gt;
 &lt;ul&gt;
@@ -121,7 +131,7 @@
 &lt;ul&gt;
 &lt;li&gt;benchmark the new adjoints,&lt;/li&gt;
 &lt;li&gt;refine the AbstractDifferentiation.jl package and use it within DiffEqSensitivity.jl,&lt;/li&gt;
-&lt;li&gt;add more docs, and examples.&lt;/li&gt;
+&lt;li&gt;add more docs and examples.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;If you have any further suggestions or comments, check out our slac/zulip channels #sciml-bridged and #diffeq-bridged or the 
 &lt;a href=&#34;https://discourse.julialang.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Julia language discourse&lt;/a&gt;.&lt;/p&gt;
@@ -136,7 +146,7 @@ I would also like to thank
 &lt;a href=&#34;https://github.com/arnoldjulian&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Julian Arnold&lt;/a&gt;, and 
 &lt;a href=&#34;https://github.com/mako-git&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Martin Koppenhöfer&lt;/a&gt; for helpful comments on my blog posts. Special thanks to 
 &lt;a href=&#34;https://github.com/Zymrael&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Michael Poli&lt;/a&gt; and 
-&lt;a href=&#34;https://github.com/massastrello&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Stefano Massaroli&lt;/a&gt; for their suggestions with respect to adjoints for hybrid differential equations. Finally, thanks to the very supportive julia community and to Google&amp;rsquo;s open source program for funding this experience!&lt;/p&gt;
+&lt;a href=&#34;https://github.com/massastrello&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Stefano Massaroli&lt;/a&gt; for their suggestions on adjoints for hybrid differential equations. Finally, thanks to the very supportive julia community and to Google&amp;rsquo;s open source program for funding this experience!&lt;/p&gt;
 </description>
     </item>
     

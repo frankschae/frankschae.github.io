@@ -27,7 +27,7 @@
   
     
   
-  <meta name="description" content="Project summary In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as an high level API for automatic differentiation.">
+  <meta name="description" content="Project summary In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as a high level API for automatic differentiation.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://frankschae.github.io/post/gsoc-2021/">
@@ -240,7 +240,7 @@
   <meta property="og:site_name" content="FS">
   <meta property="og:url" content="https://frankschae.github.io/post/gsoc-2021/">
   <meta property="og:title" content="Neural Hybrid Differential Equations and Adjoint Sensitivity Analysis | FS">
-  <meta property="og:description" content="Project summary In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as an high level API for automatic differentiation."><meta property="og:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="og:description" content="Project summary In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as a high level API for automatic differentiation."><meta property="og:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -290,7 +290,7 @@
       "url": "https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Project summary In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as an high level API for automatic differentiation."
+  "description": "Project summary In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as a high level API for automatic differentiation."
 }
 </script>
 
@@ -655,11 +655,11 @@
 
     <div class="article-style">
       <h2 id="project-summary">Project summary</h2>
-<p>In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as an high level API for automatic differentiation.</p>
+<p>In this project, we have implemented state-of-the-art sensitivity tools for chaotic dynamical systems, continuous adjoint sensitivity methods for hybrid differential equations, as well as a high level API for automatic differentiation.</p>
 <p>Possible fields of application for these tools range from model discovery with explicit dosing times in pharmacology, over accurate gradient estimates for chaotic fluid dynamics, to the control of open quantum systems. A more detailed summary is available 
 <a href="https://summerofcode.withgoogle.com/projects/#5357798591823872" target="_blank" rel="noopener">on the GSoC page</a>.</p>
 <h2 id="blog-posts">Blog posts</h2>
-<p>The following blog posts describe the work in more detail throughout the GSoC period:</p>
+<p>The following blog posts describe the work throughout the GSoC period in more detail:</p>
 <ol>
 <li>
 <a href="https://frankschae.github.io/post/hybridde/" target="_blank" rel="noopener">Neural Hybrid Differential Equations</a></li>
@@ -713,23 +713,33 @@
 </ul>
 <h4 id="abstractdifferentiationjl">AbstractDifferentiation.jl</h4>
 <p>Merged:</p>
-<p>*
-<a href="https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/2" target="_blank" rel="noopener">Fixes gradient, Jacobian, Hessian, and vjp tests</a></p>
+<ul>
+<li>
+<a href="https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/2" target="_blank" rel="noopener">Fixes gradient, Jacobian, Hessian, and vjp tests</a></li>
+</ul>
 <p>Open:</p>
-<p>*
-<a href="https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/3" target="_blank" rel="noopener">Add ForwardDiff and Zygote</a></p>
+<ul>
+<li>
+<a href="https://github.com/JuliaDiff/AbstractDifferentiation.jl/pull/3" target="_blank" rel="noopener">Add ForwardDiff and Zygote</a></li>
+</ul>
 <h4 id="ordinarydiffeqjl">OrdinaryDiffEq.jl</h4>
 <p>Merged:</p>
-<p>*
-<a href="https://github.com/SciML/OrdinaryDiffEq.jl/pull/1424" target="_blank" rel="noopener">Fix discrete reverse mode for some standard controllers</a></p>
+<ul>
+<li>
+<a href="https://github.com/SciML/OrdinaryDiffEq.jl/pull/1424" target="_blank" rel="noopener">Fix discrete reverse mode for some standard controllers</a></li>
+</ul>
 <h4 id="steadystatediffeqjl">SteadyStateDiffEq.jl</h4>
 <p>Merged:</p>
-<p>*
-<a href="https://github.com/SciML/SteadyStateDiffEq.jl/pull/31" target="_blank" rel="noopener">convert alg.tspan to type of prob.u0</a></p>
+<ul>
+<li>
+<a href="https://github.com/SciML/SteadyStateDiffEq.jl/pull/31" target="_blank" rel="noopener">convert alg.tspan to type of prob.u0</a></li>
+</ul>
 <h4 id="diffeqnoiseprocessjl">DiffEqNoiseProcess.jl</h4>
 <p>Merged:</p>
-<p>*
-<a href="https://github.com/SciML/DiffEqNoiseProcess.jl/pull/94" target="_blank" rel="noopener">Allow solvers to use Noise Grid with SVectors</a></p>
+<ul>
+<li>
+<a href="https://github.com/SciML/DiffEqNoiseProcess.jl/pull/94" target="_blank" rel="noopener">Allow solvers to use Noise Grid with SVectors</a></li>
+</ul>
 <h4 id="stochasticdiffeqjl">StochasticDiffEq.jl</h4>
 <p>Merged:</p>
 <ul>
@@ -758,7 +768,7 @@
 <ul>
 <li>benchmark the new adjoints,</li>
 <li>refine the AbstractDifferentiation.jl package and use it within DiffEqSensitivity.jl,</li>
-<li>add more docs, and examples.</li>
+<li>add more docs and examples.</li>
 </ul>
 <p>If you have any further suggestions or comments, check out our slac/zulip channels #sciml-bridged and #diffeq-bridged or the 
 <a href="https://discourse.julialang.org/" target="_blank" rel="noopener">Julia language discourse</a>.</p>
@@ -773,7 +783,7 @@ I would also like to thank
 <a href="https://github.com/arnoldjulian" target="_blank" rel="noopener">Julian Arnold</a>, and 
 <a href="https://github.com/mako-git" target="_blank" rel="noopener">Martin Koppenhöfer</a> for helpful comments on my blog posts. Special thanks to 
 <a href="https://github.com/Zymrael" target="_blank" rel="noopener">Michael Poli</a> and 
-<a href="https://github.com/massastrello" target="_blank" rel="noopener">Stefano Massaroli</a> for their suggestions with respect to adjoints for hybrid differential equations. Finally, thanks to the very supportive julia community and to Google&rsquo;s open source program for funding this experience!</p>
+<a href="https://github.com/massastrello" target="_blank" rel="noopener">Stefano Massaroli</a> for their suggestions on adjoints for hybrid differential equations. Finally, thanks to the very supportive julia community and to Google&rsquo;s open source program for funding this experience!</p>
 
     </div>
 
