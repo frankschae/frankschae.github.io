@@ -70,11 +70,10 @@
 &lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/445&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;State-dependent Continuous Callbacks for BacksolveAdjoint&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/474&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;QuadratureAdjoint() for ContinuousCallback&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Open:&lt;/p&gt;
-&lt;ul&gt;
 &lt;li&gt;
 &lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/475&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;More tests for Neural ODEs with callbacks for different sensitivity algorithms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/476&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Support for PeriodicCallbacks in continuous adjoint methods&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;abstractdifferentiationjl&#34;&gt;AbstractDifferentiation.jl&lt;/h4&gt;
 &lt;p&gt;Merged:&lt;/p&gt;
@@ -92,6 +91,12 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;a href=&#34;https://github.com/SciML/OrdinaryDiffEq.jl/pull/1424&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fix discrete reverse mode for some standard controllers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;diffeqcallbacksjl&#34;&gt;DiffEqCallbacks.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/SciML/DiffEqCallbacks.jl/pull/102&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Introduce a PeriodicCallbackAffect struct&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;steadystatediffeqjl&#34;&gt;SteadyStateDiffEq.jl&lt;/h4&gt;
 &lt;p&gt;Merged:&lt;/p&gt;
