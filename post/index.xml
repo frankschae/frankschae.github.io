@@ -102,7 +102,15 @@
 &lt;p&gt;Merged:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;a href=&#34;https://github.com/SciML/SteadyStateDiffEq.jl/pull/31&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;convert alg.tspan to type of prob.u0&lt;/a&gt;&lt;/li&gt;
+&lt;a href=&#34;https://github.com/SciML/SteadyStateDiffEq.jl/pull/31&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Convert alg.tspan to type of prob.u0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;chainrulesjl&#34;&gt;ChainRules.jl&lt;/h4&gt;
+&lt;p&gt;Merged:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/JuliaDiff/ChainRules.jl/pull/506&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Do not differentiate through the construction of BitArray&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/JuliaDiff/ChainRules.jl/pull/508&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Use splatting in BitArray&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;diffeqnoiseprocessjl&#34;&gt;DiffEqNoiseProcess.jl&lt;/h4&gt;
 &lt;p&gt;Merged:&lt;/p&gt;
