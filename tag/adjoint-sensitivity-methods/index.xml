@@ -21,7 +21,7 @@
 &lt;p&gt;$$
 \begin{aligned}
 \text{d}z(t) &amp;amp;= v(t) \text{d}t, \\&lt;br&gt;
-\text{d}v(t) &amp;amp;= -\mathrm g,  \text{d}t
+\text{d}v(t) &amp;amp;= -\mathrm g\thinspace  \text{d}t
 \end{aligned}&lt;br&gt;
 $$&lt;/p&gt;
 &lt;p&gt;with initial condition&lt;/p&gt;
@@ -38,7 +38,7 @@ $$&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
 z(t) &amp;amp;= z_0 + v_0 t - \frac{\mathrm g}{2} t^2, \\&lt;br&gt;
-v(t) &amp;amp;= v_0 - \mathrm g,  t
+v(t) &amp;amp;= v_0 - \mathrm g\thinspace  t
 \end{aligned}&lt;br&gt;
 $$&lt;/p&gt;
 &lt;p&gt;or numerically using the OrdinaryDiffEq package from the 
@@ -172,7 +172,7 @@ v({\tau})&amp;amp;= \gamma \sqrt{v_0^2 + 2 \mathrm g z_0}
 (\star) \quad z(t) = \begin{cases}
 z_0 + v_0 t - \dfrac{\mathrm g}{2} t^2 ,&amp;amp; \forall t &amp;lt; \tau ,\\&lt;br&gt;
 -\dfrac{-\mathrm g t + v_0 + \sqrt{v_0^2 + 2 \mathrm g z_0}}{2 \mathrm g}  \\&lt;br&gt;
-\quad\cdot; (-\mathrm g t + v_0 + \sqrt{v_0^2 + 2 \mathrm g z_0} (1 + 2 \gamma)), &amp;amp; \forall t \ge \tau.
+\quad\cdot \space (-\mathrm g t + v_0 + \sqrt{v_0^2 + 2 \mathrm g z_0} (1 + 2 \gamma)), &amp;amp; \forall t \ge \tau.
 \end{cases}
 $$&lt;/p&gt;
 &lt;p&gt;This is correct even if one substitutes, e.g., a value with higher precision $\mathrm g = 9.81$ for the gravitation constant.&lt;/p&gt;
@@ -284,24 +284,40 @@ anim = animate(list_plots,every=1)
 
 &lt;p&gt;The original curve is shown in black in the figure above.&lt;/p&gt;
 &lt;h2 id=&#34;sensitivity-analysis-with-events&#34;&gt;Sensitivity analysis with events&lt;/h2&gt;
-&lt;p&gt;More generally, we are often interested in computing the change of a loss function with respect to changes of the parameters or initial condition. Suppose that you have a mean square error loss&lt;/p&gt;
+&lt;p&gt;In more general terms, the last example can be seen as a loss function acting on $z$ at the end time&lt;/p&gt;
 &lt;p&gt;$$
-L = \sum_j(z(\tau_j) - y_j)^2
+L^{\text{exp}} = z(t_{\text{end}}),
 $$&lt;/p&gt;
-&lt;p&gt;with respect to target values $y_i$ at implicit (bounce) times right before or at the event times. Let $\alpha$ denote any of the inputs $(z_0,v_0,g,\gamma)$. The sensitivity with respect to $\alpha$ is then given by the chain rule:&lt;/p&gt;
+&lt;p&gt;where the superscript &amp;ldquo;exp&amp;rdquo; refers to an explicit definition of the time ($t_{\text{end}}$) at which we evaluate the loss function.  Let $\alpha$ denote any of the inputs $(z_0,v_0,g,\gamma)$. The sensitivity with respect to $\alpha$ is then given by the chain rule&lt;/p&gt;
 &lt;p&gt;$$
-\frac{\text{d}L}{\text{d} \alpha} =  2\sum_j (z(\tau_j) - y_j) \frac{\text{d}z(\tau_j)}{\text{d} \alpha},
-$$
-where we have to be careful that implicit times $\tau_j$ potentially depend on $\alpha$: Using the location $z(t)$ at the explicit time $t = 0.9905$ instead of the implicit $z(\tau)$, a different value for the sensitivity is obtained  (a value ignoring the changes in $\tau$ and not the one we are looking for), even though $\tau = 0.9905$ too.&lt;/p&gt;
-&lt;p&gt;More completely, one can have&lt;/p&gt;
-&lt;p&gt;$$L = \sum_j L_j(\tau_j,x(\tau_j),p) + \sum_i L^{\text{ex}}_i(s_j,x(s_i),p)  ,$$&lt;/p&gt;
-&lt;p&gt;where we also allow for losses $L_i^{\text{ex}}$ at explicit time points $s_i$ such as $t_{\text{end}}$.&lt;/p&gt;
-&lt;p&gt;For the bouncing ball with quantity of interest $L = z(t_{\text{end}})$, we can easily compute the sensitivities $\dfrac{\text{d}L}{\text{d} \alpha}$ by inserting our results for $z(t_{\text{end}})$.&lt;/p&gt;
-&lt;p&gt;However, in most systems, we won&amp;rsquo;t be able to solve analytically a differential equation&lt;/p&gt;
+\frac{\text{d}L^{\text{exp}}}{\text{d} \alpha} = \frac{\text{d}L^{\text{exp}}}{\text{d} z}  \frac{\text{d}z(t_{\text{end}})}{\text{d} \alpha} = \frac{\text{d}z(t_{\text{end}})}{\text{d} \alpha}.
+$$&lt;/p&gt;
+&lt;p&gt;Inserting our results for $z(t) = z_{\rm exp}(t)$ instead of $z(t) = z_{\rm imp}(t)$ at $t_{\text{end}}$, a different value for the sensitivity is obtained (a value ignoring the changes in $z$ due to changes in the bouncing time $\tau$), e.g.,&lt;/p&gt;
+&lt;p&gt;$$
+\quad \frac{\text{d}L^{\text{exp}}}{\text{d} z_0} = \begin{cases}
+1 &amp;amp; \text{with } z(t) = z_{\rm exp}(t) ,\\&lt;br&gt;
+0.84 &amp;amp; \text{with } z(t) = z_{\rm imp}(t) .
+\end{cases}
+$$&lt;/p&gt;
+&lt;p&gt;Besides an explicit description of time points, we may also encounter implicitly defined time points. For example, for the bouncing ball with velocity at the impact time $\tau-$ (i.e., at the left limit) as the quantity of interest,&lt;/p&gt;
+&lt;p&gt;$$
+L = v(\tau-),
+$$&lt;/p&gt;
+&lt;p&gt;we could be interested in the sensitivity of $L$ with respect $g$. Using the velocity $v(t)$ at the explicit time $t = 0.9905$ instead of the implicit $v(\tau-)$, again a different value for the sensitivity is obtained (a value again ignoring the changes in $\tau$ and not the one we are looking for), even though $\tau = 0.9905$ in both cases:&lt;/p&gt;
+&lt;p&gt;$$
+\quad \frac{\text{d}L}{\text{d} g} = \begin{cases}
+-0.99005 &amp;amp; \text{with } v(t) = v_{\rm exp}(t) ,\\&lt;br&gt;
+-\frac{g}{\sqrt{v_0^2 + 2 g z_0}} = -0.99995 &amp;amp; \text{ with } v(t) = v_{\rm imp}(t) .
+\end{cases}
+$$&lt;/p&gt;
+&lt;p&gt;Thanks to our analytical results for the bouncing ball, the sensitivity computation has been straightforward up to now. However, in most systems, we won&amp;rsquo;t be able to solve analytically a differential equation&lt;/p&gt;
 &lt;p&gt;$$
 \text{d}x(t) = f(x,p,t) \text{d}t
 $$&lt;/p&gt;
 &lt;p&gt;with initial condition $x_0=x(t_0)$. Instead, we have to numerically solve for the trajectory $x(t)$.&lt;/p&gt;
+&lt;p&gt;More completely, we will in the following derive an adjoint sensitivity method for a loss function&lt;/p&gt;
+&lt;p&gt;$$L = \sum_j L_j(\tau_j,x(\tau_j),p) + \sum_i L^{\text{exp}}_i(s_j,x(s_i),p)  ,$$&lt;/p&gt;
+&lt;p&gt;with $L_i^{\text{exp}}$ at explicit time points $s_i$, such as $t_{\text{end}}$, and $L_j(\tau_j,x(\tau_j),p)$ at implicit time points, such as $\tau$, which allows us to compute the sensitivity of $L$ with respect to changes of the parameters or initial condition without the requirement of an analytical solution for $x(t)$.&lt;/p&gt;
 &lt;h3 id=&#34;backsolve-adjoint-algorithm-for-ordinary-differential-equations&#34;&gt;Backsolve-Adjoint algorithm for ordinary differential equations&lt;/h3&gt;
 &lt;p&gt;Taking derivatives (or finding sensitivities) works in a beautiful mechanical way. We or a computer can find the derivatives of complex expressions by just repeatedly applying the chain rule.&lt;/p&gt;
 &lt;p&gt;We write&lt;/p&gt;
@@ -312,8 +328,8 @@ $$&lt;/p&gt;
 &lt;p&gt;Let us focus on the &lt;code&gt;BacksolveAdjoint()&lt;/code&gt; algorithm which computes the sensitivities&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\frac{\text{d},\text{solve}(t_0, x_0, t, p)}{\text{d}x_{0}} &amp;amp;= \lambda(t_{0}),\\&lt;br&gt;
-\frac{\text{d},\text{solve}(t_0, x_0, t, p)}{\text{d}p} &amp;amp;= \lambda_{p}(t_{0}),
+\frac{\text{d}\thinspace\text{solve}(t_0, x_0, t, p)}{\text{d}x_{0}} &amp;amp;= \lambda(t_{0}),\\&lt;br&gt;
+\frac{\text{d}\thinspace\text{solve}(t_0, x_0, t, p)}{\text{d}p} &amp;amp;= \lambda_{p}(t_{0}),
 \end{aligned}
 $$&lt;/p&gt;
 &lt;p&gt;with respect to the initial state and the parameters. It does so by solving an ODE for $\lambda(s)$ in reverse time from $t$ to $t_0$&lt;/p&gt;
@@ -334,25 +350,25 @@ $$&lt;/p&gt;
 &lt;p&gt;Note that computing the vector-Jacobian products (vjp) in the adjoint ODE requires the value of $x(s)$ along its trajectory. In &lt;code&gt;BacksolveAdjoint()&lt;/code&gt;, we recompute $x(s)$ &amp;ndash; together with the adjoint variables &amp;ndash; backwards in time starting with its final value $x(t)$. A derivation of the ODE adjoint is given in 
 &lt;a href=&#34;https://mitmath.github.io/18337/lecture11/adjoints&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chris&#39; MIT 18.337 lecture notes&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;BacksolveAdjoint()&lt;/code&gt;, essentially the custom primitive differentiation rule of &lt;code&gt;solve&lt;/code&gt;, is the elementary building block needed to derive sensitivities also in more complicated examples:&lt;/p&gt;
-&lt;p&gt;Consider a loss depending on the state $x(s_i)$ at fix time points $s_i$ through loss functions $L_i$,&lt;/p&gt;
+&lt;p&gt;Consider a loss depending on the state $x(s_i)$ at fix time points $s_i$ through loss functions $L_i^{\text{exp}}$,&lt;/p&gt;
 &lt;p&gt;$$
-L = \sum_i L_i(s_i, x(s_i), p).
+L^{\text{exp}} = \sum_i L_i^{\text{exp}}(s_i, x(s_i), p).
 $$&lt;/p&gt;
-&lt;p&gt;Without contortions we can obtain the sensitivity of $L$ in $p$ (or in $x_0$) using the tool we have. For those a bit familiar with automatic differentiation, this is perhaps easiest to see if we write $L$ as pseudo code&lt;/p&gt;
+&lt;p&gt;Without contortions we can obtain the sensitivity of $L^{\text{exp}}$ in $p$ (or in $x_0$) using the tool we have. For those a bit familiar with automatic differentiation, this is perhaps easiest to see if we write $L^{\text{exp}}$ as pseudo code&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;function loss(t0, x0, p)
     x1 = solve(t0, x0, s1, p)
     L = L1(s1, x1, p)
-    x2 = solve(t1, x1, s2, p)
+    x2 = solve(s1, x1, s2, p)
     L += L2(s2, x2, p)
     ...
     return L
 end
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and consider the problem of automatically differentiating it. You&amp;rsquo;ll just need the primitives of &lt;code&gt;solve&lt;/code&gt;, &lt;code&gt;L1&lt;/code&gt; and &lt;code&gt;L2&lt;/code&gt;! The sensitivities can be computed by repeated calls to &lt;code&gt;BacksolveAdjoint()&lt;/code&gt; on the intervals &lt;code&gt;(s_i, s_{i+1})&lt;/code&gt; backward in time, taking in the sensitivities $\sum_i L(s_i, x(s_i))$ at times $s_i$, or as single call &lt;code&gt;BacksolveAdjoint()&lt;/code&gt; with discrete callbacks:&lt;/p&gt;
+&lt;p&gt;and consider the problem of automatically differentiating it. You&amp;rsquo;ll just need the primitives of &lt;code&gt;solve&lt;/code&gt;, &lt;code&gt;L1&lt;/code&gt; and &lt;code&gt;L2&lt;/code&gt;! The sensitivities can be computed by repeated calls to &lt;code&gt;BacksolveAdjoint()&lt;/code&gt; on the intervals &lt;code&gt;(s_i, s_{i+1})&lt;/code&gt; backward in time, taking in the sensitivities $\sum_i L^{\text{exp}}(s_i, x(s_i), p)$ at times $s_i$, or according to the common notation&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; as single call &lt;code&gt;BacksolveAdjoint()&lt;/code&gt; with discrete callbacks:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\frac{\text{d}\lambda(t)}{\text{d}t} &amp;amp;= -\lambda(t)^\dagger \frac{\text{d} f(\rightarrow x(t), p, t)}{\text{d} x(t)} - \frac{\text{d} L_i(\rightarrow x(t), p)}{\text{d} x(t)}^\dagger \delta(t-s_i), \\&lt;br&gt;
-\frac{\text{d}\lambda_{p}(t)}{\text{d}t} &amp;amp;= -\lambda(t)^\dagger \frac{\text{d} f(x(t), \rightarrow p, t)}{\text{d} p} - \frac{\text{d} L_i(  x(t),\rightarrow p)}{\text{d} p}^\dagger \delta(t-s_i) ,
+\frac{\text{d}\lambda(t)}{\text{d}t} &amp;amp;= -\lambda(t)^\dagger \frac{\text{d} f(\rightarrow x(t), p, t)}{\text{d} x(t)} - \frac{\text{d} L_i^{\text{exp}}(\rightarrow x(t), p)}{\text{d} x(t)}^\dagger \delta(t-s_i), \\&lt;br&gt;
+\frac{\text{d}\lambda_{p}(t)}{\text{d}t} &amp;amp;= -\lambda(t)^\dagger \frac{\text{d} f(x(t), \rightarrow p, t)}{\text{d} p} - \frac{\text{d} L_i^{\text{exp}}(  x(t),\rightarrow p)}{\text{d} p}^\dagger \delta(t-s_i).
 \end{aligned}
 $$&lt;/p&gt;
 &lt;p&gt;The sensitivities of the ordinary &lt;code&gt;solve&lt;/code&gt; with respect to the other arguments are also needed and given by&lt;/p&gt;
@@ -365,7 +381,21 @@ $$&lt;/p&gt;
 $$&lt;/p&gt;
 &lt;p&gt;Now we can even properly define the &lt;code&gt;rrule&lt;/code&gt; of &lt;code&gt;solve&lt;/code&gt; in the sense of &lt;code&gt;DiffRules.jl&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;explicit-events-1&#34;&gt;Explicit events&lt;/h3&gt;
-&lt;p&gt;To make &lt;code&gt;BacksolveAdjoint()&lt;/code&gt; compatible with explicit events&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, we have to store the event times $s_j$ as well as the state $x(s_j-)$ at the left limit of $s_i$.&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; We then solve the adjoint ODE backwards in time between the events. As soon as we reach an event time $s_j$ from the right, we update the augmented state according to&lt;/p&gt;
+&lt;p&gt;To make &lt;code&gt;BacksolveAdjoint()&lt;/code&gt; compatible with explicit events&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;function loss(t0, x0, p)
+    x1- = solve(t0, x0, s1, p)
+    L = L1-(s1, x1-, p) # saved before affect
+    x1 = a(x1-, p, s1) # affect
+    L += L1(s1, x1, p) # saved after affect
+    x2- = solve(s1, x1, s2, p)
+    L += L2-(s2, x2-, p)
+    x2 = a(x2-, p, s2) # affect
+    L += L2(s2, x2, p)
+    ...
+    return L
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;we have to store the event times $s_j$ as well as the state $x(s_j-)$ at the left limit of $s_i$.&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; We then solve the adjoint ODE backwards in time between the events. As soon as we reach an event time $s_j$ from the right, we update the augmented state according to&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
 \lambda({s_j}-) &amp;amp;= \lambda({s_j})^\dagger \frac{\text{d} a(\rightarrow x({s_j}-), p, {s_j}-)}{\text{d} x(s_j-)} \\&lt;br&gt;
@@ -392,6 +422,8 @@ $$&lt;/p&gt;
 was also considered by Ricky T. Q. Chen, Brandon Amos, and Maximilian Nickel in their ICLR 2021 paper&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 &lt;p&gt;Therefore, the sensitivity of the event time with respect to parameters $\frac{\text{d}\tau}{\text{d}p}$ must be taken into account. &lt;span style=&#34;color:blue&#34;&gt;
 Here and in the following we consider only the $p$-dependence of $\tau_$ for simplicity. However, it is straightforward to include a dependence on the initial state $x_0$ in an analogues way&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;. &lt;/span&gt;&lt;/p&gt;
+&lt;span style=&#34;color:blue&#34;&gt;
+add time derivative of solve2 &lt;/span&gt;
 &lt;p&gt;In a first step, we need to compute the sensitivity of $\tau_1(p)$ with respect to $p$ (or $x_0$) based on the event condition $g(t, x(t)) = 0$.  We can apply the 
 &lt;a href=&#34;https://www.uni-siegen.de/fb6/analysis/overhagen/vorlesungsbeschreibungen/skripte/analysis3_1.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;implicit function theorem&lt;/a&gt;. For this, see that $\tau_1(p)$ is implicitly defined by $F(p, \tau_1) = g( \tau_1, \text{solve}(t_0, x_0, \tau_1, p)) = 0$ which yields&lt;/p&gt;
 &lt;p&gt;$$
@@ -548,7 +580,8 @@ $$&lt;/p&gt;
 &lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/issues/383&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;#383&lt;/a&gt; and 
 &lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/issues/374&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;#374&lt;/a&gt;, and 
 &lt;a href=&#34;https://github.com/SciML/DiffEqSensitivity.jl/pull/445&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PR #445&lt;/a&gt; in the DiffEqSensitivity.jl package.&lt;/p&gt;
-&lt;p&gt;If you have any questions or comments, please don’t hesitate to contact us (github.com/frankschae)!&lt;/p&gt;
+&lt;p&gt;If you have any questions or comments, please don’t hesitate to contact us (
+&lt;a href=&#34;https://github.com/frankschae&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;github.com/frankschae&lt;/a&gt;)!&lt;/p&gt;
 &lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
 &lt;ol&gt;
