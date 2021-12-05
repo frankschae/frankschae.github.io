@@ -5,12 +5,20 @@
     <link>https://frankschae.github.io/</link>
       <atom:link href="https://frankschae.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>FS</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Fri, 13 Aug 2021 21:41:45 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Fri, 03 Dec 2021 00:20:37 +0100</lastBuildDate>
     <image>
       <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>FS</title>
       <link>https://frankschae.github.io/</link>
     </image>
+    
+    <item>
+      <title>AbstractDifferentiation.jl: Backend-Agnostic Differentiable Programming in Julia</title>
+      <link>https://frankschae.github.io/software/abstractdifferentiation/</link>
+      <pubDate>Fri, 03 Dec 2021 00:20:37 +0100</pubDate>
+      <guid>https://frankschae.github.io/software/abstractdifferentiation/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Neural Hybrid Differential Equations and Adjoint Sensitivity Analysis</title>
@@ -1994,7 +2002,7 @@ end
     </item>
     
     <item>
-      <title>MitosisStochasticDiffEq</title>
+      <title>MitosisStochasticDiffEq.jl</title>
       <link>https://frankschae.github.io/software/mitosisstochasticdiffeq/</link>
       <pubDate>Wed, 10 Mar 2021 00:20:37 +0100</pubDate>
       <guid>https://frankschae.github.io/software/mitosisstochasticdiffeq/</guid>

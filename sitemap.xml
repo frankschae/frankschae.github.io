@@ -3,8 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://frankschae.github.io/software/abstractdifferentiation/</loc>
+    <lastmod>2021-12-03T00:20:37+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://frankschae.github.io/</loc>
-    <lastmod>2021-08-13T21:41:45+02:00</lastmod>
+    <lastmod>2021-12-03T00:20:37+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/software/</loc>
+    <lastmod>2021-12-03T00:20:37+01:00</lastmod>
   </url>
   
   <url>
@@ -100,11 +110,6 @@
   <url>
     <loc>https://frankschae.github.io/post/hybridde/</loc>
     <lastmod>2021-06-16T14:50:17+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/software/</loc>
-    <lastmod>2021-03-10T00:21:37+01:00</lastmod>
   </url>
   
   <url>
