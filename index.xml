@@ -912,11 +912,11 @@ $$&lt;/p&gt;
 &lt;p&gt;Let us focus on the &lt;code&gt;BacksolveAdjoint()&lt;/code&gt; algorithm which computes the sensitivities&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\frac{\text{d}\thinspace\text{solve}(t_0, x_0, t, p)}{\text{d}x_{0}} &amp;amp;= \lambda(t_{0}),\\&lt;br&gt;
-\frac{\text{d}\thinspace\text{solve}(t_0, x_0, t, p)}{\text{d}p} &amp;amp;= \lambda_{p}(t_{0}),
+\frac{\text{d}\thinspace L(\text{solve}(t_0, x_0, t, p))}{\text{d}x_{0}} &amp;amp;= \lambda(t_{0}),\\&lt;br&gt;
+\frac{\text{d}\thinspace L(\text{solve}(t_0, x_0, t, p))}{\text{d}p} &amp;amp;= \lambda_{p}(t_{0}),
 \end{aligned}
 $$&lt;/p&gt;
-&lt;p&gt;with respect to the initial state and the parameters. It does so by solving an ODE for $\lambda(s)$ in reverse time from $t$ to $t_0$&lt;/p&gt;
+&lt;p&gt;of a loss function $L$ acting on the final state with respect to the initial state and the parameters. It does so by solving an ODE for $\lambda(s)$ in reverse time from $t$ to $t_0$&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
 \frac{\text{d}\lambda(s)}{\text{d}s} &amp;amp;= -\lambda(s)^\dagger \frac{\text{d} f(\rightarrow x(s), p, t)}{\text{d} x(s)} \\&lt;br&gt;
@@ -926,8 +926,8 @@ $$&lt;/p&gt;
 &lt;p&gt;with initial conditions:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{aligned}
-\lambda(t)&amp;amp;= 1, \\&lt;br&gt;
-\lambda_{p}(t) &amp;amp;= 1.
+\lambda(t)&amp;amp;= \frac{\text{d}\thinspace L(\text{solve}(t_0, x_0, t, p))}{\text{d}x_{T}}, \\&lt;br&gt;
+\lambda_{p}(t) &amp;amp;= 0.
 \end{aligned}
 $$&lt;/p&gt;
 &lt;p&gt;The arrows ($\rightarrow$) indicate the variable with respect to which we differentiate, which will become important later when the same variable shows up in multiple function arguments.&lt;/p&gt;
@@ -1004,10 +1004,8 @@ $$&lt;/p&gt;
 &lt;p&gt;$$\xi_1 = x(\tau_1-).$$&lt;/p&gt;
 &lt;p&gt;This case where we have a loss function $L = L_1$ depending on $\tau_1$, $x(\tau_1)$, and $p$
 was also considered by Ricky T. Q. Chen, Brandon Amos, and Maximilian Nickel in their ICLR 2021 paper&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-&lt;p&gt;Therefore, the sensitivity of the event time with respect to parameters $\frac{\text{d}\tau}{\text{d}p}$ must be taken into account. &lt;span style=&#34;color:blue&#34;&gt;
-Here and in the following we consider only the $p$-dependence of $\tau_$ for simplicity. However, it is straightforward to include a dependence on the initial state $x_0$ in an analogues way&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;. &lt;/span&gt;&lt;/p&gt;
-&lt;span style=&#34;color:blue&#34;&gt;
-add time derivative of solve2 &lt;/span&gt;
+&lt;p&gt;Therefore, the sensitivity of the event time with respect to parameters $\frac{\text{d}\tau}{\text{d}p}$ must be taken into account.
+Here and in the following we consider only the $p$-dependence of $\tau_1$ for simplicity. However, it is straightforward to include a dependence on the initial state $x_0$ in an analogues way&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 &lt;p&gt;In a first step, we need to compute the sensitivity of $\tau_1(p)$ with respect to $p$ (or $x_0$) based on the event condition $g(t, x(t)) = 0$.  We can apply the 
 &lt;a href=&#34;https://www.uni-siegen.de/fb6/analysis/overhagen/vorlesungsbeschreibungen/skripte/analysis3_1.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;implicit function theorem&lt;/a&gt;. For this, see that $\tau_1(p)$ is implicitly defined by $F(p, \tau_1) = g( \tau_1, \text{solve}(t_0, x_0, \tau_1, p)) = 0$ which yields&lt;/p&gt;
 &lt;p&gt;$$
