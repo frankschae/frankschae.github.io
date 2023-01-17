@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://frankschae.github.io/software/abstractdifferentiation/</loc>
-    <lastmod>2021-12-03T00:20:37+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://frankschae.github.io/</loc>
-    <lastmod>2021-12-03T00:20:37+01:00</lastmod>
+    <lastmod>2023-01-16T00:20:37+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://frankschae.github.io/software/</loc>
+    <lastmod>2023-01-16T00:20:37+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/software/stochasticad/</loc>
+    <lastmod>2023-01-16T00:20:37+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/software/abstractdifferentiation/</loc>
     <lastmod>2021-12-03T00:20:37+01:00</lastmod>
   </url>
   
@@ -184,6 +189,11 @@
   
   <url>
     <loc>https://frankschae.github.io/author/agnes-valenti/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/tag/analytical-predictors/</loc>
     <lastmod>2021-03-09T23:56:43+01:00</lastmod>
   </url>
   
