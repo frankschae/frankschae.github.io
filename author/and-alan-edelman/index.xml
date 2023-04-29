@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>and Alan Edelman | FS</title>
+    <link>https://frankschae.github.io/author/and-alan-edelman/</link>
+      <atom:link href="https://frankschae.github.io/author/and-alan-edelman/index.xml" rel="self" type="application/rss+xml" />
+    <description>and Alan Edelman</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Sat, 29 Apr 2023 17:26:49 -0400</lastBuildDate>
+    <image>
+      <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>and Alan Edelman</title>
+      <link>https://frankschae.github.io/author/and-alan-edelman/</link>
+    </image>
+    
+    <item>
+      <title>Performance Bounds for Quantum Control</title>
+      <link>https://frankschae.github.io/project/controlbounds/</link>
+      <pubDate>Sat, 29 Apr 2023 17:26:49 -0400</pubDate>
+      <guid>https://frankschae.github.io/project/controlbounds/</guid>
+      <description>&lt;p&gt;Control of devices at the quantum level holds enormous potential for current and future applications in the field of quantum information science. However, due to the nonlinear and stochastic nature of quantum systems under continuous observation, analytical solutions to all but the simplest quantum control problems remain unknown. In this project, we present a convex optimization framework to compute informative bounds on the best attainable control performance. Since our approach provides an under-approximator for the value function, we can use it directly to construct near-optimal heuristic controllers as demonstrated for a qubit subjected to homodyne detection and photon counting.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

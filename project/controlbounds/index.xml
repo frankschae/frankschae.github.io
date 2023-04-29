@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Performance Bounds for Quantum Control | FS</title>
+    <link>https://frankschae.github.io/project/controlbounds/</link>
+      <atom:link href="https://frankschae.github.io/project/controlbounds/index.xml" rel="self" type="application/rss+xml" />
+    <description>Performance Bounds for Quantum Control</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Sat, 29 Apr 2023 17:26:49 -0400</lastBuildDate>
+    <image>
+      <url>https://frankschae.github.io/project/controlbounds/featured.png</url>
+      <title>Performance Bounds for Quantum Control</title>
+      <link>https://frankschae.github.io/project/controlbounds/</link>
+    </image>
+    
+  </channel>
+</rss>

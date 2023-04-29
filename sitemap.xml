@@ -3,8 +3,68 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://frankschae.github.io/author/and-alan-edelman/</loc>
+    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/authors/</loc>
+    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/chris-rackauckas/</loc>
+    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/tag/convex-optimization/</loc>
+    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://frankschae.github.io/</loc>
-    <lastmod>2023-01-16T00:20:37+01:00</lastmod>
+    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/fs-in-collaboration-with-flemming-holtorf/</loc>
+    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/julian-arnold/</loc>
+    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/project/controlbounds/</loc>
+    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/project/</loc>
+    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/tag/quantum-control/</loc>
+    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/tag/stochastic-optimal-control/</loc>
+    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/tag/sum-of-squares/</loc>
+    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/tags/</loc>
+    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
   </url>
   
   <url>
@@ -38,11 +98,6 @@
   </url>
   
   <url>
-    <loc>https://frankschae.github.io/tags/</loc>
-    <lastmod>2021-08-13T21:41:45+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://frankschae.github.io/tag/abstractdifferentiation.jl/</loc>
     <lastmod>2021-08-01T12:03:17+02:00</lastmod>
   </url>
@@ -64,11 +119,6 @@
   
   <url>
     <loc>https://frankschae.github.io/tag/adjoint-sensitivity-methods/</loc>
-    <lastmod>2021-07-16T13:24:04+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/authors/</loc>
     <lastmod>2021-07-16T13:24:04+02:00</lastmod>
   </url>
   
@@ -169,16 +219,6 @@
   
   <url>
     <loc>https://frankschae.github.io/tag/nsde/</loc>
-    <lastmod>2021-03-10T00:20:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/project/</loc>
-    <lastmod>2021-03-10T00:20:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/tag/quantum-control/</loc>
     <lastmod>2021-03-10T00:20:29+01:00</lastmod>
   </url>
   
