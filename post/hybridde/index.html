@@ -662,6 +662,8 @@
 <a href="https://summerofcode.withgoogle.com/organizations/5765643267211264/" target="_blank" rel="noopener">NumFocus</a>/
 <a href="https://sciml.ai" target="_blank" rel="noopener">SciML</a> organization and comprises adjoint sensitivity methods for discontinuities, shadowing methods for chaotic dynamics, symbolically generated adjoint methods, and further AD tooling within the Julia Language.</p>
 <p>This first post aims to illustrate our new (adjoint) sensitivity analysis tools with respect to event handling in (ordinary) differential equations (DEs).</p>
+<p>Note: Please check the 
+<a href="https://docs.sciml.ai/SciMLSensitivity/dev/examples/hybrid_jump/hybrid_diffeq/" target="_blank" rel="noopener">SciMLSensitivity.jl docs</a> for a maintained neural hybrid DE tutorial!</p>
 <h2 id="hybrid-differential-equations">Hybrid Differential Equations</h2>
 <p>DEs with additional explicit or implicit discontinuities are called hybrid DEs. Within the SciML software suite, such discontinuities may be incorporated into DE models by 
 <a href="https://diffeq.sciml.ai/stable/features/callback_functions/" target="_blank" rel="noopener">callbacks</a>. Evidently, the incorporation of discontinuities allows a user to specify changes (<em>events</em>) in the system, i.e., changes of the state or the parameters of the DE, which cannot be modeled by a plain ordinary DE. While explicit events can be described by 
