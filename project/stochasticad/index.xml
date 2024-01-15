@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Automatic Differentiation of Programs with Discrete Randomness | FS</title>
+    <link>https://frankschae.github.io/project/stochasticad/</link>
+      <atom:link href="https://frankschae.github.io/project/stochasticad/index.xml" rel="self" type="application/rss+xml" />
+    <description>Automatic Differentiation of Programs with Discrete Randomness</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Mon, 15 Jan 2024 10:49:24 -0500</lastBuildDate>
+    <image>
+      <url>https://frankschae.github.io/project/stochasticad/featured.png</url>
+      <title>Automatic Differentiation of Programs with Discrete Randomness</title>
+      <link>https://frankschae.github.io/project/stochasticad/</link>
+    </image>
+    
+  </channel>
+</rss>

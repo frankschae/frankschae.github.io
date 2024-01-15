@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Automated Data-driven Reconstruction of Physical Properties | FS</title>
+    <link>https://frankschae.github.io/project/reconstruction/</link>
+      <atom:link href="https://frankschae.github.io/project/reconstruction/index.xml" rel="self" type="application/rss+xml" />
+    <description>Automated Data-driven Reconstruction of Physical Properties</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Tue, 09 Mar 2021 23:56:43 +0100</lastBuildDate>
+    <image>
+      <url>https://frankschae.github.io/project/reconstruction/featured.png</url>
+      <title>Automated Data-driven Reconstruction of Physical Properties</title>
+      <link>https://frankschae.github.io/project/reconstruction/</link>
+    </image>
+    
+  </channel>
+</rss>

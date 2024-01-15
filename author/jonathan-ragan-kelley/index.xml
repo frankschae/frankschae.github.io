@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jonathan Ragan-Kelley | FS</title>
+    <link>https://frankschae.github.io/author/jonathan-ragan-kelley/</link>
+      <atom:link href="https://frankschae.github.io/author/jonathan-ragan-kelley/index.xml" rel="self" type="application/rss+xml" />
+    <description>Jonathan Ragan-Kelley</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Frank Schäfer</copyright><lastBuildDate>Mon, 15 Jan 2024 10:49:24 -0500</lastBuildDate>
+    <image>
+      <url>https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Jonathan Ragan-Kelley</title>
+      <link>https://frankschae.github.io/author/jonathan-ragan-kelley/</link>
+    </image>
+    
+    <item>
+      <title>Automatic Differentiation of Programs with Discrete Randomness</title>
+      <link>https://frankschae.github.io/project/stochasticad/</link>
+      <pubDate>Mon, 15 Jan 2024 10:49:24 -0500</pubDate>
+      <guid>https://frankschae.github.io/project/stochasticad/</guid>
+      <description>&lt;p&gt;Automatic differentiation (AD) has become ubiquitous throughout scientific computing and deep learning. However, AD systems have been restricted to the subset of programs that have a continuous dependence on parameters. Programs that have discrete stochastic behaviors governed by distribution parameters, such as flipping a coin with probability p of being heads, pose a challenge to these systems. In this work we develop a new AD methodology for programs with discrete randomness. We demonstrate how this method gives an unbiased and low-variance estimator.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

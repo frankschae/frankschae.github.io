@@ -3,27 +3,77 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://frankschae.github.io/author/alex-lew/</loc>
+    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/authors/</loc>
+    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/project/stochasticad/</loc>
+    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/chris-rackauckas/</loc>
+    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/</loc>
+    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/fs-in-collaboration-with-gaurav-arya/</loc>
+    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/jonathan-ragan-kelley/</loc>
+    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/kartik-chandra/</loc>
+    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/mathieu-huot/</loc>
+    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/moritz-schauer/</loc>
+    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/project/</loc>
+    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/ruben-seyer/</loc>
+    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/vikash-mansinghka/</loc>
+    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://frankschae.github.io/author/and-alan-edelman/</loc>
     <lastmod>2023-04-29T17:26:49-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://frankschae.github.io/authors/</loc>
-    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/chris-rackauckas/</loc>
-    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://frankschae.github.io/tag/convex-optimization/</loc>
-    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/</loc>
     <lastmod>2023-04-29T17:26:49-04:00</lastmod>
   </url>
   
@@ -39,11 +89,6 @@
   
   <url>
     <loc>https://frankschae.github.io/project/controlbounds/</loc>
-    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/project/</loc>
     <lastmod>2023-04-29T17:26:49-04:00</lastmod>
   </url>
   
@@ -238,7 +283,22 @@
   </url>
   
   <url>
+    <loc>https://frankschae.github.io/author/and-masao-ogata/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://frankschae.github.io/author/and-niels-lorch/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/annika-kurzmann/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/project/reconstruction/</loc>
     <lastmod>2021-03-09T23:56:43+01:00</lastmod>
   </url>
   
@@ -248,7 +308,27 @@
   </url>
   
   <url>
+    <loc>https://frankschae.github.io/author/chuyao-tong/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://frankschae.github.io/author/eliska-greplova/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/flemming-holtorf/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/frantisek-herman/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/fs-in-collaboration-with-eliska-greplova/</loc>
     <lastmod>2021-03-09T23:56:43+01:00</lastmod>
   </url>
   
@@ -259,6 +339,21 @@
   
   <url>
     <loc>https://frankschae.github.io/author/gregor-boschung/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/hideaki-maebashi/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/hiroyasu-matsuura/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/jozef-bucko/</loc>
     <lastmod>2021-03-09T23:56:43+01:00</lastmod>
   </url>
   
@@ -283,7 +378,22 @@
   </url>
   
   <url>
+    <loc>https://frankschae.github.io/author/rebekka-garreis/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://frankschae.github.io/author/sebastian-huber/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/thomas-ihn/</loc>
+    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://frankschae.github.io/author/tomoki-hirosawa/</loc>
     <lastmod>2021-03-09T23:56:43+01:00</lastmod>
   </url>
   
