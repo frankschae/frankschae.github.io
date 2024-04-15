@@ -1,554 +1,313 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>https://frankschae.github.io/author/alex-lew/</loc>
-    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/authors/</loc>
-    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
-  </url>
-  
-  <url>
+    <loc>https://frankschae.github.io/talk/example-talk/</loc>
+    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://frankschae.github.io/event/</loc>
+    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/project/stochasticad/</loc>
     <lastmod>2024-01-15T10:49:24-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/chris-rackauckas/</loc>
-    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/</loc>
-    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/fs-in-collaboration-with-gaurav-arya/</loc>
-    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/jonathan-ragan-kelley/</loc>
-    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/kartik-chandra/</loc>
-    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/mathieu-huot/</loc>
-    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/moritz-schauer/</loc>
-    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/project/</loc>
     <lastmod>2024-01-15T10:49:24-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/ruben-seyer/</loc>
-    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/vikash-mansinghka/</loc>
-    <lastmod>2024-01-15T10:49:24-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/and-alan-edelman/</loc>
-    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/convex-optimization/</loc>
     <lastmod>2023-04-29T17:26:49-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/fs-in-collaboration-with-flemming-holtorf/</loc>
-    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/julian-arnold/</loc>
-    <lastmod>2023-04-29T17:26:49-04:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/project/controlbounds/</loc>
     <lastmod>2023-04-29T17:26:49-04:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/quantum-control/</loc>
     <lastmod>2023-04-29T17:26:49-04:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/stochastic-optimal-control/</loc>
     <lastmod>2023-04-29T17:26:49-04:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/sum-of-squares/</loc>
     <lastmod>2023-04-29T17:26:49-04:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tags/</loc>
     <lastmod>2023-04-29T17:26:49-04:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/software/</loc>
     <lastmod>2023-01-16T00:20:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/software/stochasticad/</loc>
     <lastmod>2023-01-16T00:20:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://frankschae.github.io/</loc>
+    <lastmod>2022-10-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/software/abstractdifferentiation/</loc>
     <lastmod>2021-12-03T00:20:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/gsoc-2021/</loc>
     <lastmod>2021-08-13T21:41:45+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/post/gsoc-2021/</loc>
     <lastmod>2021-08-13T21:41:45+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/post/</loc>
     <lastmod>2021-08-13T21:41:45+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/abstractdifferentiation.jl/</loc>
     <lastmod>2021-08-01T12:03:17+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/post/abstract_differentiation/</loc>
     <lastmod>2021-08-01T12:03:17+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/automatic-differentiation/</loc>
     <lastmod>2021-08-01T12:03:17+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/julia/</loc>
     <lastmod>2021-08-01T12:03:17+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/adjoint-sensitivity-methods/</loc>
     <lastmod>2021-07-16T13:24:04+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/event-handling/</loc>
     <lastmod>2021-07-16T13:24:04+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/frank-schafer-and-moritz-schauer/</loc>
-    <lastmod>2021-07-16T13:24:04+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/hybrid-differential-equations/</loc>
     <lastmod>2021-07-16T13:24:04+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/post/bouncing_ball/</loc>
     <lastmod>2021-07-16T13:24:04+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/chaotic-systems/</loc>
     <lastmod>2021-07-02T11:08:22+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/forward-sensitivity-methods/</loc>
     <lastmod>2021-07-02T11:08:22+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/shadowing/</loc>
     <lastmod>2021-07-02T11:08:22+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/post/shadowing/</loc>
     <lastmod>2021-07-02T11:08:22+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/post/hybridde/</loc>
     <lastmod>2021-06-16T14:50:17+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/software/sciml/</loc>
     <lastmod>2021-03-10T00:21:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/software/mitosisstochasticdiffeq/</loc>
     <lastmod>2021-03-10T00:20:37+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/and-michal-kloc/</loc>
-    <lastmod>2021-03-10T00:20:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/christoph-bruder/</loc>
-    <lastmod>2021-03-10T00:20:29+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/project/dp_for_control/</loc>
     <lastmod>2021-03-10T00:20:29+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/differentiable-programming/</loc>
     <lastmod>2021-03-10T00:20:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/fs-in-collaboration-with-pavel-sekatski/</loc>
-    <lastmod>2021-03-10T00:20:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/martin-koppenhofer/</loc>
-    <lastmod>2021-03-10T00:20:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/niels-lorch/</loc>
-    <lastmod>2021-03-10T00:20:29+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/node/</loc>
     <lastmod>2021-03-10T00:20:29+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/nsde/</loc>
     <lastmod>2021-03-10T00:20:29+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/sciml/</loc>
     <lastmod>2021-03-10T00:20:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/agnes-valenti/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/analytical-predictors/</loc>
     <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/and-masao-ogata/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/and-niels-lorch/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/annika-kurzmann/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/project/reconstruction/</loc>
     <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/axel-lode/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/chuyao-tong/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/eliska-greplova/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/flemming-holtorf/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/frantisek-herman/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/fs-in-collaboration-with-eliska-greplova/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/fs-in-collaboration-with-julian-arnold/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/gregor-boschung/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/hideaki-maebashi/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/hiroyasu-matsuura/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/jozef-bucko/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/machine-learning/</loc>
     <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/project/ml_for_pt/</loc>
     <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/martin-zonda/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/neural-networks/</loc>
     <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/rebekka-garreis/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/sebastian-huber/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/thomas-ihn/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/tomoki-hirosawa/</loc>
-    <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/unsupervised-learning/</loc>
     <lastmod>2021-03-09T23:56:43+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/and-andreas-buchleitner/</loc>
-    <lastmod>2021-03-09T10:39:11+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/bose-hubbard-model/</loc>
     <lastmod>2021-03-09T10:39:11+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/exact-diagonalization/</loc>
     <lastmod>2021-03-09T10:39:11+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/fs-in-collaboration-with-laurent-de-forges-de-parny/</loc>
-    <lastmod>2021-03-09T10:39:11+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/many-body-physics/</loc>
     <lastmod>2021-03-09T10:39:11+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/mctdh-x/</loc>
     <lastmod>2021-03-09T10:39:11+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/miguel-bastarrachea/</loc>
-    <lastmod>2021-03-09T10:39:11+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/project/mbdynamics/</loc>
     <lastmod>2021-03-09T10:39:11+01:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/gsoc-2020/</loc>
     <lastmod>2020-08-26T22:59:49+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/post/gsoc-2020/</loc>
     <lastmod>2020-08-26T22:59:49+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/post/high-weak/</loc>
     <lastmod>2020-08-18T21:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/high-weak-order-solver/</loc>
     <lastmod>2020-08-18T21:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/srk-methods/</loc>
     <lastmod>2020-08-18T21:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/post/gsoc2020-high-weak-order-solvers-sde-adjoints/</loc>
     <lastmod>2020-05-30T15:10:33+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/publication-type/2/</loc>
     <lastmod>2020-05-10T13:22:24+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/publication/njp/</loc>
     <lastmod>2020-05-10T13:22:24+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/publication_types/</loc>
     <lastmod>2020-05-10T13:22:24+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/publication/</loc>
     <lastmod>2020-05-10T13:22:24+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/bosonic-systems/</loc>
     <lastmod>2020-05-10T13:22:17+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/publication/entropy/</loc>
     <lastmod>2020-05-10T13:22:17+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/publication/jphysb/</loc>
     <lastmod>2020-05-10T13:22:11+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/multiple-scattering/</loc>
     <lastmod>2020-05-10T13:22:11+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/numerical-optimization/</loc>
     <lastmod>2020-05-10T13:22:11+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/publication/pre99/</loc>
     <lastmod>2020-05-10T13:14:56+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/phase-transitions/</loc>
     <lastmod>2020-05-10T13:14:56+02:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://frankschae.github.io/publication/preprint/</loc>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://frankschae.github.io/publication-type/article/</loc>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://frankschae.github.io/tag/source-themes/</loc>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://frankschae.github.io/slides/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://frankschae.github.io/slides/example/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://frankschae.github.io/publication/journal-article/</loc>
+    <lastmod>2015-09-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://frankschae.github.io/publication-type/article-journal/</loc>
+    <lastmod>2015-09-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://frankschae.github.io/publication/conference-paper/</loc>
+    <lastmod>2013-07-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://frankschae.github.io/publication-type/paper-conference/</loc>
+    <lastmod>2013-07-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/categories/</loc>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/project/scattering/</loc>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/frank-schafer/</loc>
-  </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/author/fs-in-collaboration-with-felix-eckert-and-thomas-wellens/</loc>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://frankschae.github.io/home/</loc>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://frankschae.github.io/tag/multiple-scattering-theory/</loc>
+    <changefreq>weekly</changefreq>
   </url>
-  
-  <url>
-    <loc>https://frankschae.github.io/talk/</loc>
-  </url>
-  
 </urlset>

@@ -1,84 +1,196 @@
-<!DOCTYPE html><html lang="en-us" >
+<!DOCTYPE html>
+<!-- This site was created with Hugo Blox. https://hugoblox.com -->
+<!-- Last Published: April 14, 2024 --><html lang="en-us" >
+
 
 <head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Source Themes Academic 4.8.0">
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Hugo Blox Builder 5.9.7" />
   
 
   
   
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.26c458e6907dc03073573976b7f4044e.css" media="print" onload="this.media='all'">
+
   
   
   
     
     
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.4/css/academicons.min.css" integrity="sha512-IW0nhlW5MgNydsXJO40En2EoCkTTjZhI3yuODrZIc8cQ4h1XcF53PsqDHa09NqnkXuIe0Oiyyj171BqZFwISBw==" crossorigin="anonymous" media="print" onload="this.media='all'">
     
-  
-  
 
-  <meta name="author" content="Frank Schäfer">
-
-  
-  
-  
     
-  
-  <meta name="description" content="In this post, we dig into sensitivity analysis of chaotic systems. Chaotic systems are dynamical, deterministic systems that are extremely sensitive to small changes in the initial state or the system parameters.">
-
-  
-  <link rel="alternate" hreflang="en-us" href="https://frankschae.github.io/post/shadowing/">
-
-  
-
-
-  
-  
-  
-  <meta name="theme-color" content="#2962ff">
-  
-
-  
-  
-  
-  <script src="/js/mathjax-config.js"></script>
-  
-
-  
-  
-  
-  
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
-
     
     
     
       
+      
     
     
+    
+
+    
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.min.css" integrity="" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
       
       
         
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
-        
+      
+
       
     
-
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
-    
-
-    
-
-    
-    
+      
       
 
       
@@ -87,12 +199,6 @@
       
     
       
-
-      
-      
-
-      
-    
       
 
       
@@ -100,129 +206,19 @@
 
       
     
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
-      
-    
-      
-
-      
-      
-
-      
-    
-
-  
-
-  
-  
-  
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
   
 
   
   
   
   
-  <link rel="stylesheet" href="/css/academic.css">
-
   
-
-
-
-
   
-
+  <link rel="stylesheet" href="/css/wowchemy.f6689966c0a10712f95f034011917db0.css" />
 
   
   
-
   
-  <link rel="alternate" href="/post/shadowing/index.xml" type="application/rss+xml" title="FS">
-  
-
-  <link rel="manifest" href="/index.webmanifest">
-  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
-  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
-
-  <link rel="canonical" href="https://frankschae.github.io/post/shadowing/">
 
   
   
@@ -233,23 +229,120 @@
   
     
     
+    <link rel="stylesheet" href="/css/libs/chroma/github-light.min.css" title="hl-light" media="print" onload="this.media='all'" >
+    <link rel="stylesheet" href="/css/libs/chroma/dracula.min.css" title="hl-dark" media="print" onload="this.media='all'" disabled>
+  
+
   
   
-  <meta property="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
-  <meta property="og:site_name" content="FS">
-  <meta property="og:url" content="https://frankschae.github.io/post/shadowing/">
-  <meta property="og:title" content="Shadowing Methods for Forward and Adjoint Sensitivity Analysis of Chaotic Systems | FS">
-  <meta property="og:description" content="In this post, we dig into sensitivity analysis of chaotic systems. Chaotic systems are dynamical, deterministic systems that are extremely sensitive to small changes in the initial state or the system parameters."><meta property="og:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
-  <meta property="twitter:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
-    
-      <meta property="article:published_time" content="2021-07-02T11:08:22&#43;02:00">
-    
+  
+
+
+
+
+
+
+  <meta name="author" content="Frank Schäfer" />
+
+
+
+
+
+  
+
+<meta name="description" content="In this post, we dig into sensitivity analysis of chaotic systems. Chaotic systems are dynamical, deterministic systems that are extremely sensitive to small changes in the initial state or the system parameters." />
+
+
+
+<link rel="alternate" hreflang="en-us" href="https://frankschae.github.io/post/shadowing/" />
+<link rel="canonical" href="https://frankschae.github.io/post/shadowing/" />
+
+
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+
+
+<link rel="icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png" />
+<link rel="apple-touch-icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_3.png" />
+
+<meta name="theme-color" content="#1565c0" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+<meta property="twitter:card" content="summary" />
+
+  <meta property="twitter:site" content="@GetResearchDev" />
+  <meta property="twitter:creator" content="@GetResearchDev" />
+<meta property="twitter:image" content="https://frankschae.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png" />
+
+
+
+  
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="FS" />
+<meta property="og:url" content="https://frankschae.github.io/post/shadowing/" />
+<meta property="og:title" content="Shadowing Methods for Forward and Adjoint Sensitivity Analysis of Chaotic Systems | FS" />
+<meta property="og:description" content="In this post, we dig into sensitivity analysis of chaotic systems. Chaotic systems are dynamical, deterministic systems that are extremely sensitive to small changes in the initial state or the system parameters." /><meta property="og:image" content="https://frankschae.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+
+  
+    <meta
+      property="article:published_time"
+      content="2021-07-02T11:08:22&#43;02:00"
+    />
+  
+  
     <meta property="article:modified_time" content="2021-07-02T11:08:22&#43;02:00">
   
 
-  
+
+
+
 
 
     
@@ -287,7 +380,7 @@
     "name": "FS",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+      "url": "https://frankschae.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_3.png"
     }
   },
   "description": "In this post, we dig into sensitivity analysis of chaotic systems. Chaotic systems are dynamical, deterministic systems that are extremely sensitive to small changes in the initial state or the system parameters."
@@ -299,22 +392,56 @@
   
 
 
+
+
+  
+  
+  
+
+  
+  
+
   
 
 
   
-
-
-
-
-
   <title>Shadowing Methods for Forward and Adjoint Sensitivity Analysis of Chaotic Systems | FS</title>
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
 
-  <aside class="search-results" id="search">
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="263091e46f2c8aead98407a523d8a2fe" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.9e4214442a7711d35691acd58f6f6361.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
   <div class="container">
     <section class="search-header">
 
@@ -323,16 +450,22 @@
           <h1>Search</h1>
         </div>
         <div class="col-6 col-search-close">
-          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
         </div>
       </div>
 
       <div id="search-box">
         
         <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
-        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
         
       </div>
+
+      
+      
+
+      
 
     </section>
     <section class="section-search-results">
@@ -346,6 +479,12 @@
 </aside>
 
 
+
+  <div class="page-header header--fixed">
+  
+  
+  
+  
   
 
 
@@ -354,222 +493,290 @@
 
 
 
-<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
-  <div class="container">
 
-    
-    <div class="d-none d-lg-inline-flex">
-      <a class="navbar-brand" href="/">FS</a>
-    </div>
-    
 
-    
-    <button type="button" class="navbar-toggler" data-toggle="collapse"
-            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-    <span><i class="fas fa-bars"></i></span>
-    </button>
-    
 
-    
-    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
-      <a class="navbar-brand" href="/">FS</a>
-    </div>
-    
 
-    
-    
-    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
 
       
-      <ul class="navbar-nav d-md-inline-flex">
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#about"><span>Home</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#posts"><span>Posts</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#projects"><span>Research projects</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#software"><span>Open Source Software</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#contact"><span>Contact</span></a>
-        </li>
-
-        
-        
-
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">FS</a>
+      </div>
       
 
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">FS</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
         
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#about"><span>Home</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>Posts</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#projects"><span>Research projects</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#software"><span>Open source software</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#contact"><span>Contact</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
       </ul>
+
     </div>
+  </nav>
+</header>
 
-    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
-      
-      <li class="nav-item">
-        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
-      </li>
-      
-
-      
-      <li class="nav-item dropdown theme-dropdown">
-        <a href="#" class="nav-link js-theme-selector" data-toggle="dropdown" aria-haspopup="true">
-          <i class="fas fa-palette" aria-hidden="true"></i>
-        </a>
-        <div class="dropdown-menu">
-          <a href="#" class="dropdown-item js-set-theme-light">
-            <span>Light</span>
-          </a>
-          <a href="#" class="dropdown-item js-set-theme-dark">
-            <span>Dark</span>
-          </a>
-          <a href="#" class="dropdown-item js-set-theme-auto">
-            <span>Automatic</span>
-          </a>
-        </div>
-      </li>
-      
-
-      
-
-    </ul>
 
   </div>
-</nav>
 
+  <div class="page-body">
+    
+    
+    
 
-  <article class="article">
+    <article class="article">
 
   
+
 
 
 
@@ -625,6 +832,7 @@
   
   
   
+  
 
   
   
@@ -632,15 +840,6 @@
 </div>
 
     
-
-
-
-
-
-
-
-
-
 
 
 
@@ -655,8 +854,7 @@
 
     <div class="article-style">
       <p>In this post, we dig into sensitivity analysis of chaotic systems. Chaotic systems are dynamical, deterministic systems that are extremely sensitive to small changes in the initial state or the system parameters. Specifically, the dependence of a chaotic system on its initial conditions is well known as the &ldquo;butterfly effect&rdquo;. Chaotic models are encountered in various fields ranging from simple examples such as the double pendulum to highly complicated fluid or climate models.</p>
-<p>Sensitivity analysis methods have proven to be very powerful for solving inverse problems such as parameter estimation or optimal control<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. However, conventional sensitivity analysis methods may fail in chaotic systems due to the ill-conditioning of the initial value problem. Sophisticated methods, such as least squares shadowing<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> (LSS) or non-intrusive least squares shadowing<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> (NILSS) have been developed in the last decade. Essentially, these methods transform the initial value problem to a well conditioned optimization problem &ndash; the least squares shadowing problem. In this second part of my GSoC project, I implemented the LSS and the NILSS method within the 
-<a href="https://github.com/SciML/DiffEqSensitivity.jl" target="_blank" rel="noopener">DiffEqSensitivity.jl</a> package.</p>
+<p>Sensitivity analysis methods have proven to be very powerful for solving inverse problems such as parameter estimation or optimal control<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. However, conventional sensitivity analysis methods may fail in chaotic systems due to the ill-conditioning of the initial value problem. Sophisticated methods, such as least squares shadowing<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> (LSS) or non-intrusive least squares shadowing<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> (NILSS) have been developed in the last decade. Essentially, these methods transform the initial value problem to a well conditioned optimization problem &ndash; the least squares shadowing problem. In this second part of my GSoC project, I implemented the LSS and the NILSS method within the <a href="https://github.com/SciML/DiffEqSensitivity.jl" target="_blank" rel="noopener">DiffEqSensitivity.jl</a> package.</p>
 <p>The objective for LSS and NILSS is a long-time average quantity. More precisely, we define the instantaneous objective by $g(u,p)$, where $u$ is the state and $p$ is the parameter of the differential equation. Then, the objective is obtained by averaging $g$ over an infinitely long trajectory:</p>
 <p>$$
 \langle g \rangle_∞ = \lim_{T \rightarrow ∞} \langle g \rangle_T,
@@ -670,57 +868,51 @@ Under the assumption of ergodicity, $\langle g \rangle_∞$ only depends on $p$.
 <p>One of the most important chaotic models is the Lorenz system which is a simplified model for atmospheric convection. The Lorenz system has three states $x$, $y$, and $z$, as well as three parameters $\rho$, $\sigma$, and $\beta$. Its time evolution is given by the ODE:</p>
 <p>$$
 \begin{pmatrix}
-\text{d}x \\<br>
-\text{d}y \\<br>
-\text{d}z \\<br>
+\text{d}x \\
+\text{d}y \\
+\text{d}z \\
 \end{pmatrix} = \begin{pmatrix}
-\sigma (y-x)\\<br>
-x(\rho-z) - y\\<br>
-x y - \beta z \\<br>
+\sigma (y-x)\\
+x(\rho-z) - y\\
+x y - \beta z \\
 \end{pmatrix}\text{d}t
 $$</p>
 <p>For simplicity, let us fix $\sigma=10$ and $\beta=8/3$ and focus only on the sensitivity with respect to $\rho$. The classic Lorenz attractor is obtained when using $\rho=28$:</p>
-<pre><code class="language-julia">using Random; Random.seed!(1234)
-using OrdinaryDiffEq
-using Statistics
-using QuadGK, ForwardDiff, Calculus
-using DiffEqSensitivity
-using SparseArrays, LinearAlgebra
-
-# simulate 1 trajectory of the Lorenz system forward
-function lorenz!(du,u,p,t)
-  du[1] = 10*(u[2]-u[1])
-  du[2] = u[1]*(p[1]-u[3]) - u[2]
-  du[3] = u[1]*u[2] - (8//3)*u[3]
-end
-
-p = [28.0]
-tspan_init = (0.0,30.0)
-tspan_attractor = (30.0,50.0)
-u0 = rand(3)
-prob_init = ODEProblem(lorenz!,u0,tspan_init,p)
-sol_init = solve(prob_init,Tsit5())
-prob_attractor = ODEProblem(lorenz!,sol_init[end],tspan_attractor,p)
-sol_attractor = solve(prob_attractor,Vern9(),abstol=1e-14,reltol=1e-14)
-
-using Plots, LaTeXStrings
-pl1 = plot(sol_init,vars=(1,2,3), legend=true,
-  label = &quot;initial&quot;,
-  labelfontsize=20,
-  lw = 2,
-  xlabel = L&quot;x&quot;, ylabel = L&quot;y&quot;, zlabel = L&quot;z&quot;,
-  xlims=(-25,30),ylims=(-30,30),zlims=(5,49)
- )
-plot!(pl1, sol_attractor,vars=(1,2,3), label=&quot;attractor&quot;,xlims=(-25,30),ylims=(-30,30),zlims=(5,49)
- )
-savefig(pl1, &quot;Lorenz_forward.png&quot;)
-</code></pre>
-
-
-
-
-
-  
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Random</span><span class="p">;</span> <span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">OrdinaryDiffEq</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Statistics</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">QuadGK</span><span class="p">,</span> <span class="n">ForwardDiff</span><span class="p">,</span> <span class="n">Calculus</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">DiffEqSensitivity</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">SparseArrays</span><span class="p">,</span> <span class="n">LinearAlgebra</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># simulate 1 trajectory of the Lorenz system forward</span>
+</span></span><span class="line"><span class="cl"><span class="k">function</span> <span class="n">lorenz!</span><span class="p">(</span><span class="n">du</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">du</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">  <span class="n">du</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">-</span> <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="n">du</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="mi">8</span><span class="o">//</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mf">28.0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">tspan_init</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">30.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tspan_attractor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">30.0</span><span class="p">,</span><span class="mf">50.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u0</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">prob_init</span> <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">lorenz!</span><span class="p">,</span><span class="n">u0</span><span class="p">,</span><span class="n">tspan_init</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sol_init</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob_init</span><span class="p">,</span><span class="n">Tsit5</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">prob_attractor</span> <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">lorenz!</span><span class="p">,</span><span class="n">sol_init</span><span class="p">[</span><span class="k">end</span><span class="p">],</span><span class="n">tspan_attractor</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sol_attractor</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob_attractor</span><span class="p">,</span><span class="n">Vern9</span><span class="p">(),</span><span class="n">abstol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span><span class="n">reltol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Plots</span><span class="p">,</span> <span class="n">LaTeXStrings</span>
+</span></span><span class="line"><span class="cl"><span class="n">pl1</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">sol_init</span><span class="p">,</span><span class="n">vars</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">label</span> <span class="o">=</span> <span class="s">&#34;initial&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">labelfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">xlabel</span> <span class="o">=</span> <span class="sa">L</span><span class="s">&#34;x&#34;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="sa">L</span><span class="s">&#34;y&#34;</span><span class="p">,</span> <span class="n">zlabel</span> <span class="o">=</span> <span class="sa">L</span><span class="s">&#34;z&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span><span class="n">zlims</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">49</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot!</span><span class="p">(</span><span class="n">pl1</span><span class="p">,</span> <span class="n">sol_attractor</span><span class="p">,</span><span class="n">vars</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&#34;attractor&#34;</span><span class="p">,</span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span><span class="n">zlims</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">49</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">savefig</span><span class="p">(</span><span class="n">pl1</span><span class="p">,</span> <span class="s">&#34;Lorenz_forward.png&#34;</span><span class="p">)</span>
+</span></span></code></pre></div>
 
 
 
@@ -732,79 +924,70 @@ savefig(pl1, &quot;Lorenz_forward.png&quot;)
 
 
 
-<figure >
-
-
-  <a data-fancybox="" href="/img/Lorenz_forward.png" >
-
-
-  <img src="/img/Lorenz_forward.png" alt=""  >
-</a>
 
 
 
-</figure>
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="Lorenz_forward.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
 
 <p>Here, we separated the trajectory in two parts: We plot the initial transient dynamics starting from random initial conditions towards the attractor in blue and the subsequent time evolution lying entirely on the attractor in orange.</p>
-<p>Following Refs.<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> and <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>, we choose</p>
+<p>Following Refs.<sup id="fnref1:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> and <sup id="fnref1:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>, we choose</p>
 <p>$$
 \langle z \rangle_∞ = \lim_{T \rightarrow ∞} \frac{1}{T} \int_0^T z \text{d}t
 $$</p>
 <p>as the objective, where we only use the trajectory that lies completely on the attractor (i.e., the orange trajectory in the plot on top). Let us first study the objective as a function of $\rho$.</p>
-<pre><code class="language-julia">function compute_objective(sol)
-  quadgk(t-&gt; sol(t)[end]/(tspan_attractor[2]-tspan_attractor[1]) ,tspan_attractor[1],tspan_attractor[2], atol=1e-14, rtol=1e-10)[1]
-end
-
-pl2 = plot(sol_attractor.t, getindex.(sol_attractor.u,3), ylabel=L&quot;z(t)&quot;, xlabel=L&quot;t&quot;, label=false, labelfontsize=20,lw = 2)
-mean_z = [mean(getindex.(sol_attractor.u,3))]
-int_z = compute_objective(sol_attractor)
-hline!(pl2, [int_z], label=L&quot;\langle z\rangle&quot;, lw = 2)
-savefig(pl2, &quot;zsingle.png&quot;)
-
-# for each value of the parameter, solve 20 times the initial value problem
-# wrap the procedure inside a function depending on p
-function Lorenz_solve(p)
-  u0 = rand(3)
-  prob_init = ODEProblem(lorenz!,u0,tspan_init,p)
-  sol_init = solve(prob_init,Tsit5())
-  prob_attractor = ODEProblem(lorenz!,sol_init[end],tspan_attractor,p)
-  sol_attractor = solve(prob_attractor,Vern9(),abstol=1e-14,reltol=1e-14)
-  sol_attractor, prob_attractor
-end
-
-Niter = 10
-ps = collect(0.0:1.0:50.0)
-probs = []
-sols = []
-zmean = []
-zstd = []
-for ρ in ps
-  @show ρ
-  ztmp = []
-  for i=1:Niter
-    sol, prob = Lorenz_solve([ρ])
-    zbar = compute_objective(sol)
-    push!(sols, sol)
-    push!(probs, prob)
-    push!(ztmp, zbar)
-  end
-  push!(zmean,mean(ztmp))
-  push!(zstd,std(ztmp))
-end
-
-pl3 = plot(ps,zmean, ribbon = zstd, ylabel=L&quot;\langle z\rangle&quot;, xlabel=L&quot;\rho&quot;, legend=false, labelfontsize=20, lw = 2, xlims=(0,50),ylims=(0,50))
-savefig(pl3, &quot;zvsrho.png&quot;)
-
-pl4 = plot(pl2,pl3, margin=3Plots.mm, layout = (1, 2), size=(600,300))
-savefig(pl4, &quot;z.png&quot;)
-</code></pre>
-<p>We obtain:</p>
-
-
-
-
-
-  
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="k">function</span> <span class="n">compute_objective</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">quadgk</span><span class="p">(</span><span class="n">t</span><span class="o">-&gt;</span> <span class="n">sol</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="k">end</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">tspan_attractor</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">tspan_attractor</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">,</span><span class="n">tspan_attractor</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">tspan_attractor</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">pl2</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">sol_attractor</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">getindex</span><span class="o">.</span><span class="p">(</span><span class="n">sol_attractor</span><span class="o">.</span><span class="n">u</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">ylabel</span><span class="o">=</span><span class="sa">L</span><span class="s">&#34;z(t)&#34;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="sa">L</span><span class="s">&#34;t&#34;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">labelfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">mean_z</span> <span class="o">=</span> <span class="p">[</span><span class="n">mean</span><span class="p">(</span><span class="n">getindex</span><span class="o">.</span><span class="p">(</span><span class="n">sol_attractor</span><span class="o">.</span><span class="n">u</span><span class="p">,</span><span class="mi">3</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl"><span class="n">int_z</span> <span class="o">=</span> <span class="n">compute_objective</span><span class="p">(</span><span class="n">sol_attractor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">hline!</span><span class="p">(</span><span class="n">pl2</span><span class="p">,</span> <span class="p">[</span><span class="n">int_z</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">L</span><span class="s">&#34;\langle z</span><span class="se">\r</span><span class="s">angle&#34;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">savefig</span><span class="p">(</span><span class="n">pl2</span><span class="p">,</span> <span class="s">&#34;zsingle.png&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># for each value of the parameter, solve 20 times the initial value problem</span>
+</span></span><span class="line"><span class="cl"><span class="c"># wrap the procedure inside a function depending on p</span>
+</span></span><span class="line"><span class="cl"><span class="k">function</span> <span class="n">Lorenz_solve</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">u0</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">prob_init</span> <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">lorenz!</span><span class="p">,</span><span class="n">u0</span><span class="p">,</span><span class="n">tspan_init</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">sol_init</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob_init</span><span class="p">,</span><span class="n">Tsit5</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">  <span class="n">prob_attractor</span> <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">lorenz!</span><span class="p">,</span><span class="n">sol_init</span><span class="p">[</span><span class="k">end</span><span class="p">],</span><span class="n">tspan_attractor</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">sol_attractor</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob_attractor</span><span class="p">,</span><span class="n">Vern9</span><span class="p">(),</span><span class="n">abstol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span><span class="n">reltol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">sol_attractor</span><span class="p">,</span> <span class="n">prob_attractor</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Niter</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="n">ps</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="mf">0.0</span><span class="o">:</span><span class="mf">1.0</span><span class="o">:</span><span class="mf">50.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">probs</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="n">sols</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="n">zmean</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="n">zstd</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">ρ</span> <span class="k">in</span> <span class="n">ps</span>
+</span></span><span class="line"><span class="cl">  <span class="nd">@show</span> <span class="n">ρ</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ztmp</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">Niter</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sol</span><span class="p">,</span> <span class="n">prob</span> <span class="o">=</span> <span class="n">Lorenz_solve</span><span class="p">([</span><span class="n">ρ</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">zbar</span> <span class="o">=</span> <span class="n">compute_objective</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">push!</span><span class="p">(</span><span class="n">sols</span><span class="p">,</span> <span class="n">sol</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">push!</span><span class="p">(</span><span class="n">probs</span><span class="p">,</span> <span class="n">prob</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">push!</span><span class="p">(</span><span class="n">ztmp</span><span class="p">,</span> <span class="n">zbar</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span>
+</span></span><span class="line"><span class="cl">  <span class="n">push!</span><span class="p">(</span><span class="n">zmean</span><span class="p">,</span><span class="n">mean</span><span class="p">(</span><span class="n">ztmp</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="n">push!</span><span class="p">(</span><span class="n">zstd</span><span class="p">,</span><span class="n">std</span><span class="p">(</span><span class="n">ztmp</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">pl3</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="n">zmean</span><span class="p">,</span> <span class="n">ribbon</span> <span class="o">=</span> <span class="n">zstd</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="sa">L</span><span class="s">&#34;\langle z</span><span class="se">\r</span><span class="s">angle&#34;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="sa">L</span><span class="s">&#34;</span><span class="se">\r</span><span class="s">ho&#34;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">labelfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">savefig</span><span class="p">(</span><span class="n">pl3</span><span class="p">,</span> <span class="s">&#34;zvsrho.png&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">pl4</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">pl2</span><span class="p">,</span><span class="n">pl3</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mi">3</span><span class="n">Plots</span><span class="o">.</span><span class="n">mm</span><span class="p">,</span> <span class="n">layout</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="mi">300</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">savefig</span><span class="p">(</span><span class="n">pl4</span><span class="p">,</span> <span class="s">&#34;z.png&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>We obtain:</p>
 
 
 
@@ -816,40 +999,37 @@ savefig(pl4, &quot;z.png&quot;)
 
 
 
-<figure >
-
-
-  <a data-fancybox="" href="/img/z.png" >
-
-
-  <img src="/img/z.png" alt=""  >
-</a>
 
 
 
-</figure>
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="z.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
 
 <p>That is, we find a slope of approximately one (almost everywhere except at the kink $\rho\approx 23$), and, therefore, we expect a sensitivity of</p>
 <p>$$
 \frac{\text{d}\langle z \rangle_∞}{\text{d} \rho} \approx 1.
 $$</p>
 <h2 id="conventional-forward-mode-sensitivity-analysis-and-finite-differencing">Conventional forward-mode sensitivity analysis and finite-differencing</h2>
-<p>For non-chaotic systems, we would just use the 
-<a href="https://diffeq.sciml.ai/stable/analysis/sensitivity/#Sensitivity-Algorithms" target="_blank" rel="noopener">standard discrete or continuous forward sensitivity methods</a> or even finite-differencing.  If we try to compute the sensitivity for the Lorenz system:</p>
-<pre><code class="language-julia">function G(p, prob=prob_attractor)
-  tmp_prob = remake(prob,p=p)
-  tmp_sol = solve(tmp_prob,Vern9(),abstol=1e-14,reltol=1e-14)
-  res = compute_objective(tmp_sol)
-  @info res
-  res
-end
-sense_forward = ForwardDiff.gradient(G,p)
-sense_calculus = Calculus.gradient(G,p)
-</code></pre>
-<p>we find diverging values:</p>
+<p>For non-chaotic systems, we would just use the <a href="https://diffeq.sciml.ai/stable/analysis/sensitivity/#Sensitivity-Algorithms" target="_blank" rel="noopener">standard discrete or continuous forward sensitivity methods</a> or even finite-differencing.  If we try to compute the sensitivity for the Lorenz system:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="k">function</span> <span class="n">G</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">prob</span><span class="o">=</span><span class="n">prob_attractor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">tmp_prob</span> <span class="o">=</span> <span class="n">remake</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">tmp_sol</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">tmp_prob</span><span class="p">,</span><span class="n">Vern9</span><span class="p">(),</span><span class="n">abstol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span><span class="n">reltol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">res</span> <span class="o">=</span> <span class="n">compute_objective</span><span class="p">(</span><span class="n">tmp_sol</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nd">@info</span> <span class="n">res</span>
+</span></span><span class="line"><span class="cl">  <span class="n">res</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="n">sense_forward</span> <span class="o">=</span> <span class="n">ForwardDiff</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sense_calculus</span> <span class="o">=</span> <span class="n">Calculus</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+</span></span></code></pre></div><p>we find diverging values:</p>
 <p>$$
 \begin{aligned}
-&amp; \frac{\text{d}\langle z \rangle_\infty}{\text{d} \rho} \Bigg\rvert_{\rho=28} \approx -49899 {\text{ (ForwardDiff)}}  \\<br>
+&amp; \frac{\text{d}\langle z \rangle_\infty}{\text{d} \rho} \Bigg\rvert_{\rho=28} \approx -49899 {\text{ (ForwardDiff)}}  \\
 &amp;\frac{\text{d}\langle z \rangle_\infty}{\text{d} \rho} \Bigg\rvert_{\rho=28} \approx 472 {\text{ (Calculus)}}
 \end{aligned}
 $$</p>
@@ -857,44 +1037,37 @@ $$</p>
 <p>$$
 \frac{\text{d}}{\text{d} \rho} \langle z \rangle_∞ \neq \lim_{T \rightarrow ∞} \frac{\partial}{\partial \rho} \langle z \rangle_T
 $$</p>
-<p>Similarly, using 
-<a href="https://diffeq.sciml.ai/stable/analysis/uncertainty_quantification/#Example-3:-Adaptive-ProbInts-on-the-Lorenz-Attractor" target="_blank" rel="noopener">uncertainty quantification</a> one realizes that due to finite numerical precision and the associated unavoidable errors that are amplified exponentially, one cannot follow the true solution of a chaotic system for long times. We can visualize this by solving the Lorenz system twice with exactly the same parameters and initial condition but with different floating point number precision. In the following animation, we see an $O(1)$ difference between both trajectories after a few Lyapunov lengths:</p>
-<pre><code class="language-julia">prob_attractor1 = ODEProblem(lorenz!,sol_init[end],(0.0, 50.0),p)
-prob_attractor2 = ODEProblem(lorenz!,convert.(Float32, sol_init[end]),(0f0, 50f0),convert.(Float32,p))
-sol1 = solve(prob_attractor1,Tsit5(),abstol=1e-6,reltol=1e-6, saveat=0.01)
-sol2 = solve(prob_attractor2,Tsit5(),abstol=1f-6,reltol=1f-6, saveat=0.01f0)
-
-list_plots = []
-t1 = 0.0
-for i in 1:500
-  t2 = i*0.1
-  plt1 = plot(sol1, vars=(1,2,3), tspan=(t1,t2), denseplot=true, legend=true,
-     label = &quot;Float64&quot;, labelfontsize=20, lw = 2,
-     xlabel = L&quot;x&quot;, ylabel = L&quot;y&quot;, zlabel = L&quot;z&quot;,
-     xlims=(-20,25),ylims=(-28,25),zlims=(5,48))
-  plot!(plt1, sol2,vars=(1,2,3), tspan=(t1,t2), denseplot=true, label=&quot;Float32&quot;,
-        xlims=(-20,25),ylims=(-28,25),zlims=(5,48))
-  push!(list_plots, plt1)
-end
-
-anim = animate(list_plots,every=1)
-
-pl1 = plot(sol1,vars=(1,2,3), legend=true,
-  label = &quot;Float64&quot;, labelfontsize=20, lw = 2,
-  xlabel = L&quot;x&quot;, ylabel = L&quot;y&quot;, zlabel = L&quot;z&quot;,
-  xlims=(-20,25),ylims=(-28,25),zlims=(5,48)
- )
-plot!(pl1, sol2,vars=(1,2,3), label=&quot;Float32&quot;, xlims=(-20,25),ylims=(-28,25),zlims=(5,48)
- )
-
-savefig(pl1, &quot;Lorenz_Floats.png&quot;)
-</code></pre>
-
-
-
-
-
-  
+<p>Similarly, using <a href="https://diffeq.sciml.ai/stable/analysis/uncertainty_quantification/#Example-3:-Adaptive-ProbInts-on-the-Lorenz-Attractor" target="_blank" rel="noopener">uncertainty quantification</a> one realizes that due to finite numerical precision and the associated unavoidable errors that are amplified exponentially, one cannot follow the true solution of a chaotic system for long times. We can visualize this by solving the Lorenz system twice with exactly the same parameters and initial condition but with different floating point number precision. In the following animation, we see an $O(1)$ difference between both trajectories after a few Lyapunov lengths:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="n">prob_attractor1</span> <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">lorenz!</span><span class="p">,</span><span class="n">sol_init</span><span class="p">[</span><span class="k">end</span><span class="p">],(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">prob_attractor2</span> <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">lorenz!</span><span class="p">,</span><span class="n">convert</span><span class="o">.</span><span class="p">(</span><span class="kt">Float32</span><span class="p">,</span> <span class="n">sol_init</span><span class="p">[</span><span class="k">end</span><span class="p">]),(</span><span class="mf">0f0</span><span class="p">,</span> <span class="mf">50f0</span><span class="p">),</span><span class="n">convert</span><span class="o">.</span><span class="p">(</span><span class="kt">Float32</span><span class="p">,</span><span class="n">p</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">sol1</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob_attractor1</span><span class="p">,</span><span class="n">Tsit5</span><span class="p">(),</span><span class="n">abstol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span><span class="n">reltol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">saveat</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sol2</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob_attractor2</span><span class="p">,</span><span class="n">Tsit5</span><span class="p">(),</span><span class="n">abstol</span><span class="o">=</span><span class="mf">1f-6</span><span class="p">,</span><span class="n">reltol</span><span class="o">=</span><span class="mf">1f-6</span><span class="p">,</span> <span class="n">saveat</span><span class="o">=</span><span class="mf">0.01f0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">list_plots</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="n">t1</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">500</span>
+</span></span><span class="line"><span class="cl">  <span class="n">t2</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl">  <span class="n">plt1</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">sol1</span><span class="p">,</span> <span class="n">vars</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">tspan</span><span class="o">=</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">),</span> <span class="n">denseplot</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="n">label</span> <span class="o">=</span> <span class="s">&#34;Float64&#34;</span><span class="p">,</span> <span class="n">labelfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="n">xlabel</span> <span class="o">=</span> <span class="sa">L</span><span class="s">&#34;x&#34;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="sa">L</span><span class="s">&#34;y&#34;</span><span class="p">,</span> <span class="n">zlabel</span> <span class="o">=</span> <span class="sa">L</span><span class="s">&#34;z&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">28</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span><span class="n">zlims</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">48</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="n">plot!</span><span class="p">(</span><span class="n">plt1</span><span class="p">,</span> <span class="n">sol2</span><span class="p">,</span><span class="n">vars</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">tspan</span><span class="o">=</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">),</span> <span class="n">denseplot</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#34;Float32&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">28</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span><span class="n">zlims</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">48</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="n">push!</span><span class="p">(</span><span class="n">list_plots</span><span class="p">,</span> <span class="n">plt1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">anim</span> <span class="o">=</span> <span class="n">animate</span><span class="p">(</span><span class="n">list_plots</span><span class="p">,</span><span class="n">every</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">pl1</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">sol1</span><span class="p">,</span><span class="n">vars</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">label</span> <span class="o">=</span> <span class="s">&#34;Float64&#34;</span><span class="p">,</span> <span class="n">labelfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">xlabel</span> <span class="o">=</span> <span class="sa">L</span><span class="s">&#34;x&#34;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="sa">L</span><span class="s">&#34;y&#34;</span><span class="p">,</span> <span class="n">zlabel</span> <span class="o">=</span> <span class="sa">L</span><span class="s">&#34;z&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">28</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span><span class="n">zlims</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">48</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot!</span><span class="p">(</span><span class="n">pl1</span><span class="p">,</span> <span class="n">sol2</span><span class="p">,</span><span class="n">vars</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&#34;Float32&#34;</span><span class="p">,</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">28</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span><span class="n">zlims</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">48</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">savefig</span><span class="p">(</span><span class="n">pl1</span><span class="p">,</span> <span class="s">&#34;Lorenz_Floats.png&#34;</span><span class="p">)</span>
+</span></span></code></pre></div>
 
 
 
@@ -906,18 +1079,16 @@ savefig(pl1, &quot;Lorenz_Floats.png&quot;)
 
 
 
-<figure >
-
-
-  <a data-fancybox="" href="/img/Lorenz.gif" >
-
-
-  <img src="/img/Lorenz.gif" alt=""  >
-</a>
 
 
 
-</figure>
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="Lorenz.gif" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
 
 <p>Without animation:</p>
 
@@ -925,7 +1096,6 @@ savefig(pl1, &quot;Lorenz_Floats.png&quot;)
 
 
 
-  
 
 
 
@@ -937,60 +1107,50 @@ savefig(pl1, &quot;Lorenz_Floats.png&quot;)
 
 
 
-<figure >
 
 
-  <a data-fancybox="" href="/img/Lorenz_Floats.png" >
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="Lorenz_Floats.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
 
-
-  <img src="/img/Lorenz_Floats.png" alt=""  >
-</a>
-
-
-
-</figure>
-
-<p>Luckily, the 
-<a href="https://mathworld.wolfram.com/ShadowingTheorem.html" target="_blank" rel="noopener">shadowing lemma</a> states:</p>
+<p>Luckily, the <a href="https://mathworld.wolfram.com/ShadowingTheorem.html" target="_blank" rel="noopener">shadowing lemma</a> states:</p>
 <blockquote>
 <p>Although a numerically computed chaotic trajectory diverges exponentially from the true trajectory with the same initial coordinates, there exists an errorless trajectory with a slightly different initial condition that stays near (&ldquo;shadows&rdquo;) the numerically computed one.</p>
 </blockquote>
 <h2 id="shadowing-methods">Shadowing methods</h2>
-<p>The central idea of the shadowing methods is to distill the long-time effect (which actually shifts the attractor) due to a variation of the system parameters (upwards in the $z$-direction with increasing $\rho$ for the Lorenz system) from the transient effect, i.e., the butterfly effect that looks like exponentially diverging trajectories due to variations of the initial conditions.  That implies that we aim at finding two trajectories, one with $p$ and one with $p+\delta p$, which do <em>not</em> diverge exponentially from each other (which exist thanks to the shadowing lemma). In this case, their difference will only contain the long-time effect. More details can be found in Refs. <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> and <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>, including a visualization of both effects in Fig. 1 of Ref. <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>.</p>
+<p>The central idea of the shadowing methods is to distill the long-time effect (which actually shifts the attractor) due to a variation of the system parameters (upwards in the $z$-direction with increasing $\rho$ for the Lorenz system) from the transient effect, i.e., the butterfly effect that looks like exponentially diverging trajectories due to variations of the initial conditions.  That implies that we aim at finding two trajectories, one with $p$ and one with $p+\delta p$, which do <em>not</em> diverge exponentially from each other (which exist thanks to the shadowing lemma). In this case, their difference will only contain the long-time effect. More details can be found in Refs. <sup id="fnref2:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> and <sup id="fnref2:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>, including a visualization of both effects in Fig. 1 of Ref. <sup id="fnref3:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>.</p>
 <h2 id="lss-and-nilss-for-the-lorenz-system">LSS and NILSS for the Lorenz system</h2>
-<p>Switching to LSS or NILSS within the 
-<a href="https://sciml.ai/" target="_blank" rel="noopener">SciML</a> ecosystem is straightforward by either defining the associated LSS (<code>ForwardLSSProblem</code> or <code>AdjointLSSProblem</code>) or NILSS problem (<code>NILSSProblem</code>) type manually:</p>
-<pre><code class="language-julia"># objective
-g(u,p,t) = u[end]
-
-####
-# LSS
-####
-lss_problem = ForwardLSSProblem(sol_attractor, ForwardLSS(alpha=DiffEqSensitivity.CosWindowing()), g)
-@show shadow_forward(lss_problem) # 1.0095888187322035
-
-lss_problem = ForwardLSSProblem(sol_attractor, ForwardLSS(alpha=DiffEqSensitivity.Cos2Windowing()), g)
-@show shadow_forward(lss_problem) # 1.0343951385924328
-
-lss_problem = ForwardLSSProblem(sol_attractor, ForwardLSS(alpha=10.0), g)
-@show shadow_forward(lss_problem) # 1.0284286902740765
-
-adjointlss_problem = AdjointLSSProblem(sol_attractor, AdjointLSS(alpha=10.0), g)
-@show shadow_adjoint(adjointlss_problem) # 1.028428690274077
-</code></pre>
-<p>or by setting the <code>sensealg=</code> kwarg in <code>solve()</code>:</p>
-<pre><code class="language-julia"># select via sensealg in solve
-using Zygote
-
-function GLSS(p; sensealg=ForwardLSS(), dt=0.01, g=nothing)
-  _prob = remake(prob_attractor,p=p)
-  _sol = solve(_prob,Vern9(),abstol=1e-14,reltol=1e-14,saveat=dt,sensealg=sensealg, g=g)
-  sum(getindex.(_sol.u,3))
-end
-
-dp1 = Zygote.gradient((p)-&gt;GLSS(p),p) # 0.9694728321500617
-</code></pre>
-<p>Note that we have implemented three different options for forward shadowing with <code>LSS()</code>:</p>
+<p>Switching to LSS or NILSS within the <a href="https://sciml.ai/" target="_blank" rel="noopener">SciML</a> ecosystem is straightforward by either defining the associated LSS (<code>ForwardLSSProblem</code> or <code>AdjointLSSProblem</code>) or NILSS problem (<code>NILSSProblem</code>) type manually:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="c"># objective</span>
+</span></span><span class="line"><span class="cl"><span class="n">g</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="k">end</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">####</span>
+</span></span><span class="line"><span class="cl"><span class="c"># LSS</span>
+</span></span><span class="line"><span class="cl"><span class="c">####</span>
+</span></span><span class="line"><span class="cl"><span class="n">lss_problem</span> <span class="o">=</span> <span class="n">ForwardLSSProblem</span><span class="p">(</span><span class="n">sol_attractor</span><span class="p">,</span> <span class="n">ForwardLSS</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">DiffEqSensitivity</span><span class="o">.</span><span class="n">CosWindowing</span><span class="p">()),</span> <span class="n">g</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@show</span> <span class="n">shadow_forward</span><span class="p">(</span><span class="n">lss_problem</span><span class="p">)</span> <span class="c"># 1.0095888187322035</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">lss_problem</span> <span class="o">=</span> <span class="n">ForwardLSSProblem</span><span class="p">(</span><span class="n">sol_attractor</span><span class="p">,</span> <span class="n">ForwardLSS</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">DiffEqSensitivity</span><span class="o">.</span><span class="n">Cos2Windowing</span><span class="p">()),</span> <span class="n">g</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@show</span> <span class="n">shadow_forward</span><span class="p">(</span><span class="n">lss_problem</span><span class="p">)</span> <span class="c"># 1.0343951385924328</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">lss_problem</span> <span class="o">=</span> <span class="n">ForwardLSSProblem</span><span class="p">(</span><span class="n">sol_attractor</span><span class="p">,</span> <span class="n">ForwardLSS</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">10.0</span><span class="p">),</span> <span class="n">g</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@show</span> <span class="n">shadow_forward</span><span class="p">(</span><span class="n">lss_problem</span><span class="p">)</span> <span class="c"># 1.0284286902740765</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">adjointlss_problem</span> <span class="o">=</span> <span class="n">AdjointLSSProblem</span><span class="p">(</span><span class="n">sol_attractor</span><span class="p">,</span> <span class="n">AdjointLSS</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">10.0</span><span class="p">),</span> <span class="n">g</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@show</span> <span class="n">shadow_adjoint</span><span class="p">(</span><span class="n">adjointlss_problem</span><span class="p">)</span> <span class="c"># 1.028428690274077</span>
+</span></span></code></pre></div><p>or by setting the <code>sensealg=</code> kwarg in <code>solve()</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="c"># select via sensealg in solve</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Zygote</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">function</span> <span class="n">GLSS</span><span class="p">(</span><span class="n">p</span><span class="p">;</span> <span class="n">sensealg</span><span class="o">=</span><span class="n">ForwardLSS</span><span class="p">(),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">_prob</span> <span class="o">=</span> <span class="n">remake</span><span class="p">(</span><span class="n">prob_attractor</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">_sol</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">_prob</span><span class="p">,</span><span class="n">Vern9</span><span class="p">(),</span><span class="n">abstol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span><span class="n">reltol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span><span class="n">saveat</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span><span class="n">sensealg</span><span class="o">=</span><span class="n">sensealg</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">sum</span><span class="p">(</span><span class="n">getindex</span><span class="o">.</span><span class="p">(</span><span class="n">_sol</span><span class="o">.</span><span class="n">u</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dp1</span> <span class="o">=</span> <span class="n">Zygote</span><span class="o">.</span><span class="n">gradient</span><span class="p">((</span><span class="n">p</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GLSS</span><span class="p">(</span><span class="n">p</span><span class="p">),</span><span class="n">p</span><span class="p">)</span> <span class="c"># 0.9694728321500617</span>
+</span></span></code></pre></div><p>Note that we have implemented three different options for forward shadowing with <code>LSS()</code>:</p>
 <ul>
 <li><code>CosWindowing()</code> (default)</li>
 <li><code>Cos2Windowing()</code></li>
@@ -999,72 +1159,68 @@ dp1 = Zygote.gradient((p)-&gt;GLSS(p),p) # 0.9694728321500617
 <p>Additionally, an adjoint implementation <code>AdjointLSS()</code> is available that is particularly recommended for a large number of system parameters.  Based on the values computed above, we can easily check that <code>AdjointLSS(alpha=10.0)</code> agrees perfectly with <code>ForwardLSS(alpha=10.0)</code>. In all cases considered, we find the expected sensitivity value of $\approx 1$.</p>
 <p>However, the use of <code>LSS()</code> is (typically) much more expensive than the use of <code>NILSS()</code>, because <code>LSS()</code> needs to solve a large linear system. This linear system scales with the number of independent variables in the differential equation times the number of time steps and, thus, it can become very large.  The computational and memory costs of <code>NILSS()</code> scale with the number of positive (unstable) Lyapunov exponents, since it constrains the optimization problem in the LSS method to its unstable subspace. In many cases, this number is much smaller than the number of independent variables, hence making <code>NILSS()</code> more efficient.</p>
 <p>In the <code>NILSS()</code> algorithm, the user can control the number of steps per segment as well as the number of segments.</p>
-<pre><code class="language-julia">####
-# NILSS
-####
-
-# make sure trajectory is fully on the attractor
-Random.seed!(1234)
-tspan_init = (0.0,100.0)
-tspan_attractor = (100.0,120.0)
-u0 = rand(3)
-prob_init = ODEProblem(lorenz!,u0,tspan_init,p)
-sol_init = solve(prob_init,Tsit5())
-prob_attractor = ODEProblem(lorenz!,sol_init[end],tspan_attractor,p)
-
-nseg = 100 # number of segments on time interval
-nstep = 2001 # number of steps on each segment
-
-nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
-@show DiffEqSensitivity.shadow_forward(nilss_prob,Tsit5()) # 0.9966924374966089
-
-</code></pre>
-<p>If the number of segments is chosen too small, a warning is thrown:</p>
-<pre><code class="language-julia">nseg = 20 # number of segments on time interval
-nstep = 2001 # number of steps on each segment
-
-nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
-@show DiffEqSensitivity.shadow_forward(nilss_prob,Tsit5()) # 1.0416028730638789
-
-# Warning: Detected a large value of ξ at the beginning of a segment.
-# └ @ DiffEqSensitivity ~/.julia/dev/DiffEqSensitivity/src/nilss.jl:474
-</code></pre>
-<p>In the future, we might add an option for the automate control of these variables following the proposal in the NILSS paper<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="c">####</span>
+</span></span><span class="line"><span class="cl"><span class="c"># NILSS</span>
+</span></span><span class="line"><span class="cl"><span class="c">####</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># make sure trajectory is fully on the attractor</span>
+</span></span><span class="line"><span class="cl"><span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tspan_init</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">100.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tspan_attractor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">100.0</span><span class="p">,</span><span class="mf">120.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u0</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">prob_init</span> <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">lorenz!</span><span class="p">,</span><span class="n">u0</span><span class="p">,</span><span class="n">tspan_init</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sol_init</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob_init</span><span class="p">,</span><span class="n">Tsit5</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">prob_attractor</span> <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">lorenz!</span><span class="p">,</span><span class="n">sol_init</span><span class="p">[</span><span class="k">end</span><span class="p">],</span><span class="n">tspan_attractor</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">nseg</span> <span class="o">=</span> <span class="mi">100</span> <span class="c"># number of segments on time interval</span>
+</span></span><span class="line"><span class="cl"><span class="n">nstep</span> <span class="o">=</span> <span class="mi">2001</span> <span class="c"># number of steps on each segment</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">nilss_prob</span> <span class="o">=</span> <span class="n">NILSSProblem</span><span class="p">(</span><span class="n">prob_attractor</span><span class="p">,</span> <span class="n">NILSS</span><span class="p">(</span><span class="n">nseg</span><span class="p">,</span> <span class="n">nstep</span><span class="p">),</span> <span class="n">g</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@show</span> <span class="n">DiffEqSensitivity</span><span class="o">.</span><span class="n">shadow_forward</span><span class="p">(</span><span class="n">nilss_prob</span><span class="p">,</span><span class="n">Tsit5</span><span class="p">())</span> <span class="c"># 0.9966924374966089</span>
+</span></span></code></pre></div><p>If the number of segments is chosen too small, a warning is thrown:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="n">nseg</span> <span class="o">=</span> <span class="mi">20</span> <span class="c"># number of segments on time interval</span>
+</span></span><span class="line"><span class="cl"><span class="n">nstep</span> <span class="o">=</span> <span class="mi">2001</span> <span class="c"># number of steps on each segment</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">nilss_prob</span> <span class="o">=</span> <span class="n">NILSSProblem</span><span class="p">(</span><span class="n">prob_attractor</span><span class="p">,</span> <span class="n">NILSS</span><span class="p">(</span><span class="n">nseg</span><span class="p">,</span> <span class="n">nstep</span><span class="p">),</span> <span class="n">g</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@show</span> <span class="n">DiffEqSensitivity</span><span class="o">.</span><span class="n">shadow_forward</span><span class="p">(</span><span class="n">nilss_prob</span><span class="p">,</span><span class="n">Tsit5</span><span class="p">())</span> <span class="c"># 1.0416028730638789</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Warning: Detected a large value of ξ at the beginning of a segment.</span>
+</span></span><span class="line"><span class="cl"><span class="c"># └ @ DiffEqSensitivity ~/.julia/dev/DiffEqSensitivity/src/nilss.jl:474</span>
+</span></span></code></pre></div><p>In the future, we might add an option for the automate control of these variables following the proposal in the NILSS paper<sup id="fnref4:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>.</p>
 <h2 id="outlook">Outlook</h2>
 <p>With respect to the shadowing methods for chaotic systems, we are planning to implement further methods, such as</p>
 <ul>
 <li>NILSAS<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></li>
 <li>FD-NILSS<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup></li>
 </ul>
-<p>in the upcoming weeks. For further information and a collection of other methods, the interested reader is invited to track the corresponding 
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/issues/102" target="_blank" rel="noopener">issue</a> in the DiffEqSensitivity.jl package.</p>
+<p>in the upcoming weeks. For further information and a collection of other methods, the interested reader is invited to track the corresponding <a href="https://github.com/SciML/DiffEqSensitivity.jl/issues/102" target="_blank" rel="noopener">issue</a> in the DiffEqSensitivity.jl package.</p>
 <p>If you have any questions or comments, please don’t hesitate to contact me!</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>Frank Schäfer, Michal Kloc, et al., Mach. Learn.: Sci. Technol. <strong>1</strong>, 035009 (2020). <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:1">
+<p>Frank Schäfer, Michal Kloc, et al., Mach. Learn.: Sci. Technol. <strong>1</strong>, 035009 (2020).&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
-<p>Frank Schäfer, Pavel Sekatski, et al., Mach. Learn.: Sci. Technol. <strong>2</strong>, 035004 (2021). <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:2">
+<p>Frank Schäfer, Pavel Sekatski, et al., Mach. Learn.: Sci. Technol. <strong>2</strong>, 035004 (2021).&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
-<p>Chris Rackauckas, Yingbo Ma, et al., arXiv preprint arXiv:2001.04385 (2020). <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:3">
+<p>Chris Rackauckas, Yingbo Ma, et al., arXiv preprint arXiv:2001.04385 (2020).&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:4" role="doc-endnote">
-<p>Qiqi Wang, Rui Hu, et al. J. Comput. Phys <strong>26</strong>, 210-224 (2014) <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:4">
+<p>Qiqi Wang, Rui Hu, et al. J. Comput. Phys <strong>26</strong>, 210-224 (2014)&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:5" role="doc-endnote">
-<p>Angxiu Ni and Qiqi Wang. J. Comput. Phys <strong>347</strong>,  56-77 (2017). <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:5">
+<p>Angxiu Ni and Qiqi Wang. J. Comput. Phys <strong>347</strong>,  56-77 (2017).&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref3:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref4:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:6" role="doc-endnote">
-<p>Angxiu Ni and Chaitanya Talnikar, J. Comput. Phys <strong>395</strong>, 690-709, (2019) <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:6">
+<p>Angxiu Ni and Chaitanya Talnikar, J. Comput. Phys <strong>395</strong>, 690-709, (2019)&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:7" role="doc-endnote">
-<p>Angxiu Ni, Qiqi Wang et al., J. Comput. Phys <strong>394</strong>, 615-631 (2019) <a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:7">
+<p>Angxiu Ni, Qiqi Wang et al., J. Comput. Phys <strong>394</strong>, 615-631 (2019)&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
     </div>
 
@@ -1078,21 +1234,21 @@ nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
   
   <a class="badge badge-light" href="/tag/gsoc-2021/">GSoC 2021</a>
   
-  <a class="badge badge-light" href="/tag/julia/">julia</a>
+  <a class="badge badge-light" href="/tag/julia/">Julia</a>
   
-  <a class="badge badge-light" href="/tag/adjoint-sensitivity-methods/">Adjoint sensitivity methods</a>
+  <a class="badge badge-light" href="/tag/adjoint-sensitivity-methods/">Adjoint Sensitivity Methods</a>
   
-  <a class="badge badge-light" href="/tag/forward-sensitivity-methods/">Forward sensitivity methods</a>
+  <a class="badge badge-light" href="/tag/forward-sensitivity-methods/">Forward Sensitivity Methods</a>
   
   <a class="badge badge-light" href="/tag/shadowing/">Shadowing</a>
   
-  <a class="badge badge-light" href="/tag/chaotic-systems/">Chaotic systems</a>
+  <a class="badge badge-light" href="/tag/chaotic-systems/">Chaotic Systems</a>
   
 </div>
 
 
 
-<div class="share-box" aria-hidden="true">
+<div class="share-box">
   <ul class="share">
     
       
@@ -1102,8 +1258,12 @@ nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
       
       
       
+      
+      
+      
+      
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://frankschae.github.io/post/shadowing/&amp;text=Shadowing%20Methods%20for%20Forward%20and%20Adjoint%20Sensitivity%20Analysis%20of%20Chaotic%20Systems" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ffrankschae.github.io%2Fpost%2Fshadowing%2F&amp;text=Shadowing&#43;Methods&#43;for&#43;Forward&#43;and&#43;Adjoint&#43;Sensitivity&#43;Analysis&#43;of&#43;Chaotic&#43;Systems" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -1115,8 +1275,12 @@ nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
       
       
       
+      
+      
+      
+      
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://frankschae.github.io/post/shadowing/&amp;t=Shadowing%20Methods%20for%20Forward%20and%20Adjoint%20Sensitivity%20Analysis%20of%20Chaotic%20Systems" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Ffrankschae.github.io%2Fpost%2Fshadowing%2F&amp;t=Shadowing&#43;Methods&#43;for&#43;Forward&#43;and&#43;Adjoint&#43;Sensitivity&#43;Analysis&#43;of&#43;Chaotic&#43;Systems" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -1128,8 +1292,14 @@ nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
       
       
       
+      
+      
+      
+      
+        
+      
       <li>
-        <a href="mailto:?subject=Shadowing%20Methods%20for%20Forward%20and%20Adjoint%20Sensitivity%20Analysis%20of%20Chaotic%20Systems&amp;body=https://frankschae.github.io/post/shadowing/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Shadowing%20Methods%20for%20Forward%20and%20Adjoint%20Sensitivity%20Analysis%20of%20Chaotic%20Systems&amp;body=https%3A%2F%2Ffrankschae.github.io%2Fpost%2Fshadowing%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -1141,8 +1311,12 @@ nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
       
       
       
+      
+      
+      
+      
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://frankschae.github.io/post/shadowing/&amp;title=Shadowing%20Methods%20for%20Forward%20and%20Adjoint%20Sensitivity%20Analysis%20of%20Chaotic%20Systems" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Ffrankschae.github.io%2Fpost%2Fshadowing%2F&amp;title=Shadowing&#43;Methods&#43;for&#43;Forward&#43;and&#43;Adjoint&#43;Sensitivity&#43;Analysis&#43;of&#43;Chaotic&#43;Systems" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -1154,8 +1328,12 @@ nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
       
       
       
+      
+      
+      
+      
       <li>
-        <a href="https://web.whatsapp.com/send?text=Shadowing%20Methods%20for%20Forward%20and%20Adjoint%20Sensitivity%20Analysis%20of%20Chaotic%20Systems%20https://frankschae.github.io/post/shadowing/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=Shadowing&#43;Methods&#43;for&#43;Forward&#43;and&#43;Adjoint&#43;Sensitivity&#43;Analysis&#43;of&#43;Chaotic&#43;Systems%20https%3A%2F%2Ffrankschae.github.io%2Fpost%2Fshadowing%2F" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1167,8 +1345,12 @@ nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
       
       
       
+      
+      
+      
+      
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://frankschae.github.io/post/shadowing/&amp;title=Shadowing%20Methods%20for%20Forward%20and%20Adjoint%20Sensitivity%20Analysis%20of%20Chaotic%20Systems" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Ffrankschae.github.io%2Fpost%2Fshadowing%2F&amp;title=Shadowing&#43;Methods&#43;for&#43;Forward&#43;and&#43;Adjoint&#43;Sensitivity&#43;Analysis&#43;of&#43;Chaotic&#43;Systems" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1186,33 +1368,29 @@ nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
 
 
 
-
   
   
 
 
 
-
-
+  
+  
   
     
-    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
     
       
+      <a href="https://frankschae.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu5bdd272e648badb42a595cb37d3ba435_2457515_270x270_fill_lanczos_center_3.png" alt="Frank Schäfer"></a>
     
-    
-    
-    <div class="media author-card content-widget-hr">
-      
-        
-        <img class="avatar mr-3 avatar-circle" src="/author/frank-schafer/avatar_hu5bdd272e648badb42a595cb37d3ba435_2457515_270x270_fill_lanczos_center_2.png" alt="Frank Schäfer">
-      
 
-      <div class="media-body">
-        <h5 class="card-title"><a href="https://frankschae.github.io/">Frank Schäfer</a></h5>
-        <h6 class="card-subtitle">Postdoctoral researcher</h6>
-        <p class="card-text">My research interests include many-body physics, machine learning, and differentiable programming.</p>
-        <ul class="network-icon" aria-hidden="true">
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://frankschae.github.io/">Frank Schäfer</a></h5>
+      <h6 class="card-subtitle">Postdoctoral researcher</h6>
+      <p class="card-text">My research interests include many-body physics, probabilistic machine learning, and differentiable programming.</p>
+      <ul class="network-icon" aria-hidden="true">
   
     
     
@@ -1297,106 +1475,155 @@ nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
   
 </ul>
 
-      </div>
     </div>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <div class="article-widget content-widget-hr">
-    <h3>Related</h3>
-    <ul>
-      
-      <li><a href="/post/hybridde/">Neural Hybrid Differential Equations</a></li>
-      
-      <li><a href="/post/gsoc2020-high-weak-order-solvers-sde-adjoints/">GSoC 2020: High weak order SDE solvers and their utility in neural SDEs</a></li>
-      
-      <li><a href="/post/high-weak/">High weak order SDE solvers</a></li>
-      
-    </ul>
   </div>
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
   </div>
 </article>
+  </div>
 
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+  
+    
+  
+  
+    
+  
+
+  
+
+  
+  <p class="powered-by copyright-license-text">
+    © 2024 Frank Schäfer. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+  </p>
+  
+
+  <p class="powered-by footer-license-icons">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank" aria-label="Creative Commons">
+      <i class="fab fa-creative-commons fa-2x" aria-hidden="true"></i>
+      <i class="fab fa-creative-commons-by fa-2x" aria-hidden="true"></i>
       
-
-    
-    
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
-
+        <i class="fab fa-creative-commons-nc fa-2x" aria-hidden="true"></i>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js" integrity="sha256-lyWCDMnMeZiXRi7Zl54sZGKYmgQs4izcT7+tKc+KUBk=" crossorigin="anonymous" title="mermaid"></script>
       
-
+        <i class="fab fa-creative-commons-nd fa-2x" aria-hidden="true"></i>
       
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/julia.min.js"></script>
-        
+    </a>
+  </p>
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
       
+      
+      
+      
+      
+      
+      Published with <a href="https://hugoblox.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Hugo Blox Builder</a> — the free, <a href="https://github.com/HugoBlox/hugo-blox-builder" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
 
+    </div>
     
+  </div>
 
-    
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
-    
+  
 
-    
-    
-    <script>const code_highlighting = true;</script>
-    
 
-    
-    
-    <script>const isSiteThemeDark = false;</script>
-    
+<script src="/js/vendor-bundle.min.ff7771056d34ad9f2de2d8f6a466e748.js"></script>
 
-    
-    
-    
-    
-    
-    
-    <script>
-      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
-      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
-      const content_type = {
-        'post': "Posts",
-        'project': "Projects",
-        'publication' : "Publications",
-        'talk' : "Talks"
-        };
-    </script>
-    
 
-    
-    
 
-    
-    
-    <script id="search-hit-fuse-template" type="text/x-template">
-      <div class="search-hit" id="summary-{{key}}">
+
+  
+
+  
+  
+
+  
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.min.js" integrity="" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+  
+  <script id="search-hit-fuse-template" type="text/x-template">
+    <div class="search-hit" id="summary-{{key}}">
       <div class="search-hit-content">
         <div class="search-hit-name">
           <a href="{{relpermalink}}">{{title}}</a>
@@ -1404,42 +1631,18 @@ nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
           <p class="search-hit-description">{{snippet}}</p>
         </div>
       </div>
-      </div>
-    </script>
-    
+    </div>
+  </script>
+  
+    <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+  
 
-    
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
-    
 
-    
-    
 
-    
-    
 
-    
-    
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-      
-    
-    
-    
-    
-    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
 
-    
 
 
 
@@ -1448,31 +1651,53 @@ nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
 
   
   
-  <div class="container">
-    <footer class="site-footer">
+  
+  
+  
+  
   
 
-  <p class="powered-by">
-    © 2020 Frank Schäfer &middot; 
 
-    Powered by the
-    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
-    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
 
-    
-    <span class="float-right" aria-hidden="true">
-      <a href="#" class="back-to-top">
-        <span class="button_icon">
-          <i class="fas fa-chevron-up fa-2x"></i>
-        </span>
-      </a>
-    </span>
-    
-  </p>
-</footer>
 
-  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+
+  <script src="/js/wowchemy-headroom.db4755770454eb63685f8de785c0a172.js" type="module"></script>
+
+
+
+
+
+
+
+
+
   
+  
+
+
+<script src="/en/js/wowchemy.min.7f5ebaff62ae468cff8bb3dd1337bb9b.js"></script>
+
+
+
+  <script src="/js/wowchemy-map.a26e9d2f7238ba5b868384f1c5bc6477.js" type="module"></script>
+
+
+
 
   
 <div id="modal" class="modal fade" role="dialog">
@@ -1485,7 +1710,8 @@ nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
         </button>
       </div>
       <div class="modal-body">
-        <pre><code class="tex hljs"></code></pre>
+        
+        <pre><code></code></pre>
       </div>
       <div class="modal-footer">
         <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
@@ -1499,6 +1725,26 @@ nilss_prob = NILSSProblem(prob_attractor, NILSS(nseg, nstep), g)
     </div>
   </div>
 </div>
+
+
+  <script src="/js/wowchemy-publication.9c0e895144aef5a693008b5c5d450147.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

@@ -1,84 +1,196 @@
-<!DOCTYPE html><html lang="en-us" >
+<!DOCTYPE html>
+<!-- This site was created with Hugo Blox. https://hugoblox.com -->
+<!-- Last Published: April 14, 2024 --><html lang="en-us" >
+
 
 <head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Source Themes Academic 4.8.0">
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Hugo Blox Builder 5.9.7" />
   
 
   
   
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.26c458e6907dc03073573976b7f4044e.css" media="print" onload="this.media='all'">
+
   
   
   
     
     
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.4/css/academicons.min.css" integrity="sha512-IW0nhlW5MgNydsXJO40En2EoCkTTjZhI3yuODrZIc8cQ4h1XcF53PsqDHa09NqnkXuIe0Oiyyj171BqZFwISBw==" crossorigin="anonymous" media="print" onload="this.media='all'">
     
-  
-  
 
-  <meta name="author" content="Frank Schäfer">
-
-  
-  
-  
     
-  
-  <meta name="description" content="In this post, we discuss sensitivity analysis of differential equations with state changes caused by events triggered at defined moments, for example reflections, bounces off a wall or other sudden forces.">
-
-  
-  <link rel="alternate" hreflang="en-us" href="https://frankschae.github.io/post/bouncing_ball/">
-
-  
-
-
-  
-  
-  
-  <meta name="theme-color" content="#2962ff">
-  
-
-  
-  
-  
-  <script src="/js/mathjax-config.js"></script>
-  
-
-  
-  
-  
-  
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
-
     
     
     
       
+      
     
     
+    
+
+    
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.min.css" integrity="" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
       
       
         
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
-        
+      
+
       
     
-
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
-    
-
-    
-
-    
-    
+      
       
 
       
@@ -87,12 +199,6 @@
       
     
       
-
-      
-      
-
-      
-    
       
 
       
@@ -100,129 +206,19 @@
 
       
     
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
-      
-    
-      
-
-      
-      
-
-      
-    
-
-  
-
-  
-  
-  
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
   
 
   
   
   
   
-  <link rel="stylesheet" href="/css/academic.css">
-
   
-
-
-
-
   
-
+  <link rel="stylesheet" href="/css/wowchemy.f6689966c0a10712f95f034011917db0.css" />
 
   
   
-
   
-  <link rel="alternate" href="/post/bouncing_ball/index.xml" type="application/rss+xml" title="FS">
-  
-
-  <link rel="manifest" href="/index.webmanifest">
-  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
-  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
-
-  <link rel="canonical" href="https://frankschae.github.io/post/bouncing_ball/">
 
   
   
@@ -233,23 +229,120 @@
   
     
     
+    <link rel="stylesheet" href="/css/libs/chroma/github-light.min.css" title="hl-light" media="print" onload="this.media='all'" >
+    <link rel="stylesheet" href="/css/libs/chroma/dracula.min.css" title="hl-dark" media="print" onload="this.media='all'" disabled>
+  
+
   
   
-  <meta property="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
-  <meta property="og:site_name" content="FS">
-  <meta property="og:url" content="https://frankschae.github.io/post/bouncing_ball/">
-  <meta property="og:title" content="Sensitivity Analysis of Hybrid Differential Equations | FS">
-  <meta property="og:description" content="In this post, we discuss sensitivity analysis of differential equations with state changes caused by events triggered at defined moments, for example reflections, bounces off a wall or other sudden forces."><meta property="og:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
-  <meta property="twitter:image" content="https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
-    
-      <meta property="article:published_time" content="2021-07-16T13:24:04&#43;02:00">
-    
+  
+
+
+
+
+
+
+  <meta name="author" content="Frank Schäfer" />
+
+
+
+
+
+  
+
+<meta name="description" content="In this post, we discuss sensitivity analysis of differential equations with state changes caused by events triggered at defined moments, for example reflections, bounces off a wall or other sudden forces." />
+
+
+
+<link rel="alternate" hreflang="en-us" href="https://frankschae.github.io/post/bouncing_ball/" />
+<link rel="canonical" href="https://frankschae.github.io/post/bouncing_ball/" />
+
+
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+
+
+<link rel="icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png" />
+<link rel="apple-touch-icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_3.png" />
+
+<meta name="theme-color" content="#1565c0" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+<meta property="twitter:card" content="summary" />
+
+  <meta property="twitter:site" content="@GetResearchDev" />
+  <meta property="twitter:creator" content="@GetResearchDev" />
+<meta property="twitter:image" content="https://frankschae.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png" />
+
+
+
+  
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="FS" />
+<meta property="og:url" content="https://frankschae.github.io/post/bouncing_ball/" />
+<meta property="og:title" content="Sensitivity Analysis of Hybrid Differential Equations | FS" />
+<meta property="og:description" content="In this post, we discuss sensitivity analysis of differential equations with state changes caused by events triggered at defined moments, for example reflections, bounces off a wall or other sudden forces." /><meta property="og:image" content="https://frankschae.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+
+  
+    <meta
+      property="article:published_time"
+      content="2021-07-16T13:24:04&#43;02:00"
+    />
+  
+  
     <meta property="article:modified_time" content="2021-07-16T13:24:04&#43;02:00">
   
 
-  
+
+
+
 
 
     
@@ -287,7 +380,7 @@
     "name": "FS",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://frankschae.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+      "url": "https://frankschae.github.io/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_3.png"
     }
   },
   "description": "In this post, we discuss sensitivity analysis of differential equations with state changes caused by events triggered at defined moments, for example reflections, bounces off a wall or other sudden forces."
@@ -299,22 +392,56 @@
   
 
 
+
+
+  
+  
+  
+
+  
+  
+
   
 
 
   
-
-
-
-
-
   <title>Sensitivity Analysis of Hybrid Differential Equations | FS</title>
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
 
-  <aside class="search-results" id="search">
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="a60e1fb7808c483d902fff1d56e2a3a3" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.9e4214442a7711d35691acd58f6f6361.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
   <div class="container">
     <section class="search-header">
 
@@ -323,16 +450,22 @@
           <h1>Search</h1>
         </div>
         <div class="col-6 col-search-close">
-          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
         </div>
       </div>
 
       <div id="search-box">
         
         <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
-        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
         
       </div>
+
+      
+      
+
+      
 
     </section>
     <section class="section-search-results">
@@ -346,6 +479,12 @@
 </aside>
 
 
+
+  <div class="page-header header--fixed">
+  
+  
+  
+  
   
 
 
@@ -354,222 +493,290 @@
 
 
 
-<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
-  <div class="container">
 
-    
-    <div class="d-none d-lg-inline-flex">
-      <a class="navbar-brand" href="/">FS</a>
-    </div>
-    
 
-    
-    <button type="button" class="navbar-toggler" data-toggle="collapse"
-            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-    <span><i class="fas fa-bars"></i></span>
-    </button>
-    
 
-    
-    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
-      <a class="navbar-brand" href="/">FS</a>
-    </div>
-    
 
-    
-    
-    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
 
       
-      <ul class="navbar-nav d-md-inline-flex">
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#about"><span>Home</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#posts"><span>Posts</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#projects"><span>Research projects</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#software"><span>Open Source Software</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#contact"><span>Contact</span></a>
-        </li>
-
-        
-        
-
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">FS</a>
+      </div>
       
 
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">FS</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
         
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#about"><span>Home</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>Posts</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#projects"><span>Research projects</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#software"><span>Open source software</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#contact"><span>Contact</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
       </ul>
+
     </div>
+  </nav>
+</header>
 
-    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
-      
-      <li class="nav-item">
-        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
-      </li>
-      
-
-      
-      <li class="nav-item dropdown theme-dropdown">
-        <a href="#" class="nav-link js-theme-selector" data-toggle="dropdown" aria-haspopup="true">
-          <i class="fas fa-palette" aria-hidden="true"></i>
-        </a>
-        <div class="dropdown-menu">
-          <a href="#" class="dropdown-item js-set-theme-light">
-            <span>Light</span>
-          </a>
-          <a href="#" class="dropdown-item js-set-theme-dark">
-            <span>Dark</span>
-          </a>
-          <a href="#" class="dropdown-item js-set-theme-auto">
-            <span>Automatic</span>
-          </a>
-        </div>
-      </li>
-      
-
-      
-
-    </ul>
 
   </div>
-</nav>
 
+  <div class="page-body">
+    
+    
+    
 
-  <article class="article">
+    <article class="article">
 
   
+
 
 
 
@@ -607,8 +814,8 @@
   <div>
     
 
-  
-  <span>Frank Schäfer and Moritz Schauer</span>
+  <span >
+      Frank Schäfer and Moritz Schauer</span>
   </div>
   
   
@@ -635,6 +842,7 @@
   
   
   
+  
 
   
   
@@ -642,15 +850,6 @@
 </div>
 
     
-
-
-
-
-
-
-
-
-
 
 
 
@@ -667,66 +866,57 @@
       <p>In this post, we discuss sensitivity analysis of differential equations with state changes caused by events triggered at defined moments, for example reflections, bounces off a wall or other sudden forces. These are described by hybrid differential equations<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. We highlight differences between explicit<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> and implicit events<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>. As a paradigmatic example, we consider a bouncing ball described by the ODE</p>
 <p>$$
 \begin{aligned}
-\text{d}z(t) &amp;= v(t) \text{d}t, \\<br>
+\text{d}z(t) &amp;= v(t) \text{d}t, \\
 \text{d}v(t) &amp;= -\mathrm g\thinspace  \text{d}t
 \end{aligned}<br>
 $$</p>
 <p>with initial condition</p>
 <p>$$
 \begin{aligned}
-z(t=0) &amp;= z_0 = 5, \\<br>
+z(t=0) &amp;= z_0 = 5, \\
 v(t=0) &amp;= v_0 = -0.1.
 \end{aligned}<br>
 $$</p>
 <p>The initial condition contains the initial height $z_0$ and initial velocity $v_0$ of the ball. We have two important parameters in this system. First, there is the gravitational constant $\mathrm g=10$ modeling the acceleration of the ball due to an approximately constant gravitational field.</p>
-<p>Second, we model the ground as barrier at $z = 0$ where the ball bounces off in opposite direction. We include a dissipation factor $\gamma=0.8$ (
-<a href="https://en.wikipedia.org/wiki/Coefficient_of_restitution" target="_blank" rel="noopener">coefficient of restitution</a>) that accounts for a imperfect elastic bounce on the ground.</p>
+<p>Second, we model the ground as barrier at $z = 0$ where the ball bounces off in opposite direction. We include a dissipation factor $\gamma=0.8$ (<a href="https://en.wikipedia.org/wiki/Coefficient_of_restitution" target="_blank" rel="noopener">coefficient of restitution</a>) that accounts for a imperfect elastic bounce on the ground.</p>
 <p>When ignoring the bounces, we can straightforwardly integrate the ODE analytically</p>
 <p>$$
 \begin{aligned}
-z(t) &amp;= z_0 + v_0 t - \frac{\mathrm g}{2} t^2, \\<br>
+z(t) &amp;= z_0 + v_0 t - \frac{\mathrm g}{2} t^2, \\
 v(t) &amp;= v_0 - \mathrm g\thinspace  t
 \end{aligned}<br>
 $$</p>
-<p>or numerically using the OrdinaryDiffEq package from the 
-<a href="https://sciml.ai/" target="_blank" rel="noopener">SciML</a> ecosystem.</p>
-<pre><code class="language-julia">### simulate forward
-
-using ForwardDiff, Zygote, OrdinaryDiffEq, DiffEqSensitivity
-using Plots, LaTeXStrings
-
-# dynamics
-function f(du,u,p,t)
-  du[1] = u[2]
-  du[2] = -p[1]
-end
-
-# parameters and solve
-z0 = 5.0
-v0 = -0.1
-t0 = 0.0
-tend = 1.9
-g = 10
-γ = 0.8
-
-u0 = [z0,v0]
-tspan = (t0,tend)
-p = [g, γ]
-prob = ODEProblem(f,u0,tspan,p)
-
-# plot forward trajectory
-sol = solve(prob,Tsit5(),saveat=0.1)
-pl = plot(sol, label = [&quot;z(t)&quot; &quot;v(t)&quot;], labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &quot;t&quot;, legend=:bottomleft)
-hline!(pl, [0.0], label=false, color=&quot;black&quot;)
-savefig(pl,&quot;BB_forward_no_bounce.png&quot;)
-</code></pre>
-<p><img src="https://i.imgur.com/fKTiDEe.png" alt=""></p>
-
-
-
-
-
-  
+<p>or numerically using the OrdinaryDiffEq package from the <a href="https://sciml.ai/" target="_blank" rel="noopener">SciML</a> ecosystem.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="c">### simulate forward</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">ForwardDiff</span><span class="p">,</span> <span class="n">Zygote</span><span class="p">,</span> <span class="n">OrdinaryDiffEq</span><span class="p">,</span> <span class="n">DiffEqSensitivity</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Plots</span><span class="p">,</span> <span class="n">LaTeXStrings</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># dynamics</span>
+</span></span><span class="line"><span class="cl"><span class="k">function</span> <span class="n">f</span><span class="p">(</span><span class="n">du</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">du</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="n">du</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># parameters and solve</span>
+</span></span><span class="line"><span class="cl"><span class="n">z0</span> <span class="o">=</span> <span class="mf">5.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">v0</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">t0</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">tend</span> <span class="o">=</span> <span class="mf">1.9</span>
+</span></span><span class="line"><span class="cl"><span class="n">g</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="n">γ</span> <span class="o">=</span> <span class="mf">0.8</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">u0</span> <span class="o">=</span> <span class="p">[</span><span class="n">z0</span><span class="p">,</span><span class="n">v0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">tspan</span> <span class="o">=</span> <span class="p">(</span><span class="n">t0</span><span class="p">,</span><span class="n">tend</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="p">,</span> <span class="n">γ</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">prob</span> <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">u0</span><span class="p">,</span><span class="n">tspan</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># plot forward trajectory</span>
+</span></span><span class="line"><span class="cl"><span class="n">sol</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="n">Tsit5</span><span class="p">(),</span><span class="n">saveat</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pl</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#34;z(t)&#34;</span> <span class="s">&#34;v(t)&#34;</span><span class="p">],</span> <span class="n">labelfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s">&#34;t&#34;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="ss">:bottomleft</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">hline!</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#34;black&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">savefig</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span><span class="s">&#34;BB_forward_no_bounce.png&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>
 
 
 
@@ -738,25 +928,44 @@ savefig(pl,&quot;BB_forward_no_bounce.png&quot;)
 
 
 
-<figure >
-
-
-  <a data-fancybox="" href="/img/BB_forward_no_bounce.png" >
-
-
-  <img src="/img/BB_forward_no_bounce.png" alt=""  >
-</a>
 
 
 
-</figure>
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="https://i.imgur.com/fKTiDEe.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="BB_forward_no_bounce.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
 
 <p>Of course, this way the ball continues to fall through the barrier at $z=0$.</p>
 <h2 id="forward-simulation-with-events">Forward simulation with events</h2>
 <p>At time $\tau$ around $\tau \approx 1$, the ball hits the ground $z(\tau) = 0$, and is inelastically reflected while dissipating a fraction of its energy. This can be modeled by re-initializing the ODE at time $\tau$ with new initial conditions</p>
 <p>$$
 \begin{aligned}<br>
-z({\tau}) &amp;=  z(\tau-) ,\\<br>
+z({\tau}) &amp;=  z(\tau-) ,\\
 v({\tau})&amp;= -\gamma v(\tau-) ,
 \end{aligned}<br>
 $$</p>
@@ -773,15 +982,15 @@ $$</p>
 <p>The full explicit trajectory $z_{\rm exp}(t) = z(t)$ is determined by</p>
 <p>$$
 z(t) = \begin{cases}
-z_0 + v_0 t - \dfrac{\mathrm g}{2} t^2 ,&amp; \forall t &lt; \tau, \\<br>
--0.4901 \mathrm g - 0.5 \mathrm g (-0.99005 + t)^2 + 0.99005 v_0 + z_0\\<br>
+z_0 + v_0 t - \dfrac{\mathrm g}{2} t^2 ,&amp; \forall t &lt; \tau, \\
+-0.4901 \mathrm g - 0.5 \mathrm g (-0.99005 + t)^2 + 0.99005 v_0 + z_0\\
 \quad  - (-0.99005 + t) (-0.99005 \mathrm g + v_0)\gamma  ,&amp; \forall t \ge \tau,
 \end{cases}
 $$</p>
 <p>where we used</p>
 <p>$$
 \begin{aligned}<br>
-z({\tau})&amp;=  z_0 + 0.99005 v_0 -0.4901 \mathrm g, \\<br>
+z({\tau})&amp;=  z_0 + 0.99005 v_0 -0.4901 \mathrm g, \\
 v({\tau})&amp;= -\gamma v({\tau-}) = -\gamma(v_0 - 0.99005 \mathrm g)  .
 \end{aligned}<br>
 $$</p>
@@ -790,15 +999,14 @@ $$</p>
 a(z,v) = (z, -\gamma v).
 $$</p>
 <p>Numerically, we use a <code>DiscreteCallback</code> in this case to simulate the system.</p>
-<pre><code class="language-julia"># solve with DiscreteCallback (explicit event)
-tstar = (v0 + sqrt(v0^2+2*z0*g))/g
-condition1(u,t,integrator) = (t == tstar)
-affect!(integrator) = integrator.u[2] = -integrator.p[2]*integrator.u[2]
-cb1 = DiscreteCallback(condition1,affect!,save_positions=(true,true))
-
-sol1 = solve(prob,Tsit5(),callback=cb1, saveat=0.1, tstops=[tstar])
-</code></pre>
-<p>Evidently, by choosing an explicit definition of the event, the impact time is fixed. The reflection event is triggered at $\tau = 0.99005$, a time where under different initial configurations the ball perhaps hasn’t reached the ground.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="c"># solve with DiscreteCallback (explicit event)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tstar</span> <span class="o">=</span> <span class="p">(</span><span class="n">v0</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">v0</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">z0</span><span class="o">*</span><span class="n">g</span><span class="p">))</span><span class="o">/</span><span class="n">g</span>
+</span></span><span class="line"><span class="cl"><span class="n">condition1</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">integrator</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="n">tstar</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">affect!</span><span class="p">(</span><span class="n">integrator</span><span class="p">)</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">integrator</span><span class="o">.</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">integrator</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">cb1</span> <span class="o">=</span> <span class="n">DiscreteCallback</span><span class="p">(</span><span class="n">condition1</span><span class="p">,</span><span class="n">affect!</span><span class="p">,</span><span class="n">save_positions</span><span class="o">=</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="nb">true</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sol1</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="n">Tsit5</span><span class="p">(),</span><span class="n">callback</span><span class="o">=</span><span class="n">cb1</span><span class="p">,</span> <span class="n">saveat</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">tstops</span><span class="o">=</span><span class="p">[</span><span class="n">tstar</span><span class="p">])</span>
+</span></span></code></pre></div><p>Evidently, by choosing an explicit definition of the event, the impact time is fixed. The reflection event is triggered at $\tau = 0.99005$, a time where under different initial configurations the ball perhaps hasn’t reached the ground.</p>
 <h3 id="implicit-events">Implicit events</h3>
 <p>The physically more meaningful description of a bouncing ball is therefore given by an implicit description of the event in form of a condition (event function)</p>
 <p>$$
@@ -807,7 +1015,7 @@ $$</p>
 <p>where an event occurs at time $\tau$ if $g(z(\tau),v(\tau),p,\tau) = 0$. We have already used this condition to define our impact time $\tau$ when modeling the bounce explicitly. The implicit formulation also lends itself to take multiple bounces into account by triggering the event every time  $g(z,v,p,t) = 0$.</p>
 <p>As in the previous case, we can analytically compute the full trajectory of the ball. By substituting the formula for $\tau$ we have at the event time</p>
 <p>\begin{aligned}
-z({\tau})&amp;= 0, \\<br>
+z({\tau})&amp;= 0, \\
 v({\tau}-)&amp;= - \sqrt{v_0^2 + 2 \mathrm g z_0}
 \end{aligned}</p>
 <p>for the left limit and</p>
@@ -817,33 +1025,26 @@ v({\tau})&amp;= \gamma \sqrt{v_0^2 + 2 \mathrm g z_0}
 <p>right after the bounce. Thus, the full trajectory $z_{\rm imp}(t) = z(t)$ is given by</p>
 <p>$$
 (\star) \quad z(t) = \begin{cases}
-z_0 + v_0 t - \dfrac{\mathrm g}{2} t^2 ,&amp; \forall t &lt; \tau ,\\<br>
--\dfrac{-\mathrm g t + v_0 + \sqrt{v_0^2 + 2 \mathrm g z_0}}{2 \mathrm g}  \\<br>
+z_0 + v_0 t - \dfrac{\mathrm g}{2} t^2 ,&amp; \forall t &lt; \tau ,\\
+-\dfrac{-\mathrm g t + v_0 + \sqrt{v_0^2 + 2 \mathrm g z_0}}{2 \mathrm g}  \\
 \quad\cdot \space (-\mathrm g t + v_0 + \sqrt{v_0^2 + 2 \mathrm g z_0} (1 + 2 \gamma)), &amp; \forall t \ge \tau.
 \end{cases}
 $$</p>
 <p>This is correct even if one substitutes, e.g., a value with higher precision $\mathrm g = 9.81$ for the gravitation constant.</p>
 <p>Numerically, we use a <code>ContinuousCallback</code> in this case.</p>
-<pre><code class="language-julia"># solve with ContinuousCallback (implicit event)
-condition2(u,t,integrator) = u[1] # Event happens when condition2(u,t,integrator) == 0
-cb2 = ContinuousCallback(condition2,affect!,save_positions=(true,true))
-sol2 = solve(prob,Tsit5(),callback=cb2,saveat=0.1)
-</code></pre>
-<p>We can verify that both callbacks lead to the same forward time evolution (for fixed initial conditions and parameters).</p>
-<pre><code class="language-julia"># plot forward trajectory
-pl1 = plot(sol1, label = [&quot;z(t)&quot; &quot;v(t)&quot;], title=&quot;explicit event&quot;, labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &quot;t&quot;, legend=:bottomright)
-pl2 = plot(sol2, label = [&quot;z(t)&quot; &quot;v(t)&quot;], title=&quot;implicit event&quot;, labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &quot;t&quot;, legend=:bottomright)
-hline!(pl1, [0.0], label=false, color=&quot;black&quot;)
-hline!(pl2, [0.0], label=false, color=&quot;black&quot;)
-pl = plot(pl1,pl2)
-savefig(pl,&quot;BB_forward.png&quot;)
-</code></pre>
-
-
-
-
-
-  
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="c"># solve with ContinuousCallback (implicit event)</span>
+</span></span><span class="line"><span class="cl"><span class="n">condition2</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">integrator</span><span class="p">)</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c"># Event happens when condition2(u,t,integrator) == 0</span>
+</span></span><span class="line"><span class="cl"><span class="n">cb2</span> <span class="o">=</span> <span class="n">ContinuousCallback</span><span class="p">(</span><span class="n">condition2</span><span class="p">,</span><span class="n">affect!</span><span class="p">,</span><span class="n">save_positions</span><span class="o">=</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="nb">true</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">sol2</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="n">Tsit5</span><span class="p">(),</span><span class="n">callback</span><span class="o">=</span><span class="n">cb2</span><span class="p">,</span><span class="n">saveat</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</span></span></code></pre></div><p>We can verify that both callbacks lead to the same forward time evolution (for fixed initial conditions and parameters).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="c"># plot forward trajectory</span>
+</span></span><span class="line"><span class="cl"><span class="n">pl1</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">sol1</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#34;z(t)&#34;</span> <span class="s">&#34;v(t)&#34;</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s">&#34;explicit event&#34;</span><span class="p">,</span> <span class="n">labelfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s">&#34;t&#34;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="ss">:bottomright</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pl2</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">sol2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#34;z(t)&#34;</span> <span class="s">&#34;v(t)&#34;</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s">&#34;implicit event&#34;</span><span class="p">,</span> <span class="n">labelfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s">&#34;t&#34;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="ss">:bottomright</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">hline!</span><span class="p">(</span><span class="n">pl1</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#34;black&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">hline!</span><span class="p">(</span><span class="n">pl2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#34;black&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pl</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">pl1</span><span class="p">,</span><span class="n">pl2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">savefig</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span><span class="s">&#34;BB_forward.png&#34;</span><span class="p">)</span>
+</span></span></code></pre></div>
 
 
 
@@ -855,18 +1056,16 @@ savefig(pl,&quot;BB_forward.png&quot;)
 
 
 
-<figure >
-
-
-  <a data-fancybox="" href="/img/BB_forward.png" >
-
-
-  <img src="/img/BB_forward.png" alt=""  >
-</a>
 
 
 
-</figure>
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="BB_forward.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
 
 <p>In addition, the implicitly defined impact time via the <code>ContinuousCallback</code> also changes appropriately when changing the initial conditions or the parameters, for example when using  $\mathrm g = 9.81$ for the gravitation constant. In other words, the event time $\tau=\tau(p,z_0,v_0,t_0)$ is a function of the parameters and initial conditions, and is implicitly defined by the event condition.</p>
 <p>Suppose we let the ball drop from a somewhat higher position now. Does an increase in height $z$ at $t=0$ give an increase or decrease in height at the end time $t_\text{end}=1.9$? This is something we can answer with sensitivity analysis. For example if we increase the height by (a fraction of) one unit then using $(\star)$</p>
@@ -875,36 +1074,30 @@ savefig(pl,&quot;BB_forward.png&quot;)
 $$</p>
 <p>meaning the height at $t_\text{end}$ is also by a corresponding fraction of 0.84 units higher.</p>
 <p>We can verify this visually:</p>
-<pre><code class="language-julia"># animate forward trajectory
-sol3 = solve(remake(prob,u0=[u0[1]+0.5,u0[2]]),Tsit5(),callback=cb2,saveat=0.01)
-
-plt2 = plot(sol2, label = false, labelfontsize=20, legendfontsize=20, lw = 1, xlabel = &quot;t&quot;, legend=:bottomright, color=&quot;black&quot;, xlims=(t0,tend))
-hline!(plt2, [0.0], label=false, color=&quot;black&quot;)
-plot!(plt2, sol3, tspan=(t0,tend), color=[1 2], label = [&quot;z(t)&quot; &quot;v(t)&quot;], labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &quot;t&quot;, legend=:bottomright, denseplot=true, xlims=(t0,tend), ylims=(-11,9))
-# scatter!(plt2, [t2,t2], sol3(t2), color=[1, 2], label=false)
-
-list_plots = []
-for t in sol3.t
-  tstart = 0.0
-
-  plt1 = plot(sol2, label = false, labelfontsize=20, legendfontsize=20, lw = 1, xlabel = &quot;t&quot;, legend=:bottomright, color=&quot;black&quot;)
-  hline!(plt1, [0.0], label=false, color=&quot;black&quot;)
-  plot!(plt1, sol3, tspan=(t0,t), color=[1 2], label = [&quot;z(t)&quot; &quot;v(t)&quot;], labelfontsize=20, legendfontsize=20, lw = 2, xlabel = &quot;t&quot;, legend=:bottomright, denseplot=true, xlims=(t0,tend), ylims=(-11,9))
-  scatter!(plt1,[t,t], sol3(t), color=[1, 2], label=false)
-  plt = plot(plt1,plt2)
-  push!(list_plots, plt)
-end
-
-plot(list_plots[100])
-
-anim = animate(list_plots,every=1)
-</code></pre>
-
-
-
-
-
-  
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="c"># animate forward trajectory</span>
+</span></span><span class="line"><span class="cl"><span class="n">sol3</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">remake</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="n">u0</span><span class="o">=</span><span class="p">[</span><span class="n">u0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">u0</span><span class="p">[</span><span class="mi">2</span><span class="p">]]),</span><span class="n">Tsit5</span><span class="p">(),</span><span class="n">callback</span><span class="o">=</span><span class="n">cb2</span><span class="p">,</span><span class="n">saveat</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt2</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">sol2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="nb">false</span><span class="p">,</span> <span class="n">labelfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s">&#34;t&#34;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="ss">:bottomright</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#34;black&#34;</span><span class="p">,</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span><span class="n">tend</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">hline!</span><span class="p">(</span><span class="n">plt2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#34;black&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot!</span><span class="p">(</span><span class="n">plt2</span><span class="p">,</span> <span class="n">sol3</span><span class="p">,</span> <span class="n">tspan</span><span class="o">=</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span><span class="n">tend</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#34;z(t)&#34;</span> <span class="s">&#34;v(t)&#34;</span><span class="p">],</span> <span class="n">labelfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s">&#34;t&#34;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="ss">:bottomright</span><span class="p">,</span> <span class="n">denseplot</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span><span class="n">tend</span><span class="p">),</span> <span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">11</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c"># scatter!(plt2, [t2,t2], sol3(t2), color=[1, 2], label=false)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">list_plots</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">t</span> <span class="k">in</span> <span class="n">sol3</span><span class="o">.</span><span class="n">t</span>
+</span></span><span class="line"><span class="cl">  <span class="n">tstart</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">plt1</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">sol2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="nb">false</span><span class="p">,</span> <span class="n">labelfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s">&#34;t&#34;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="ss">:bottomright</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#34;black&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">hline!</span><span class="p">(</span><span class="n">plt1</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#34;black&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">plot!</span><span class="p">(</span><span class="n">plt1</span><span class="p">,</span> <span class="n">sol3</span><span class="p">,</span> <span class="n">tspan</span><span class="o">=</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span><span class="n">t</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#34;z(t)&#34;</span> <span class="s">&#34;v(t)&#34;</span><span class="p">],</span> <span class="n">labelfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s">&#34;t&#34;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="ss">:bottomright</span><span class="p">,</span> <span class="n">denseplot</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span><span class="n">tend</span><span class="p">),</span> <span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">11</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="n">scatter!</span><span class="p">(</span><span class="n">plt1</span><span class="p">,[</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">],</span> <span class="n">sol3</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">plt</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">plt1</span><span class="p">,</span><span class="n">plt2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">push!</span><span class="p">(</span><span class="n">list_plots</span><span class="p">,</span> <span class="n">plt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plot</span><span class="p">(</span><span class="n">list_plots</span><span class="p">[</span><span class="mi">100</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">anim</span> <span class="o">=</span> <span class="n">animate</span><span class="p">(</span><span class="n">list_plots</span><span class="p">,</span><span class="n">every</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span></code></pre></div>
 
 
 
@@ -916,18 +1109,16 @@ anim = animate(list_plots,every=1)
 
 
 
-<figure >
-
-
-  <a data-fancybox="" href="/img/BB.gif" >
-
-
-  <img src="/img/BB.gif" alt=""  >
-</a>
 
 
 
-</figure>
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="BB.gif" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
 
 <p>The original curve is shown in black in the figure above.</p>
 <h2 id="sensitivity-analysis-with-events">Sensitivity analysis with events</h2>
@@ -942,7 +1133,7 @@ $$</p>
 <p>Inserting our results for $z(t) = z_{\rm exp}(t)$ instead of $z(t) = z_{\rm imp}(t)$ at $t_{\text{end}}$, a different value for the sensitivity is obtained (a value ignoring the changes in $z$ due to changes in the bouncing time $\tau$), e.g.,</p>
 <p>$$
 \quad \frac{\text{d}L^{\text{exp}}}{\text{d} z_0} = \begin{cases}
-1 &amp; \text{with } z(t) = z_{\rm exp}(t) ,\\<br>
+1 &amp; \text{with } z(t) = z_{\rm exp}(t) ,\\
 0.84 &amp; \text{with } z(t) = z_{\rm imp}(t) .
 \end{cases}
 $$</p>
@@ -953,7 +1144,7 @@ $$</p>
 <p>we could be interested in the sensitivity of $L$ with respect $g$. Using the velocity $v(t)$ at the explicit time $t = 0.9905$ instead of the implicit $v(\tau-)$, again a different value for the sensitivity is obtained (a value again ignoring the changes in $\tau$ and not the one we are looking for), even though $\tau = 0.9905$ in both cases:</p>
 <p>$$
 \quad \frac{\text{d}L}{\text{d} g} = \begin{cases}
--0.99005 &amp; \text{with } v(t) = v_{\rm exp}(t) ,\\<br>
+-0.99005 &amp; \text{with } v(t) = v_{\rm exp}(t) ,\\
 -\frac{g}{\sqrt{v_0^2 + 2 g z_0}} = -0.99995 &amp; \text{ with } v(t) = v_{\rm imp}(t) .
 \end{cases}
 $$</p>
@@ -970,51 +1161,48 @@ $$</p>
 <p>We write</p>
 <p>$$\text{solve}(t_0, x_0, t, p)$$</p>
 <p>$(= x(t))$ for the functional solution of the ODE at time $t$.</p>
-<p>Regarding the computation of the sensitivities (the derivatives of the function <code>solve</code>), we may then choose one of the 
-<a href="https://diffeq.sciml.ai/stable/analysis/sensitivity/" target="_blank" rel="noopener">available algorithms</a> for the given differential equation. Currently, <code>BacksolveAdjoint()</code>, <code>InterpolatingAdjoint()</code>, <code>QuadratureAdjoint()</code>, <code>ReverseDiffAdjoint()</code>, <code>TrackerAdjoint()</code>, and <code>ForwardDiffAdjoint()</code> are compatible with events in ordinary differential equations.</p>
+<p>Regarding the computation of the sensitivities (the derivatives of the function <code>solve</code>), we may then choose one of the <a href="https://diffeq.sciml.ai/stable/analysis/sensitivity/" target="_blank" rel="noopener">available algorithms</a> for the given differential equation. Currently, <code>BacksolveAdjoint()</code>, <code>InterpolatingAdjoint()</code>, <code>QuadratureAdjoint()</code>, <code>ReverseDiffAdjoint()</code>, <code>TrackerAdjoint()</code>, and <code>ForwardDiffAdjoint()</code> are compatible with events in ordinary differential equations.</p>
 <p>Let us focus on the <code>BacksolveAdjoint()</code> algorithm which computes the sensitivities</p>
 <p>$$
 \begin{aligned}
-\frac{\text{d}\thinspace L(\text{solve}(t_0, x_0, t, p))}{\text{d}x_{0}} &amp;= \lambda(t_{0}),\\<br>
+\frac{\text{d}\thinspace L(\text{solve}(t_0, x_0, t, p))}{\text{d}x_{0}} &amp;= \lambda(t_{0}),\\
 \frac{\text{d}\thinspace L(\text{solve}(t_0, x_0, t, p))}{\text{d}p} &amp;= \lambda_{p}(t_{0}),
 \end{aligned}
 $$</p>
 <p>of a loss function $L$ acting on the final state with respect to the initial state and the parameters. It does so by solving an ODE for $\lambda(s)$ in reverse time from $t$ to $t_0$</p>
 <p>$$
 \begin{aligned}
-\frac{\text{d}\lambda(s)}{\text{d}s} &amp;= -\lambda(s)^\dagger \frac{\text{d} f(\rightarrow x(s), p, t)}{\text{d} x(s)} \\<br>
+\frac{\text{d}\lambda(s)}{\text{d}s} &amp;= -\lambda(s)^\dagger \frac{\text{d} f(\rightarrow x(s), p, t)}{\text{d} x(s)} \\
 \frac{\text{d}\lambda_{p}(s)}{\text{d}s} &amp;= -\lambda(s)^\dagger \frac{\text{d} f(x(s), \rightarrow p, s)}{\text{d} p},
 \end{aligned}
 $$</p>
 <p>with initial conditions:</p>
 <p>$$
 \begin{aligned}
-\lambda(t)&amp;= \frac{\text{d}\thinspace L(\text{solve}(t_0, x_0, t, p))}{\text{d}x_{T}}, \\<br>
+\lambda(t)&amp;= \frac{\text{d}\thinspace L(\text{solve}(t_0, x_0, t, p))}{\text{d}x_{T}}, \\
 \lambda_{p}(t) &amp;= 0.
 \end{aligned}
 $$</p>
 <p>The arrows ($\rightarrow$) indicate the variable with respect to which we differentiate, which will become important later when the same variable shows up in multiple function arguments.</p>
-<p>Note that computing the vector-Jacobian products (vjp) in the adjoint ODE requires the value of $x(s)$ along its trajectory. In <code>BacksolveAdjoint()</code>, we recompute $x(s)$ &ndash; together with the adjoint variables &ndash; backwards in time starting with its final value $x(t)$. A derivation of the ODE adjoint is given in 
-<a href="https://mitmath.github.io/18337/lecture11/adjoints" target="_blank" rel="noopener">Chris' MIT 18.337 lecture notes</a>.</p>
+<p>Note that computing the vector-Jacobian products (vjp) in the adjoint ODE requires the value of $x(s)$ along its trajectory. In <code>BacksolveAdjoint()</code>, we recompute $x(s)$ &ndash; together with the adjoint variables &ndash; backwards in time starting with its final value $x(t)$. A derivation of the ODE adjoint is given in <a href="https://mitmath.github.io/18337/lecture11/adjoints" target="_blank" rel="noopener">Chris&rsquo; MIT 18.337 lecture notes</a>.</p>
 <p><code>BacksolveAdjoint()</code>, essentially the custom primitive differentiation rule of <code>solve</code>, is the elementary building block needed to derive sensitivities also in more complicated examples:</p>
 <p>Consider a loss depending on the state $x(s_i)$ at fix time points $s_i$ through loss functions $L_i^{\text{exp}}$,</p>
 <p>$$
 L^{\text{exp}} = \sum_i L_i^{\text{exp}}(s_i, x(s_i), p).
 $$</p>
 <p>Without contortions we can obtain the sensitivity of $L^{\text{exp}}$ in $p$ (or in $x_0$) using the tool we have. For those a bit familiar with automatic differentiation, this is perhaps easiest to see if we write $L^{\text{exp}}$ as pseudo code</p>
-<pre><code class="language-julia">function loss(t0, x0, p)
-    x1 = solve(t0, x0, s1, p)
-    L = L1(s1, x1, p)
-    x2 = solve(s1, x1, s2, p)
-    L += L2(s2, x2, p)
-    ...
-    return L
-end
-</code></pre>
-<p>and consider the problem of automatically differentiating it. You&rsquo;ll just need the primitives of <code>solve</code>, <code>L1</code> and <code>L2</code>! The sensitivities can be computed by repeated calls to <code>BacksolveAdjoint()</code> on the intervals <code>(s_i, s_{i+1})</code> backward in time, taking in the sensitivities $\sum_i L^{\text{exp}}(s_i, x(s_i), p)$ at times $s_i$, or according to the common notation<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> as single call <code>BacksolveAdjoint()</code> with discrete callbacks:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="k">function</span> <span class="n">loss</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x1</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">L</span> <span class="o">=</span> <span class="n">L1</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x2</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">L</span> <span class="o">+=</span> <span class="n">L2</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">L</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></div><p>and consider the problem of automatically differentiating it. You&rsquo;ll just need the primitives of <code>solve</code>, <code>L1</code> and <code>L2</code>! The sensitivities can be computed by repeated calls to <code>BacksolveAdjoint()</code> on the intervals <code>(s_i, s_{i+1})</code> backward in time, taking in the sensitivities $\sum_i L^{\text{exp}}(s_i, x(s_i), p)$ at times $s_i$, or according to the common notation<sup id="fnref1:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> as single call <code>BacksolveAdjoint()</code> with discrete callbacks:</p>
 <p>$$
 \begin{aligned}
-\frac{\text{d}\lambda(t)}{\text{d}t} &amp;= -\lambda(t)^\dagger \frac{\text{d} f(\rightarrow x(t), p, t)}{\text{d} x(t)} - \frac{\text{d} L_i^{\text{exp}}(\rightarrow x(t), p)}{\text{d} x(t)}^\dagger \delta(t-s_i), \\<br>
+\frac{\text{d}\lambda(t)}{\text{d}t} &amp;= -\lambda(t)^\dagger \frac{\text{d} f(\rightarrow x(t), p, t)}{\text{d} x(t)} - \frac{\text{d} L_i^{\text{exp}}(\rightarrow x(t), p)}{\text{d} x(t)}^\dagger \delta(t-s_i), \\
 \frac{\text{d}\lambda_{p}(t)}{\text{d}t} &amp;= -\lambda(t)^\dagger \frac{\text{d} f(x(t), \rightarrow p, t)}{\text{d} p} - \frac{\text{d} L_i^{\text{exp}}(  x(t),\rightarrow p)}{\text{d} p}^\dagger \delta(t-s_i).
 \end{aligned}
 $$</p>
@@ -1028,24 +1216,23 @@ $$</p>
 $$</p>
 <p>Now we can even properly define the <code>rrule</code> of <code>solve</code> in the sense of <code>DiffRules.jl</code>.</p>
 <h3 id="explicit-events-1">Explicit events</h3>
-<p>To make <code>BacksolveAdjoint()</code> compatible with explicit events<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>,</p>
-<pre><code class="language-julia">function loss(t0, x0, p)
-    x1- = solve(t0, x0, s1, p)
-    L = L1-(s1, x1-, p) # saved before affect
-    x1 = a(x1-, p, s1) # affect
-    L += L1(s1, x1, p) # saved after affect
-    x2- = solve(s1, x1, s2, p)
-    L += L2-(s2, x2-, p)
-    x2 = a(x2-, p, s2) # affect
-    L += L2(s2, x2, p)
-    ...
-    return L
-end
-</code></pre>
-<p>we have to store the event times $s_j$ as well as the state $x(s_j-)$ at the left limit of $s_i$.<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> We then solve the adjoint ODE backwards in time between the events. As soon as we reach an event time $s_j$ from the right, we update the augmented state according to</p>
+<p>To make <code>BacksolveAdjoint()</code> compatible with explicit events<sup id="fnref2:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>,</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="k">function</span> <span class="n">loss</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x1</span><span class="o">-</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">L</span> <span class="o">=</span> <span class="n">L1</span><span class="o">-</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">x1</span><span class="o">-</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="c"># saved before affect</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x1</span> <span class="o">=</span> <span class="n">a</span><span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">s1</span><span class="p">)</span> <span class="c"># affect</span>
+</span></span><span class="line"><span class="cl">    <span class="n">L</span> <span class="o">+=</span> <span class="n">L1</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="c"># saved after affect</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x2</span><span class="o">-</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">L</span> <span class="o">+=</span> <span class="n">L2</span><span class="o">-</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">x2</span><span class="o">-</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x2</span> <span class="o">=</span> <span class="n">a</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="c"># affect</span>
+</span></span><span class="line"><span class="cl">    <span class="n">L</span> <span class="o">+=</span> <span class="n">L2</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">L</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></div><p>we have to store the event times $s_j$ as well as the state $x(s_j-)$ at the left limit of $s_i$.<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> We then solve the adjoint ODE backwards in time between the events. As soon as we reach an event time $s_j$ from the right, we update the augmented state according to</p>
 <p>$$
 \begin{aligned}
-\lambda({s_j}-) &amp;= \lambda({s_j})^\dagger \frac{\text{d} a(\rightarrow x({s_j}-), p, {s_j}-)}{\text{d} x(s_j-)} \\<br>
+\lambda({s_j}-) &amp;= \lambda({s_j})^\dagger \frac{\text{d} a(\rightarrow x({s_j}-), p, {s_j}-)}{\text{d} x(s_j-)} \\
 \lambda_p({s_j}-) &amp;= \lambda_p({s_j}) -  \lambda({s_j})^\dagger \frac{\text{d} a(x({s_j}-), \rightarrow p, {s_j}-)}{\text{d} p}
 \end{aligned}
 $$</p>
@@ -1059,27 +1246,26 @@ $$</p>
 <p>to put emphasis on this, or equivalently, compute for a unspecified function $L(t, x, p)$ the result of $\frac{\text{d}L}{\text{d}p}$ with</p>
 <p>$$
 \begin{aligned}
-\frac{\text{d}L}{\text{d}p} &amp;= \frac{\text{d}L( \text{solve2}(t_0, x_0, g, \rightarrow p),\rightarrow p)}{\text{d}p}\\<br>
+\frac{\text{d}L}{\text{d}p} &amp;= \frac{\text{d}L( \text{solve2}(t_0, x_0, g, \rightarrow p),\rightarrow p)}{\text{d}p}\\
 &amp;= \frac{\text{d}L(\tau_1({\color{black}\rightarrow} p), \text{solve}(t_0, x_0, \tau_1({\color{black}\rightarrow}p), \rightarrow p),\rightarrow p)}{\text{d}p},
 \end{aligned}
 $$</p>
 <p>which indicates that changing $p$ influences $L$ both through changes in $\tau_1$ as well as changes in</p>
 <p>$$\xi_1 = x(\tau_1-).$$</p>
 <p>This case where we have a loss function $L = L_1$ depending on $\tau_1$, $x(\tau_1)$, and $p$
-was also considered by Ricky T. Q. Chen, Brandon Amos, and Maximilian Nickel in their ICLR 2021 paper<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>.</p>
+was also considered by Ricky T. Q. Chen, Brandon Amos, and Maximilian Nickel in their ICLR 2021 paper<sup id="fnref1:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>.</p>
 <p>Therefore, the sensitivity of the event time with respect to parameters $\frac{\text{d}\tau}{\text{d}p}$ must be taken into account.
-Here and in the following we consider only the $p$-dependence of $\tau_1$ for simplicity. However, it is straightforward to include a dependence on the initial state $x_0$ in an analogues way<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>.</p>
-<p>In a first step, we need to compute the sensitivity of $\tau_1(p)$ with respect to $p$ (or $x_0$) based on the event condition $g(t, x(t)) = 0$.  We can apply the 
-<a href="https://www.uni-siegen.de/fb6/analysis/overhagen/vorlesungsbeschreibungen/skripte/analysis3_1.pdf" target="_blank" rel="noopener">implicit function theorem</a>. For this, see that $\tau_1(p)$ is implicitly defined by $F(p, \tau_1) = g( \tau_1, \text{solve}(t_0, x_0, \tau_1, p)) = 0$ which yields</p>
+Here and in the following we consider only the $p$-dependence of $\tau_1$ for simplicity. However, it is straightforward to include a dependence on the initial state $x_0$ in an analogues way<sup id="fnref2:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>.</p>
+<p>In a first step, we need to compute the sensitivity of $\tau_1(p)$ with respect to $p$ (or $x_0$) based on the event condition $g(t, x(t)) = 0$.  We can apply the <a href="https://www.uni-siegen.de/fb6/analysis/overhagen/vorlesungsbeschreibungen/skripte/analysis3_1.pdf" target="_blank" rel="noopener">implicit function theorem</a>. For this, see that $\tau_1(p)$ is implicitly defined by $F(p, \tau_1) = g( \tau_1, \text{solve}(t_0, x_0, \tau_1, p)) = 0$ which yields</p>
 <p>$$
 \begin{aligned}
-\frac{\text{d}\tau_1(p)}{\text{d}p} &amp;= - \left(\frac{\text{d}g(\rightarrow \tau_1, \text{solve}(t_0, x_0, \rightarrow \tau_1, p))}{\text{d}\tau_1}\right)^{-1} \frac{\text{d}g(\tau_1, \text{solve}(t_0, x_0, \tau_1, \rightarrow p))}{\text{d}p} .\\<br>
+\frac{\text{d}\tau_1(p)}{\text{d}p} &amp;= - \left(\frac{\text{d}g(\rightarrow \tau_1, \text{solve}(t_0, x_0, \rightarrow \tau_1, p))}{\text{d}\tau_1}\right)^{-1} \frac{\text{d}g(\tau_1, \text{solve}(t_0, x_0, \tau_1, \rightarrow p))}{\text{d}p} .\\
 \end{aligned}
 $$</p>
 <p>The total derivative<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup> inside the bracket is:
 $$
 \begin{aligned}
-\frac{\text{d}g}{\text{d}\tau_1} \stackrel{\text{def}}{=} \frac{\text{d}g(\rightarrow \tau_1, \text{solve}(t_0, x_0, \rightarrow \tau_1, p))}{\text{d}\tau_1} &amp;= \frac{\text{d}g(\rightarrow \tau_1, \xi_1)}{\text{d}\tau_1} + \frac{\text{d}g(\tau_1, \text{solve}(t_0, x_0, \rightarrow \tau_1, p))}{\text{d}\tau_1}\\<br>
+\frac{\text{d}g}{\text{d}\tau_1} \stackrel{\text{def}}{=} \frac{\text{d}g(\rightarrow \tau_1, \text{solve}(t_0, x_0, \rightarrow \tau_1, p))}{\text{d}\tau_1} &amp;= \frac{\text{d}g(\rightarrow \tau_1, \xi_1)}{\text{d}\tau_1} + \frac{\text{d}g(\tau_1, \text{solve}(t_0, x_0, \rightarrow \tau_1, p))}{\text{d}\tau_1}\\
 \end{aligned}
 $$</p>
 <p>Since</p>
@@ -1102,8 +1288,8 @@ for the second term of $\dfrac{\text{d}\tau_1(p)}{\text{d}p}$.</p>
 <p>We can now write the gradient as:</p>
 <p>$$
 \begin{aligned}
-\frac{\text{d}L(\tau_1({\color{black}\rightarrow} p), \text{solve}(t_0, x_0, \tau_1({\color{black}\rightarrow}p), \rightarrow p),\rightarrow p)}{\text{d}p} &amp;= \frac{\text{d}L(\tau_1(p), \text{solve}(t_0, x_0, \tau_1(p),  p), \rightarrow p)}{\text{d}p} \\<br>
-+&amp; \frac{\text{d}L(\tau_1(p), \text{solve}(t_0, x_0, \tau_1(p),  \rightarrow p), p)}{\text{d}p} \\<br>
+\frac{\text{d}L(\tau_1({\color{black}\rightarrow} p), \text{solve}(t_0, x_0, \tau_1({\color{black}\rightarrow}p), \rightarrow p),\rightarrow p)}{\text{d}p} &amp;= \frac{\text{d}L(\tau_1(p), \text{solve}(t_0, x_0, \tau_1(p),  p), \rightarrow p)}{\text{d}p} \\
++&amp; \frac{\text{d}L(\tau_1(p), \text{solve}(t_0, x_0, \tau_1(p),  \rightarrow p), p)}{\text{d}p} \\
 +&amp; \frac{\text{d}L(\rightarrow \tau_1(p), \text{solve}(t_0, x_0, \rightarrow \tau_1(p),  p), p)}{\text{d}\tau_1} \frac{\text{d} \tau_1(p)}{\text{d}p},
 \end{aligned}
 $$</p>
@@ -1172,7 +1358,7 @@ $$</p>
 <li>If both limits contribute to the loss function, the contributions ${\color{red}\lambda_1}$ and ${\color{blue}\lambda_{a,1}}$ are added.</li>
 </ol>
 <h4 id="generalization-several-events">Generalization: several events</h4>
-<p>As implied by Chen et al. as well as by Timo C. Wunderlich and Christian Pehle<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, one can chain together the events and differentiate through the entire time evolution on a time interval $(t_0, t_{\text{end}})$. That is, we are generally allowed to segment the time evolution over an interval $[t_0, t]$ into one from $[t_0, s]$ and a subsequent one from $[s, t]$:</p>
+<p>As implied by Chen et al. as well as by Timo C. Wunderlich and Christian Pehle<sup id="fnref1:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, one can chain together the events and differentiate through the entire time evolution on a time interval $(t_0, t_{\text{end}})$. That is, we are generally allowed to segment the time evolution over an interval $[t_0, t]$ into one from $[t_0, s]$ and a subsequent one from $[s, t]$:</p>
 <p>$$
 \text{solve}(t_0, x_0, t, p)  = \text{solve}(s, \text{solve}(t_0, x_0, s, p), t-s, p),
 $$</p>
@@ -1180,16 +1366,15 @@ $$</p>
 <p>(A good exercise to get familiar with these type of arguments is to verify</p>
 <p>$$\frac{\text{d}}{\text{d}s} \text{solve}(s, \text{solve}(t_0, x_0, s, p), t-s, p) = 0.)$$</p>
 <p>Essentially, we know how to address several events already by considering a loss function</p>
-<pre><code class="language-julia">function loss2(t0, x0, p)
-    tau1, xi1 = solve2(t0, x0, g, p)
-    L = L1(tau1, xi1, p)
-    tau2, xi2 = solve2(tau1, xi1, g, p)
-    L += L2(tau2, xi2, p)
-    ...
-    return L
-end
-</code></pre>
-<p>and applying the same generic rules of (automatic) differentiation as in the previous example, now using the elementary differentiation rule for <code>solve2</code> (<code>rrule</code> for <code>solve2</code>) we derived above.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="k">function</span> <span class="n">loss2</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tau1</span><span class="p">,</span> <span class="n">xi1</span> <span class="o">=</span> <span class="n">solve2</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">L</span> <span class="o">=</span> <span class="n">L1</span><span class="p">(</span><span class="n">tau1</span><span class="p">,</span> <span class="n">xi1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tau2</span><span class="p">,</span> <span class="n">xi2</span> <span class="o">=</span> <span class="n">solve2</span><span class="p">(</span><span class="n">tau1</span><span class="p">,</span> <span class="n">xi1</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">L</span> <span class="o">+=</span> <span class="n">L2</span><span class="p">(</span><span class="n">tau2</span><span class="p">,</span> <span class="n">xi2</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">L</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></div><p>and applying the same generic rules of (automatic) differentiation as in the previous example, now using the elementary differentiation rule for <code>solve2</code> (<code>rrule</code> for <code>solve2</code>) we derived above.</p>
 <p>Differentiating by hand, we have the following modification of the method from the previous section, which can be derived choosing a particular function $L$ in the previous section which incorporates the <code>solve</code> from $\tau_1$ to $t_{\text{end}}$. Note</p>
 <p>$$
 \lambda_{\tau_1}^0 = \frac{\text{d}(\text{solve}(\rightarrow \tau_1,  a(\xi_1,p), t_{\text{end}}, p))}{\text{d} \tau_1} = - f(a(\xi_1,p), p, \tau_1).
@@ -1221,43 +1406,38 @@ $$</p>
 <li>Backpropagate $\lambda_J = {\color{red}\lambda_J} + {\color{blue}\lambda_{a,J}} + {\color{green}\lambda_{c,J}}$ to the next event time $\tau_{J-1}$ and iterate over the remaining $J-1$ events.</li>
 </ol>
 <h2 id="outlook">Outlook</h2>
-<p>We are still refining the adjoints in case of implicit discontinuities (<code>ContinuousCallbacks</code>). For further information, the interested reader is encouraged to track the associated issues 
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/issues/383" target="_blank" rel="noopener">#383</a> and 
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/issues/374" target="_blank" rel="noopener">#374</a>, and 
-<a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/445" target="_blank" rel="noopener">PR #445</a> in the DiffEqSensitivity.jl package.</p>
-<p>If you have any questions or comments, please don’t hesitate to contact us (
-<a href="https://github.com/frankschae" target="_blank" rel="noopener">github.com/frankschae</a>)!</p>
-<section class="footnotes" role="doc-endnotes">
+<p>We are still refining the adjoints in case of implicit discontinuities (<code>ContinuousCallbacks</code>). For further information, the interested reader is encouraged to track the associated issues <a href="https://github.com/SciML/DiffEqSensitivity.jl/issues/383" target="_blank" rel="noopener">#383</a> and <a href="https://github.com/SciML/DiffEqSensitivity.jl/issues/374" target="_blank" rel="noopener">#374</a>, and <a href="https://github.com/SciML/DiffEqSensitivity.jl/pull/445" target="_blank" rel="noopener">PR #445</a> in the DiffEqSensitivity.jl package.</p>
+<p>If you have any questions or comments, please don’t hesitate to contact us (<a href="https://github.com/frankschae" target="_blank" rel="noopener">github.com/frankschae</a>)!</p>
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>Michael Poli, Stefano Massaroli, et al., arXiv preprint arXiv:2106.04165 (2021). <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:1">
+<p>Michael Poli, Stefano Massaroli, et al., arXiv preprint arXiv:2106.04165 (2021).&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
-<p>Junteng Jia, Austin R. Benson, arXiv preprint arXiv:1905.10403 (2019). <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:2">
+<p>Junteng Jia, Austin R. Benson, arXiv preprint arXiv:1905.10403 (2019).&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
-<p>Timo C. Wunderlich and Christian Pehle, Sci. Rep. <em>11</em>, 12829 (2021). <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:3">
+<p>Timo C. Wunderlich and Christian Pehle, Sci. Rep. <em>11</em>, 12829 (2021).&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:4" role="doc-endnote">
-<p>Ricky T. Q. Chen, Brandon Amos, Maximilian Nickel, arXiv preprint arXiv:2011.03902 (2020). <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:4">
+<p>Ricky T. Q. Chen, Brandon Amos, Maximilian Nickel, arXiv preprint arXiv:2011.03902 (2020).&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref2:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:5" role="doc-endnote">
-<p>If the affect function also changes the parameters of the differential equation, we must additionally store $p(t_i-)$ and compute another vjp to update $\lambda_p$. <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:5">
+<p>If the affect function also changes the parameters of the differential equation, we must additionally store $p(t_i-)$ and compute another vjp to update $\lambda_p$.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:6" role="doc-endnote">
-<p>For a function $f$ of more than one variable $y = f(t, x_1(t),x_2(t),\dots,x_N(t))$, the 
-<a href="https://en.wikipedia.org/wiki/Differential_of_a_function#Differentials_in_several_variables" target="_blank" rel="noopener">total derivative</a> with respect to the independent variable $t$ is given by the sum of all partial derivatives
+<li id="fn:6">
+<p>For a function $f$ of more than one variable $y = f(t, x_1(t),x_2(t),\dots,x_N(t))$, the <a href="https://en.wikipedia.org/wiki/Differential_of_a_function#Differentials_in_several_variables" target="_blank" rel="noopener">total derivative</a> with respect to the independent variable $t$ is given by the sum of all partial derivatives
 $$
 \begin{aligned}
-\frac{\text{d}y}{\text{d}t} &amp;= \frac{\text{d}f(\rightarrow t, x_1(\rightarrow t),x_2(\rightarrow t),\dots,x_N(\rightarrow t))}{\text{d}t} \\<br>
-&amp;= \frac{\text{d}f(\rightarrow t, x_1(t),x_2(t),\dots,x_N(t))}{\text{d}t} + \frac{\text{d}f(t, x_1(\rightarrow t),x_2(t),\dots,x_N(t))}{\text{d}t}\\<br>
+\frac{\text{d}y}{\text{d}t} &amp;= \frac{\text{d}f(\rightarrow t, x_1(\rightarrow t),x_2(\rightarrow t),\dots,x_N(\rightarrow t))}{\text{d}t} \\
+&amp;= \frac{\text{d}f(\rightarrow t, x_1(t),x_2(t),\dots,x_N(t))}{\text{d}t} + \frac{\text{d}f(t, x_1(\rightarrow t),x_2(t),\dots,x_N(t))}{\text{d}t}\\
 &amp;+ \frac{\text{d}f(t, x_1(t),x_2(\rightarrow t),\dots,x_N(t))}{\text{d}t} + \dots +  \frac{\text{d}f(t, x_1(t),x_2(t),\dots,x_N(\rightarrow t))}{\text{d}t}.
 \end{aligned}
-$$ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+$$&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
     </div>
 
@@ -1271,17 +1451,17 @@ $$ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
   
   <a class="badge badge-light" href="/tag/gsoc-2021/">GSoC 2021</a>
   
-  <a class="badge badge-light" href="/tag/hybrid-differential-equations/">Hybrid differential equations</a>
+  <a class="badge badge-light" href="/tag/hybrid-differential-equations/">Hybrid Differential Equations</a>
   
-  <a class="badge badge-light" href="/tag/adjoint-sensitivity-methods/">Adjoint sensitivity methods</a>
+  <a class="badge badge-light" href="/tag/adjoint-sensitivity-methods/">Adjoint Sensitivity Methods</a>
   
-  <a class="badge badge-light" href="/tag/event-handling/">Event handling</a>
+  <a class="badge badge-light" href="/tag/event-handling/">Event Handling</a>
   
 </div>
 
 
 
-<div class="share-box" aria-hidden="true">
+<div class="share-box">
   <ul class="share">
     
       
@@ -1291,8 +1471,12 @@ $$ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
       
       
       
+      
+      
+      
+      
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://frankschae.github.io/post/bouncing_ball/&amp;text=Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ffrankschae.github.io%2Fpost%2Fbouncing_ball%2F&amp;text=Sensitivity&#43;Analysis&#43;of&#43;Hybrid&#43;Differential&#43;Equations" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -1304,8 +1488,12 @@ $$ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
       
       
       
+      
+      
+      
+      
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://frankschae.github.io/post/bouncing_ball/&amp;t=Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Ffrankschae.github.io%2Fpost%2Fbouncing_ball%2F&amp;t=Sensitivity&#43;Analysis&#43;of&#43;Hybrid&#43;Differential&#43;Equations" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -1317,8 +1505,14 @@ $$ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
       
       
       
+      
+      
+      
+      
+        
+      
       <li>
-        <a href="mailto:?subject=Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations&amp;body=https://frankschae.github.io/post/bouncing_ball/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations&amp;body=https%3A%2F%2Ffrankschae.github.io%2Fpost%2Fbouncing_ball%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -1330,8 +1524,12 @@ $$ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
       
       
       
+      
+      
+      
+      
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://frankschae.github.io/post/bouncing_ball/&amp;title=Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Ffrankschae.github.io%2Fpost%2Fbouncing_ball%2F&amp;title=Sensitivity&#43;Analysis&#43;of&#43;Hybrid&#43;Differential&#43;Equations" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -1343,8 +1541,12 @@ $$ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
       
       
       
+      
+      
+      
+      
       <li>
-        <a href="https://web.whatsapp.com/send?text=Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations%20https://frankschae.github.io/post/bouncing_ball/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=Sensitivity&#43;Analysis&#43;of&#43;Hybrid&#43;Differential&#43;Equations%20https%3A%2F%2Ffrankschae.github.io%2Fpost%2Fbouncing_ball%2F" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1356,8 +1558,12 @@ $$ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
       
       
       
+      
+      
+      
+      
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://frankschae.github.io/post/bouncing_ball/&amp;title=Sensitivity%20Analysis%20of%20Hybrid%20Differential%20Equations" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Ffrankschae.github.io%2Fpost%2Fbouncing_ball%2F&amp;title=Sensitivity&#43;Analysis&#43;of&#43;Hybrid&#43;Differential&#43;Equations" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1375,114 +1581,159 @@ $$ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
 
 
 
-
+  
   
     
-    
-
-
-
-
-
-  
-
-
-  
-
-
-
-
-
-
 
 
 
 
   
-  
-  <div class="article-widget content-widget-hr">
-    <h3>Related</h3>
-    <ul>
-      
-      <li><a href="/post/hybridde/">Neural Hybrid Differential Equations</a></li>
-      
-      <li><a href="/post/shadowing/">Shadowing Methods for Forward and Adjoint Sensitivity Analysis of Chaotic Systems</a></li>
-      
-      <li><a href="/post/gsoc2020-high-weak-order-solvers-sde-adjoints/">GSoC 2020: High weak order SDE solvers and their utility in neural SDEs</a></li>
-      
-    </ul>
-  </div>
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
   </div>
 </article>
+  </div>
 
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+  
+    
+  
+  
+    
+  
+
+  
+
+  
+  <p class="powered-by copyright-license-text">
+    © 2024 Frank Schäfer. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+  </p>
+  
+
+  <p class="powered-by footer-license-icons">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank" aria-label="Creative Commons">
+      <i class="fab fa-creative-commons fa-2x" aria-hidden="true"></i>
+      <i class="fab fa-creative-commons-by fa-2x" aria-hidden="true"></i>
       
-
-    
-    
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
-
+        <i class="fab fa-creative-commons-nc fa-2x" aria-hidden="true"></i>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js" integrity="sha256-lyWCDMnMeZiXRi7Zl54sZGKYmgQs4izcT7+tKc+KUBk=" crossorigin="anonymous" title="mermaid"></script>
       
-
+        <i class="fab fa-creative-commons-nd fa-2x" aria-hidden="true"></i>
       
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/julia.min.js"></script>
-        
+    </a>
+  </p>
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
       
+      
+      
+      
+      
+      
+      Published with <a href="https://hugoblox.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Hugo Blox Builder</a> — the free, <a href="https://github.com/HugoBlox/hugo-blox-builder" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
 
+    </div>
     
+  </div>
 
-    
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
-    
+  
 
-    
-    
-    <script>const code_highlighting = true;</script>
-    
 
-    
-    
-    <script>const isSiteThemeDark = false;</script>
-    
+<script src="/js/vendor-bundle.min.ff7771056d34ad9f2de2d8f6a466e748.js"></script>
 
-    
-    
-    
-    
-    
-    
-    <script>
-      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
-      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
-      const content_type = {
-        'post': "Posts",
-        'project': "Projects",
-        'publication' : "Publications",
-        'talk' : "Talks"
-        };
-    </script>
-    
 
-    
-    
 
-    
-    
-    <script id="search-hit-fuse-template" type="text/x-template">
-      <div class="search-hit" id="summary-{{key}}">
+
+  
+
+  
+  
+
+  
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.min.js" integrity="" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+  
+  <script id="search-hit-fuse-template" type="text/x-template">
+    <div class="search-hit" id="summary-{{key}}">
       <div class="search-hit-content">
         <div class="search-hit-name">
           <a href="{{relpermalink}}">{{title}}</a>
@@ -1490,42 +1741,18 @@ $$ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
           <p class="search-hit-description">{{snippet}}</p>
         </div>
       </div>
-      </div>
-    </script>
-    
+    </div>
+  </script>
+  
+    <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+  
 
-    
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
-    
 
-    
-    
 
-    
-    
 
-    
-    
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-      
-    
-    
-    
-    
-    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
 
-    
 
 
 
@@ -1534,31 +1761,53 @@ $$ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
 
   
   
-  <div class="container">
-    <footer class="site-footer">
+  
+  
+  
+  
   
 
-  <p class="powered-by">
-    © 2020 Frank Schäfer &middot; 
 
-    Powered by the
-    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
-    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
 
-    
-    <span class="float-right" aria-hidden="true">
-      <a href="#" class="back-to-top">
-        <span class="button_icon">
-          <i class="fas fa-chevron-up fa-2x"></i>
-        </span>
-      </a>
-    </span>
-    
-  </p>
-</footer>
 
-  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+
+  <script src="/js/wowchemy-headroom.db4755770454eb63685f8de785c0a172.js" type="module"></script>
+
+
+
+
+
+
+
+
+
   
+  
+
+
+<script src="/en/js/wowchemy.min.7f5ebaff62ae468cff8bb3dd1337bb9b.js"></script>
+
+
+
+  <script src="/js/wowchemy-map.a26e9d2f7238ba5b868384f1c5bc6477.js" type="module"></script>
+
+
+
 
   
 <div id="modal" class="modal fade" role="dialog">
@@ -1571,7 +1820,8 @@ $$ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
         </button>
       </div>
       <div class="modal-body">
-        <pre><code class="tex hljs"></code></pre>
+        
+        <pre><code></code></pre>
       </div>
       <div class="modal-footer">
         <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
@@ -1585,6 +1835,26 @@ $$ <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe
     </div>
   </div>
 </div>
+
+
+  <script src="/js/wowchemy-publication.9c0e895144aef5a693008b5c5d450147.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>
