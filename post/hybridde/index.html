@@ -924,7 +924,7 @@ $$</p>
 
 <figure  >
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="forward_damped_oscillator_no_kicks.png" alt="" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="/img/forward_damped_oscillator_no_kicks.png" alt="" loading="lazy" data-zoomable /></div>
   </div></figure>
 
 <p>We now include a kick to the velocity of the oscillator at regular time steps. Here, we choose both the time difference between the kicks and the increase in velocity as <code>1</code>.</p>
@@ -965,7 +965,7 @@ $$</p>
 
 <figure  >
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="forward_damped_oscillator.png" alt="" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="/img/forward_damped_oscillator.png" alt="" loading="lazy" data-zoomable /></div>
   </div></figure>
 
 The left-hand side shows a zoom for short times to better resolve the kicks. Note that by setting <code>save_positions=(true,true)</code>, the kicks would be saved before <strong>and</strong> after the event such that the kicks would appear completely vertically in the plot. The data on the right-hand will be used as training data below. In the spirit of universal differential equations<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>, we now aim at learning (potentially) missing parts of the model from these data traces.</p>
@@ -1024,7 +1024,7 @@ The left-hand side shows a zoom for short times to better resolve the kicks. Not
 
 <figure  >
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="untrained_nn.png" alt="" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="/img/untrained_nn.png" alt="" loading="lazy" data-zoomable /></div>
   </div></figure>
 
 <p>which (of course) doesn&rsquo;t match the data due to the random initialization of the neural network parameters before training. The neural network can be trained, i.e., its parameters can be optimized, by minimizing a mean-squared error loss function:</p>
@@ -1094,7 +1094,7 @@ The left-hand side shows a zoom for short times to better resolve the kicks. Not
 
 <figure  >
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="trained1.png" alt="" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="/img/trained1.png" alt="" loading="lazy" data-zoomable /></div>
   </div></figure>
 
 <p>We see the expected constant value of <code>u[3]</code>, indicating a kick to the velocity of <code>+=1</code>, at the kicking times over the full time interval.</p>

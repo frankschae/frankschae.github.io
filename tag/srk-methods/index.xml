@@ -162,7 +162,7 @@ Repeating this call to the &lt;code&gt;test_convergence()&lt;/code&gt; function 
 
 &lt;figure  &gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;weak_conv.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://frankschae.github.io/img/weak_conv.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 
 &lt;p&gt;Note that the &lt;code&gt;SimplifiedEM&lt;/code&gt; and the &lt;code&gt;EM&lt;/code&gt; scheme fall on top of each other.
@@ -212,7 +212,7 @@ Thanks to &lt;a href=&#34;https://github.com/SciML/DiffEqDevTools.jl/pull/75&#34
 
 &lt;figure  &gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;WorkPrecision.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://frankschae.github.io/img/WorkPrecision.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 
 &lt;p&gt;Therefore, &lt;code&gt;DRI1&lt;/code&gt; has the best performance in this non-commutative noise case if the error is supposed to stay below 1e-3.
@@ -295,7 +295,7 @@ We plan to perform more in-depth benchmarks in the near future what will be repo
 
 &lt;figure  &gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;Brusselator_many_trajectories.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://frankschae.github.io/img/Brusselator_many_trajectories.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 
 &lt;p&gt;We can confirm Rößler&amp;rsquo;s observation&lt;sup id=&#34;fnref3:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; that the adaptive scheme describes the time evolution of the SDE more accurately,
@@ -359,7 +359,7 @@ as oscillations are damped out stronger for the fixed step size method, thus app
 
 &lt;figure  &gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;Brusselator.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://frankschae.github.io/img/Brusselator.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 
 &lt;h3 id=&#34;gpu-usage&#34;&gt;GPU usage&lt;/h3&gt;
@@ -477,7 +477,7 @@ $$&lt;/p&gt;
 
 &lt;figure  &gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;DRI1.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://frankschae.github.io/img/DRI1.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 
 &lt;p&gt;In the next couple of weeks, my focus will be on&lt;/p&gt;
@@ -547,7 +547,7 @@ After some fixes for the &lt;a href=&#34;https://docs.sciml.ai/latest/features/n
 
 &lt;figure  &gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;animation.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://frankschae.github.io/img/animation.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 
 &lt;h3 id=&#34;gradients-of-diagonal-sdes&#34;&gt;Gradients of diagonal SDEs&lt;/h3&gt;
